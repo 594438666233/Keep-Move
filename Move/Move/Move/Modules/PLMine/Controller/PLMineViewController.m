@@ -10,11 +10,12 @@
 #import "PLInitialWeightTableViewCell.h"
 #import "PLDataBaseManager.h"
 #import "PLPersonInformation.h"
+#import "PLHWeightTableViewCell.h"
 static NSString *const InitialWeight = @"PLInitialWeightTableViewCell";
 static NSString *const cellID = @"cell";
 static NSString *const recordCell = @"recordCell";
 static NSString *const setCell = @"setCell";
-
+static NSString *const WeightCell = @"PLHWeightTableViewCell";
 
 @interface PLMineViewController ()
 <
@@ -47,14 +48,14 @@ UITableViewDataSource
     
     
     
-    PLPersonInformation *person = [[PLPersonInformation alloc] init];
-    person.gender = @"男";
-    person.brithday = 1994;
-    person.height = 1.53;
-    person.goalWeight = 66.f;
-    person.goalStep = 10000.f;
-    
-    [[PLDataBaseManager shareManager] insertPerson:person];
+//    PLPersonInformation *person = [[PLPersonInformation alloc] init];
+//    person.gender = @"男";
+//    person.brithday = 1994;
+//    person.height = 1.53;
+//    person.goalWeight = 66.f;
+//    person.goalStep = 10000.f;
+//    
+//    [[PLDataBaseManager shareManager] insertPerson:person];
 }
 
 
@@ -110,7 +111,13 @@ UITableViewDataSource
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
 
     if (indexPath.section == 0) {
-        return 220;
+        if ([[PLDataBaseManager shareManager] currentWeight]) {
+            return 380;
+        } else {
+            return 220;
+        }
+        
+        
     } else{
         return 44;
     }
@@ -123,15 +130,28 @@ UITableViewDataSource
     
     if (indexPath.section == 0) {
     
-        PLInitialWeightTableViewCell *initialCell = [tableView dequeueReusableCellWithIdentifier:InitialWeight];
+        CGFloat weight = [[PLDataBaseManager shareManager] currentWeight];
+        if (!weight) {
+            PLInitialWeightTableViewCell *initialCell = [tableView dequeueReusableCellWithIdentifier:InitialWeight];
+            
+            
+            if (!initialCell) {
+                initialCell = [[NSBundle mainBundle] loadNibNamed:InitialWeight owner:nil options:nil].lastObject;
+                initialCell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            
+            return initialCell;
+        } else {
+            PLHWeightTableViewCell *weightCell = [tableView dequeueReusableCellWithIdentifier:WeightCell];
+            if (!weightCell) {
+                weightCell = [[NSBundle mainBundle] loadNibNamed:WeightCell owner:nil options:nil].lastObject;
+            }
+            return weightCell;
+            
         
-        
-        if (!initialCell) {
-            initialCell = [[NSBundle mainBundle] loadNibNamed:InitialWeight owner:nil options:nil].lastObject;
-            initialCell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
-        return initialCell;
+        
     } else if(indexPath.section == 1){
         if (indexPath.row == 0) {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
