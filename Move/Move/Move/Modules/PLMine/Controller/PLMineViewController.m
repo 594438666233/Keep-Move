@@ -9,7 +9,7 @@
 #import "PLMineViewController.h"
 #import "PLInitialWeightTableViewCell.h"
 #import "PLDataBaseManager.h"
-
+#import "PLPersonInformation.h"
 static NSString *const InitialWeight = @"PLInitialWeightTableViewCell";
 static NSString *const cellID = @"cell";
 static NSString *const recordCell = @"recordCell";
@@ -44,6 +44,17 @@ UITableViewDataSource
     [[PLDataBaseManager shareManager] createPersonTable];
     
     
+    
+    
+    
+    PLPersonInformation *person = [[PLPersonInformation alloc] init];
+    person.gender = @"男";
+    person.brithday = 1994;
+    person.height = 1.53;
+    person.goalWeight = 66.f;
+    person.goalStep = 10000.f;
+    
+    [[PLDataBaseManager shareManager] insertPerson:person];
 }
 
 

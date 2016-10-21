@@ -13,6 +13,10 @@
 		115BE28C1DB9A42B003279AC /* NSUserDefaults+Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE28A1DB9A42B003279AC /* NSUserDefaults+Categories.m */; };
 		115BE2991DB9C01B003279AC /* PLHistoryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE2981DB9C01B003279AC /* PLHistoryInformation.m */; };
 		115BE29C1DB9C2BB003279AC /* PLPersonInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE29B1DB9C2BB003279AC /* PLPersonInformation.m */; };
+		115BE2C61DBA2E05003279AC /* PLHWeightTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE2C41DBA2E05003279AC /* PLHWeightTableViewCell.m */; };
+		115BE2C71DBA2E05003279AC /* PLHWeightTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 115BE2C51DBA2E05003279AC /* PLHWeightTableViewCell.xib */; };
+		115BE2CB1DBA33FC003279AC /* PLHealthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE2CA1DBA33FC003279AC /* PLHealthManager.m */; };
+		115BE2CD1DBA3485003279AC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 115BE2CC1DBA3485003279AC /* HealthKit.framework */; };
 		845372A91DB7796C00DBE92F /* PLGoalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */; };
 		845372AB1DB7798000DBE92F /* PLGoalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845372AA1DB7798000DBE92F /* PLGoalHeaderView.xib */; };
 		845372C01DB799F300DBE92F /* PLTargetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372BF1DB799F300DBE92F /* PLTargetView.m */; };
@@ -345,6 +349,13 @@
 		115BE2981DB9C01B003279AC /* PLHistoryInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLHistoryInformation.m; sourceTree = "<group>"; };
 		115BE29A1DB9C2BB003279AC /* PLPersonInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPersonInformation.h; sourceTree = "<group>"; };
 		115BE29B1DB9C2BB003279AC /* PLPersonInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLPersonInformation.m; sourceTree = "<group>"; };
+		115BE2C31DBA2E05003279AC /* PLHWeightTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLHWeightTableViewCell.h; sourceTree = "<group>"; };
+		115BE2C41DBA2E05003279AC /* PLHWeightTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLHWeightTableViewCell.m; sourceTree = "<group>"; };
+		115BE2C51DBA2E05003279AC /* PLHWeightTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLHWeightTableViewCell.xib; sourceTree = "<group>"; };
+		115BE2C91DBA33FC003279AC /* PLHealthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLHealthManager.h; sourceTree = "<group>"; };
+		115BE2CA1DBA33FC003279AC /* PLHealthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLHealthManager.m; sourceTree = "<group>"; };
+		115BE2CC1DBA3485003279AC /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		115BE2CE1DBA3485003279AC /* Move.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Move.entitlements; sourceTree = "<group>"; };
 		8448B6AC1DB76F6B00F10D49 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		845372A71DB7796C00DBE92F /* PLGoalHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLGoalHeaderView.h; sourceTree = "<group>"; };
 		845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLGoalHeaderView.m; sourceTree = "<group>"; };
@@ -702,6 +713,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04C9DF05A1FFE3CAF87B0C65 /* libPods-Move.a in Frameworks */,
+				115BE2CD1DBA3485003279AC /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,6 +738,15 @@
 				115BE29B1DB9C2BB003279AC /* PLPersonInformation.m */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		115BE2C81DBA33EB003279AC /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				115BE2C91DBA33FC003279AC /* PLHealthManager.h */,
+				115BE2CA1DBA33FC003279AC /* PLHealthManager.m */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		845372B01DB78E5000DBE92F /* Controller */ = {
@@ -999,6 +1020,7 @@
 		8471C5311DB75BE0008E8A5A /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				115BE2C81DBA33EB003279AC /* Manager */,
 				8471C5321DB75BEA008E8A5A /* Categories */,
 			);
 			path = Common;
@@ -1124,6 +1146,9 @@
 				84AB970A1DB8D4100075FDC0 /* PLInitialWeightTableViewCell.h */,
 				84AB970B1DB8D4100075FDC0 /* PLInitialWeightTableViewCell.m */,
 				84AB970C1DB8D4100075FDC0 /* PLInitialWeightTableViewCell.xib */,
+				115BE2C31DBA2E05003279AC /* PLHWeightTableViewCell.h */,
+				115BE2C41DBA2E05003279AC /* PLHWeightTableViewCell.m */,
+				115BE2C51DBA2E05003279AC /* PLHWeightTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1194,6 +1219,7 @@
 		84D0D8201DB6F48500EDCFB3 /* Move */ = {
 			isa = PBXGroup;
 			children = (
+				115BE2CE1DBA3485003279AC /* Move.entitlements */,
 				115BE25A1DB8F052003279AC /* DataBase */,
 				8471C4401DB75AFD008E8A5A /* Base */,
 				8471C5311DB75BE0008E8A5A /* Common */,
@@ -1372,6 +1398,7 @@
 		F9A17AE059D77DCC7047BF50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				115BE2CC1DBA3485003279AC /* HealthKit.framework */,
 				B831A8F8977B0645FE86CA3C /* libPods-Move.a */,
 			);
 			name = Frameworks;
@@ -1413,6 +1440,11 @@
 					84D0D81D1DB6F48400EDCFB3 = {
 						CreatedOnToolsVersion = 7.1;
 						DevelopmentTeam = QWKQAE7W9B;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -1585,6 +1617,7 @@
 				84F046021DB8754B009D3BC3 /* activity_circle-6_132x114_@2x.png in Resources */,
 				84F045B71DB8754B009D3BC3 /* activity_circle-22_150x130_@2x.png in Resources */,
 				8471C4EC1DB75B5E008E8A5A /* trends_bar_42mm-43.png in Resources */,
+				115BE2C71DBA2E05003279AC /* PLHWeightTableViewCell.xib in Resources */,
 				84F045F31DB8754B009D3BC3 /* activity_circle-4_150x130_@2x.png in Resources */,
 				84AB97651DB8E7B70075FDC0 /* icon_level3.png in Resources */,
 				84F0459E1DB8754B009D3BC3 /* activity_circle-11_132x114_@2x.png in Resources */,
@@ -1809,9 +1842,11 @@
 				84AB96FC1DB8B6D70075FDC0 /* PLTargetModel.m in Sources */,
 				8471C5351DB75C03008E8A5A /* UIButton+Block.m in Sources */,
 				115BE28C1DB9A42B003279AC /* NSUserDefaults+Categories.m in Sources */,
+				115BE2CB1DBA33FC003279AC /* PLHealthManager.m in Sources */,
 				115BE25D1DB8F172003279AC /* PLDataBaseManager.m in Sources */,
 				84AB970F1DB8D4100075FDC0 /* PLBounceWeightView.m in Sources */,
 				115BE29C1DB9C2BB003279AC /* PLPersonInformation.m in Sources */,
+				115BE2C61DBA2E05003279AC /* PLHWeightTableViewCell.m in Sources */,
 				845372A91DB7796C00DBE92F /* PLGoalHeaderView.m in Sources */,
 				84AB96F61DB8B5300075FDC0 /* PLDefeatModel.m in Sources */,
 				84D636081DB764B500AC0E4D /* PLSignViewController.m in Sources */,
@@ -1928,6 +1963,7 @@
 			baseConfigurationReference = ABB478DB739F70B2F1F47C2C /* Pods-Move.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Move/Move.entitlements;
 				DEVELOPMENT_TEAM = QWKQAE7W9B;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Move/Supporting Files/PrefixHeader.pch";
@@ -1944,6 +1980,7 @@
 			baseConfigurationReference = 8B0711DB2C7BEE42D9AB7963 /* Pods-Move.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Move/Move.entitlements;
 				DEVELOPMENT_TEAM = QWKQAE7W9B;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Move/Supporting Files/PrefixHeader.pch";

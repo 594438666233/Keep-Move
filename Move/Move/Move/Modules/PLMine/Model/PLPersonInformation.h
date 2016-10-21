@@ -10,4 +10,12 @@
 
 @interface PLPersonInformation : NSObject
 
+// id integer primary key autoincrement, gender text , brithday integer , height real , goalweight real
+
+@property (nonatomic, copy) NSString *gender;
+@property (nonatomic, assign) NSInteger brithday;
+@property (nonatomic, assign) CGFloat height;
+@property (nonatomic, assign) CGFloat goalWeight;
+@property (nonatomic, assign) CGFloat goalStep;
+
 @end
