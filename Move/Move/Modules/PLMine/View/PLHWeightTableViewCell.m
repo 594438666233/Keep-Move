@@ -8,28 +8,7 @@
 
 #import "PLHWeightTableViewCell.h"
 
-
-@interface PLHWeightTableViewCell ()
-
-@property (weak, nonatomic) IBOutlet UILabel *currentWeight;
-
-@property (weak, nonatomic) IBOutlet UILabel *BMILabel;
-
-@property (weak, nonatomic) IBOutlet UILabel *goalWeightLabel;
-@end
-
 @implementation PLHWeightTableViewCell
-
-
-- (IBAction)currentWeightAction:(id)sender {
-}
-
-- (IBAction)goalWeightAction:(id)sender {
-}
-
-
-
-
 
 - (void)awakeFromNib {
     [super awakeFromNib];
