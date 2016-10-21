@@ -10,4 +10,6 @@
 
 @interface PLMineViewController : RootViewController
 
+@property (nonatomic, strong) UITableView *tableView;
+
 @end

@@ -8,11 +8,15 @@
 
 #import "PLBounceWeightView.h"
 
+#import "NSDate+Categories.h"
+
 @interface PLBounceWeightView ()
 
 @property (weak, nonatomic) IBOutlet UIButton *saveButton;
 
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
+
+
 
 
 
@@ -32,6 +36,9 @@
     self.saveButton.layer.borderColor = PLYELLOW.CGColor;
     self.saveButton.layer.borderWidth = 1;
     self.weightLabel.tintColor = PLYELLOW;
+    
+    self.timeLabel.text = [NSDate getSystemTimeStringWithFormat:@"yyyy年 MM月dd日 HH:mm"];
+    
 
 }
 /*
@@ -41,6 +48,8 @@
     // Drawing code
 }
 */
+
+
 - (IBAction)backAction:(id)sender {
     if ([self.delegate respondsToSelector:@selector(pl_bouceWeightView:style:)]) {
         [self.delegate pl_bouceWeightView:self style:0];
@@ -49,6 +58,9 @@
 }
 
 - (IBAction)saveAction:(id)sender {
+    if ([self.delegate respondsToSelector:@selector(pl_bouceWeightView:style:)]) {
+        [self.delegate pl_bouceWeightView:self style:1];
+    }
 }
 
 

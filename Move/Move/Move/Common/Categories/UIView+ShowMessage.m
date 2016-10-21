@@ -25,7 +25,7 @@
     
     UILabel *label = [[UILabel alloc] init];
     label.font = [UIFont systemFontOfSize:15];
-    label.textColor = [UIColor grayColor];
+    label.textColor = [UIColor whiteColor];
     label.textAlignment = NSTextAlignmentCenter;
     label.text = message;
     CGFloat width = [UILabel getWidthWithTitle:message Font:label.font];

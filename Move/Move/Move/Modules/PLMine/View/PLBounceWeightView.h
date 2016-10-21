@@ -23,4 +23,6 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *weightLabel;
 
+
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @end

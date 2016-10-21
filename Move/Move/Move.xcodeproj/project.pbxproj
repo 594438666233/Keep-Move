@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		04C9DF05A1FFE3CAF87B0C65 /* libPods-Move.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B831A8F8977B0645FE86CA3C /* libPods-Move.a */; };
+		115BE25D1DB8F172003279AC /* PLDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE25C1DB8F172003279AC /* PLDataBaseManager.m */; };
+		115BE28B1DB9A42B003279AC /* NSDate+Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE2881DB9A42B003279AC /* NSDate+Categories.m */; };
+		115BE28C1DB9A42B003279AC /* NSUserDefaults+Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE28A1DB9A42B003279AC /* NSUserDefaults+Categories.m */; };
+		115BE2991DB9C01B003279AC /* PLHistoryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE2981DB9C01B003279AC /* PLHistoryInformation.m */; };
+		115BE29C1DB9C2BB003279AC /* PLPersonInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE29B1DB9C2BB003279AC /* PLPersonInformation.m */; };
 		845372A91DB7796C00DBE92F /* PLGoalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */; };
 		845372AB1DB7798000DBE92F /* PLGoalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845372AA1DB7798000DBE92F /* PLGoalHeaderView.xib */; };
 		845372C01DB799F300DBE92F /* PLTargetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372BF1DB799F300DBE92F /* PLTargetView.m */; };
@@ -330,6 +335,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		115BE25B1DB8F172003279AC /* PLDataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLDataBaseManager.h; path = ../../../../../Documents/UI/ML_PiaoPiao/ML_PiaoPiao/MLClasses/Modules/Me/Controller/PLDataBaseManager.h; sourceTree = "<group>"; };
+		115BE25C1DB8F172003279AC /* PLDataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLDataBaseManager.m; path = ../../../../../Documents/UI/ML_PiaoPiao/ML_PiaoPiao/MLClasses/Modules/Me/Controller/PLDataBaseManager.m; sourceTree = "<group>"; };
+		115BE2871DB9A42B003279AC /* NSDate+Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Categories.h"; sourceTree = "<group>"; };
+		115BE2881DB9A42B003279AC /* NSDate+Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Categories.m"; sourceTree = "<group>"; };
+		115BE2891DB9A42B003279AC /* NSUserDefaults+Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Categories.h"; sourceTree = "<group>"; };
+		115BE28A1DB9A42B003279AC /* NSUserDefaults+Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+Categories.m"; sourceTree = "<group>"; };
+		115BE2971DB9C01B003279AC /* PLHistoryInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLHistoryInformation.h; sourceTree = "<group>"; };
+		115BE2981DB9C01B003279AC /* PLHistoryInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLHistoryInformation.m; sourceTree = "<group>"; };
+		115BE29A1DB9C2BB003279AC /* PLPersonInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPersonInformation.h; sourceTree = "<group>"; };
+		115BE29B1DB9C2BB003279AC /* PLPersonInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLPersonInformation.m; sourceTree = "<group>"; };
 		8448B6AC1DB76F6B00F10D49 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		845372A71DB7796C00DBE92F /* PLGoalHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLGoalHeaderView.h; sourceTree = "<group>"; };
 		845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLGoalHeaderView.m; sourceTree = "<group>"; };
@@ -693,6 +708,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		115BE25A1DB8F052003279AC /* DataBase */ = {
+			isa = PBXGroup;
+			children = (
+				115BE25B1DB8F172003279AC /* PLDataBaseManager.h */,
+				115BE25C1DB8F172003279AC /* PLDataBaseManager.m */,
+			);
+			path = DataBase;
+			sourceTree = "<group>";
+		};
+		115BE2931DB9BD92003279AC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				115BE2971DB9C01B003279AC /* PLHistoryInformation.h */,
+				115BE2981DB9C01B003279AC /* PLHistoryInformation.m */,
+				115BE29A1DB9C2BB003279AC /* PLPersonInformation.h */,
+				115BE29B1DB9C2BB003279AC /* PLPersonInformation.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		845372B01DB78E5000DBE92F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -731,13 +766,6 @@
 				84D636071DB764B500AC0E4D /* PLSignViewController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		845372B61DB78E8C00DBE92F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		845372B71DB78E9000DBE92F /* Model */ = {
@@ -985,6 +1013,10 @@
 				84AC59391DB7697500E7D8C0 /* UILabel+SizeToHeight.m */,
 				8471C5361DB75C10008E8A5A /* UIView+ShowMessage.h */,
 				8471C5371DB75C10008E8A5A /* UIView+ShowMessage.m */,
+				115BE2871DB9A42B003279AC /* NSDate+Categories.h */,
+				115BE2881DB9A42B003279AC /* NSDate+Categories.m */,
+				115BE2891DB9A42B003279AC /* NSUserDefaults+Categories.h */,
+				115BE28A1DB9A42B003279AC /* NSUserDefaults+Categories.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1012,8 +1044,8 @@
 			isa = PBXGroup;
 			children = (
 				84AB97021DB8D4100075FDC0 /* Controller */,
+				115BE2931DB9BD92003279AC /* Model */,
 				84AB97061DB8D4100075FDC0 /* View */,
-				845372B61DB78E8C00DBE92F /* Model */,
 			);
 			path = PLMine;
 			sourceTree = "<group>";
@@ -1162,6 +1194,7 @@
 		84D0D8201DB6F48500EDCFB3 /* Move */ = {
 			isa = PBXGroup;
 			children = (
+				115BE25A1DB8F052003279AC /* DataBase */,
 				8471C4401DB75AFD008E8A5A /* Base */,
 				8471C5311DB75BE0008E8A5A /* Common */,
 				84F3B2581DB78C4800C18464 /* Macro */,
@@ -1379,6 +1412,7 @@
 				TargetAttributes = {
 					84D0D81D1DB6F48400EDCFB3 = {
 						CreatedOnToolsVersion = 7.1;
+						DevelopmentTeam = QWKQAE7W9B;
 					};
 				};
 			};
@@ -1770,10 +1804,14 @@
 				8471C44F1DB75AFD008E8A5A /* BaseView.m in Sources */,
 				84D0D8261DB6F48500EDCFB3 /* AppDelegate.m in Sources */,
 				84C611FF1DB855B30029CEC5 /* PLDefeatView.m in Sources */,
+				115BE2991DB9C01B003279AC /* PLHistoryInformation.m in Sources */,
 				84D6360D1DB764C200AC0E4D /* PLGoalViewController.m in Sources */,
 				84AB96FC1DB8B6D70075FDC0 /* PLTargetModel.m in Sources */,
 				8471C5351DB75C03008E8A5A /* UIButton+Block.m in Sources */,
+				115BE28C1DB9A42B003279AC /* NSUserDefaults+Categories.m in Sources */,
+				115BE25D1DB8F172003279AC /* PLDataBaseManager.m in Sources */,
 				84AB970F1DB8D4100075FDC0 /* PLBounceWeightView.m in Sources */,
+				115BE29C1DB9C2BB003279AC /* PLPersonInformation.m in Sources */,
 				845372A91DB7796C00DBE92F /* PLGoalHeaderView.m in Sources */,
 				84AB96F61DB8B5300075FDC0 /* PLDefeatModel.m in Sources */,
 				84D636081DB764B500AC0E4D /* PLSignViewController.m in Sources */,
@@ -1781,6 +1819,7 @@
 				84D0D8231DB6F48500EDCFB3 /* main.m in Sources */,
 				84AB96FF1DB8BACC0075FDC0 /* PLNavigationView.m in Sources */,
 				84AB96F21DB8B2DD0075FDC0 /* PLCareerModel.m in Sources */,
+				115BE28B1DB9A42B003279AC /* NSDate+Categories.m in Sources */,
 				8471C44D1DB75AFD008E8A5A /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1889,6 +1928,7 @@
 			baseConfigurationReference = ABB478DB739F70B2F1F47C2C /* Pods-Move.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = QWKQAE7W9B;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Move/Supporting Files/PrefixHeader.pch";
 				INFOPLIST_FILE = "Move/Supporting Files/Info.plist";
@@ -1904,6 +1944,7 @@
 			baseConfigurationReference = 8B0711DB2C7BEE42D9AB7963 /* Pods-Move.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = QWKQAE7W9B;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Move/Supporting Files/PrefixHeader.pch";
 				INFOPLIST_FILE = "Move/Supporting Files/Info.plist";

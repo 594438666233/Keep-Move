@@ -9,7 +9,9 @@
 #import "PLInitialWeightTableViewCell.h"
 
 #import "PLBounceWeightView.h"
+#import "PLMineViewController.h"
 
+#import "PLHistoryInformation.h"
 @interface PLInitialWeightTableViewCell ()
 
 <
@@ -56,9 +58,53 @@ UITextFieldDelegate
     return isValid;
 }
 
+
+
 - (void)pl_bouceWeightView:(PLBounceWeightView *)bouceWeightView style:(NSInteger)style {
     if (style == 0) {
         [_glassView removeFromSuperview];
+    } else {
+        
+        
+        
+        NSInteger num = [bouceWeightView.weightLabel.text integerValue];
+        
+        if (num < 500 && num > 0) {
+            
+            
+            
+            [_glassView removeFromSuperview];
+            
+            PLHistoryInformation *history = [[PLHistoryInformation alloc] init];
+            history.weight = num;
+            
+            history.time = bouceWeightView.timeLabel.text;
+            
+            [[PLDataBaseManager shareManager] insertHistoryRecord:history];
+            
+           
+
+            
+            
+            [((PLMineViewController *)[self ml_viewController]).tableView reloadData];
+            
+            
+            
+            
+            
+            
+        } else {
+            
+            
+            
+            [UIView showMessage:@"请输入真实体重哦"];
+            bouceWeightView.weightLabel.text = nil;
+          
+            
+        
+        }
+        
+        
     }
 
 }
@@ -92,6 +138,16 @@ UITextFieldDelegate
     [_glassView addSubview:bounceWeight];
     
 
+}
+
+- (UIViewController *)ml_viewController {
+    for (UIView* next = [self superview]; next; next = next.superview) {
+        UIResponder *nextResponder = [next nextResponder];
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            return (UIViewController *)nextResponder;
+        }
+    }
+    return nil;
 }
 
 

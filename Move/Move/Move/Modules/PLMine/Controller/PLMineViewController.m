@@ -8,6 +8,7 @@
 
 #import "PLMineViewController.h"
 #import "PLInitialWeightTableViewCell.h"
+#import "PLDataBaseManager.h"
 
 static NSString *const InitialWeight = @"PLInitialWeightTableViewCell";
 static NSString *const cellID = @"cell";
@@ -20,9 +21,11 @@ static NSString *const setCell = @"setCell";
 UITableViewDelegate,
 UITableViewDataSource
 >
-@property (nonatomic, strong) UITableView *tableView;
+
 
 @property (nonatomic, strong) UILabel *timeCopy;
+
+
 
 @end
 
@@ -37,6 +40,9 @@ UITableViewDataSource
     [self.view addSubview:self.tableView];
     
     [self createButton];
+    
+    [[PLDataBaseManager shareManager] createPersonTable];
+    
     
 }
 
@@ -132,7 +138,7 @@ UITableViewDataSource
             if (!cell) {
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:recordCell];
                 cell.imageView.image = [UIImage imageNamed:@"record"];
-                cell.textLabel.text = @"没有近期活动日志";
+                cell.textLabel.text = @"体重记录日志";
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.backgroundColor = ColorWith51Black;
                 cell.textLabel.textColor = [UIColor grayColor];
@@ -172,14 +178,14 @@ UITableViewDataSource
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 200)];
     self.tableView.tableFooterView = footView;
     self.timeCopy = [[UILabel alloc] initWithFrame:CGRectMake((WIDTH - 300) / 2, 20, 300, 20)];
-    _timeCopy.text = @"上次备份时间:无";
+    _timeCopy.text = @"慎重选择哦";
     _timeCopy.textColor = [UIColor grayColor];
     _timeCopy.textAlignment = NSTextAlignmentCenter;
     [footView addSubview:_timeCopy];
     
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setTitle:@"现在备份数据" forState:UIControlStateNormal];
+    [button setTitle:@"清空历史数据" forState:UIControlStateNormal];
     [button setTitleColor:PLYELLOW forState:UIControlStateNormal];
     button.layer.cornerRadius = 10.f;
     button.frame = CGRectMake((WIDTH - (WIDTH - 20)) / 2, 50, WIDTH - 20, 44);
@@ -192,5 +198,10 @@ UITableViewDataSource
     
 
 }
+
+
+    
+
+
 
 @end
