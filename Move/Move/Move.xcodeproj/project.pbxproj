@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		04C9DF05A1FFE3CAF87B0C65 /* libPods-Move.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B831A8F8977B0645FE86CA3C /* libPods-Move.a */; };
-		115BE25D1DB8F172003279AC /* PLDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE25C1DB8F172003279AC /* PLDataBaseManager.m */; };
 		115BE28B1DB9A42B003279AC /* NSDate+Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE2881DB9A42B003279AC /* NSDate+Categories.m */; };
 		115BE28C1DB9A42B003279AC /* NSUserDefaults+Categories.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE28A1DB9A42B003279AC /* NSUserDefaults+Categories.m */; };
 		115BE2991DB9C01B003279AC /* PLHistoryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE2981DB9C01B003279AC /* PLHistoryInformation.m */; };
@@ -17,6 +16,7 @@
 		115BE2C71DBA2E05003279AC /* PLHWeightTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 115BE2C51DBA2E05003279AC /* PLHWeightTableViewCell.xib */; };
 		115BE2CB1DBA33FC003279AC /* PLHealthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE2CA1DBA33FC003279AC /* PLHealthManager.m */; };
 		115BE2CD1DBA3485003279AC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 115BE2CC1DBA3485003279AC /* HealthKit.framework */; };
+		115BE2D51DBA39DE003279AC /* PLDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE2D41DBA39DE003279AC /* PLDataBaseManager.m */; };
 		845372A91DB7796C00DBE92F /* PLGoalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */; };
 		845372AB1DB7798000DBE92F /* PLGoalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845372AA1DB7798000DBE92F /* PLGoalHeaderView.xib */; };
 		845372C01DB799F300DBE92F /* PLTargetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372BF1DB799F300DBE92F /* PLTargetView.m */; };
@@ -339,8 +339,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		115BE25B1DB8F172003279AC /* PLDataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PLDataBaseManager.h; path = ../../../../../Documents/UI/ML_PiaoPiao/ML_PiaoPiao/MLClasses/Modules/Me/Controller/PLDataBaseManager.h; sourceTree = "<group>"; };
-		115BE25C1DB8F172003279AC /* PLDataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PLDataBaseManager.m; path = ../../../../../Documents/UI/ML_PiaoPiao/ML_PiaoPiao/MLClasses/Modules/Me/Controller/PLDataBaseManager.m; sourceTree = "<group>"; };
 		115BE2871DB9A42B003279AC /* NSDate+Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Categories.h"; sourceTree = "<group>"; };
 		115BE2881DB9A42B003279AC /* NSDate+Categories.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Categories.m"; sourceTree = "<group>"; };
 		115BE2891DB9A42B003279AC /* NSUserDefaults+Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+Categories.h"; sourceTree = "<group>"; };
@@ -356,6 +354,8 @@
 		115BE2CA1DBA33FC003279AC /* PLHealthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLHealthManager.m; sourceTree = "<group>"; };
 		115BE2CC1DBA3485003279AC /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		115BE2CE1DBA3485003279AC /* Move.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Move.entitlements; sourceTree = "<group>"; };
+		115BE2D31DBA39DE003279AC /* PLDataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDataBaseManager.h; sourceTree = "<group>"; };
+		115BE2D41DBA39DE003279AC /* PLDataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLDataBaseManager.m; sourceTree = "<group>"; };
 		8448B6AC1DB76F6B00F10D49 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		845372A71DB7796C00DBE92F /* PLGoalHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLGoalHeaderView.h; sourceTree = "<group>"; };
 		845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLGoalHeaderView.m; sourceTree = "<group>"; };
@@ -720,15 +720,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		115BE25A1DB8F052003279AC /* DataBase */ = {
-			isa = PBXGroup;
-			children = (
-				115BE25B1DB8F172003279AC /* PLDataBaseManager.h */,
-				115BE25C1DB8F172003279AC /* PLDataBaseManager.m */,
-			);
-			path = DataBase;
-			sourceTree = "<group>";
-		};
 		115BE2931DB9BD92003279AC /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -743,6 +734,8 @@
 		115BE2C81DBA33EB003279AC /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				115BE2D31DBA39DE003279AC /* PLDataBaseManager.h */,
+				115BE2D41DBA39DE003279AC /* PLDataBaseManager.m */,
 				115BE2C91DBA33FC003279AC /* PLHealthManager.h */,
 				115BE2CA1DBA33FC003279AC /* PLHealthManager.m */,
 			);
@@ -1220,7 +1213,6 @@
 			isa = PBXGroup;
 			children = (
 				115BE2CE1DBA3485003279AC /* Move.entitlements */,
-				115BE25A1DB8F052003279AC /* DataBase */,
 				8471C4401DB75AFD008E8A5A /* Base */,
 				8471C5311DB75BE0008E8A5A /* Common */,
 				84F3B2581DB78C4800C18464 /* Macro */,
@@ -1843,7 +1835,6 @@
 				8471C5351DB75C03008E8A5A /* UIButton+Block.m in Sources */,
 				115BE28C1DB9A42B003279AC /* NSUserDefaults+Categories.m in Sources */,
 				115BE2CB1DBA33FC003279AC /* PLHealthManager.m in Sources */,
-				115BE25D1DB8F172003279AC /* PLDataBaseManager.m in Sources */,
 				84AB970F1DB8D4100075FDC0 /* PLBounceWeightView.m in Sources */,
 				115BE29C1DB9C2BB003279AC /* PLPersonInformation.m in Sources */,
 				115BE2C61DBA2E05003279AC /* PLHWeightTableViewCell.m in Sources */,
@@ -1856,6 +1847,7 @@
 				84AB96F21DB8B2DD0075FDC0 /* PLCareerModel.m in Sources */,
 				115BE28B1DB9A42B003279AC /* NSDate+Categories.m in Sources */,
 				8471C44D1DB75AFD008E8A5A /* RootViewController.m in Sources */,
+				115BE2D51DBA39DE003279AC /* PLDataBaseManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
