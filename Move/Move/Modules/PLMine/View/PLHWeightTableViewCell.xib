@@ -12,7 +12,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="380"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="PLInitialWeightTableViewCell" tableViewCell="CDM-Cs-9bh" id="nPa-L7-OYr">
-                <frame key="frameInset" width="320" height="379.5"/>
+                <frame key="frameInset" width="320" height="379"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前体重" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xnj-Qy-HTp">
@@ -29,6 +29,9 @@
                             <constraint firstAttribute="width" constant="32" id="WA8-Cw-xH5"/>
                         </constraints>
                         <state key="normal" image="weight_input_icon_grey@3x"/>
+                        <connections>
+                            <action selector="currentWeightAction:" destination="CDM-Cs-9bh" eventType="touchUpInside" id="eXq-IM-gOr"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AaJ-bz-Mw9">
                         <constraints>
@@ -66,6 +69,9 @@
                             <constraint firstAttribute="height" constant="32" id="w0a-p5-P8D"/>
                         </constraints>
                         <state key="normal" image="weight_setgoal_icon@3x"/>
+                        <connections>
+                            <action selector="goalWeightAction:" destination="CDM-Cs-9bh" eventType="touchUpInside" id="8cM-ew-iFw"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目标体重 80.0kg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ve-1X-8KM">
                         <constraints>
@@ -105,6 +111,11 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="0.199973762" green="0.2000150383" blue="0.19997116919999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <connections>
+                <outlet property="BMILabel" destination="ImQ-so-yuV" id="GqR-Xd-gjK"/>
+                <outlet property="currentWeight" destination="AaJ-bz-Mw9" id="seS-vK-OUc"/>
+                <outlet property="goalWeightLabel" destination="7ve-1X-8KM" id="7sm-Xq-G6G"/>
+            </connections>
             <point key="canvasLocation" x="-19" y="23"/>
         </tableViewCell>
     </objects>

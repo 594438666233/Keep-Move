@@ -143,12 +143,12 @@
     
     [self.dbQueue inDatabase:^(FMDatabase *db) {
         FMResultSet *result = [db executeQuery:@"SELECT weight FROM Record"];
-        
+        self.weight = 0;
         while ([result next]) {
             
             self.weight = [result intForColumnIndex:0];
             
-            NSLog(@"%f", _weight);
+            
         }
     }];
     

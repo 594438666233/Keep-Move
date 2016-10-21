@@ -127,11 +127,17 @@ UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
    
+    CGFloat weight = [[PLDataBaseManager shareManager] currentWeight];
+    
     
     if (indexPath.section == 0) {
     
-        CGFloat weight = [[PLDataBaseManager shareManager] currentWeight];
+        
+        
+        
         if (!weight) {
+            
+            
             PLInitialWeightTableViewCell *initialCell = [tableView dequeueReusableCellWithIdentifier:InitialWeight];
             
             
@@ -141,10 +147,15 @@ UITableViewDataSource
             }
             
             return initialCell;
+            
+            
         } else {
+            
+            
             PLHWeightTableViewCell *weightCell = [tableView dequeueReusableCellWithIdentifier:WeightCell];
             if (!weightCell) {
                 weightCell = [[NSBundle mainBundle] loadNibNamed:WeightCell owner:nil options:nil].lastObject;
+                weightCell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             return weightCell;
             
@@ -224,8 +235,24 @@ UITableViewDataSource
     button.layer.borderWidth = 1.f;
     button.backgroundColor = ColorWith51Black;
     [footView addSubview:button];
+    [button addTarget:self action:@selector(pl_clear) forControlEvents:UIControlEventTouchUpInside];
     
     
+    
+
+}
+- (void)pl_clear {
+    
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"删除后体重记录会被清空哦" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleDefault handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [[PLDataBaseManager shareManager] clearRecord];
+        
+        
+        [self.tableView reloadData];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
     
 
 }
