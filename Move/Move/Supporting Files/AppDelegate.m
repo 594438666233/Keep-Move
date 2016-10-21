@@ -29,6 +29,7 @@
     
     // 成就
     PLGoalViewController *goalViewController = [[PLGoalViewController alloc] init];
+    UINavigationController *goalNav = [[UINavigationController alloc] initWithRootViewController:goalViewController];
     UIImage *goalImage = [UIImage imageNamed:@"achieveNormal"];
     goalImage = [goalImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIImage *goalSelectedImage = [UIImage imageNamed:@"achieveSelected"];
@@ -37,6 +38,7 @@
     
     // 分析
     PLAnalyseViewController *analyseViewController = [[PLAnalyseViewController alloc] init];
+    UINavigationController *analyseNav = [[UINavigationController alloc] initWithRootViewController:analyseViewController];
     UIImage *analyseImage = [UIImage imageNamed:@"analyseNormal"];
     analyseImage = [analyseImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIImage *analyseSelectedImage = [UIImage imageNamed:@"analyseSelected"];
@@ -45,6 +47,7 @@
     
     // 跑步
     PLRunViewController *runViewController = [[PLRunViewController alloc] init];
+    UINavigationController *runNav = [[UINavigationController alloc] initWithRootViewController:runViewController];
     UIImage *runImage = [UIImage imageNamed:@"runNormal"];
     runImage = [runImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIImage *runSelectedImage = [UIImage imageNamed:@"runSelected"];
@@ -54,6 +57,7 @@
     
     // 目标
     PLSignViewController *signViewController = [[PLSignViewController alloc] init];
+    UINavigationController *signNav = [[UINavigationController alloc] initWithRootViewController:signViewController];
     UIImage *signImage = [UIImage imageNamed:@"goalNormal"];
     
     signImage = [signImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -66,6 +70,7 @@
     // 我
     PLMineViewController *myViewController = [[PLMineViewController alloc] init];
     UIImage *mineImage = [UIImage imageNamed:@"mineNormal"];
+    UINavigationController *myNav = [[UINavigationController alloc] initWithRootViewController:myViewController];
     mineImage = [mineImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     UIImage *mineSelectedImage = [UIImage imageNamed:@"mineSelected"];
     mineSelectedImage = [mineSelectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
@@ -75,11 +80,11 @@
     self.rootTabBarController = [[UITabBarController alloc] init];
     
     _rootTabBarController.viewControllers = @[
-                                              goalViewController,
-                                              analyseViewController,
-                                              runViewController,
-                                              signViewController,
-                                              myViewController
+                                              goalNav,
+                                              analyseNav,
+                                              runNav,
+                                              signNav,
+                                              myNav
                                               ];
     
     _rootTabBarController.tabBar.tintColor = PLYELLOW;

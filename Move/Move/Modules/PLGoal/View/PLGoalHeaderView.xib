@@ -40,7 +40,7 @@
                 </label>
             </subviews>
             <constraints>
-                <constraint firstItem="I0M-Eb-1Hv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="8Ro-Pr-9mm"/>
+                <constraint firstItem="I0M-Eb-1Hv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="29" id="8Ro-Pr-9mm"/>
                 <constraint firstItem="xLz-nB-Hcv" firstAttribute="top" secondItem="Qf9-KN-1bO" secondAttribute="bottom" constant="30" id="A01-wT-Ds6"/>
                 <constraint firstItem="Qf9-KN-1bO" firstAttribute="top" secondItem="I0M-Eb-1Hv" secondAttribute="bottom" constant="-1" id="U4a-f9-079"/>
                 <constraint firstItem="I0M-Eb-1Hv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="ZZx-bT-nNe"/>
@@ -57,7 +57,7 @@
                 <outlet property="dateLabel" destination="I0M-Eb-1Hv" id="Fst-LT-4Wt"/>
                 <outlet property="stepLabel" destination="Qf9-KN-1bO" id="59U-8X-8IS"/>
             </connections>
-            <point key="canvasLocation" x="172" y="-208"/>
+            <point key="canvasLocation" x="-11" y="-213"/>
         </view>
     </objects>
 </document>

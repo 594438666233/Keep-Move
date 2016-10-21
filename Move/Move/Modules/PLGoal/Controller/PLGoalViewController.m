@@ -45,28 +45,28 @@
 
 - (void)createHeaderView {
     self.plGoalHeaderView = [[PLGoalHeaderView alloc] init];
-    _plGoalHeaderView.frame = CGRectMake(0, 64, PLWIDTH, HEIGHT / 4);
+    _plGoalHeaderView.frame = CGRectMake(0, 0, PLWIDTH, HEIGHT / 4);
     [self.view addSubview:_plGoalHeaderView];
 }
 
 - (void)createTargetView {
     self.plTargetView = [[PLTargetView alloc] init];
     _plTargetView.alpha = 0.0;
-    _plTargetView.frame = CGRectMake(0, 64, PLWIDTH, HEIGHT / 4);
+    _plTargetView.frame = CGRectMake(0, 0, PLWIDTH, HEIGHT / 4);
     [self.view addSubview:_plTargetView];
 }
 
 - (void)createDefeatView {
     self.plDefeatView = [[PLDefeatView alloc] init];
     _plDefeatView.alpha = 0.0;
-    _plDefeatView.frame = CGRectMake(0, 64, PLWIDTH, HEIGHT / 4);
+    _plDefeatView.frame = CGRectMake(0, 0, PLWIDTH, HEIGHT / 4);
     [self.view addSubview:_plDefeatView];
 }
 
 - (void)createCareerView {
     self.plCareerView = [[PLCareerView alloc] init];
     _plCareerView.alpha = 0.0;
-    _plCareerView.frame = CGRectMake(0, 64, PLWIDTH, HEIGHT / 4);
+    _plCareerView.frame = CGRectMake(0, 0, PLWIDTH, HEIGHT / 4);
     [self.view addSubview:_plCareerView];
 }
 
@@ -158,7 +158,7 @@
             }
         }];
         [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"goal%d", i]] forState:UIControlStateNormal];
-        button.frame = CGRectMake(margin * i + (i - 1) * 40, HEIGHT - 49 - 70, 40, 40);
+        button.frame = CGRectMake(margin * i + (i - 1) * 40, HEIGHT - 49 - 40 - 64 - 20, 40, 40);
         [self.view addSubview:button];
     }
     
