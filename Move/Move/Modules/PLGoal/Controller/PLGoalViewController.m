@@ -81,31 +81,31 @@
             [_plDefeatView.layer removeAllAnimations];
             [_plCareerView.layer removeAllAnimations];
             [_plTargetView.layer removeAllAnimations];
-
+            
             switch (button.tag) {
                 case 1001:
-                        {
-                            [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut  animations:^{
+                {
+                    [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut  animations:^{
+                        
+                        _plGoalHeaderView.alpha = 0.0f;
+                        _plDefeatView.alpha = 0.0;
+                        _plCareerView.alpha = 0.0;
+                        
+                    } completion:^(BOOL finished) {
+                        if (finished) {
+                            
+                            [UIView animateWithDuration:0.3f animations:^{
                                 
-                                _plGoalHeaderView.alpha = 0.0f;
-                                _plDefeatView.alpha = 0.0;
-                                _plCareerView.alpha = 0.0;
-                             
+                                _plTargetView.alpha = 1.0f;
                             } completion:^(BOOL finished) {
-                                if (finished) {
-                                    
-                                    [UIView animateWithDuration:0.3f animations:^{
-                                        
-                                        _plTargetView.alpha = 1.0f;
-                                    } completion:^(BOOL finished) {
-       
-                                    }];
-                                }
-                                
                                 
                             }];
-
                         }
+                        
+                        
+                    }];
+                    
+                }
                     break;
                 case 1002:
                 {
@@ -118,19 +118,19 @@
                             
                             [UIView animateWithDuration:0.3f animations:^{
                                 _plDefeatView.alpha = 1.0;
-
+                                
                             } completion:^(BOOL finished) {
                                 
                             }];
                         }
-     
+                        
                     }];
-
+                    
                 }
                     break;
                 case 1003:
                 {
-       
+                    
                     [UIView animateWithDuration:0.3f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut  animations:^{
                         _plTargetView.alpha = 0.0f;
                         _plGoalHeaderView.alpha = 0.0f;
@@ -141,7 +141,7 @@
                             
                             [UIView animateWithDuration:0.3f animations:^{
                                 _plCareerView.alpha = 1.0f;
-                             
+                                
                             } completion:^(BOOL finished) {
                                 
                             }];
@@ -150,7 +150,7 @@
                         
                         
                     }];
-
+                    
                 }
                     break;
                 default:
@@ -158,7 +158,7 @@
             }
         }];
         [button setBackgroundImage:[UIImage imageNamed:[NSString stringWithFormat:@"goal%d", i]] forState:UIControlStateNormal];
-        button.frame = CGRectMake(margin * i + (i - 1) * 40, HEIGHT - 49 - 40 - 64 - 20, 40, 40);
+        button.frame = CGRectMake(margin * i + (i - 1) * 40, HEIGHT - 49 - 64 - 70, 40, 40);
         [self.view addSubview:button];
     }
     
@@ -179,7 +179,7 @@
     self.roopImageView = [[UIImageView alloc] initWithImage:roopImage];
     _roopImageView.frame = CGRectMake(WIDTH - 30 - 82 * _mul * 0.7, _imageView.frame.origin.y + _imageView.frame.size.height + 10, 82 * _mul * 0.7, 100 * _mul * 0.7);
     [self.view addSubview:_roopImageView];
-
+    
 }
 
 #pragma mark - tapAction
@@ -201,7 +201,7 @@
             
         }
     }];
-
+    
     
     if (_isSwitch == YES) {
         _isSwitch = NO;

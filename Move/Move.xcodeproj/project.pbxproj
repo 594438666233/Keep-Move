@@ -17,11 +17,11 @@
 		115BE2CB1DBA33FC003279AC /* PLHealthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE2CA1DBA33FC003279AC /* PLHealthManager.m */; };
 		115BE2CD1DBA3485003279AC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 115BE2CC1DBA3485003279AC /* HealthKit.framework */; };
 		115BE2D51DBA39DE003279AC /* PLDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE2D41DBA39DE003279AC /* PLDataBaseManager.m */; };
+		115BE2D71DBA4E71003279AC /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 115BE2D61DBA4E71003279AC /* camera.png */; };
 		845372A91DB7796C00DBE92F /* PLGoalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */; };
 		845372AB1DB7798000DBE92F /* PLGoalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845372AA1DB7798000DBE92F /* PLGoalHeaderView.xib */; };
 		845372C01DB799F300DBE92F /* PLTargetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372BF1DB799F300DBE92F /* PLTargetView.m */; };
 		845372C21DB79A0500DBE92F /* PLTargetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845372C11DB79A0500DBE92F /* PLTargetView.xib */; };
-		846C8CC41DBA439F002F28D6 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 846C8CC31DBA439F002F28D6 /* camera.png */; };
 		8471C44D1DB75AFD008E8A5A /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471C4451DB75AFD008E8A5A /* RootViewController.m */; };
 		8471C44E1DB75AFD008E8A5A /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471C4481DB75AFD008E8A5A /* BaseModel.m */; };
 		8471C44F1DB75AFD008E8A5A /* BaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8471C44B1DB75AFD008E8A5A /* BaseView.m */; };
@@ -357,6 +357,7 @@
 		115BE2CE1DBA3485003279AC /* Move.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Move.entitlements; sourceTree = "<group>"; };
 		115BE2D31DBA39DE003279AC /* PLDataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDataBaseManager.h; sourceTree = "<group>"; };
 		115BE2D41DBA39DE003279AC /* PLDataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLDataBaseManager.m; sourceTree = "<group>"; };
+		115BE2D61DBA4E71003279AC /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 		8448B6AC1DB76F6B00F10D49 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		845372A71DB7796C00DBE92F /* PLGoalHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLGoalHeaderView.h; sourceTree = "<group>"; };
 		845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLGoalHeaderView.m; sourceTree = "<group>"; };
@@ -365,7 +366,6 @@
 		845372BE1DB799F300DBE92F /* PLTargetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTargetView.h; sourceTree = "<group>"; };
 		845372BF1DB799F300DBE92F /* PLTargetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTargetView.m; sourceTree = "<group>"; };
 		845372C11DB79A0500DBE92F /* PLTargetView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLTargetView.xib; sourceTree = "<group>"; };
-		846C8CC31DBA439F002F28D6 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
 		8471C4441DB75AFD008E8A5A /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		8471C4451DB75AFD008E8A5A /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		8471C4471DB75AFD008E8A5A /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
@@ -1152,8 +1152,8 @@
 			isa = PBXGroup;
 			children = (
 				84AB972E1DB8E7B70075FDC0 /* Avatars.plist */,
-				846C8CC31DBA439F002F28D6 /* camera.png */,
 				84AB972F1DB8E7B70075FDC0 /* dd_creategroup.png */,
+				115BE2D61DBA4E71003279AC /* camera.png */,
 				84AB97301DB8E7B70075FDC0 /* dd_creategroup@2x.png */,
 				84AB97311DB8E7B70075FDC0 /* dd_more_icon_plus.png */,
 				84AB97321DB8E7B70075FDC0 /* dd_more_icon_plus@2x.png */,
@@ -1488,7 +1488,7 @@
 				84F045FF1DB8754B009D3BC3 /* activity_circle-55_150x130_@2x.png in Resources */,
 				84AB97661DB8E7B70075FDC0 /* icon_level3@3x.png in Resources */,
 				8471C5031DB75B5E008E8A5A /* trends_bar_42mm-64.png in Resources */,
-				846C8CC41DBA439F002F28D6 /* camera.png in Resources */,
+				115BE2D71DBA4E71003279AC /* camera.png in Resources */,
 				84AB975C1DB8E7B70075FDC0 /* goalAlbumCellEmptyBg_6s.jpg in Resources */,
 				84AB97251DB8E4780075FDC0 /* achieveSelected.png in Resources */,
 				84C6120A1DB85B290029CEC5 /* PLCareerView.xib in Resources */,

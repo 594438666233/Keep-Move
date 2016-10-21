@@ -53,7 +53,7 @@
     UIImage *runSelectedImage = [UIImage imageNamed:@"runSelected"];
     runSelectedImage = [runSelectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     runViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"" image:runImage selectedImage:runSelectedImage];
-
+    
     
     // 目标
     PLSignViewController *signViewController = [[PLSignViewController alloc] init];
@@ -89,18 +89,18 @@
     
     _rootTabBarController.tabBar.tintColor = PLYELLOW;
     _rootTabBarController.tabBar.barTintColor = [UIColor whiteColor];
-
-
     
-//    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-//    //     判断是否第一次进入应用
-//    if (![userDef boolForKey:@"notFirst"]) {
-//        // 如果第一次，进入引导页
-//        self.window.rootViewController = [[LeadingPageViewController alloc] init];
-//    } else {
-//        // 否则直接进入应用
-//        self.window.rootViewController = _rootTabBarController;
-//    }
+    
+    
+    //    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+    //    //     判断是否第一次进入应用
+    //    if (![userDef boolForKey:@"notFirst"]) {
+    //        // 如果第一次，进入引导页
+    //        self.window.rootViewController = [[LeadingPageViewController alloc] init];
+    //    } else {
+    //        // 否则直接进入应用
+    //        self.window.rootViewController = _rootTabBarController;
+    //    }
     UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 49)];
     backView.backgroundColor = ColorWith51Black;
     [_rootTabBarController.tabBar insertSubview:backView atIndex:0];
