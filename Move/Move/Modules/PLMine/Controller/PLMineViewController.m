@@ -11,6 +11,8 @@
 #import "PLDataBaseManager.h"
 #import "PLPersonInformation.h"
 #import "PLHWeightTableViewCell.h"
+#import "PLHistoryInformationViewController.h"
+#import "PLSetInformationTableViewController.h"
 static NSString *const InitialWeight = @"PLInitialWeightTableViewCell";
 static NSString *const cellID = @"cell";
 static NSString *const recordCell = @"recordCell";
@@ -68,6 +70,7 @@ UITableViewDataSource
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = ColorWithBackGround;
+        
     }
     return _tableView;
 }
@@ -122,6 +125,20 @@ UITableViewDataSource
         return 44;
     }
     
+
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    if (indexPath.section == 1) {
+        PLHistoryInformationViewController *historyVC = [[PLHistoryInformationViewController alloc] init];
+        [self.navigationController pushViewController:historyVC animated:YES];
+    } else if(indexPath.section == 2) {
+    
+        PLSetInformationTableViewController *informationVC = [PLSetInformationTableViewController pl_setInformationTableViewController];
+        [self.navigationController pushViewController:informationVC animated:YES];
+    
+    }
 
 }
 
@@ -184,6 +201,7 @@ UITableViewDataSource
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 cell.backgroundColor = ColorWith51Black;
                 cell.textLabel.textColor = [UIColor grayColor];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 
             }
             return cell;
@@ -198,10 +216,11 @@ UITableViewDataSource
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:setCell];
             cell.imageView.image = [UIImage imageNamed:@"set"];
-            cell.textLabel.text = @"数据与设置";
+            cell.textLabel.text = @"个人资料与设置";
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.backgroundColor = ColorWith51Black;
             cell.textLabel.textColor = [UIColor grayColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         return cell;
     

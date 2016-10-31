@@ -20,7 +20,7 @@
 @property (nonatomic, assign) CGFloat weight;
 @property (nonatomic, copy) NSString *time;
 
-@property (nonatomic, strong) NSMutableArray *historyArray;
+
 
 @end
 
@@ -40,7 +40,7 @@
     _flag1 = NO;
     _flag2 = NO;
 
-    self.historyArray = [NSMutableArray array];
+    
     
     NSString *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES).lastObject;
     NSString *sqlFilePath = [path stringByAppendingPathComponent:@"move.sqlite"];
@@ -161,6 +161,8 @@
 
 - (NSArray *)ArrayWithRecordWeight {
 
+    
+    NSMutableArray *__block historyArray = [NSMutableArray array];
     [self.dbQueue inDatabase:^(FMDatabase *db) {
         FMResultSet *result = [db executeQuery:@"SELECT * FROM Record"];
         
@@ -172,11 +174,11 @@
             PLHistoryInformation *history = [[PLHistoryInformation alloc] init];
             history.time = _time;
             history.weight = _weight;
-            [self.historyArray addObject:history];
+            [historyArray addObject:history];
         }
     }];
     
-    return _historyArray;
+    return historyArray;
 }
 
 //NSArray *array = [[PLDataBaseManager shareManager] ArrayWithRecordWeight];

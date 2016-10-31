@@ -18,6 +18,11 @@
 		115BE2CD1DBA3485003279AC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 115BE2CC1DBA3485003279AC /* HealthKit.framework */; };
 		115BE2D51DBA39DE003279AC /* PLDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE2D41DBA39DE003279AC /* PLDataBaseManager.m */; };
 		115BE2D71DBA4E71003279AC /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 115BE2D61DBA4E71003279AC /* camera.png */; };
+		11A10F6A1DC6D404005EBDA5 /* PLHistoryInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A10F691DC6D404005EBDA5 /* PLHistoryInformationViewController.m */; };
+		11A10F6E1DC6D76F005EBDA5 /* PLHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A10F6C1DC6D76F005EBDA5 /* PLHistoryTableViewCell.m */; };
+		11A10F6F1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11A10F6D1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib */; };
+		11A10F771DC6EF83005EBDA5 /* PLSetInformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A10F761DC6EF83005EBDA5 /* PLSetInformationTableViewController.m */; };
+		11A10F791DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11A10F781DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard */; };
 		845372A91DB7796C00DBE92F /* PLGoalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */; };
 		845372AB1DB7798000DBE92F /* PLGoalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845372AA1DB7798000DBE92F /* PLGoalHeaderView.xib */; };
 		845372C01DB799F300DBE92F /* PLTargetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372BF1DB799F300DBE92F /* PLTargetView.m */; };
@@ -358,6 +363,14 @@
 		115BE2D31DBA39DE003279AC /* PLDataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDataBaseManager.h; sourceTree = "<group>"; };
 		115BE2D41DBA39DE003279AC /* PLDataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLDataBaseManager.m; sourceTree = "<group>"; };
 		115BE2D61DBA4E71003279AC /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		11A10F681DC6D404005EBDA5 /* PLHistoryInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLHistoryInformationViewController.h; sourceTree = "<group>"; };
+		11A10F691DC6D404005EBDA5 /* PLHistoryInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLHistoryInformationViewController.m; sourceTree = "<group>"; };
+		11A10F6B1DC6D76F005EBDA5 /* PLHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLHistoryTableViewCell.h; sourceTree = "<group>"; };
+		11A10F6C1DC6D76F005EBDA5 /* PLHistoryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLHistoryTableViewCell.m; sourceTree = "<group>"; };
+		11A10F6D1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		11A10F751DC6EF83005EBDA5 /* PLSetInformationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSetInformationTableViewController.h; sourceTree = "<group>"; };
+		11A10F761DC6EF83005EBDA5 /* PLSetInformationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSetInformationTableViewController.m; sourceTree = "<group>"; };
+		11A10F781DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PLSetInformationTableViewController.storyboard; sourceTree = "<group>"; };
 		8448B6AC1DB76F6B00F10D49 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		845372A71DB7796C00DBE92F /* PLGoalHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLGoalHeaderView.h; sourceTree = "<group>"; };
 		845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLGoalHeaderView.m; sourceTree = "<group>"; };
@@ -1128,6 +1141,11 @@
 				84AB97031DB8D4100075FDC0 /* PLMineViewController.h */,
 				84AB97041DB8D4100075FDC0 /* PLMineViewController.m */,
 				84AB97051DB8D4100075FDC0 /* PLMineViewController.xib */,
+				11A10F681DC6D404005EBDA5 /* PLHistoryInformationViewController.h */,
+				11A10F691DC6D404005EBDA5 /* PLHistoryInformationViewController.m */,
+				11A10F751DC6EF83005EBDA5 /* PLSetInformationTableViewController.h */,
+				11A10F761DC6EF83005EBDA5 /* PLSetInformationTableViewController.m */,
+				11A10F781DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1144,6 +1162,9 @@
 				115BE2C31DBA2E05003279AC /* PLHWeightTableViewCell.h */,
 				115BE2C41DBA2E05003279AC /* PLHWeightTableViewCell.m */,
 				115BE2C51DBA2E05003279AC /* PLHWeightTableViewCell.xib */,
+				11A10F6B1DC6D76F005EBDA5 /* PLHistoryTableViewCell.h */,
+				11A10F6C1DC6D76F005EBDA5 /* PLHistoryTableViewCell.m */,
+				11A10F6D1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1576,6 +1597,7 @@
 				84AB97271DB8E4780075FDC0 /* goalSelected.png in Resources */,
 				8471C4FF1DB75B5E008E8A5A /* trends_bar_42mm-60.png in Resources */,
 				8471C4CC1DB75B5E008E8A5A /* trends_bar_42mm-14.png in Resources */,
+				11A10F6F1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib in Resources */,
 				8471C5151DB75B5E008E8A5A /* trends_bar_42mm-80.png in Resources */,
 				84F046081DB8754B009D3BC3 /* activity_circle-9_132x114_@2x.png in Resources */,
 				84F045AE1DB8754B009D3BC3 /* activity_circle-19_132x114_@2x.png in Resources */,
@@ -1733,6 +1755,7 @@
 				8471C4EF1DB75B5E008E8A5A /* trends_bar_42mm-46.png in Resources */,
 				84F045A31DB8754B009D3BC3 /* activity_circle-13_150x130_@2x.png in Resources */,
 				8471C4ED1DB75B5E008E8A5A /* trends_bar_42mm-44.png in Resources */,
+				11A10F791DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard in Resources */,
 				84F045E21DB8754B009D3BC3 /* activity_circle-42_132x114_@2x.png in Resources */,
 				84AB97681DB8E7B70075FDC0 /* icon_level4@3x.png in Resources */,
 				84F0459B1DB8754B009D3BC3 /* activity_circle-0_150x130_@2x.png in Resources */,
@@ -1830,6 +1853,7 @@
 				84D636171DB764E300AC0E4D /* PLAnalyseViewController.m in Sources */,
 				8471C5381DB75C10008E8A5A /* UIView+ShowMessage.m in Sources */,
 				845372C01DB799F300DBE92F /* PLTargetView.m in Sources */,
+				11A10F6E1DC6D76F005EBDA5 /* PLHistoryTableViewCell.m in Sources */,
 				8471C44F1DB75AFD008E8A5A /* BaseView.m in Sources */,
 				84D0D8261DB6F48500EDCFB3 /* AppDelegate.m in Sources */,
 				84C611FF1DB855B30029CEC5 /* PLDefeatView.m in Sources */,
@@ -1839,6 +1863,7 @@
 				8471C5351DB75C03008E8A5A /* UIButton+Block.m in Sources */,
 				115BE28C1DB9A42B003279AC /* NSUserDefaults+Categories.m in Sources */,
 				115BE2CB1DBA33FC003279AC /* PLHealthManager.m in Sources */,
+				11A10F6A1DC6D404005EBDA5 /* PLHistoryInformationViewController.m in Sources */,
 				84AB970F1DB8D4100075FDC0 /* PLBounceWeightView.m in Sources */,
 				115BE29C1DB9C2BB003279AC /* PLPersonInformation.m in Sources */,
 				115BE2C61DBA2E05003279AC /* PLHWeightTableViewCell.m in Sources */,
@@ -1848,6 +1873,7 @@
 				84AB970D1DB8D4100075FDC0 /* PLMineViewController.m in Sources */,
 				84D0D8231DB6F48500EDCFB3 /* main.m in Sources */,
 				84AB96FF1DB8BACC0075FDC0 /* PLNavigationView.m in Sources */,
+				11A10F771DC6EF83005EBDA5 /* PLSetInformationTableViewController.m in Sources */,
 				84AB96F21DB8B2DD0075FDC0 /* PLCareerModel.m in Sources */,
 				115BE28B1DB9A42B003279AC /* NSDate+Categories.m in Sources */,
 				8471C44D1DB75AFD008E8A5A /* RootViewController.m in Sources */,
