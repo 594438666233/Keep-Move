@@ -58,7 +58,6 @@ static NSString *const cellIdentifier = @"cell";
     cell.addButton.hidden = YES;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (indexPath.section == 0) {
-        cell.buttonTitle = @"添加";
         switch (indexPath.row) {
             case 0:
             {

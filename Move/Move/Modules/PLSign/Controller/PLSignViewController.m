@@ -9,7 +9,7 @@
 #import "PLSignViewController.h"
 #import "PLRecommendGoalCell.h"
 #import "PLAddGoalViewController.h"
-
+#import "PLSignCellObject.h"
 static NSString *const cellReusableIdentifier = @"cell";
 
 @interface PLSignViewController ()
@@ -18,14 +18,44 @@ static NSString *const cellReusableIdentifier = @"cell";
     UITableViewDataSource
 >
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, copy) NSString *goalPath;
+@property (nonatomic, retain) NSMutableArray *dataArray;
+@property (nonatomic, retain) NSMutableArray *recommendGoalArray;
+@property (nonatomic, assign) BOOL flag;
+@property (nonatomic, assign) BOOL tempFlag;
+
 
 @end
 
 @implementation PLSignViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self setupPath];
+    self.dataArray = [NSMutableArray array];
+    NSArray *pArray = [NSKeyedUnarchiver unarchiveObjectWithFile:_goalPath];
+    self.dataArray = [NSMutableArray arrayWithArray:pArray];
+    if (_dataArray.count == 0) {
+        _flag = NO;
+        NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+        // 保存用户数据
+        [userDef setBool:_flag forKey:@"notFirst"];
+        [userDef synchronize];
+    }
+    
+    [_tableView reloadData];
+    NSLog(@"%@", self.dataArray);
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _tempFlag = YES;
+    [self setupTableView];
     
+}
+
+- (void)setupTableView {
     // 设置footerView
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 150)];
     self.tableView.tableFooterView = footView;
@@ -47,29 +77,123 @@ static NSString *const cellReusableIdentifier = @"cell";
     _tableView.rowHeight = 80.f;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tableView registerNib:[UINib nibWithNibName:@"PLRecommendGoalCell" bundle:nil] forCellReuseIdentifier:cellReusableIdentifier];
+}
+
+- (void)setupPath {
+    // 拼接路径
+    NSArray *libraryArray = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *libraryPath = [libraryArray firstObject];
     
+    // 列表
+    NSString *path = [libraryPath stringByAppendingString:@"/Preferences"];
+    path = [path stringByAppendingString:@"/Goal.plist"];
+    self.goalPath = path;
+    NSLog(@"%@", _goalPath);
+}
+
+
+
+- (NSMutableArray *)recommendGoalArray {
+    if (_recommendGoalArray == nil) {
+        self.recommendGoalArray = [NSMutableArray array];
+        PLSignCellObject *sign0 = [PLSignCellObject plSignCellObjectWithTitle:@"8小时充足睡眠" andImageView:[UIImage imageNamed:@"stopwatch"]];
+        PLSignCellObject *sign1 = [PLSignCellObject plSignCellObjectWithTitle:@"健身房报道" andImageView:[UIImage imageNamed:@"dumbbell"]];
+        PLSignCellObject *sign2 = [PLSignCellObject plSignCellObjectWithTitle:@"拒绝啤酒" andImageView:[UIImage imageNamed:@"beer"]];
+        PLSignCellObject *sign3 = [PLSignCellObject plSignCellObjectWithTitle:@"每日1万步" andImageView:[UIImage imageNamed:@"shoe-1"]];
+        [_recommendGoalArray addObjectsFromArray:@[sign0, sign1, sign2, sign3]];
+        
+    }
+
+    return _recommendGoalArray;
 }
 
 #pragma mark - UITableView Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 4;
-    }else {
-        return 0;
+    
+    if (_tempFlag == YES) {
+        
+        NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+        // 判断是否第一次进入应用
+        if (![userDef boolForKey:@"notFirst"]) {
+            // 如果第一次，进入引导页
+            if (section == 0) {
+                return self.recommendGoalArray.count;
+            }else {
+                return _dataArray.count;
+            }
+            
+        }
+        return _dataArray.count;
+    }else{
+        if (self.recommendGoalArray.count != 0) {
+            if (section == 0) {
+                return self.recommendGoalArray.count;
+            }else {
+                return _dataArray.count;
+            }
+        }
     }
+    return _dataArray.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    
+    if (_tempFlag == YES) {
+        NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+        // 判断是否第一次进入应用
+        if (![userDef boolForKey:@"notFirst"]) {
+        // 如果第一次，进入引导页
+        
+            return 2;
+        
+        
+        }
+        return 1;
+    }else{
+        if (self.recommendGoalArray.count != 0) {
+            return 2;
+        }else{
+            return 1;
+        }
+    }
+    
+    return 0;
+    
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return @"推荐目标";
-    }else {
+    
+    
+    if (_tempFlag == YES) {
+        
+        NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+        // 判断是否第一次进入应用
+        if (![userDef boolForKey:@"notFirst"]) {
+            // 如果第一次，进入引导页
+            
+            if (section == 0) {
+                return @"推荐目标";
+            }else {
+                return @"我的目标";
+            }
+            
+            
+        }
         return @"我的目标";
+    }else{
+        if (_recommendGoalArray.count != 0) {
+            if (section == 0) {
+                return @"推荐目标";
+            }else {
+                return @"我的目标";
+            }
+        }else {
+            return @"我的目标";
+        }
     }
+    
+
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -79,75 +203,280 @@ static NSString *const cellReusableIdentifier = @"cell";
     label.textColor = [UIColor grayColor];
     label.font = [UIFont systemFontOfSize:15];
     [view addSubview:label];
-    if (section == 0) {
-        label.text = @"推荐目标";
-        return view;
-    }else {
+    
+    if (_tempFlag == YES) {
+        
+        NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+        // 判断是否第一次进入应用
+        if (![userDef boolForKey:@"notFirst"]) {
+            // 如果第一次，进入引导页
+            
+            if (section == 0) {
+                label.text = @"推荐目标";
+                return view;
+            }else {
+                label.text = @"我的目标";
+                return view;
+            }
+            
+            
+        }
         label.text = @"我的目标";
         return view;
+    }else {
+        if (self.recommendGoalArray.count != 0) {
+            if (section == 0) {
+                label.text = @"推荐目标";
+                return view;
+            }else {
+                label.text = @"我的目标";
+                return view;
+            }
+        }
     }
+    label.text = @"我的目标";
+    return view;
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    PLRecommendGoalCell *cell = [tableView dequeueReusableCellWithIdentifier:cellReusableIdentifier];
+    
+    __weak PLRecommendGoalCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell = [[NSBundle mainBundle] loadNibNamed:@"PLRecommendGoalCell" owner:nil options:nil].lastObject;
 
     cell.backgroundColor = PLBLACK;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.textColor = [UIColor grayColor];
-    if (indexPath.section == 0) {
-        cell.buttonTitle = @"添加";
-        switch (indexPath.row) {
-            case 0:
-            {
-                cell.titleString = @"按时睡觉";
-                cell.addButtonBlock = ^(UIButton *button) {
-                    NSLog(@"hello world");
-                };
-                return cell;
-            }
-            break;
-            case 1:
-            {
-                cell.titleString = @"坚持锻炼";
-                cell.iconImage = [UIImage imageNamed:@"dumbbell"];
-                cell.addButtonBlock = ^(UIButton *button) {
-                    NSLog(@"hello");
-                };
-                return cell;
-            }
-            break;
-            case 2:
-            {
-                cell.titleString = @"拒绝啤酒";
-                cell.iconImage = [UIImage imageNamed:@"beer"];
-                cell.addButtonBlock = ^(UIButton *button) {
-                    NSLog(@"hello beer");
-                };
-                return cell;
-            }
-            break;
-            case 3:
-            {
-                cell.titleString = @"坚持跑步";
-                cell.iconImage = [UIImage imageNamed:@"shoe-1"];
-                cell.addButtonBlock = ^(UIButton *button) {
-                    NSLog(@"run");
-                };
-                return cell;
-            }
-            break;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    if (_tempFlag == YES) {
+        NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+        // 判断是否第一次进入应用
+        if (![userDef boolForKey:@"notFirst"]) {
+            // 如果第一次，进入引导页
+            if (self.recommendGoalArray.count != 0) {
                 
-            default:
-                break;
+                if (indexPath.section == 0) {
+                    cell.buttonTitle = @"添加";
+                    PLSignCellObject *sign = _recommendGoalArray[indexPath.row];
+                    cell.titleString = sign.titleString;
+                    cell.iconImage = sign.imageView;
+                    switch (indexPath.row) {
+                        case 0:
+                        {
+                            cell.addButtonBlock = ^(UIButton *button) {
+                                
+                                [self.dataArray addObject:sign];
+                                [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                                [cell removeFromSuperview];
+                                _tempFlag = NO;
+                                [_recommendGoalArray removeObject:sign];
+                                [_tableView reloadData];
+                                
+                                _flag = YES;
+                                
+                                NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+                                // 保存用户数据
+                                [userDef setBool:_flag forKey:@"notFirst"];
+                                [userDef synchronize];
+                                
+                                
+                            };
+                            return cell;
+                        }
+                            break;
+                        case 1:
+                        {
+                            
+                            cell.addButtonBlock = ^(UIButton *button) {
+                                [self.dataArray addObject:sign];
+                                [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                                [cell removeFromSuperview];
+                                _tempFlag = NO;
+                                [_recommendGoalArray removeObject:sign];
+                                [_tableView reloadData];
+                                
+                                _flag = YES;
+                                NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+                                // 保存用户数据
+                                [userDef setBool:_flag forKey:@"notFirst"];
+                                [userDef synchronize];
+                            };
+                            return cell;
+                        }
+                            break;
+                        case 2:
+                        {
+                            
+                            cell.addButtonBlock = ^(UIButton *button) {
+                                [self.dataArray addObject:sign];
+                                [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                                [cell removeFromSuperview];
+                                _tempFlag = NO;
+                                [_recommendGoalArray removeObject:sign];
+                                [_tableView reloadData];
+                                
+                                _flag = YES;
+                                NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+                                // 保存用户数据
+                                [userDef setBool:_flag forKey:@"notFirst"];
+                                [userDef synchronize];
+                            };
+                            return cell;
+                        }
+                            break;
+                        case 3:
+                        {
+                            
+                            cell.addButtonBlock = ^(UIButton *button) {
+                                [self.dataArray addObject:sign];
+                                [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                                [cell removeFromSuperview];
+                                _tempFlag = NO;
+                                [_recommendGoalArray removeObject:sign];
+                                [_tableView reloadData];
+                                
+                                _flag = YES;
+                                NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+                                // 保存用户数据
+                                [userDef setBool:_flag forKey:@"notFirst"];
+                                [userDef synchronize];
+                            };
+                            return cell;
+                        }
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                }
+            }
+
+        }else {
+            PLSignCellObject *sign = _dataArray[indexPath.row];
+            
+            cell.titleString = sign.titleString;
+            cell.iconImage = [UIImage imageNamed:@"unover"];
+            cell.buttonTitle = @"打卡";
+            
+            
+            cell.addButtonBlock = ^(UIButton *button) {
+                cell.iconImage = [UIImage imageNamed:@"over"];
+                cell.buttonTitle = @"已打卡";
+                
+            };
+            return cell;
         }
+    }else {
+        if (self.recommendGoalArray.count != 0) {
+            
+            if (indexPath.section == 0) {
+                cell.buttonTitle = @"添加";
+                PLSignCellObject *sign = _recommendGoalArray[indexPath.row];
+                cell.titleString = sign.titleString;
+                cell.iconImage = sign.imageView;
+                switch (indexPath.row) {
+                    case 0:
+                    {
+                        cell.addButtonBlock = ^(UIButton *button) {
+                            
+                            [self.dataArray addObject:sign];
+                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [cell removeFromSuperview];
+                            _tempFlag = NO;
+                            [_recommendGoalArray removeObject:sign];
+                            [_tableView reloadData];
+                            
+                            _flag = YES;
+                            
+                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+                            // 保存用户数据
+                            [userDef setBool:_flag forKey:@"notFirst"];
+                            [userDef synchronize];
+                            
+                            
+                        };
+                        return cell;
+                    }
+                        break;
+                    case 1:
+                    {
+                        
+                        cell.addButtonBlock = ^(UIButton *button) {
+                            [self.dataArray addObject:sign];
+                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [cell removeFromSuperview];
+                            [_recommendGoalArray removeObject:sign];
+                            [_tableView reloadData];
+                            
+                            _flag = YES;
+                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+                            // 保存用户数据
+                            [userDef setBool:_flag forKey:@"notFirst"];
+                            [userDef synchronize];
+                        };
+                        return cell;
+                    }
+                        break;
+                    case 2:
+                    {
+                        
+                        cell.addButtonBlock = ^(UIButton *button) {
+                            [self.dataArray addObject:sign];
+                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [cell removeFromSuperview];
+                            [_recommendGoalArray removeObject:sign];
+                            [_tableView reloadData];
+                            
+                            _flag = YES;
+                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+                            // 保存用户数据
+                            [userDef setBool:_flag forKey:@"notFirst"];
+                            [userDef synchronize];
+                        };
+                        return cell;
+                    }
+                        break;
+                    case 3:
+                    {
+                        
+                        cell.addButtonBlock = ^(UIButton *button) {
+                            [self.dataArray addObject:sign];
+                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [cell removeFromSuperview];
+                            [_recommendGoalArray removeObject:sign];
+                            [_tableView reloadData];
+                            
+                            _flag = YES;
+                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+                            // 保存用户数据
+                            [userDef setBool:_flag forKey:@"notFirst"];
+                            [userDef synchronize];
+                        };
+                        return cell;
+                    }
+                        break;
+                        
+                    default:
+                        break;
+                }
+            }
+        }
+        PLSignCellObject *sign = _dataArray[indexPath.row];
+        
+        cell.titleString = sign.titleString;
+        cell.iconImage = [UIImage imageNamed:@"unover"];
+        cell.buttonTitle = @"打卡";
+        
+        
+        cell.addButtonBlock = ^(UIButton *button) {
+            cell.iconImage = [UIImage imageNamed:@"over"];
+            cell.buttonTitle = @"已打卡";
+            
+        };
+        return cell;
+
     }
-//    cell.titleString = @"坚持跑步";
-//    cell.iconImage = [UIImage imageNamed:@"shoe-1"];
-//    cell.buttonTitle = @"移除";
-//    cell.addButtonBlock = ^(UIButton *button) {
-//        NSLog(@"run");
-//    };
-//    return cell;
     return 0;
 
 }

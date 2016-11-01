@@ -23,6 +23,7 @@
 		11A10F6F1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11A10F6D1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib */; };
 		11A10F771DC6EF83005EBDA5 /* PLSetInformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A10F761DC6EF83005EBDA5 /* PLSetInformationTableViewController.m */; };
 		11A10F791DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11A10F781DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard */; };
+		842441E51DC7751D00582B41 /* PLSignCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 842441E41DC7751D00582B41 /* PLSignCellObject.m */; };
 		845372A91DB7796C00DBE92F /* PLGoalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */; };
 		845372AB1DB7798000DBE92F /* PLGoalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845372AA1DB7798000DBE92F /* PLGoalHeaderView.xib */; };
 		845372C01DB799F300DBE92F /* PLTargetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372BF1DB799F300DBE92F /* PLTargetView.m */; };
@@ -212,6 +213,8 @@
 		84AB97781DB8E7B70075FDC0 /* weight_bmi_icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84AB97521DB8E7B70075FDC0 /* weight_bmi_icon@3x.png */; };
 		84AB97791DB8E7B70075FDC0 /* weRunConnecting.gif in Resources */ = {isa = PBXBuildFile; fileRef = 84AB97531DB8E7B70075FDC0 /* weRunConnecting.gif */; };
 		84AC593A1DB7697500E7D8C0 /* UILabel+SizeToHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AC59391DB7697500E7D8C0 /* UILabel+SizeToHeight.m */; };
+		84B3328D1DC8824F00681A71 /* unover.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B3328B1DC8824F00681A71 /* unover.png */; };
+		84B3328E1DC8824F00681A71 /* over.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B3328C1DC8824F00681A71 /* over.png */; };
 		84B7B7D11DC6DE4F00715926 /* PLRecommendGoalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7B7CF1DC6DE4E00715926 /* PLRecommendGoalCell.m */; };
 		84B7B7D21DC6DE4F00715926 /* PLRecommendGoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B7B7D01DC6DE4F00715926 /* PLRecommendGoalCell.xib */; };
 		84B7B7DD1DC6DE8E00715926 /* bicycle.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B7B7D41DC6DE8D00715926 /* bicycle.png */; };
@@ -395,6 +398,8 @@
 		11A10F751DC6EF83005EBDA5 /* PLSetInformationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSetInformationTableViewController.h; sourceTree = "<group>"; };
 		11A10F761DC6EF83005EBDA5 /* PLSetInformationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSetInformationTableViewController.m; sourceTree = "<group>"; };
 		11A10F781DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PLSetInformationTableViewController.storyboard; sourceTree = "<group>"; };
+		842441E31DC7751D00582B41 /* PLSignCellObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSignCellObject.h; sourceTree = "<group>"; };
+		842441E41DC7751D00582B41 /* PLSignCellObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSignCellObject.m; sourceTree = "<group>"; };
 		8448B6AC1DB76F6B00F10D49 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		845372A71DB7796C00DBE92F /* PLGoalHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLGoalHeaderView.h; sourceTree = "<group>"; };
 		845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLGoalHeaderView.m; sourceTree = "<group>"; };
@@ -602,6 +607,8 @@
 		84AB97531DB8E7B70075FDC0 /* weRunConnecting.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = weRunConnecting.gif; sourceTree = "<group>"; };
 		84AC59381DB7697500E7D8C0 /* UILabel+SizeToHeight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+SizeToHeight.h"; sourceTree = "<group>"; };
 		84AC59391DB7697500E7D8C0 /* UILabel+SizeToHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+SizeToHeight.m"; sourceTree = "<group>"; };
+		84B3328B1DC8824F00681A71 /* unover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unover.png; sourceTree = "<group>"; };
+		84B3328C1DC8824F00681A71 /* over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = over.png; sourceTree = "<group>"; };
 		84B7B7CE1DC6DE4E00715926 /* PLRecommendGoalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLRecommendGoalCell.h; sourceTree = "<group>"; };
 		84B7B7CF1DC6DE4E00715926 /* PLRecommendGoalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLRecommendGoalCell.m; sourceTree = "<group>"; };
 		84B7B7D01DC6DE4F00715926 /* PLRecommendGoalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLRecommendGoalCell.xib; sourceTree = "<group>"; };
@@ -864,6 +871,8 @@
 		845372B81DB78E9400DBE92F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				842441E31DC7751D00582B41 /* PLSignCellObject.h */,
+				842441E41DC7751D00582B41 /* PLSignCellObject.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1279,6 +1288,8 @@
 		84B7B7D31DC6DE8000715926 /* RecommendGoal */ = {
 			isa = PBXGroup;
 			children = (
+				84B3328B1DC8824F00681A71 /* unover.png */,
+				84B3328C1DC8824F00681A71 /* over.png */,
 				84572CDA1DC74CC600B8CD0D /* carrot.png */,
 				84572CDB1DC74CC600B8CD0D /* tea.png */,
 				84572CDC1DC74CC600B8CD0D /* 美食.png */,
@@ -1593,6 +1604,7 @@
 				8471C51B1DB75B5E008E8A5A /* trends_bar_42mm-86.png in Resources */,
 				8471C4F61DB75B5E008E8A5A /* trends_bar_42mm-52.png in Resources */,
 				84F045FF1DB8754B009D3BC3 /* activity_circle-55_150x130_@2x.png in Resources */,
+				84B3328D1DC8824F00681A71 /* unover.png in Resources */,
 				84AB97661DB8E7B70075FDC0 /* icon_level3@3x.png in Resources */,
 				8471C5031DB75B5E008E8A5A /* trends_bar_42mm-64.png in Resources */,
 				115BE2D71DBA4E71003279AC /* camera.png in Resources */,
@@ -1711,6 +1723,7 @@
 				84AB972A1DB8E4780075FDC0 /* analyseNormal.png in Resources */,
 				8471C4D01DB75B5E008E8A5A /* trends_bar_42mm-18.png in Resources */,
 				8471C51D1DB75B5E008E8A5A /* trends_bar_42mm-88.png in Resources */,
+				84B3328E1DC8824F00681A71 /* over.png in Resources */,
 				84AB976B1DB8E7B70075FDC0 /* moon.png in Resources */,
 				84F045A51DB8754B009D3BC3 /* activity_circle-14_150x130_@2x.png in Resources */,
 				84C611F81DB845040029CEC5 /* goal2.png in Resources */,
@@ -1982,8 +1995,8 @@
 				84AB96F61DB8B5300075FDC0 /* PLDefeatModel.m in Sources */,
 				84D636081DB764B500AC0E4D /* PLSignViewController.m in Sources */,
 				84AB970D1DB8D4100075FDC0 /* PLMineViewController.m in Sources */,
+				842441E51DC7751D00582B41 /* PLSignCellObject.m in Sources */,
 				84D0D8231DB6F48500EDCFB3 /* main.m in Sources */,
-				84AB96FF1DB8BACC0075FDC0 /* PLNavigationView.m in Sources */,
 				11A10F771DC6EF83005EBDA5 /* PLSetInformationTableViewController.m in Sources */,
 				84AB96F21DB8B2DD0075FDC0 /* PLCareerModel.m in Sources */,
 				115BE28B1DB9A42B003279AC /* NSDate+Categories.m in Sources */,
