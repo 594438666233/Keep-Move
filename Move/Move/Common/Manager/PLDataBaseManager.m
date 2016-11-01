@@ -88,7 +88,7 @@
     
     [self.dbQueue inDatabase:^(FMDatabase *db) {
         
-        BOOL success = [db executeUpdate:[NSString stringWithFormat:@"insert into Person values (null,'%@','%ld', '%f','%f','%f')", person.gender, person.brithday, person.height, person.goalWeight, person.goalStep]];
+        BOOL success = [db executeUpdate:[NSString stringWithFormat:@"insert into Person values (null,'%@','%ld', '%f','%f','%ld')", person.gender, person.brithday, person.height, person.goalWeight, person.goalStep]];
         
         if (success) {
             NSLog(@"插入成功");
@@ -114,6 +114,47 @@
  
  [[PLDataBaseManager shareManager] insertPerson:person];
  */
+
+- (BOOL)updatePerson:(PLPersonInformation *)person {
+    _flag1 = NO;
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+//         BOOL success = [db executeUpdate:@"create table if not exists Person (id integer primary key autoincrement, gender text , brithday integer , height real , goalweight real, goalstep real)"];
+        BOOL success1 = [db executeUpdate:[NSString stringWithFormat:@"update Person set gender = '%@' ", person.gender]];
+        BOOL success2 = [db executeUpdate:[NSString stringWithFormat:@"update Person set brithday = '%ld' ", person.brithday]];
+        BOOL success3 = [db executeUpdate:[NSString stringWithFormat:@"update Person set height = '%f' ", person.height]];
+        BOOL success4 = [db executeUpdate:[NSString stringWithFormat:@"update Person set goalweight = '%f' ", person.goalWeight]];
+        BOOL success5 = [db executeUpdate:[NSString stringWithFormat:@"update Person set goalstep = '%ld' ", person.goalStep]];
+        if (success1&&success2&&success3&&success4&&success5) {
+            NSLog(@"修改成功");
+            _flag1 = YES;
+        } else {
+            NSLog(@"修改失败");
+        }
+        
+
+    }];
+
+    return _flag1;
+}
+- (PLPersonInformation *)personInformation {
+    
+    PLPersonInformation *__block person = [[PLPersonInformation alloc] init];
+    
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *result = [db executeQuery:@"SELECT * FROM Person"];
+        while ([result next]) {
+            person.gender = [result stringForColumnIndex:1];
+            person.brithday = [result intForColumnIndex:2];
+            person.height = [result doubleForColumnIndex:3];
+            person.goalWeight = [result doubleForColumnIndex:4];
+            person.goalStep = [result intForColumnIndex:5];
+        }
+        
+    }];
+    return person;
+    
+
+}
 
 - (BOOL)insertHistoryRecord:(PLHistoryInformation *)history {
     _flag1 = NO;

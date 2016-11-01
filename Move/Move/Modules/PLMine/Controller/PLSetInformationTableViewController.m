@@ -8,8 +8,14 @@
 
 #import "PLSetInformationTableViewController.h"
 
-@interface PLSetInformationTableViewController ()
+#import "PLPersonInformation.h"
 
+@interface PLSetInformationTableViewController ()
+<
+UIPickerViewDelegate,
+UIPickerViewDataSource
+
+>
 
 @property (weak, nonatomic) IBOutlet UITextField *gender;
 
@@ -21,16 +27,54 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *steps;
 
+
+@property (nonatomic, strong) NSArray *genderArray;
+
+@property (nonatomic, strong) NSMutableArray *brithArray;
+
+@property (nonatomic, strong) UIPickerView *genderPicker;
+
+@property (nonatomic, strong) UIPickerView *brithPicker;
+
 @end
 
 @implementation PLSetInformationTableViewController
 
 
+- (NSArray *)genderArray {
+    if (!_genderArray) {
+        _genderArray = [NSArray arrayWithObjects:@"男", @"女", nil];
+    }
+    return _genderArray;
+}
 
+- (NSMutableArray *)brithArray {
+    if (!_brithArray) {
+        _brithArray = [NSMutableArray array];
+        for (int i = 1900; i <= 2016; i++) {
+            [_brithArray addObject:[NSString stringWithFormat:@"%d", i]];
+        }
+    }
+    return _brithArray;
+
+}
 
 + (instancetype)pl_setInformationTableViewController {
 
     return [[UIStoryboard storyboardWithName:NSStringFromClass(self) bundle:nil] instantiateViewControllerWithIdentifier:NSStringFromClass(self)];
+
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+
+    [super viewWillDisappear:animated];
+    PLPersonInformation *person = [[PLPersonInformation alloc] init];
+    person.gender = self.gender.text;
+    person.brithday = [self.brithYear.text integerValue];
+    person.height = [self.height.text floatValue];
+    person.goalWeight = [self.weight.text floatValue];
+    person.goalStep = [self.steps.text integerValue];
+    [[PLDataBaseManager shareManager] updatePerson:person];
 
 }
 
@@ -41,22 +85,98 @@
     
     self.tableView.separatorColor = ColorWithBackGround;
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction)];
+    tap.cancelsTouchesInView = NO;
+    tap.numberOfTapsRequired = 1;
+    [self.tableView addGestureRecognizer:tap];
+    
+    PLPersonInformation *person = [[PLDataBaseManager shareManager] personInformation];
+    self.gender.text = person.gender;
+    self.brithYear.text = [NSString stringWithFormat:@"%ld", person.brithday];
+    self.height.text = [NSString stringWithFormat:@"%.1f", person.height];
+    self.weight.text = [NSString stringWithFormat:@"%.1f", person.goalWeight];
+    self.steps.text = [NSString stringWithFormat:@"%ld", person.goalStep];
+    
+    
+    
     [self createLabel];
     
-    self.weight.inputView.backgroundColor = [UIColor blackColor];
     
     
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UIView *genderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height / 3)];
+    
+    self.gender.inputView = genderView;
+    self.genderPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT /3)];
+    [genderView addSubview:_genderPicker];
+    _genderPicker.delegate = self;
+    _genderPicker.dataSource = self;
+    
+    
+    UIView *birthView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height / 3)];
+    
+    self.brithYear.inputView = birthView;
+    self.brithPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, HEIGHT /3)];
+    [birthView addSubview:_brithPicker];
+    _brithPicker.delegate = self;
+    _brithPicker.dataSource = self;
+    
+    
+    
 }
 
 
 
+#pragma mark - pickerView协议方法
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
 
+}
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    if ([pickerView isEqual:_genderPicker]) {
+        return self.genderArray.count;
+    }
+    else if([pickerView isEqual:_brithPicker]) {
+    
+        return self.brithArray.count;
+    
+    }
+    
+    return 0;
+
+}
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    
+    if([pickerView isEqual:_genderPicker]) {
+    
+        return self.genderArray[row];
+    }
+    else if([pickerView isEqual:_brithPicker]) {
+    
+        
+        return self.brithArray[row];
+    }
+    
+    return nil;
+    
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    if ([pickerView isEqual:_genderPicker]) {
+        
+        self.gender.text = self.genderArray[row];
+    } else if ([pickerView isEqual:_brithPicker]) {
+    
+        self.brithYear.text = self.brithArray[row];
+    }
+    
+
+
+}
+
+#pragma mark - 私有
 - (void)createLabel {
     UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 200)];
     self.tableView.tableFooterView = footView;
@@ -70,6 +190,42 @@
 
 }
 
+
+- (void)tapAction {
+    [self.view endEditing:YES];
+
+}
+
+#pragma mark - tableView
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    switch (indexPath.row) {
+        case 0:
+            [self.gender becomeFirstResponder];
+            break;
+       
+        case 1:
+            [self.brithYear becomeFirstResponder];
+            break;
+            
+        case 2:
+            [self.height becomeFirstResponder];
+            break;
+            
+        case 3:
+            [self.weight becomeFirstResponder];
+            break;
+            
+        case 4:
+            [self.steps becomeFirstResponder];
+            break;
+            
+        default:
+            break;
+    }
+    
+
+}
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];

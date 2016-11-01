@@ -16,6 +16,6 @@
 @property (nonatomic, assign) NSInteger brithday;
 @property (nonatomic, assign) CGFloat height;
 @property (nonatomic, assign) CGFloat goalWeight;
-@property (nonatomic, assign) CGFloat goalStep;
+@property (nonatomic, assign) NSInteger goalStep;
 
 @end

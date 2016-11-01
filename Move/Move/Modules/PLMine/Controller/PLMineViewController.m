@@ -58,6 +58,16 @@ UITableViewDataSource
 //    person.goalStep = 10000.f;
 //    
 //    [[PLDataBaseManager shareManager] insertPerson:person];
+//    
+//    person.gender = @"女";
+//    person.brithday = 1922;
+//    person.height = 1.88;
+//    person.goalWeight = 16.f;
+//    person.goalStep = 10523.f;
+//    [[PLDataBaseManager shareManager] updatePerson:person];
+    [[PLDataBaseManager shareManager] personInformation];
+    
+    
 }
 
 

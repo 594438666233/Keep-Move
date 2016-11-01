@@ -23,6 +23,8 @@
 		11A10F6F1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11A10F6D1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib */; };
 		11A10F771DC6EF83005EBDA5 /* PLSetInformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A10F761DC6EF83005EBDA5 /* PLSetInformationTableViewController.m */; };
 		11A10F791DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11A10F781DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard */; };
+		49A935E81DC8BD8E00BF099E /* PLXTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A935E71DC8BD8E00BF099E /* PLXTouchView.m */; };
+		49A935EA1DC8C48800BF099E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49A935E91DC8C48800BF099E /* Assets.xcassets */; };
 		842441E51DC7751D00582B41 /* PLSignCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 842441E41DC7751D00582B41 /* PLSignCellObject.m */; };
 		845372A91DB7796C00DBE92F /* PLGoalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */; };
 		845372AB1DB7798000DBE92F /* PLGoalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845372AA1DB7798000DBE92F /* PLGoalHeaderView.xib */; };
@@ -243,7 +245,6 @@
 		84C6120A1DB85B290029CEC5 /* PLCareerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C612091DB85B290029CEC5 /* PLCareerView.xib */; };
 		84D0D8231DB6F48500EDCFB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0D8221DB6F48500EDCFB3 /* main.m */; };
 		84D0D8261DB6F48500EDCFB3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0D8251DB6F48500EDCFB3 /* AppDelegate.m */; };
-		84D0D82E1DB6F48500EDCFB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84D0D82D1DB6F48500EDCFB3 /* Assets.xcassets */; };
 		84D0D8311DB6F48500EDCFB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D0D82F1DB6F48500EDCFB3 /* LaunchScreen.storyboard */; };
 		84D636081DB764B500AC0E4D /* PLSignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D636061DB764B500AC0E4D /* PLSignViewController.m */; };
 		84D636091DB764B500AC0E4D /* PLSignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D636071DB764B500AC0E4D /* PLSignViewController.xib */; };
@@ -398,6 +399,9 @@
 		11A10F751DC6EF83005EBDA5 /* PLSetInformationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSetInformationTableViewController.h; sourceTree = "<group>"; };
 		11A10F761DC6EF83005EBDA5 /* PLSetInformationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSetInformationTableViewController.m; sourceTree = "<group>"; };
 		11A10F781DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PLSetInformationTableViewController.storyboard; sourceTree = "<group>"; };
+		49A935E61DC8BD8E00BF099E /* PLXTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLXTouchView.h; sourceTree = "<group>"; };
+		49A935E71DC8BD8E00BF099E /* PLXTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLXTouchView.m; sourceTree = "<group>"; };
+		49A935E91DC8C48800BF099E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		842441E31DC7751D00582B41 /* PLSignCellObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSignCellObject.h; sourceTree = "<group>"; };
 		842441E41DC7751D00582B41 /* PLSignCellObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSignCellObject.m; sourceTree = "<group>"; };
 		8448B6AC1DB76F6B00F10D49 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -644,7 +648,6 @@
 		84D0D8221DB6F48500EDCFB3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		84D0D8241DB6F48500EDCFB3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		84D0D8251DB6F48500EDCFB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		84D0D82D1DB6F48500EDCFB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		84D0D8301DB6F48500EDCFB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84D0D8321DB6F48500EDCFB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D636051DB764B500AC0E4D /* PLSignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSignViewController.h; sourceTree = "<group>"; };
@@ -880,6 +883,8 @@
 		845372B91DB78E9800DBE92F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				49A935E61DC8BD8E00BF099E /* PLXTouchView.h */,
+				49A935E71DC8BD8E00BF099E /* PLXTouchView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1348,7 +1353,6 @@
 				84F0460E1DB8754F009D3BC3 /* ImageSource */,
 				84D0D8241DB6F48500EDCFB3 /* AppDelegate.h */,
 				84D0D8251DB6F48500EDCFB3 /* AppDelegate.m */,
-				84D0D82D1DB6F48500EDCFB3 /* Assets.xcassets */,
 				84D0D8321DB6F48500EDCFB3 /* Info.plist */,
 				84D0D82F1DB6F48500EDCFB3 /* LaunchScreen.storyboard */,
 				8448B6AC1DB76F6B00F10D49 /* PrefixHeader.pch */,
@@ -1483,6 +1487,7 @@
 		84F0460E1DB8754F009D3BC3 /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				49A935E91DC8C48800BF099E /* Assets.xcassets */,
 				84B7B7D31DC6DE8000715926 /* RecommendGoal */,
 				84AB972D1DB8E7B70075FDC0 /* PLSOURCE */,
 				8471C4501DB75B5E008E8A5A /* dong */,
@@ -1679,6 +1684,7 @@
 				84B7B7DF1DC6DE8E00715926 /* shoe-1.png in Resources */,
 				84AB97741DB8E7B70075FDC0 /* weight_add@2x.png in Resources */,
 				8471C4C91DB75B5E008E8A5A /* trends_bar_42mm-11.png in Resources */,
+				49A935EA1DC8C48800BF099E /* Assets.xcassets in Resources */,
 				84AB97701DB8E7B70075FDC0 /* tips_icon.png in Resources */,
 				8471C4C41DB75B5E008E8A5A /* tips_icon@3x.png in Resources */,
 				8471C4CA1DB75B5E008E8A5A /* trends_bar_42mm-12.png in Resources */,
@@ -1795,7 +1801,6 @@
 				84F045E71DB8754B009D3BC3 /* activity_circle-44_150x130_@2x.png in Resources */,
 				8471C4E21DB75B5E008E8A5A /* trends_bar_42mm-34.png in Resources */,
 				84AB97641DB8E7B70075FDC0 /* icon_level2@3x.png in Resources */,
-				84D0D82E1DB6F48500EDCFB3 /* Assets.xcassets in Resources */,
 				84AB97591DB8E7B70075FDC0 /* dd_more_icon_plus@3x.png in Resources */,
 				8471C4FE1DB75B5E008E8A5A /* trends_bar_42mm-6.png in Resources */,
 				84AB97711DB8E7B70075FDC0 /* tips_icon@2x.png in Resources */,
@@ -1983,6 +1988,7 @@
 				8471C5351DB75C03008E8A5A /* UIButton+Block.m in Sources */,
 				84572CD01DC737B400B8CD0D /* PLDetailGoalViewController.m in Sources */,
 				115BE28C1DB9A42B003279AC /* NSUserDefaults+Categories.m in Sources */,
+				49A935E81DC8BD8E00BF099E /* PLXTouchView.m in Sources */,
 				115BE2CB1DBA33FC003279AC /* PLHealthManager.m in Sources */,
 				11A10F6A1DC6D404005EBDA5 /* PLHistoryInformationViewController.m in Sources */,
 				84AB970F1DB8D4100075FDC0 /* PLBounceWeightView.m in Sources */,
@@ -2111,6 +2117,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Move/Move.entitlements;
 				DEVELOPMENT_TEAM = QWKQAE7W9B;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Move/Supporting Files/PrefixHeader.pch";
 				INFOPLIST_FILE = "Move/Supporting Files/Info.plist";
@@ -2128,6 +2135,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Move/Move.entitlements;
 				DEVELOPMENT_TEAM = QWKQAE7W9B;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Move/Supporting Files/PrefixHeader.pch";
 				INFOPLIST_FILE = "Move/Supporting Files/Info.plist";

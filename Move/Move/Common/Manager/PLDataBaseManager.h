@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+@class PLPersonInformation;
 
 @class PLHistoryInformation, PLPersonInformation;
 
@@ -28,4 +29,8 @@
 - (BOOL)clearRecord;
 
 - (BOOL)insertPerson:(PLPersonInformation *)person;
+
+- (BOOL)updatePerson:(PLPersonInformation *)person;
+
+- (PLPersonInformation *)personInformation;
 @end
