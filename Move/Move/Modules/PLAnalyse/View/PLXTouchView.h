@@ -12,5 +12,6 @@
 
 @property (nonatomic, assign) CGRect frame;
 @property (nonatomic, copy) NSString *text;
+@property (nonatomic, assign) BOOL hidden;
 
 @end

@@ -18,4 +18,5 @@
 #import "UIView+ShowMessage.h"
 #import <FMDB.h>
 #import "PLDataBaseManager.h"
+#import <PNChart.h>
 #endif /* PrefixHeader_pch */

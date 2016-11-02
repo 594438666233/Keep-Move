@@ -1,36 +1,23 @@
 //
-//  PLAnalyseViewController.m
+//  PLXStepViewController.m
 //  Move
 //
-//  Created by PhelanGeek on 2016/10/19.
+//  Created by dllo on 2016/11/2.
 //  Copyright © 2016年 PhelanGeek. All rights reserved.
 //
 
-#import "PLAnalyseViewController.h"
+#import "PLXStepViewController.h"
 
-
-@interface PLAnalyseViewController ()
-<
-UICollectionViewDelegate,
-UICollectionViewDataSource
->
-
-@property (nonatomic, strong) UICollectionView *collectionView;
+@interface PLXStepViewController ()
 
 @end
 
-@implementation PLAnalyseViewController
+@implementation PLXStepViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    // Do any additional setup after loading the view.
 }
-
-- (void)createCollectionView {
-    
-}
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

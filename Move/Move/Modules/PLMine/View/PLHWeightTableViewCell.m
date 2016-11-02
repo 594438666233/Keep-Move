@@ -11,12 +11,17 @@
 #import "PLMineViewController.h"
 
 #import "PLHistoryInformation.h"
+
+#import "WYLineChartView.h"
+#import "WYLineChartPoint.h"
+
 @interface PLHWeightTableViewCell ()
 
 <
 PLBounceWeightViewDelegate,
-UITextFieldDelegate
-
+UITextFieldDelegate,
+WYLineChartViewDelegate,
+WYLineChartViewDatasource
 >
 
 @property (nonatomic, strong) UIView *glassView;
@@ -28,9 +33,97 @@ UITextFieldDelegate
 
 @property (weak, nonatomic) IBOutlet UILabel *goalWeight;
 
+@property (weak, nonatomic) IBOutlet UIImageView *chartImageView;
+
+@property (nonatomic, strong) WYLineChartView *lineChart;
+
+@property (nonatomic, strong) NSMutableArray *pointsArray;
+
+@property (nonatomic, strong) NSMutableArray *dateArray;
+
+
 @end
 
 @implementation PLHWeightTableViewCell
+
+#pragma mark - 创建折线图
+
+- (void)createLineChart {
+    self.pointsArray = [NSMutableArray array];
+    self.dateArray = [NSMutableArray array];
+    
+    [_dateArray addObjectsFromArray:@[@"10/27", @"10/28", @"10/29", @"10/30", @"10/31", @"11/01", @"11/02"]];
+    for (int i = 0; i < 7; i++) {
+        WYLineChartPoint *point = [[WYLineChartPoint alloc] init];
+        point.value = arc4random() % 10 + 50;
+        [_pointsArray addObject:point];
+    }
+
+    self.lineChart = [[WYLineChartView alloc] initWithFrame:CGRectMake(0, 0, WIDTH * 0.9, 250)];
+    _lineChart.backgroundColor = [UIColor clearColor];
+    _lineChart.delegate = self;
+    _lineChart.datasource = self;
+    _lineChart.scrollable = NO;
+    _lineChart.lineStyle = kWYLineChartMainBezierWaveLine;
+    _lineChart.points = [NSArray arrayWithArray:_pointsArray];
+    _lineChart.lineBottomMargin = 5;
+    _lineChart.lineTopMargin = 0;
+    _lineChart.averageLineColor = [UIColor colorWithRed:0.9 green:0.7 blue:0.1 alpha:1];
+    
+    _lineChart.gradientColors = @[[UIColor colorWithWhite:1 alpha:1],
+                                  [UIColor colorWithWhite:1 alpha:0]];
+    _lineChart.gradientColorsLocation = @[@0, @0.9];
+    _lineChart.drawGradient = YES;
+    
+    _lineChart.yAxisHeaderPrefix = @"体重";
+    _lineChart.yAxisHeaderSuffix = @"日期";
+
+    
+    [_chartImageView addSubview:_lineChart];
+    [_lineChart updateGraph];
+}
+
+#pragma mark - delegate
+- (NSInteger)numberOfLabelOnXAxisInLineChartView:(WYLineChartView *)chartView {
+    return _pointsArray.count;
+}
+- (CGFloat)gapBetweenPointsHorizontalInLineChartView:(WYLineChartView *)chartView {
+    return 60.f;
+}
+- (CGFloat)maxValueForPointsInLineChartView:(WYLineChartView *)chartView {
+    return 60;
+}
+
+- (CGFloat)minValueForPointsInLineChartView:(WYLineChartView *)chartView {
+    return 50;
+}
+
+- (NSInteger)numberOfReferenceLineVerticalInLineChartView:(WYLineChartView *)chartView {
+    return _pointsArray.count;
+}
+
+- (NSInteger)numberOfReferenceLineHorizontalInLineChartView:(WYLineChartView *)chartView {
+    return _pointsArray.count;
+}
+
+#pragma mark - datasource
+- (WYLineChartPoint *)lineChartView:(WYLineChartView *)chartView pointReferToXAxisLabelAtIndex:(NSInteger)index {
+    return _pointsArray[index];
+}
+- (NSString *)lineChartView:(WYLineChartView *)chartView contentTextForXAxisLabelAtIndex:(NSInteger)index {
+    return _dateArray[index];
+}
+
+- (CGFloat)lineChartView:(WYLineChartView *)chartView valueReferToHorizontalReferenceLineAtIndex:(NSInteger)index {
+    return ((WYLineChartPoint *)_pointsArray[index]).value;
+}
+
+- (WYLineChartPoint *)lineChartView:(WYLineChartView *)chartView pointReferToVerticalReferenceLineAtIndex:(NSInteger)index {
+    return _pointsArray[index];
+}
+
+
+
 
 
 - (IBAction)writeGoalWeight:(id)sender {
@@ -51,6 +144,9 @@ UITextFieldDelegate
     [super awakeFromNib];
     
     self.currentWeight.text = [NSString stringWithFormat:@"%.1f", [[PLDataBaseManager shareManager] currentWeight]];
+    _chartImageView.backgroundColor = [UIColor clearColor];
+    
+    [self createLineChart];
 
 }
 

@@ -23,6 +23,27 @@
 		11A10F6F1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11A10F6D1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib */; };
 		11A10F771DC6EF83005EBDA5 /* PLSetInformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A10F761DC6EF83005EBDA5 /* PLSetInformationTableViewController.m */; };
 		11A10F791DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11A10F781DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard */; };
+		4936716F1DC9E9A00048E098 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 493671451DC9E9A00048E098 /* .gitkeep */; };
+		493671701DC9E9A00048E098 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 493671471DC9E9A00048E098 /* .gitkeep */; };
+		493671711DC9E9A00048E098 /* WYLineChartBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4936714B1DC9E9A00048E098 /* WYLineChartBackgroundView.m */; };
+		493671721DC9E9A00048E098 /* WYLineChartCoordinateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4936714D1DC9E9A00048E098 /* WYLineChartCoordinateView.m */; };
+		493671731DC9E9A00048E098 /* WYLineChartJunctionShape.m in Sources */ = {isa = PBXBuildFile; fileRef = 493671501DC9E9A00048E098 /* WYLineChartJunctionShape.m */; };
+		493671741DC9E9A00048E098 /* WYLineChartMainLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 493671521DC9E9A00048E098 /* WYLineChartMainLineView.m */; };
+		493671751DC9E9A00048E098 /* WYLineChartReferenceLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 493671541DC9E9A00048E098 /* WYLineChartReferenceLineView.m */; };
+		493671761DC9E9A00048E098 /* WYChartCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 493671571DC9E9A00048E098 /* WYChartCategory.m */; };
+		493671771DC9E9A00048E098 /* WYLineChartCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 493671591DC9E9A00048E098 /* WYLineChartCalculator.m */; };
+		493671781DC9E9A00048E098 /* WYLineChartPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4936715B1DC9E9A00048E098 /* WYLineChartPoint.m */; };
+		493671791DC9E9A00048E098 /* WYLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4936715D1DC9E9A00048E098 /* WYLineChartView.m */; };
+		4936717A1DC9E9A00048E098 /* WYMainPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 493671611DC9E9A00048E098 /* WYMainPieChartView.m */; };
+		4936717B1DC9E9A00048E098 /* WYPieCenterCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 493671631DC9E9A00048E098 /* WYPieCenterCircle.m */; };
+		4936717C1DC9E9A00048E098 /* WYPieChartForegroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 493671651DC9E9A00048E098 /* WYPieChartForegroundView.m */; };
+		4936717D1DC9E9A00048E098 /* WYSectorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 493671671DC9E9A00048E098 /* WYSectorLayer.m */; };
+		4936717E1DC9E9A00048E098 /* WYPieChartCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 4936716A1DC9E9A00048E098 /* WYPieChartCalculator.m */; };
+		4936717F1DC9E9A00048E098 /* WYPieChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4936716C1DC9E9A00048E098 /* WYPieChartView.m */; };
+		493671801DC9E9A00048E098 /* WYPieSector.m in Sources */ = {isa = PBXBuildFile; fileRef = 4936716E1DC9E9A00048E098 /* WYPieSector.m */; };
+		493671831DCA047C0048E098 /* PLXStepViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 493671821DCA047C0048E098 /* PLXStepViewController.m */; };
+		493671891DCA04B60048E098 /* PLXWeightViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 493671881DCA04B60048E098 /* PLXWeightViewController.m */; };
+		4936718C1DCA04D00048E098 /* PLXCalorieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4936718B1DCA04D00048E098 /* PLXCalorieViewController.m */; };
 		49A935E81DC8BD8E00BF099E /* PLXTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A935E71DC8BD8E00BF099E /* PLXTouchView.m */; };
 		49A935EA1DC8C48800BF099E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49A935E91DC8C48800BF099E /* Assets.xcassets */; };
 		842441E51DC7751D00582B41 /* PLSignCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 842441E41DC7751D00582B41 /* PLSignCellObject.m */; };
@@ -399,6 +420,46 @@
 		11A10F751DC6EF83005EBDA5 /* PLSetInformationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSetInformationTableViewController.h; sourceTree = "<group>"; };
 		11A10F761DC6EF83005EBDA5 /* PLSetInformationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSetInformationTableViewController.m; sourceTree = "<group>"; };
 		11A10F781DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PLSetInformationTableViewController.storyboard; sourceTree = "<group>"; };
+		493671451DC9E9A00048E098 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		493671471DC9E9A00048E098 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
+		4936714A1DC9E9A00048E098 /* WYLineChartBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLineChartBackgroundView.h; sourceTree = "<group>"; };
+		4936714B1DC9E9A00048E098 /* WYLineChartBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLineChartBackgroundView.m; sourceTree = "<group>"; };
+		4936714C1DC9E9A00048E098 /* WYLineChartCoordinateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLineChartCoordinateView.h; sourceTree = "<group>"; };
+		4936714D1DC9E9A00048E098 /* WYLineChartCoordinateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLineChartCoordinateView.m; sourceTree = "<group>"; };
+		4936714F1DC9E9A00048E098 /* WYLineChartJunctionShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLineChartJunctionShape.h; sourceTree = "<group>"; };
+		493671501DC9E9A00048E098 /* WYLineChartJunctionShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLineChartJunctionShape.m; sourceTree = "<group>"; };
+		493671511DC9E9A00048E098 /* WYLineChartMainLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLineChartMainLineView.h; sourceTree = "<group>"; };
+		493671521DC9E9A00048E098 /* WYLineChartMainLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLineChartMainLineView.m; sourceTree = "<group>"; };
+		493671531DC9E9A00048E098 /* WYLineChartReferenceLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLineChartReferenceLineView.h; sourceTree = "<group>"; };
+		493671541DC9E9A00048E098 /* WYLineChartReferenceLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLineChartReferenceLineView.m; sourceTree = "<group>"; };
+		493671561DC9E9A00048E098 /* WYChartCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYChartCategory.h; sourceTree = "<group>"; };
+		493671571DC9E9A00048E098 /* WYChartCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYChartCategory.m; sourceTree = "<group>"; };
+		493671581DC9E9A00048E098 /* WYLineChartCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLineChartCalculator.h; sourceTree = "<group>"; };
+		493671591DC9E9A00048E098 /* WYLineChartCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLineChartCalculator.m; sourceTree = "<group>"; };
+		4936715A1DC9E9A00048E098 /* WYLineChartPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLineChartPoint.h; sourceTree = "<group>"; };
+		4936715B1DC9E9A00048E098 /* WYLineChartPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLineChartPoint.m; sourceTree = "<group>"; };
+		4936715C1DC9E9A00048E098 /* WYLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLineChartView.h; sourceTree = "<group>"; };
+		4936715D1DC9E9A00048E098 /* WYLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYLineChartView.m; sourceTree = "<group>"; };
+		493671601DC9E9A00048E098 /* WYMainPieChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYMainPieChartView.h; sourceTree = "<group>"; };
+		493671611DC9E9A00048E098 /* WYMainPieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYMainPieChartView.m; sourceTree = "<group>"; };
+		493671621DC9E9A00048E098 /* WYPieCenterCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYPieCenterCircle.h; sourceTree = "<group>"; };
+		493671631DC9E9A00048E098 /* WYPieCenterCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYPieCenterCircle.m; sourceTree = "<group>"; };
+		493671641DC9E9A00048E098 /* WYPieChartForegroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYPieChartForegroundView.h; sourceTree = "<group>"; };
+		493671651DC9E9A00048E098 /* WYPieChartForegroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYPieChartForegroundView.m; sourceTree = "<group>"; };
+		493671661DC9E9A00048E098 /* WYSectorLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYSectorLayer.h; sourceTree = "<group>"; };
+		493671671DC9E9A00048E098 /* WYSectorLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYSectorLayer.m; sourceTree = "<group>"; };
+		493671691DC9E9A00048E098 /* WYPieChartCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYPieChartCalculator.h; sourceTree = "<group>"; };
+		4936716A1DC9E9A00048E098 /* WYPieChartCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYPieChartCalculator.m; sourceTree = "<group>"; };
+		4936716B1DC9E9A00048E098 /* WYPieChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYPieChartView.h; sourceTree = "<group>"; };
+		4936716C1DC9E9A00048E098 /* WYPieChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYPieChartView.m; sourceTree = "<group>"; };
+		4936716D1DC9E9A00048E098 /* WYPieSector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYPieSector.h; sourceTree = "<group>"; };
+		4936716E1DC9E9A00048E098 /* WYPieSector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WYPieSector.m; sourceTree = "<group>"; };
+		493671811DCA047C0048E098 /* PLXStepViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLXStepViewController.h; sourceTree = "<group>"; };
+		493671821DCA047C0048E098 /* PLXStepViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLXStepViewController.m; sourceTree = "<group>"; };
+		493671871DCA04B60048E098 /* PLXWeightViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLXWeightViewController.h; sourceTree = "<group>"; };
+		493671881DCA04B60048E098 /* PLXWeightViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLXWeightViewController.m; sourceTree = "<group>"; };
+		4936718A1DCA04D00048E098 /* PLXCalorieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLXCalorieViewController.h; sourceTree = "<group>"; };
+		4936718B1DCA04D00048E098 /* PLXCalorieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLXCalorieViewController.m; sourceTree = "<group>"; };
 		49A935E61DC8BD8E00BF099E /* PLXTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLXTouchView.h; sourceTree = "<group>"; };
 		49A935E71DC8BD8E00BF099E /* PLXTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLXTouchView.m; sourceTree = "<group>"; };
 		49A935E91DC8C48800BF099E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -818,12 +879,131 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		493671431DC9E9A00048E098 /* WYChart */ = {
+			isa = PBXGroup;
+			children = (
+				493671441DC9E9A00048E098 /* Assets */,
+				493671461DC9E9A00048E098 /* Classes */,
+			);
+			path = WYChart;
+			sourceTree = "<group>";
+		};
+		493671441DC9E9A00048E098 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				493671451DC9E9A00048E098 /* .gitkeep */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		493671461DC9E9A00048E098 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				493671471DC9E9A00048E098 /* .gitkeep */,
+				493671481DC9E9A00048E098 /* WYLineChart */,
+				4936715E1DC9E9A00048E098 /* WYPieChart */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		493671481DC9E9A00048E098 /* WYLineChart */ = {
+			isa = PBXGroup;
+			children = (
+				493671491DC9E9A00048E098 /* Background */,
+				4936714E1DC9E9A00048E098 /* Foreground */,
+				493671551DC9E9A00048E098 /* Main */,
+			);
+			path = WYLineChart;
+			sourceTree = "<group>";
+		};
+		493671491DC9E9A00048E098 /* Background */ = {
+			isa = PBXGroup;
+			children = (
+				4936714A1DC9E9A00048E098 /* WYLineChartBackgroundView.h */,
+				4936714B1DC9E9A00048E098 /* WYLineChartBackgroundView.m */,
+				4936714C1DC9E9A00048E098 /* WYLineChartCoordinateView.h */,
+				4936714D1DC9E9A00048E098 /* WYLineChartCoordinateView.m */,
+			);
+			path = Background;
+			sourceTree = "<group>";
+		};
+		4936714E1DC9E9A00048E098 /* Foreground */ = {
+			isa = PBXGroup;
+			children = (
+				4936714F1DC9E9A00048E098 /* WYLineChartJunctionShape.h */,
+				493671501DC9E9A00048E098 /* WYLineChartJunctionShape.m */,
+				493671511DC9E9A00048E098 /* WYLineChartMainLineView.h */,
+				493671521DC9E9A00048E098 /* WYLineChartMainLineView.m */,
+				493671531DC9E9A00048E098 /* WYLineChartReferenceLineView.h */,
+				493671541DC9E9A00048E098 /* WYLineChartReferenceLineView.m */,
+			);
+			path = Foreground;
+			sourceTree = "<group>";
+		};
+		493671551DC9E9A00048E098 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				493671561DC9E9A00048E098 /* WYChartCategory.h */,
+				493671571DC9E9A00048E098 /* WYChartCategory.m */,
+				493671581DC9E9A00048E098 /* WYLineChartCalculator.h */,
+				493671591DC9E9A00048E098 /* WYLineChartCalculator.m */,
+				4936715A1DC9E9A00048E098 /* WYLineChartPoint.h */,
+				4936715B1DC9E9A00048E098 /* WYLineChartPoint.m */,
+				4936715C1DC9E9A00048E098 /* WYLineChartView.h */,
+				4936715D1DC9E9A00048E098 /* WYLineChartView.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		4936715E1DC9E9A00048E098 /* WYPieChart */ = {
+			isa = PBXGroup;
+			children = (
+				4936715F1DC9E9A00048E098 /* Components */,
+				493671681DC9E9A00048E098 /* Main */,
+			);
+			path = WYPieChart;
+			sourceTree = "<group>";
+		};
+		4936715F1DC9E9A00048E098 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				493671601DC9E9A00048E098 /* WYMainPieChartView.h */,
+				493671611DC9E9A00048E098 /* WYMainPieChartView.m */,
+				493671621DC9E9A00048E098 /* WYPieCenterCircle.h */,
+				493671631DC9E9A00048E098 /* WYPieCenterCircle.m */,
+				493671641DC9E9A00048E098 /* WYPieChartForegroundView.h */,
+				493671651DC9E9A00048E098 /* WYPieChartForegroundView.m */,
+				493671661DC9E9A00048E098 /* WYSectorLayer.h */,
+				493671671DC9E9A00048E098 /* WYSectorLayer.m */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		493671681DC9E9A00048E098 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				493671691DC9E9A00048E098 /* WYPieChartCalculator.h */,
+				4936716A1DC9E9A00048E098 /* WYPieChartCalculator.m */,
+				4936716B1DC9E9A00048E098 /* WYPieChartView.h */,
+				4936716C1DC9E9A00048E098 /* WYPieChartView.m */,
+				4936716D1DC9E9A00048E098 /* WYPieSector.h */,
+				4936716E1DC9E9A00048E098 /* WYPieSector.m */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		845372B01DB78E5000DBE92F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				84D636141DB764E300AC0E4D /* PLAnalyseViewController.h */,
 				84D636151DB764E300AC0E4D /* PLAnalyseViewController.m */,
 				84D636161DB764E300AC0E4D /* PLAnalyseViewController.xib */,
+				493671811DCA047C0048E098 /* PLXStepViewController.h */,
+				493671821DCA047C0048E098 /* PLXStepViewController.m */,
+				493671871DCA04B60048E098 /* PLXWeightViewController.h */,
+				493671881DCA04B60048E098 /* PLXWeightViewController.m */,
+				4936718A1DCA04D00048E098 /* PLXCalorieViewController.h */,
+				4936718B1DCA04D00048E098 /* PLXCalorieViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1350,6 +1530,7 @@
 		84D0D8211DB6F48500EDCFB3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				493671431DC9E9A00048E098 /* WYChart */,
 				84F0460E1DB8754F009D3BC3 /* ImageSource */,
 				84D0D8241DB6F48500EDCFB3 /* AppDelegate.h */,
 				84D0D8251DB6F48500EDCFB3 /* AppDelegate.m */,
@@ -1700,6 +1881,7 @@
 				84B7B7EC1DC6EAEC00715926 /* charter.png in Resources */,
 				84F045E01DB8754B009D3BC3 /* activity_circle-41_132x114_@2x.png in Resources */,
 				8471C5021DB75B5E008E8A5A /* trends_bar_42mm-63.png in Resources */,
+				493671701DC9E9A00048E098 /* .gitkeep in Resources */,
 				84AB97271DB8E4780075FDC0 /* goalSelected.png in Resources */,
 				8471C4FF1DB75B5E008E8A5A /* trends_bar_42mm-60.png in Resources */,
 				8471C4CC1DB75B5E008E8A5A /* trends_bar_42mm-14.png in Resources */,
@@ -1821,6 +2003,7 @@
 				84F045A01DB8754B009D3BC3 /* activity_circle-12_132x114_@2x.png in Resources */,
 				84F045DB1DB8754B009D3BC3 /* activity_circle-39_150x130_@2x.png in Resources */,
 				8471C4E71DB75B5E008E8A5A /* trends_bar_42mm-39.png in Resources */,
+				4936716F1DC9E9A00048E098 /* .gitkeep in Resources */,
 				8471C4F91DB75B5E008E8A5A /* trends_bar_42mm-55.png in Resources */,
 				84F045DD1DB8754B009D3BC3 /* activity_circle-3_150x130_@2x.png in Resources */,
 				84AB97751DB8E7B70075FDC0 /* weight_add_act.png in Resources */,
@@ -1969,45 +2152,64 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4936717A1DC9E9A00048E098 /* WYMainPieChartView.m in Sources */,
+				493671831DCA047C0048E098 /* PLXStepViewController.m in Sources */,
 				84D636121DB764D200AC0E4D /* PLRunViewController.m in Sources */,
 				84AC593A1DB7697500E7D8C0 /* UILabel+SizeToHeight.m in Sources */,
+				4936717D1DC9E9A00048E098 /* WYSectorLayer.m in Sources */,
 				84AB97111DB8D4100075FDC0 /* PLInitialWeightTableViewCell.m in Sources */,
 				84AB96F91DB8B6000075FDC0 /* PLGoalHeaderModel.m in Sources */,
 				8471C44E1DB75AFD008E8A5A /* BaseModel.m in Sources */,
 				84C612081DB85B1D0029CEC5 /* PLCareerView.m in Sources */,
 				84D636171DB764E300AC0E4D /* PLAnalyseViewController.m in Sources */,
 				8471C5381DB75C10008E8A5A /* UIView+ShowMessage.m in Sources */,
+				493671761DC9E9A00048E098 /* WYChartCategory.m in Sources */,
+				493671801DC9E9A00048E098 /* WYPieSector.m in Sources */,
 				845372C01DB799F300DBE92F /* PLTargetView.m in Sources */,
+				493671771DC9E9A00048E098 /* WYLineChartCalculator.m in Sources */,
 				11A10F6E1DC6D76F005EBDA5 /* PLHistoryTableViewCell.m in Sources */,
+				493671741DC9E9A00048E098 /* WYLineChartMainLineView.m in Sources */,
 				8471C44F1DB75AFD008E8A5A /* BaseView.m in Sources */,
 				84D0D8261DB6F48500EDCFB3 /* AppDelegate.m in Sources */,
 				84C611FF1DB855B30029CEC5 /* PLDefeatView.m in Sources */,
 				115BE2991DB9C01B003279AC /* PLHistoryInformation.m in Sources */,
 				84D6360D1DB764C200AC0E4D /* PLGoalViewController.m in Sources */,
 				84AB96FC1DB8B6D70075FDC0 /* PLTargetModel.m in Sources */,
+				493671751DC9E9A00048E098 /* WYLineChartReferenceLineView.m in Sources */,
+				4936717F1DC9E9A00048E098 /* WYPieChartView.m in Sources */,
 				8471C5351DB75C03008E8A5A /* UIButton+Block.m in Sources */,
 				84572CD01DC737B400B8CD0D /* PLDetailGoalViewController.m in Sources */,
 				115BE28C1DB9A42B003279AC /* NSUserDefaults+Categories.m in Sources */,
+				493671781DC9E9A00048E098 /* WYLineChartPoint.m in Sources */,
 				49A935E81DC8BD8E00BF099E /* PLXTouchView.m in Sources */,
 				115BE2CB1DBA33FC003279AC /* PLHealthManager.m in Sources */,
 				11A10F6A1DC6D404005EBDA5 /* PLHistoryInformationViewController.m in Sources */,
 				84AB970F1DB8D4100075FDC0 /* PLBounceWeightView.m in Sources */,
 				115BE29C1DB9C2BB003279AC /* PLPersonInformation.m in Sources */,
 				115BE2C61DBA2E05003279AC /* PLHWeightTableViewCell.m in Sources */,
+				493671891DCA04B60048E098 /* PLXWeightViewController.m in Sources */,
 				84B7B7F01DC6ECE400715926 /* PLAddGoalViewController.m in Sources */,
 				84B7B7F41DC6EE6D00715926 /* PLNavigationView.m in Sources */,
+				4936717B1DC9E9A00048E098 /* WYPieCenterCircle.m in Sources */,
+				493671711DC9E9A00048E098 /* WYLineChartBackgroundView.m in Sources */,
+				493671791DC9E9A00048E098 /* WYLineChartView.m in Sources */,
 				845372A91DB7796C00DBE92F /* PLGoalHeaderView.m in Sources */,
 				84B7B7D11DC6DE4F00715926 /* PLRecommendGoalCell.m in Sources */,
+				493671731DC9E9A00048E098 /* WYLineChartJunctionShape.m in Sources */,
 				84AB96F61DB8B5300075FDC0 /* PLDefeatModel.m in Sources */,
+				493671721DC9E9A00048E098 /* WYLineChartCoordinateView.m in Sources */,
 				84D636081DB764B500AC0E4D /* PLSignViewController.m in Sources */,
 				84AB970D1DB8D4100075FDC0 /* PLMineViewController.m in Sources */,
 				842441E51DC7751D00582B41 /* PLSignCellObject.m in Sources */,
+				4936717E1DC9E9A00048E098 /* WYPieChartCalculator.m in Sources */,
 				84D0D8231DB6F48500EDCFB3 /* main.m in Sources */,
 				11A10F771DC6EF83005EBDA5 /* PLSetInformationTableViewController.m in Sources */,
 				84AB96F21DB8B2DD0075FDC0 /* PLCareerModel.m in Sources */,
 				115BE28B1DB9A42B003279AC /* NSDate+Categories.m in Sources */,
 				8471C44D1DB75AFD008E8A5A /* RootViewController.m in Sources */,
 				115BE2D51DBA39DE003279AC /* PLDataBaseManager.m in Sources */,
+				4936717C1DC9E9A00048E098 /* WYPieChartForegroundView.m in Sources */,
+				4936718C1DCA04D00048E098 /* PLXCalorieViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

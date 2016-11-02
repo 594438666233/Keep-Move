@@ -125,7 +125,7 @@ UITableViewDataSource
 
     if (indexPath.section == 0) {
         if ([[PLDataBaseManager shareManager] currentWeight]) {
-            return 380;
+            return 480;
         } else {
             return 220;
         }
