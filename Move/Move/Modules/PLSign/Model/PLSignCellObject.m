@@ -12,15 +12,19 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
     [aCoder encodeObject:_titleString forKey:@"titleString"];
+    [aCoder encodeObject:_signArray forKey:@"signArray"];
+
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super init];
     if (self) {
         self.titleString = [aDecoder decodeObjectForKey:@"titleString"];
+        self.signArray = [aDecoder decodeObjectForKey:@"signArray"];
     }
     return self;
 }
+
 
 - (instancetype)initWithTitle:(NSString *)titleString andImageView:(UIImage *)imageView {
     self = [super init];

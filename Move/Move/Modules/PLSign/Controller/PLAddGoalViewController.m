@@ -30,6 +30,7 @@ static NSString *const cellIdentifier = @"cell";
     // 设置导航栏view
     PLNavigationView *plNavigationView = [[PLNavigationView alloc] init];
     plNavigationView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 64);
+    plNavigationView.deleteButton.hidden = YES;
     plNavigationView.cancelButtonBlock = ^(UIButton *button){
         [self dismissViewControllerAnimated:YES completion:nil];
     };

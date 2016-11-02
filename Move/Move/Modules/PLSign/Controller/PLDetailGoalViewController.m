@@ -38,7 +38,6 @@ static NSString *const cellDetailIdentifier = @"cell";
     
     NSArray *pArray = [NSKeyedUnarchiver unarchiveObjectWithFile:_goalPath];
     self.dataArray = [NSMutableArray arrayWithArray:pArray];
-    NSLog(@"%@", self.dataArray);
     
 }
 
@@ -58,12 +57,13 @@ static NSString *const cellDetailIdentifier = @"cell";
     NSString *path = [libraryPath stringByAppendingString:@"/Preferences"];
     path = [path stringByAppendingString:@"/Goal.plist"];
     self.goalPath = path;
-    NSLog(@"%@", _goalPath);
+
 }
 
 - (void)setupNavigationView {
     // 设置导航栏view
     PLNavigationView *plNavigationView = [[PLNavigationView alloc] init];
+    plNavigationView.deleteButton.hidden = YES;
     switch (_type) {
         case 0:
         {
@@ -141,6 +141,42 @@ static NSString *const cellDetailIdentifier = @"cell";
     
 }
 
+- (void)Added:(PLRecommendGoalCell*)cell andTemp:(NSString *)temp {
+    [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+    [cell.addButton setBackgroundColor:[UIColor grayColor]];
+    [cell.addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    PLSignCellObject *goal = [[PLSignCellObject alloc] init];
+    goal.titleString = temp;
+    [self.dataArray addObject:goal];
+    [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+    
+    _flag = YES;
+    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+    // 保存用户数据
+    [userDef setBool:_flag forKey:@"notFirst"];
+    [userDef synchronize];
+}
+
+- (void)unAdd:(PLRecommendGoalCell*)cell andTemp:(NSString *)temp {
+    [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
+    [cell.addButton setBackgroundColor:PLYELLOW];
+    [cell.addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    NSString *string = temp;
+    NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
+    for (PLSignCellObject *sign in array) {
+        if ([sign.titleString isEqualToString:string]) {
+            [_dataArray removeObject:sign];
+        }
+    }
+    [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+}
+
+- (void)codeBlock:(PLRecommendGoalCell*)cell {
+    [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+    [cell.addButton setBackgroundColor:[UIColor grayColor]];
+    [cell.addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     __weak PLRecommendGoalCell *cell = [tableView dequeueReusableCellWithIdentifier:cellDetailIdentifier];
@@ -164,7 +200,6 @@ static NSString *const cellDetailIdentifier = @"cell";
                     }
                 }
                 _open = NO;
-                NSLog(@"%@", _titleStringArray);
             }
             cell.iconImage = [UIImage imageNamed:@"stopwatch"];
             switch (indexPath.row) {
@@ -174,7 +209,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[0];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
 
@@ -183,29 +218,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.titleString = temp;
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = array[0];
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                           
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
 
                         }
@@ -219,7 +235,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[1];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                             
@@ -228,28 +244,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.titleString = temp;
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -263,7 +261,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[2];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -271,28 +269,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.titleString = temp;
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -307,7 +287,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[3];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                             
@@ -316,28 +296,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.titleString = temp;
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -365,7 +327,6 @@ static NSString *const cellDetailIdentifier = @"cell";
                     }
                 }
                 _open = NO;
-                NSLog(@"%@", _titleStringArray);
             }
                 switch (indexPath.row) {
                 case 0:
@@ -374,7 +335,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[0];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -383,31 +344,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.iconImage = [UIImage imageNamed:@"dumbbell"];
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            
-                            
-                            _flag = YES;
-                            
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -422,7 +362,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[1];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -431,28 +371,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.iconImage = [UIImage imageNamed:@"skipping-rope"];
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -467,7 +389,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[2];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -476,28 +398,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.iconImage = [UIImage imageNamed:@"ping-pong-racket"];
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -512,7 +416,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[3];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -521,28 +425,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.iconImage = [UIImage imageNamed:@"tennis"];
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -557,7 +443,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[4];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -566,28 +452,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.iconImage = [UIImage imageNamed:@"skates"];
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -615,7 +483,6 @@ static NSString *const cellDetailIdentifier = @"cell";
                     }
                 }
                 _open = NO;
-                NSLog(@"%@", _titleStringArray);
             }
 
             switch (indexPath.row) {
@@ -625,7 +492,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[0];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -634,23 +501,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.iconImage = [UIImage imageNamed:@"cheese"];
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -665,7 +519,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[1];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -674,28 +528,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.iconImage = [UIImage imageNamed:@"soda-in-the-bank"];
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -710,7 +546,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[1];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -719,28 +555,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.iconImage = [UIImage imageNamed:@"skipping-rope"];
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -755,7 +573,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[3];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -764,28 +582,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.iconImage = [UIImage imageNamed:@"carrot"];
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -800,7 +600,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[4];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -809,28 +609,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.iconImage = [UIImage imageNamed:@"tea"];
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -845,7 +627,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[5];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -854,28 +636,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.iconImage = [UIImage imageNamed:@"milk"];
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -890,7 +654,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[6];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -899,30 +663,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.iconImage = [UIImage imageNamed:@"beer"];
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            
-                            _flag = YES;
-                            
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -951,7 +695,6 @@ static NSString *const cellDetailIdentifier = @"cell";
                     }
                 }
                 _open = NO;
-                NSLog(@"%@", _titleStringArray);
             }
 
 
@@ -963,7 +706,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[0];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -971,28 +714,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.titleString = temp;
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -1006,7 +731,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[1];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -1014,28 +739,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.titleString = temp;
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -1050,7 +757,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[2];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -1058,30 +765,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.titleString = temp;
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            
-                            _flag = YES;
-                            
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -1096,7 +783,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[3];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -1104,28 +791,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.titleString = temp;
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -1165,7 +834,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[0];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                             
@@ -1174,28 +843,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.titleString = temp;
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -1210,7 +861,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[1];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                             
@@ -1219,28 +870,10 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.titleString = temp;
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
@@ -1255,7 +888,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[2];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -1263,30 +896,11 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.titleString = temp;
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
-                            
                         }
                     };
                     return cell;
@@ -1299,7 +913,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                     NSString *temp = array[3];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self codeBlock:cell];
                             index = NO;
                             break;
                         }
@@ -1307,48 +921,26 @@ static NSString *const cellDetailIdentifier = @"cell";
                     cell.titleString = temp;
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
-                            [cell.addButton setTitle:@"已添加" forState:UIControlStateNormal];
+                            [self Added:cell andTemp:temp];
                             index = NO;
-                            PLSignCellObject *goal = [[PLSignCellObject alloc] init];
-                            goal.titleString = temp;
-                            [self.dataArray addObject:goal];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
                         }else {
-                            [cell.addButton setTitle:@"添加" forState:UIControlStateNormal];
-                            NSString *string = temp;
-                            NSMutableArray *array = [NSMutableArray arrayWithArray:_dataArray];
-                            for (PLSignCellObject *sign in array) {
-                                if ([sign.titleString isEqualToString:string]) {
-                                    [_dataArray removeObject:sign];
-                                }
-                            }
-                            
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                            [self unAdd:cell andTemp:temp];
                             index = YES;
                             
                         }
                     };
                     return cell;
-
                 }
                     break;
-                    
                 default:
                     break;
             }
-
         }
             break;
         default:
             break;
     }
             return 0;
-    
 }
 
 @end

@@ -15,7 +15,7 @@
 #define HEIGHT       SCREEN_SIZE.height
 
 #define PLWIDTH        self.view.bounds.size.width
-#define PLYELLOW [UIColor colorWithRed:0.92 green:0.76 blue:0.08 alpha:1.0]
+#define PLYELLOW [UIColor colorWithRed:0.96 green:0.72 blue:0.07 alpha:1.0]
 #define ColorWith243 [UIColor colorWithRed:243 / 255.0 green:243 / 255.0 blue:243 / 255.0 alpha:1]
 #define ColorWith60 [UIColor colorWithRed:60 / 255.0 green:60 / 255.0 blue:60 / 255.0 alpha:1]
 #define ColorWith48Red [UIColor colorWithRed:255 / 255.0 green:48 / 255.0 blue:48 / 255.0 alpha:1]

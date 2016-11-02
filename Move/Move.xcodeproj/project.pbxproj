@@ -254,6 +254,9 @@
 		84D636131DB764D200AC0E4D /* PLRunViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D636111DB764D200AC0E4D /* PLRunViewController.xib */; };
 		84D636171DB764E300AC0E4D /* PLAnalyseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D636151DB764E300AC0E4D /* PLAnalyseViewController.m */; };
 		84D636181DB764E300AC0E4D /* PLAnalyseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D636161DB764E300AC0E4D /* PLAnalyseViewController.xib */; };
+		84E4CF1D1DC9875700C353EE /* PLSignRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E4CF1B1DC9875700C353EE /* PLSignRecordViewController.m */; };
+		84E4CF1E1DC9875700C353EE /* PLSignRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84E4CF1C1DC9875700C353EE /* PLSignRecordViewController.xib */; };
+		84E4CF201DC98C9C00C353EE /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = 84E4CF1F1DC98C9C00C353EE /* delete.png */; };
 		84F0459A1DB8754B009D3BC3 /* activity_circle-0_132x114_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F045261DB8754B009D3BC3 /* activity_circle-0_132x114_@2x.png */; };
 		84F0459B1DB8754B009D3BC3 /* activity_circle-0_150x130_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F045271DB8754B009D3BC3 /* activity_circle-0_150x130_@2x.png */; };
 		84F0459C1DB8754B009D3BC3 /* activity_circle-10_132x114_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F045281DB8754B009D3BC3 /* activity_circle-10_132x114_@2x.png */; };
@@ -662,6 +665,10 @@
 		84D636141DB764E300AC0E4D /* PLAnalyseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLAnalyseViewController.h; sourceTree = "<group>"; };
 		84D636151DB764E300AC0E4D /* PLAnalyseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLAnalyseViewController.m; sourceTree = "<group>"; };
 		84D636161DB764E300AC0E4D /* PLAnalyseViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLAnalyseViewController.xib; sourceTree = "<group>"; };
+		84E4CF1A1DC9875700C353EE /* PLSignRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSignRecordViewController.h; sourceTree = "<group>"; };
+		84E4CF1B1DC9875700C353EE /* PLSignRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSignRecordViewController.m; sourceTree = "<group>"; };
+		84E4CF1C1DC9875700C353EE /* PLSignRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLSignRecordViewController.xib; sourceTree = "<group>"; };
+		84E4CF1F1DC98C9C00C353EE /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
 		84F045261DB8754B009D3BC3 /* activity_circle-0_132x114_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity_circle-0_132x114_@2x.png"; sourceTree = "<group>"; };
 		84F045271DB8754B009D3BC3 /* activity_circle-0_150x130_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity_circle-0_150x130_@2x.png"; sourceTree = "<group>"; };
 		84F045281DB8754B009D3BC3 /* activity_circle-10_132x114_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity_circle-10_132x114_@2x.png"; sourceTree = "<group>"; };
@@ -860,6 +867,9 @@
 				84572CCD1DC737B400B8CD0D /* PLDetailGoalViewController.h */,
 				84572CCE1DC737B400B8CD0D /* PLDetailGoalViewController.m */,
 				84572CCF1DC737B400B8CD0D /* PLDetailGoalViewController.xib */,
+				84E4CF1A1DC9875700C353EE /* PLSignRecordViewController.h */,
+				84E4CF1B1DC9875700C353EE /* PLSignRecordViewController.m */,
+				84E4CF1C1DC9875700C353EE /* PLSignRecordViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1246,6 +1256,7 @@
 		84AB972D1DB8E7B70075FDC0 /* PLSOURCE */ = {
 			isa = PBXGroup;
 			children = (
+				84E4CF1F1DC98C9C00C353EE /* delete.png */,
 				84B7B7F71DC6F56100715926 /* back.png */,
 				84AB972E1DB8E7B70075FDC0 /* Avatars.plist */,
 				84AB97491DB8E7B70075FDC0 /* Tips.txt */,
@@ -1612,6 +1623,7 @@
 				84B3328D1DC8824F00681A71 /* unover.png in Resources */,
 				84AB97661DB8E7B70075FDC0 /* icon_level3@3x.png in Resources */,
 				8471C5031DB75B5E008E8A5A /* trends_bar_42mm-64.png in Resources */,
+				84E4CF1E1DC9875700C353EE /* PLSignRecordViewController.xib in Resources */,
 				115BE2D71DBA4E71003279AC /* camera.png in Resources */,
 				84AB975C1DB8E7B70075FDC0 /* goalAlbumCellEmptyBg_6s.jpg in Resources */,
 				84AB97251DB8E4780075FDC0 /* achieveSelected.png in Resources */,
@@ -1672,6 +1684,7 @@
 				84AB975D1DB8E7B70075FDC0 /* gps_music_btn.png in Resources */,
 				84AB97571DB8E7B70075FDC0 /* dd_more_icon_plus.png in Resources */,
 				8471C5301DB75B5E008E8A5A /* weight_setgoal_icon@3x.png in Resources */,
+				84E4CF201DC98C9C00C353EE /* delete.png in Resources */,
 				84F045FA1DB8754B009D3BC3 /* activity_circle-53_132x114_@2x.png in Resources */,
 				84F045C01DB8754B009D3BC3 /* activity_circle-27_132x114_@2x.png in Resources */,
 				84F045EF1DB8754B009D3BC3 /* activity_circle-48_150x130_@2x.png in Resources */,
@@ -1987,6 +2000,7 @@
 				84AB96FC1DB8B6D70075FDC0 /* PLTargetModel.m in Sources */,
 				8471C5351DB75C03008E8A5A /* UIButton+Block.m in Sources */,
 				84572CD01DC737B400B8CD0D /* PLDetailGoalViewController.m in Sources */,
+				84E4CF1D1DC9875700C353EE /* PLSignRecordViewController.m in Sources */,
 				115BE28C1DB9A42B003279AC /* NSUserDefaults+Categories.m in Sources */,
 				49A935E81DC8BD8E00BF099E /* PLXTouchView.m in Sources */,
 				115BE2CB1DBA33FC003279AC /* PLHealthManager.m in Sources */,
