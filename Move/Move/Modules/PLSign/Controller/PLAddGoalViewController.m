@@ -124,7 +124,6 @@ static NSString *const cellIdentifier = @"cell";
         {
             PLDetailGoalViewController *plDetailVC = [[PLDetailGoalViewController alloc] init];
             plDetailVC.type = 0;
-            plDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentViewController:plDetailVC animated:YES completion:nil];
         }
             break;
@@ -132,7 +131,6 @@ static NSString *const cellIdentifier = @"cell";
         {
             PLDetailGoalViewController *plDetailVC = [[PLDetailGoalViewController alloc] init];
             plDetailVC.type = 1;
-            plDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentViewController:plDetailVC animated:YES completion:nil];
         }
             break;
@@ -140,7 +138,6 @@ static NSString *const cellIdentifier = @"cell";
         {
             PLDetailGoalViewController *plDetailVC = [[PLDetailGoalViewController alloc] init];
             plDetailVC.type = 2;
-            plDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentViewController:plDetailVC animated:YES completion:nil];
         }
             break;
@@ -148,7 +145,6 @@ static NSString *const cellIdentifier = @"cell";
         {
             PLDetailGoalViewController *plDetailVC = [[PLDetailGoalViewController alloc] init];
             plDetailVC.type = 3;
-            plDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentViewController:plDetailVC animated:YES completion:nil];
         }
             break;
@@ -156,7 +152,6 @@ static NSString *const cellIdentifier = @"cell";
         {
             PLDetailGoalViewController *plDetailVC = [[PLDetailGoalViewController alloc] init];
             plDetailVC.type = 4;
-            plDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentViewController:plDetailVC animated:YES completion:nil];
         }
             break;

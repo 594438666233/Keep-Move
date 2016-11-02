@@ -46,6 +46,7 @@
             <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="cancelButton" destination="Nyq-QR-VT8" id="AUf-dR-kPC"/>
                 <outlet property="deleteButton" destination="Yxq-dl-vKd" id="fpo-em-aRW"/>
                 <outlet property="titleLabel" destination="50g-iI-uLe" id="hYx-OJ-Rkd"/>
             </connections>

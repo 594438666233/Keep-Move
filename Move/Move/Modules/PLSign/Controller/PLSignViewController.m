@@ -250,6 +250,14 @@ static NSString *const cellReusableIdentifier = @"cell";
     
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [_dataArray removeObjectAtIndex:indexPath.row];
+        [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+        [_tableView reloadData];
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     __weak PLRecommendGoalCell *cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -333,6 +341,7 @@ static NSString *const cellReusableIdentifier = @"cell";
             cell.addButtonBlock = ^(UIButton *button) {
                 cell.iconImage = [UIImage imageNamed:@"over"];
                 cell.buttonTitle = @"已打卡";
+                cell.addButton.userInteractionEnabled = NO;
                 [cell.addButton setBackgroundColor:PLYELLOW];
                 [cell.addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 NSString *time = [NSDate getSystemTimeStringWithFormat:@"yyyy年MM月dd日 HH:mm"];
@@ -403,6 +412,7 @@ static NSString *const cellReusableIdentifier = @"cell";
         if ([temp isEqualToString:_currentDate]) {
             cell.iconImage = [UIImage imageNamed:@"over"];
             cell.buttonTitle = @"已打卡";
+            cell.addButton.userInteractionEnabled = NO;
             [cell.addButton setBackgroundColor:PLYELLOW];
             [cell.addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         }else{
@@ -414,6 +424,7 @@ static NSString *const cellReusableIdentifier = @"cell";
         cell.addButtonBlock = ^(UIButton *button) {
             cell.iconImage = [UIImage imageNamed:@"over"];
             cell.buttonTitle = @"已打卡";
+            cell.addButton.userInteractionEnabled = NO;
             [cell.addButton setBackgroundColor:PLYELLOW];
             [cell.addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             NSString *time = [NSDate getSystemTimeStringWithFormat:@"yyyy年MM月dd日 HH:mm"];

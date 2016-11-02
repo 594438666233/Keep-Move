@@ -18,7 +18,7 @@ static NSString *const cellRecordIdentifier = @"cell";
     UITableViewDataSource
 >
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, retain) NSArray *dataArray;
+@property (nonatomic, retain) NSMutableArray *dataArray;
 @property (nonatomic, copy) NSString *goalPath;
 @property (nonatomic, retain) NSMutableArray *tempArray;
 
@@ -26,9 +26,13 @@ static NSString *const cellRecordIdentifier = @"cell";
 
 @implementation PLSignRecordViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self setupNavigationView];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupNavigationView];
     [self getDataSource];
  
 }
@@ -39,7 +43,7 @@ static NSString *const cellRecordIdentifier = @"cell";
     NSArray *pArray = [NSKeyedUnarchiver unarchiveObjectWithFile:_goalPath];
     self.tempArray = [NSMutableArray arrayWithArray:pArray];
     PLSignCellObject *sign = _tempArray[_index];
-    self.dataArray = sign.signArray;
+    self.dataArray = [NSMutableArray arrayWithArray:sign.signArray];
     if (_dataArray.count == 0) {
         [_tableView removeFromSuperview];
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH / 2 - 100, HEIGHT / 2 - 50, 200, 50)];
@@ -56,15 +60,23 @@ static NSString *const cellRecordIdentifier = @"cell";
     PLNavigationView *plNavigationView = [[PLNavigationView alloc] init];
     plNavigationView.titleString = @"打卡记录";
     plNavigationView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 64);
+    
+    if (_dataArray.count == 0) {
+        plNavigationView.deleteButton.hidden = YES;
+    }else{
+        plNavigationView.deleteButton.hidden = NO;
+    }
+    
     plNavigationView.cancelButtonBlock = ^(UIButton *button){
         [self dismissViewControllerAnimated:YES completion:nil];
     };
     plNavigationView.deleteButtonBlock = ^(UIButton *button) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"删除记录的同时将移除该目标" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"清空打卡记录" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            NSLog(@"delete");
-//            NSMutableArray *array = [NSMutableArray arrayWithArray:_tempArray];
-            [_tempArray removeObjectAtIndex:_index];
+            [_dataArray removeAllObjects];
+            PLSignCellObject *sign = _tempArray[_index];
+            sign.signArray = nil;
+            [_tempArray replaceObjectAtIndex:_index withObject:sign];
             [NSKeyedArchiver archiveRootObject:_tempArray toFile:_goalPath];
             [self dismissViewControllerAnimated:YES completion:nil];
         }];

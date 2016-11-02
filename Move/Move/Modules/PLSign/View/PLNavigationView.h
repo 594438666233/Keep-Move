@@ -16,5 +16,6 @@ typedef void (^CancelButtonBlock)(UIButton *);
 @property (nonatomic, copy) CancelButtonBlock deleteButtonBlock;
 @property (nonatomic, copy) NSString *titleString;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @end
