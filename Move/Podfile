@@ -4,9 +4,5 @@ pod 'PNChart'
 pod 'INTULocationManager'
 pod 'Masonry'
 pod 'SDWebImage'
-<<<<<<< HEAD
 pod 'AMap2DMap'
-=======
-pod 'AMap2DMap' 
->>>>>>> 711c956a2e31639bc382c7207df4885e0e8c24db
 end

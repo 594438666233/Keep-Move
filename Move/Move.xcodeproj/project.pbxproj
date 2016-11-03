@@ -2251,11 +2251,8 @@
 				493671791DC9E9A00048E098 /* WYLineChartView.m in Sources */,
 				845372A91DB7796C00DBE92F /* PLGoalHeaderView.m in Sources */,
 				84B7B7D11DC6DE4F00715926 /* PLRecommendGoalCell.m in Sources */,
-<<<<<<< HEAD
 				493671731DC9E9A00048E098 /* WYLineChartJunctionShape.m in Sources */,
-=======
 				84765E791DC9E1CA007F0673 /* PLMenuView.m in Sources */,
->>>>>>> 711c956a2e31639bc382c7207df4885e0e8c24db
 				84AB96F61DB8B5300075FDC0 /* PLDefeatModel.m in Sources */,
 				493671721DC9E9A00048E098 /* WYLineChartCoordinateView.m in Sources */,
 				84D636081DB764B500AC0E4D /* PLSignViewController.m in Sources */,
