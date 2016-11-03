@@ -4,4 +4,5 @@ pod 'PNChart'
 pod 'INTULocationManager'
 pod 'Masonry'
 pod 'SDWebImage'
+pod 'AMap2DMap'
 end

@@ -18,4 +18,6 @@
 #import "UIView+ShowMessage.h"
 #import <FMDB.h>
 #import "PLDataBaseManager.h"
+#import <PNChart.h>
+#import <AMapFoundationKit/AMapFoundationKit.h>
 #endif /* PrefixHeader_pch */

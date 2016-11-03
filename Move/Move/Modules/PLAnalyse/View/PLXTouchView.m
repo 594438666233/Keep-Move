@@ -23,11 +23,10 @@
         self.touchLabel = [[UILabel alloc] init];
         _touchLabel.textAlignment = NSTextAlignmentCenter;
         _touchLabel.textColor = [UIColor whiteColor];
-        _touchLabel.font = [UIFont systemFontOfSize:WIDTH / 40];
+        _touchLabel.font = [UIFont systemFontOfSize:WIDTH / 35];
         [self addSubview:_touchLabel];
 
         self.imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"三角"]];
-        
         [self addSubview:_imageView];
     }
     return self;
@@ -41,6 +40,11 @@
 - (void)setText:(NSString *)text {
     _text = text;
     _touchLabel.text = text;
+}
+- (void)setHidden:(BOOL)hidden {
+    _hidden = hidden;
+    _touchLabel.hidden = hidden;
+    _imageView.hidden = hidden;
 }
 
 @end

@@ -30,6 +30,7 @@ static NSString *const cellIdentifier = @"cell";
     // 设置导航栏view
     PLNavigationView *plNavigationView = [[PLNavigationView alloc] init];
     plNavigationView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 64);
+    plNavigationView.deleteButton.hidden = YES;
     plNavigationView.cancelButtonBlock = ^(UIButton *button){
         [self dismissViewControllerAnimated:YES completion:nil];
     };
@@ -58,7 +59,6 @@ static NSString *const cellIdentifier = @"cell";
     cell.addButton.hidden = YES;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (indexPath.section == 0) {
-        cell.buttonTitle = @"添加";
         switch (indexPath.row) {
             case 0:
             {
@@ -124,7 +124,6 @@ static NSString *const cellIdentifier = @"cell";
         {
             PLDetailGoalViewController *plDetailVC = [[PLDetailGoalViewController alloc] init];
             plDetailVC.type = 0;
-            plDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentViewController:plDetailVC animated:YES completion:nil];
         }
             break;
@@ -132,7 +131,6 @@ static NSString *const cellIdentifier = @"cell";
         {
             PLDetailGoalViewController *plDetailVC = [[PLDetailGoalViewController alloc] init];
             plDetailVC.type = 1;
-            plDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentViewController:plDetailVC animated:YES completion:nil];
         }
             break;
@@ -140,7 +138,6 @@ static NSString *const cellIdentifier = @"cell";
         {
             PLDetailGoalViewController *plDetailVC = [[PLDetailGoalViewController alloc] init];
             plDetailVC.type = 2;
-            plDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentViewController:plDetailVC animated:YES completion:nil];
         }
             break;
@@ -148,7 +145,6 @@ static NSString *const cellIdentifier = @"cell";
         {
             PLDetailGoalViewController *plDetailVC = [[PLDetailGoalViewController alloc] init];
             plDetailVC.type = 3;
-            plDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentViewController:plDetailVC animated:YES completion:nil];
         }
             break;
@@ -156,7 +152,6 @@ static NSString *const cellIdentifier = @"cell";
         {
             PLDetailGoalViewController *plDetailVC = [[PLDetailGoalViewController alloc] init];
             plDetailVC.type = 4;
-            plDetailVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
             [self presentViewController:plDetailVC animated:YES completion:nil];
         }
             break;
