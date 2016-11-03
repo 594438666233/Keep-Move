@@ -48,24 +48,15 @@ UITableViewDataSource
     
     
     
+    [self userDefauls];
     
     
-//    PLPersonInformation *person = [[PLPersonInformation alloc] init];
-//    person.gender = @"男";
-//    person.brithday = 1994;
-//    person.height = 1.53;
-//    person.goalWeight = 66.f;
-//    person.goalStep = 10000.f;
-//    
-//    [[PLDataBaseManager shareManager] insertPerson:person];
-//    
-//    person.gender = @"女";
-//    person.brithday = 1922;
-//    person.height = 1.88;
-//    person.goalWeight = 16.f;
-//    person.goalStep = 10523.f;
-//    [[PLDataBaseManager shareManager] updatePerson:person];
-    [[PLDataBaseManager shareManager] personInformation];
+    
+    
+    
+
+    
+    
     
     
 }
@@ -287,6 +278,28 @@ UITableViewDataSource
 }
 
 
+- (void)userDefauls {
+    NSUserDefaults *userDefauls1 = [NSUserDefaults standardUserDefaults];
+    
+    if (![userDefauls1 boolForKey:@"notFirst"]) {
+        
+        NSUserDefaults *userDefauls2 = [NSUserDefaults standardUserDefaults];
+        [userDefauls2 setBool:YES forKey:@"notFirst"];
+        
+        PLPersonInformation *person = [[PLPersonInformation alloc] init];
+        person.gender = @"男";
+        person.brithday = 1994;
+        person.height = 178;
+        person.goalWeight = 60.3f;
+        person.goalStep = 10000.f;
+        
+        [[PLDataBaseManager shareManager] insertPerson:person];
+        
+        
+    }
+    
+
+}
     
 
 

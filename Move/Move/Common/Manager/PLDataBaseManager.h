@@ -33,4 +33,6 @@
 - (BOOL)updatePerson:(PLPersonInformation *)person;
 
 - (PLPersonInformation *)personInformation;
+
+- (CGFloat)goalWeight;
 @end

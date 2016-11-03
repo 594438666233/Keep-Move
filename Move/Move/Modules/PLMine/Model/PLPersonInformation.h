@@ -14,7 +14,7 @@
 
 @property (nonatomic, copy) NSString *gender;
 @property (nonatomic, assign) NSInteger brithday;
-@property (nonatomic, assign) CGFloat height;
+@property (nonatomic, assign) NSInteger height;
 @property (nonatomic, assign) CGFloat goalWeight;
 @property (nonatomic, assign) NSInteger goalStep;
 

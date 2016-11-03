@@ -17,8 +17,8 @@
 @property (nonatomic, assign) BOOL flag1;
 @property (nonatomic, assign) BOOL flag2;
 
-@property (nonatomic, assign) CGFloat weight;
-@property (nonatomic, copy) NSString *time;
+
+
 
 
 
@@ -52,7 +52,7 @@
     
     [_dbQueue inDatabase:^(FMDatabase *db) {
         
-        BOOL success = [db executeUpdate:@"create table if not exists Person (id integer primary key autoincrement, gender text , brithday integer , height real , goalweight real, goalstep real)"];
+        BOOL success = [db executeUpdate:@"create table if not exists Person (id integer primary key autoincrement, gender text , brithday integer , height integer , goalweight real, goalstep real)"];
         
         if (success) {
             NSLog(@"创建表成功");
@@ -88,7 +88,7 @@
     
     [self.dbQueue inDatabase:^(FMDatabase *db) {
         
-        BOOL success = [db executeUpdate:[NSString stringWithFormat:@"insert into Person values (null,'%@','%ld', '%f','%f','%ld')", person.gender, person.brithday, person.height, person.goalWeight, person.goalStep]];
+        BOOL success = [db executeUpdate:[NSString stringWithFormat:@"insert into Person values (null,'%@','%ld', '%ld','%f','%ld')", person.gender, person.brithday, person.height, person.goalWeight, person.goalStep]];
         
         if (success) {
             NSLog(@"插入成功");
@@ -121,7 +121,7 @@
 //         BOOL success = [db executeUpdate:@"create table if not exists Person (id integer primary key autoincrement, gender text , brithday integer , height real , goalweight real, goalstep real)"];
         BOOL success1 = [db executeUpdate:[NSString stringWithFormat:@"update Person set gender = '%@' ", person.gender]];
         BOOL success2 = [db executeUpdate:[NSString stringWithFormat:@"update Person set brithday = '%ld' ", person.brithday]];
-        BOOL success3 = [db executeUpdate:[NSString stringWithFormat:@"update Person set height = '%f' ", person.height]];
+        BOOL success3 = [db executeUpdate:[NSString stringWithFormat:@"update Person set height = '%ld' ", person.height]];
         BOOL success4 = [db executeUpdate:[NSString stringWithFormat:@"update Person set goalweight = '%f' ", person.goalWeight]];
         BOOL success5 = [db executeUpdate:[NSString stringWithFormat:@"update Person set goalstep = '%ld' ", person.goalStep]];
         if (success1&&success2&&success3&&success4&&success5) {
@@ -181,19 +181,19 @@
 - (CGFloat)currentWeight {
 
     
-    
+    CGFloat __block  weight = 0.f;
     [self.dbQueue inDatabase:^(FMDatabase *db) {
         FMResultSet *result = [db executeQuery:@"SELECT weight FROM Record"];
-        self.weight = 0;
+        
         while ([result next]) {
             
-            self.weight = [result intForColumnIndex:0];
+            weight = [result doubleForColumnIndex:0];
             
             
         }
     }];
     
-    return _weight;
+    return weight;
 
 }
 
@@ -202,19 +202,20 @@
 
 - (NSArray *)ArrayWithRecordWeight {
 
-    
+    NSString __block *time = @"";
+    CGFloat __block weight = 0.f;
     NSMutableArray *__block historyArray = [NSMutableArray array];
     [self.dbQueue inDatabase:^(FMDatabase *db) {
         FMResultSet *result = [db executeQuery:@"SELECT * FROM Record"];
         
         while ([result next]) {
             
-            self.time = [result stringForColumnIndex:1];
-            self.weight = [result doubleForColumnIndex:2];
+            time = [result stringForColumnIndex:1];
+            weight = [result doubleForColumnIndex:2];
             
             PLHistoryInformation *history = [[PLHistoryInformation alloc] init];
-            history.time = _time;
-            history.weight = _weight;
+            history.time = time;
+            history.weight = weight;
             [historyArray addObject:history];
         }
     }];
@@ -243,6 +244,17 @@
 
 // BOOL flag = [[PLDataBaseManager shareManager] clearRecord];
 
+- (CGFloat)goalWeight {
+    CGFloat __block goalWeight = 0;
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *result= [db executeQuery:@"SELECT goalweight FROM Person"];
+        while ([result next]) {
+            goalWeight = [result doubleForColumnIndex:0];
+        }
+        
+    }];
+    return goalWeight;
 
+}
 
 @end

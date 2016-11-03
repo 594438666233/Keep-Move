@@ -13,7 +13,8 @@
 @interface PLSetInformationTableViewController ()
 <
 UIPickerViewDelegate,
-UIPickerViewDataSource
+UIPickerViewDataSource,
+UITextFieldDelegate
 
 >
 
@@ -35,6 +36,10 @@ UIPickerViewDataSource
 @property (nonatomic, strong) UIPickerView *genderPicker;
 
 @property (nonatomic, strong) UIPickerView *brithPicker;
+
+@property (nonatomic, assign) BOOL isHaveDian;
+
+@property (nonatomic, assign) BOOL isFirstZero;
 
 @end
 
@@ -93,10 +98,12 @@ UIPickerViewDataSource
     PLPersonInformation *person = [[PLDataBaseManager shareManager] personInformation];
     self.gender.text = person.gender;
     self.brithYear.text = [NSString stringWithFormat:@"%ld", person.brithday];
-    self.height.text = [NSString stringWithFormat:@"%.1f", person.height];
+    self.height.text = [NSString stringWithFormat:@"%ld", person.height];
     self.weight.text = [NSString stringWithFormat:@"%.1f", person.goalWeight];
     self.steps.text = [NSString stringWithFormat:@"%ld", person.goalStep];
-    
+    self.height.delegate = self;
+    self.weight.delegate = self;
+    self.steps.delegate = self;
     
     
     [self createLabel];
@@ -194,6 +201,114 @@ UIPickerViewDataSource
 - (void)tapAction {
     [self.view endEditing:YES];
 
+}
+
+#pragma mark - textfield
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    
+    if (textField == self.height) {
+        if (string.length > 0) {
+            unichar single = [string characterAtIndex:0];
+            if (single == '.') {
+                return NO;
+            }
+            if (textField.text.length >= 3) {
+                return NO;
+            }
+        }
+    }
+    if (textField == self.weight) {
+        
+        if ([textField.text rangeOfString:@"."].location==NSNotFound) {
+            _isHaveDian = NO;
+        }
+        if ([textField.text rangeOfString:@"0"].location==NSNotFound) {
+            _isFirstZero = NO;
+        }
+        
+        if ([string length]>0)
+        {
+            unichar single=[string characterAtIndex:0];//当前输入的字符
+            if ((single >='0' && single<='9') || single=='.')//数据格式正确
+            {
+                
+                if([textField.text length]==0){
+                    if(single == '.' || single == '0'){
+                        //首字母不能为小数点
+                        return NO;
+                    }
+                    
+                }
+                
+                if (single=='.'){
+                    if(!_isHaveDian)//text中还没有小数点
+                    {
+                        _isHaveDian=YES;
+                        return YES;
+                    }else{
+                        return NO;
+                    }
+                }else if(single=='0'){
+                    if ((_isFirstZero&&_isHaveDian)||(!_isFirstZero&&_isHaveDian)) {
+                        //首位有0有.（0.01）或首位没0有.（10200.00）可输入两位数的0
+                        if([textField.text isEqualToString:@"0.0"]){
+                            return NO;
+                        }
+                        NSRange ran=[textField.text rangeOfString:@"."];
+                        int tt=(int)(range.location-ran.location);
+                        if (tt <= 2){
+                            return YES;
+                        }else{
+                            return NO;
+                        }
+                    }else if (_isFirstZero&&!_isHaveDian){
+                        //首位有0没.不能再输入0
+                        return NO;
+                    }else{
+                        return YES;
+                    }
+                }else{
+                    if (_isHaveDian){
+                        //存在小数点，保留两位小数
+                        NSRange ran=[textField.text rangeOfString:@"."];
+                        int tt= (int)(range.location-ran.location);
+                        if (tt <= 2){
+                            return YES;
+                        }else{
+                            return NO;
+                        }
+                    }else if(_isFirstZero&&!_isHaveDian){
+                        //首位有0没点
+                        return NO;
+                    }else{
+                        return YES;
+                    }
+                }
+            }else{
+                //输入的数据格式不正确
+                return NO;
+            }
+        }else{
+            return YES;
+        }
+        
+
+    }
+    
+    if (textField == self.steps) {
+        
+        if (string.length > 0) {
+            
+            if (textField.text.length >= 5) {
+                return NO;
+            }
+        }
+        
+    }
+    return YES;
+    
 }
 
 #pragma mark - tableView
