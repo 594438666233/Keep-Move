@@ -47,6 +47,8 @@
 		49A935E81DC8BD8E00BF099E /* PLXTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A935E71DC8BD8E00BF099E /* PLXTouchView.m */; };
 		49A935EA1DC8C48800BF099E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49A935E91DC8C48800BF099E /* Assets.xcassets */; };
 		842441E51DC7751D00582B41 /* PLSignCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 842441E41DC7751D00582B41 /* PLSignCellObject.m */; };
+		8435C5721DCB232400339846 /* PLDetailInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8435C5711DCB232400339846 /* PLDetailInfoView.m */; };
+		8435C5741DCB232B00339846 /* PLDetailInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8435C5731DCB232B00339846 /* PLDetailInfoView.xib */; };
 		845372A91DB7796C00DBE92F /* PLGoalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */; };
 		845372AB1DB7798000DBE92F /* PLGoalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845372AA1DB7798000DBE92F /* PLGoalHeaderView.xib */; };
 		845372C01DB799F300DBE92F /* PLTargetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372BF1DB799F300DBE92F /* PLTargetView.m */; };
@@ -253,7 +255,6 @@
 		84B7B7DE1DC6DE8E00715926 /* milk.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B7B7D51DC6DE8E00715926 /* milk.png */; };
 		84B7B7DF1DC6DE8E00715926 /* shoe-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B7B7D61DC6DE8E00715926 /* shoe-1.png */; };
 		84B7B7E01DC6DE8E00715926 /* soda-in-the-bank.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B7B7D71DC6DE8E00715926 /* soda-in-the-bank.png */; };
-		84B7B7E11DC6DE8E00715926 /* tennis.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B7B7D81DC6DE8E00715926 /* tennis.png */; };
 		84B7B7E21DC6DE8E00715926 /* beer.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B7B7D91DC6DE8E00715926 /* beer.png */; };
 		84B7B7E31DC6DE8E00715926 /* dumbbell.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B7B7DA1DC6DE8E00715926 /* dumbbell.png */; };
 		84B7B7E41DC6DE8E00715926 /* cheese.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B7B7DB1DC6DE8E00715926 /* cheese.png */; };
@@ -276,6 +277,9 @@
 		84D0D8231DB6F48500EDCFB3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0D8221DB6F48500EDCFB3 /* main.m */; };
 		84D0D8261DB6F48500EDCFB3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D0D8251DB6F48500EDCFB3 /* AppDelegate.m */; };
 		84D0D8311DB6F48500EDCFB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84D0D82F1DB6F48500EDCFB3 /* LaunchScreen.storyboard */; };
+		84D15B6C1DCAD87E00228D87 /* myLocation.png in Resources */ = {isa = PBXBuildFile; fileRef = 84D15B6B1DCAD87E00228D87 /* myLocation.png */; };
+		84D15B6F1DCAE4BD00228D87 /* closeVoice.png in Resources */ = {isa = PBXBuildFile; fileRef = 84D15B6D1DCAE4BD00228D87 /* closeVoice.png */; };
+		84D15B701DCAE4BD00228D87 /* openVoice.png in Resources */ = {isa = PBXBuildFile; fileRef = 84D15B6E1DCAE4BD00228D87 /* openVoice.png */; };
 		84D636081DB764B500AC0E4D /* PLSignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D636061DB764B500AC0E4D /* PLSignViewController.m */; };
 		84D636091DB764B500AC0E4D /* PLSignViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84D636071DB764B500AC0E4D /* PLSignViewController.xib */; };
 		84D6360D1DB764C200AC0E4D /* PLGoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D6360B1DB764C200AC0E4D /* PLGoalViewController.m */; };
@@ -477,6 +481,9 @@
 		49A935E91DC8C48800BF099E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		842441E31DC7751D00582B41 /* PLSignCellObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSignCellObject.h; sourceTree = "<group>"; };
 		842441E41DC7751D00582B41 /* PLSignCellObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSignCellObject.m; sourceTree = "<group>"; };
+		8435C5701DCB232400339846 /* PLDetailInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDetailInfoView.h; sourceTree = "<group>"; };
+		8435C5711DCB232400339846 /* PLDetailInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLDetailInfoView.m; sourceTree = "<group>"; };
+		8435C5731DCB232B00339846 /* PLDetailInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLDetailInfoView.xib; sourceTree = "<group>"; };
 		8448B6AC1DB76F6B00F10D49 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		845372A71DB7796C00DBE92F /* PLGoalHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLGoalHeaderView.h; sourceTree = "<group>"; };
 		845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLGoalHeaderView.m; sourceTree = "<group>"; };
@@ -734,6 +741,9 @@
 		84D0D8251DB6F48500EDCFB3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		84D0D8301DB6F48500EDCFB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		84D0D8321DB6F48500EDCFB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		84D15B6B1DCAD87E00228D87 /* myLocation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myLocation.png; sourceTree = "<group>"; };
+		84D15B6D1DCAE4BD00228D87 /* closeVoice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = closeVoice.png; sourceTree = "<group>"; };
+		84D15B6E1DCAE4BD00228D87 /* openVoice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = openVoice.png; sourceTree = "<group>"; };
 		84D636051DB764B500AC0E4D /* PLSignViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSignViewController.h; sourceTree = "<group>"; };
 		84D636061DB764B500AC0E4D /* PLSignViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSignViewController.m; sourceTree = "<group>"; };
 		84D636071DB764B500AC0E4D /* PLSignViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLSignViewController.xib; sourceTree = "<group>"; };
@@ -1126,6 +1136,9 @@
 				84765E771DC9E1CA007F0673 /* PLMenuView.h */,
 				84765E781DC9E1CA007F0673 /* PLMenuView.m */,
 				84765E7A1DC9E1D7007F0673 /* PLMenuView.xib */,
+				8435C5701DCB232400339846 /* PLDetailInfoView.h */,
+				8435C5711DCB232400339846 /* PLDetailInfoView.m */,
+				8435C5731DCB232B00339846 /* PLDetailInfoView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1461,6 +1474,9 @@
 		84AB972D1DB8E7B70075FDC0 /* PLSOURCE */ = {
 			isa = PBXGroup;
 			children = (
+				84D15B6D1DCAE4BD00228D87 /* closeVoice.png */,
+				84D15B6E1DCAE4BD00228D87 /* openVoice.png */,
+				84D15B6B1DCAD87E00228D87 /* myLocation.png */,
 				84765E6F1DC9DFEE007F0673 /* menuNormal.png */,
 				84765E701DC9DFEE007F0673 /* menuSelected.png */,
 				84765E711DC9DFEE007F0673 /* menuRide.png */,
@@ -1775,7 +1791,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = PL;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = PhelanGeek;
 				TargetAttributes = {
 					84D0D81D1DB6F48400EDCFB3 = {
@@ -1842,6 +1858,7 @@
 				115BE2D71DBA4E71003279AC /* camera.png in Resources */,
 				84AB975C1DB8E7B70075FDC0 /* goalAlbumCellEmptyBg_6s.jpg in Resources */,
 				84AB97251DB8E4780075FDC0 /* achieveSelected.png in Resources */,
+				8435C5741DCB232B00339846 /* PLDetailInfoView.xib in Resources */,
 				84C6120A1DB85B290029CEC5 /* PLCareerView.xib in Resources */,
 				84F045B91DB8754B009D3BC3 /* activity_circle-23_150x130_@2x.png in Resources */,
 				8471C4FB1DB75B5E008E8A5A /* trends_bar_42mm-57.png in Resources */,
@@ -1852,6 +1869,7 @@
 				84F045E61DB8754B009D3BC3 /* activity_circle-44_132x114_@2x.png in Resources */,
 				8471C5061DB75B5E008E8A5A /* trends_bar_42mm-67.png in Resources */,
 				84F045D21DB8754B009D3BC3 /* activity_circle-35_132x114_@2x.png in Resources */,
+				84D15B6F1DCAE4BD00228D87 /* closeVoice.png in Resources */,
 				84AB97691DB8E7B70075FDC0 /* icon_level5.png in Resources */,
 				84F045EA1DB8754B009D3BC3 /* activity_circle-46_132x114_@2x.png in Resources */,
 				8471C5041DB75B5E008E8A5A /* trends_bar_42mm-65.png in Resources */,
@@ -2001,6 +2019,7 @@
 				84F045E31DB8754B009D3BC3 /* activity_circle-42_150x130_@2x.png in Resources */,
 				84B7B7D21DC6DE4F00715926 /* PLRecommendGoalCell.xib in Resources */,
 				8471C4C11DB75B5E008E8A5A /* activity_a_off@2x.png in Resources */,
+				84D15B701DCAE4BD00228D87 /* openVoice.png in Resources */,
 				8471C4EB1DB75B5E008E8A5A /* trends_bar_42mm-42.png in Resources */,
 				8471C50D1DB75B5E008E8A5A /* trends_bar_42mm-73.png in Resources */,
 				84D0D8311DB6F48500EDCFB3 /* LaunchScreen.storyboard in Resources */,
@@ -2063,6 +2082,7 @@
 				84F045C61DB8754B009D3BC3 /* activity_circle-2_132x114_@2x.png in Resources */,
 				84B7B7F61DC6EE7500715926 /* PLNavigationView.xib in Resources */,
 				84F045F61DB8754B009D3BC3 /* activity_circle-51_132x114_@2x.png in Resources */,
+				84D15B6C1DCAD87E00228D87 /* myLocation.png in Resources */,
 				84F045B01DB8754B009D3BC3 /* activity_circle-1_132x114_@2x.png in Resources */,
 				84F045AD1DB8754B009D3BC3 /* activity_circle-18_150x130_@2x.png in Resources */,
 				84F045CC1DB8754B009D3BC3 /* activity_circle-32_132x114_@2x.png in Resources */,
@@ -2093,7 +2113,6 @@
 				8471C4D61DB75B5E008E8A5A /* trends_bar_42mm-23.png in Resources */,
 				8471C50B1DB75B5E008E8A5A /* trends_bar_42mm-71.png in Resources */,
 				84AB97771DB8E7B70075FDC0 /* weight_bmi_icon.png in Resources */,
-				84B7B7E11DC6DE8E00715926 /* tennis.png in Resources */,
 				84B7B7DD1DC6DE8E00715926 /* bicycle.png in Resources */,
 				84C612011DB855C40029CEC5 /* PLDefeatView.xib in Resources */,
 				84F045EE1DB8754B009D3BC3 /* activity_circle-48_132x114_@2x.png in Resources */,
@@ -2207,6 +2226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4936717A1DC9E9A00048E098 /* WYMainPieChartView.m in Sources */,
+				8435C5721DCB232400339846 /* PLDetailInfoView.m in Sources */,
 				493671831DCA047C0048E098 /* PLXStepViewController.m in Sources */,
 				84D636121DB764D200AC0E4D /* PLRunViewController.m in Sources */,
 				84AC593A1DB7697500E7D8C0 /* UILabel+SizeToHeight.m in Sources */,
