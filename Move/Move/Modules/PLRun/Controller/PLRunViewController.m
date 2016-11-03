@@ -13,7 +13,10 @@
 
 @interface PLRunViewController ()
 
-@property (nonatomic, retain) UIImageView *runImageView;
+
+
+@property (weak, nonatomic) IBOutlet UIImageView *runImageView;
+
 
 @end
 
@@ -37,9 +40,9 @@
 - (void)createRunNowButton {
     
     UIImage *runImage = [UIImage sd_animatedGIFNamed:@"weRunConnecting"];
-    self.runImageView = [[UIImageView alloc] initWithImage:runImage];
+    self.runImageView.image = runImage;
     _runImageView.userInteractionEnabled = YES;
-    _runImageView.frame =  CGRectMake(0, 0, 50, 50);
+    
     [self.view addSubview:_runImageView];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
@@ -53,5 +56,7 @@
     [self presentViewController:runNowVC animated:YES completion:nil];
 }
 
+
+#pragma mark - mlWorkSpace
 
 @end

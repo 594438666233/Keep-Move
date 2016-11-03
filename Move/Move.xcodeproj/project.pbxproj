@@ -1050,9 +1050,9 @@
 			children = (
 				84D6360F1DB764D200AC0E4D /* PLRunViewController.h */,
 				84D636101DB764D200AC0E4D /* PLRunViewController.m */,
+				84D636111DB764D200AC0E4D /* PLRunViewController.xib */,
 				84765E531DC9D48A007F0673 /* PLRunNowViewController.h */,
 				84765E541DC9D48A007F0673 /* PLRunNowViewController.m */,
-				84D636111DB764D200AC0E4D /* PLRunViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
