@@ -32,11 +32,10 @@ WYLineChartViewDatasource
 
 @property (weak, nonatomic) IBOutlet UILabel *goalWeight;
 
-<<<<<<< HEAD
+
 @property (nonatomic, assign) BOOL isHaveDian;
 @property (nonatomic, assign) BOOL isFirstZero;
 
-=======
 @property (weak, nonatomic) IBOutlet UIImageView *chartImageView;
 
 @property (nonatomic, strong) WYLineChartView *lineChart;
@@ -44,7 +43,7 @@ WYLineChartViewDatasource
 @property (nonatomic, strong) NSMutableArray *pointsArray;
 
 @property (nonatomic, strong) NSMutableArray *dateArray;
->>>>>>> 2fa71f68d2407171d181cd9c46d4cb213ff03ea7
+
 
 
 @end
@@ -146,15 +145,15 @@ WYLineChartViewDatasource
     [super awakeFromNib];
     
     self.currentWeight.text = [NSString stringWithFormat:@"%.1f", [[PLDataBaseManager shareManager] currentWeight]];
-<<<<<<< HEAD
+
     
     self.goalWeight.text = [NSString stringWithFormat:@"目标体重%.1fkg",[[PLDataBaseManager shareManager] goalWeight]];
     
-=======
+
     _chartImageView.backgroundColor = [UIColor clearColor];
     
     [self createLineChart];
->>>>>>> 2fa71f68d2407171d181cd9c46d4cb213ff03ea7
+
 
 }
 

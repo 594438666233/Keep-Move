@@ -12,11 +12,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="380"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="PLInitialWeightTableViewCell" tableViewCell="CDM-Cs-9bh" id="nPa-L7-OYr">
-<<<<<<< HEAD
                 <frame key="frameInset" width="320" height="379"/>
-=======
                 <rect key="frame" x="0.0" y="0.0" width="320" height="380"/>
->>>>>>> 2fa71f68d2407171d181cd9c46d4cb213ff03ea7
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前体重" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xnj-Qy-HTp">
