@@ -46,6 +46,7 @@
 		4936718C1DCA04D00048E098 /* PLXCalorieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4936718B1DCA04D00048E098 /* PLXCalorieViewController.m */; };
 		49A935E81DC8BD8E00BF099E /* PLXTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A935E71DC8BD8E00BF099E /* PLXTouchView.m */; };
 		49A935EA1DC8C48800BF099E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49A935E91DC8C48800BF099E /* Assets.xcassets */; };
+		49D9B2281DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D9B2271DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.m */; };
 		842441E51DC7751D00582B41 /* PLSignCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 842441E41DC7751D00582B41 /* PLSignCellObject.m */; };
 		845372A91DB7796C00DBE92F /* PLGoalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */; };
 		845372AB1DB7798000DBE92F /* PLGoalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845372AA1DB7798000DBE92F /* PLGoalHeaderView.xib */; };
@@ -475,6 +476,8 @@
 		49A935E61DC8BD8E00BF099E /* PLXTouchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLXTouchView.h; sourceTree = "<group>"; };
 		49A935E71DC8BD8E00BF099E /* PLXTouchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLXTouchView.m; sourceTree = "<group>"; };
 		49A935E91DC8C48800BF099E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		49D9B2261DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLXAnalyseCollectionViewCell.h; sourceTree = "<group>"; };
+		49D9B2271DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLXAnalyseCollectionViewCell.m; sourceTree = "<group>"; };
 		842441E31DC7751D00582B41 /* PLSignCellObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSignCellObject.h; sourceTree = "<group>"; };
 		842441E41DC7751D00582B41 /* PLSignCellObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSignCellObject.m; sourceTree = "<group>"; };
 		8448B6AC1DB76F6B00F10D49 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -1097,6 +1100,8 @@
 			children = (
 				49A935E61DC8BD8E00BF099E /* PLXTouchView.h */,
 				49A935E71DC8BD8E00BF099E /* PLXTouchView.m */,
+				49D9B2261DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.h */,
+				49D9B2271DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2211,6 +2216,7 @@
 				84D636121DB764D200AC0E4D /* PLRunViewController.m in Sources */,
 				84AC593A1DB7697500E7D8C0 /* UILabel+SizeToHeight.m in Sources */,
 				4936717D1DC9E9A00048E098 /* WYSectorLayer.m in Sources */,
+				49D9B2281DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.m in Sources */,
 				84AB97111DB8D4100075FDC0 /* PLInitialWeightTableViewCell.m in Sources */,
 				84AB96F91DB8B6000075FDC0 /* PLGoalHeaderModel.m in Sources */,
 				8471C44E1DB75AFD008E8A5A /* BaseModel.m in Sources */,
