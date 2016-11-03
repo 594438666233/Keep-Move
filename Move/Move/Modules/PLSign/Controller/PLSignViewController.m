@@ -9,7 +9,10 @@
 #import "PLSignViewController.h"
 #import "PLRecommendGoalCell.h"
 #import "PLAddGoalViewController.h"
+#import "PLSignRecordViewController.h"
 #import "PLSignCellObject.h"
+#import "NSDate+Categories.h"
+
 static NSString *const cellReusableIdentifier = @"cell";
 
 @interface PLSignViewController ()
@@ -23,7 +26,8 @@ static NSString *const cellReusableIdentifier = @"cell";
 @property (nonatomic, retain) NSMutableArray *recommendGoalArray;
 @property (nonatomic, assign) BOOL flag;
 @property (nonatomic, assign) BOOL tempFlag;
-
+@property (nonatomic, copy) NSString *timeStamp;
+@property (nonatomic, copy) NSString *currentDate;
 
 @end
 
@@ -37,15 +41,14 @@ static NSString *const cellReusableIdentifier = @"cell";
     self.dataArray = [NSMutableArray arrayWithArray:pArray];
     if (_dataArray.count == 0) {
         _flag = NO;
+        _tempFlag = YES;
+        _recommendGoalArray = nil;
         NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
         // 保存用户数据
         [userDef setBool:_flag forKey:@"notFirst"];
         [userDef synchronize];
     }
-    
     [_tableView reloadData];
-    NSLog(@"%@", self.dataArray);
-    
 }
 
 - (void)viewDidLoad {
@@ -54,6 +57,8 @@ static NSString *const cellReusableIdentifier = @"cell";
     [self setupTableView];
     
 }
+
+#pragma mark - 设置tableView
 
 - (void)setupTableView {
     // 设置footerView
@@ -79,6 +84,8 @@ static NSString *const cellReusableIdentifier = @"cell";
     [_tableView registerNib:[UINib nibWithNibName:@"PLRecommendGoalCell" bundle:nil] forCellReuseIdentifier:cellReusableIdentifier];
 }
 
+#pragma mark - 设置路径
+
 - (void)setupPath {
     // 拼接路径
     NSArray *libraryArray = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
@@ -88,10 +95,12 @@ static NSString *const cellReusableIdentifier = @"cell";
     NSString *path = [libraryPath stringByAppendingString:@"/Preferences"];
     path = [path stringByAppendingString:@"/Goal.plist"];
     self.goalPath = path;
-    NSLog(@"%@", _goalPath);
+    _timeStamp = [NSDate getSystemTimeStringWithFormat:@"yyyy年MM月dd日 HH:mm"];
+    _currentDate = [[_timeStamp componentsSeparatedByString:@" "] firstObject];
+
 }
 
-
+#pragma mark - 懒加载
 
 - (NSMutableArray *)recommendGoalArray {
     if (_recommendGoalArray == nil) {
@@ -112,17 +121,15 @@ static NSString *const cellReusableIdentifier = @"cell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (_tempFlag == YES) {
-        
         NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-        // 判断是否第一次进入应用
+       
         if (![userDef boolForKey:@"notFirst"]) {
-            // 如果第一次，进入引导页
+            
             if (section == 0) {
                 return self.recommendGoalArray.count;
             }else {
                 return _dataArray.count;
             }
-            
         }
         return _dataArray.count;
     }else{
@@ -141,13 +148,10 @@ static NSString *const cellReusableIdentifier = @"cell";
     
     if (_tempFlag == YES) {
         NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-        // 判断是否第一次进入应用
+       
         if (![userDef boolForKey:@"notFirst"]) {
-        // 如果第一次，进入引导页
         
             return 2;
-        
-        
         }
         return 1;
     }else{
@@ -157,21 +161,17 @@ static NSString *const cellReusableIdentifier = @"cell";
             return 1;
         }
     }
-    
     return 0;
     
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    
-    
     if (_tempFlag == YES) {
         
         NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-        // 判断是否第一次进入应用
+       
         if (![userDef boolForKey:@"notFirst"]) {
-            // 如果第一次，进入引导页
-            
+
             if (section == 0) {
                 return @"推荐目标";
             }else {
@@ -182,7 +182,7 @@ static NSString *const cellReusableIdentifier = @"cell";
         }
         return @"我的目标";
     }else{
-        if (_recommendGoalArray.count != 0) {
+        if (self.recommendGoalArray.count != 0) {
             if (section == 0) {
                 return @"推荐目标";
             }else {
@@ -192,9 +192,22 @@ static NSString *const cellReusableIdentifier = @"cell";
             return @"我的目标";
         }
     }
-    
-
 }
+
+- (void)codeBlock:(PLSignCellObject *)sign andCell:(PLRecommendGoalCell *)cell {
+    [self.dataArray addObject:sign];
+    [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+    [cell removeFromSuperview];
+    _tempFlag = NO;
+    [_recommendGoalArray removeObject:sign];
+    [_tableView reloadData];
+    _flag = YES;
+    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+    // 保存用户数据
+    [userDef setBool:_flag forKey:@"notFirst"];
+    [userDef synchronize];
+}
+
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 21)];
@@ -207,10 +220,9 @@ static NSString *const cellReusableIdentifier = @"cell";
     if (_tempFlag == YES) {
         
         NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-        // 判断是否第一次进入应用
+       
         if (![userDef boolForKey:@"notFirst"]) {
-            // 如果第一次，进入引导页
-            
+        
             if (section == 0) {
                 label.text = @"推荐目标";
                 return view;
@@ -218,7 +230,6 @@ static NSString *const cellReusableIdentifier = @"cell";
                 label.text = @"我的目标";
                 return view;
             }
-            
             
         }
         label.text = @"我的目标";
@@ -239,21 +250,26 @@ static NSString *const cellReusableIdentifier = @"cell";
     
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [_dataArray removeObjectAtIndex:indexPath.row];
+        [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+        [_tableView reloadData];
+    }
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     __weak PLRecommendGoalCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     cell = [[NSBundle mainBundle] loadNibNamed:@"PLRecommendGoalCell" owner:nil options:nil].lastObject;
-
     cell.backgroundColor = PLBLACK;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.textColor = [UIColor grayColor];
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    
     if (_tempFlag == YES) {
         NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-        // 判断是否第一次进入应用
+       
         if (![userDef boolForKey:@"notFirst"]) {
-            // 如果第一次，进入引导页
+            
             if (self.recommendGoalArray.count != 0) {
                 
                 if (indexPath.section == 0) {
@@ -265,22 +281,8 @@ static NSString *const cellReusableIdentifier = @"cell";
                         case 0:
                         {
                             cell.addButtonBlock = ^(UIButton *button) {
-                                
-                                [self.dataArray addObject:sign];
-                                [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                                [cell removeFromSuperview];
-                                _tempFlag = NO;
-                                [_recommendGoalArray removeObject:sign];
-                                [_tableView reloadData];
-                                
-                                _flag = YES;
-                                
-                                NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                                // 保存用户数据
-                                [userDef setBool:_flag forKey:@"notFirst"];
-                                [userDef synchronize];
-                                
-                                
+                            [self codeBlock:sign andCell:cell];
+    
                             };
                             return cell;
                         }
@@ -289,18 +291,7 @@ static NSString *const cellReusableIdentifier = @"cell";
                         {
                             
                             cell.addButtonBlock = ^(UIButton *button) {
-                                [self.dataArray addObject:sign];
-                                [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                                [cell removeFromSuperview];
-                                _tempFlag = NO;
-                                [_recommendGoalArray removeObject:sign];
-                                [_tableView reloadData];
-                                
-                                _flag = YES;
-                                NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                                // 保存用户数据
-                                [userDef setBool:_flag forKey:@"notFirst"];
-                                [userDef synchronize];
+                                [self codeBlock:sign andCell:cell];
                             };
                             return cell;
                         }
@@ -309,18 +300,7 @@ static NSString *const cellReusableIdentifier = @"cell";
                         {
                             
                             cell.addButtonBlock = ^(UIButton *button) {
-                                [self.dataArray addObject:sign];
-                                [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                                [cell removeFromSuperview];
-                                _tempFlag = NO;
-                                [_recommendGoalArray removeObject:sign];
-                                [_tableView reloadData];
-                                
-                                _flag = YES;
-                                NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                                // 保存用户数据
-                                [userDef setBool:_flag forKey:@"notFirst"];
-                                [userDef synchronize];
+                            [self codeBlock:sign andCell:cell];
                             };
                             return cell;
                         }
@@ -329,18 +309,7 @@ static NSString *const cellReusableIdentifier = @"cell";
                         {
                             
                             cell.addButtonBlock = ^(UIButton *button) {
-                                [self.dataArray addObject:sign];
-                                [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                                [cell removeFromSuperview];
-                                _tempFlag = NO;
-                                [_recommendGoalArray removeObject:sign];
-                                [_tableView reloadData];
-                                
-                                _flag = YES;
-                                NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                                // 保存用户数据
-                                [userDef setBool:_flag forKey:@"notFirst"];
-                                [userDef synchronize];
+                            [self codeBlock:sign andCell:cell];
                             };
                             return cell;
                         }
@@ -354,16 +323,33 @@ static NSString *const cellReusableIdentifier = @"cell";
 
         }else {
             PLSignCellObject *sign = _dataArray[indexPath.row];
-            
             cell.titleString = sign.titleString;
-            cell.iconImage = [UIImage imageNamed:@"unover"];
-            cell.buttonTitle = @"打卡";
-            
-            
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            NSString *temp = [[sign.signArray.lastObject componentsSeparatedByString:@" "] firstObject];
+            if ([temp isEqualToString:_currentDate]) {
+                cell.iconImage = [UIImage imageNamed:@"over"];
+                cell.buttonTitle = @"已打卡";
+                cell.addButton.userInteractionEnabled = NO;
+                [cell.addButton setBackgroundColor:PLYELLOW];
+                [cell.addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            }else{
+                cell.iconImage = [UIImage imageNamed:@"unover"];
+                cell.buttonTitle = @"打卡";
+                [cell.addButton setBackgroundColor:[UIColor grayColor]];
+                [cell.addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            }
             cell.addButtonBlock = ^(UIButton *button) {
                 cell.iconImage = [UIImage imageNamed:@"over"];
                 cell.buttonTitle = @"已打卡";
-                
+                cell.addButton.userInteractionEnabled = NO;
+                [cell.addButton setBackgroundColor:PLYELLOW];
+                [cell.addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                NSString *time = [NSDate getSystemTimeStringWithFormat:@"yyyy年MM月dd日 HH:mm"];
+                NSMutableArray *tempArray = [NSMutableArray arrayWithArray:sign.signArray];
+                [tempArray addObject:time];
+                sign.signArray = tempArray;
+                [_dataArray replaceObjectAtIndex:indexPath.row withObject:sign];
+                [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
             };
             return cell;
         }
@@ -379,21 +365,7 @@ static NSString *const cellReusableIdentifier = @"cell";
                     case 0:
                     {
                         cell.addButtonBlock = ^(UIButton *button) {
-                            
-                            [self.dataArray addObject:sign];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            [cell removeFromSuperview];
-                            _tempFlag = NO;
-                            [_recommendGoalArray removeObject:sign];
-                            [_tableView reloadData];
-                            
-                            _flag = YES;
-                            
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
-                            
+                        [self codeBlock:sign andCell:cell];
                             
                         };
                         return cell;
@@ -403,17 +375,7 @@ static NSString *const cellReusableIdentifier = @"cell";
                     {
                         
                         cell.addButtonBlock = ^(UIButton *button) {
-                            [self.dataArray addObject:sign];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            [cell removeFromSuperview];
-                            [_recommendGoalArray removeObject:sign];
-                            [_tableView reloadData];
-                            
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
+                        [self codeBlock:sign andCell:cell];
                         };
                         return cell;
                     }
@@ -422,17 +384,7 @@ static NSString *const cellReusableIdentifier = @"cell";
                     {
                         
                         cell.addButtonBlock = ^(UIButton *button) {
-                            [self.dataArray addObject:sign];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            [cell removeFromSuperview];
-                            [_recommendGoalArray removeObject:sign];
-                            [_tableView reloadData];
-                            
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
+                        [self codeBlock:sign andCell:cell];
                         };
                         return cell;
                     }
@@ -441,17 +393,7 @@ static NSString *const cellReusableIdentifier = @"cell";
                     {
                         
                         cell.addButtonBlock = ^(UIButton *button) {
-                            [self.dataArray addObject:sign];
-                            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-                            [cell removeFromSuperview];
-                            [_recommendGoalArray removeObject:sign];
-                            [_tableView reloadData];
-                            
-                            _flag = YES;
-                            NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-                            // 保存用户数据
-                            [userDef setBool:_flag forKey:@"notFirst"];
-                            [userDef synchronize];
+                        [self codeBlock:sign andCell:cell];
                         };
                         return cell;
                     }
@@ -463,22 +405,67 @@ static NSString *const cellReusableIdentifier = @"cell";
             }
         }
         PLSignCellObject *sign = _dataArray[indexPath.row];
-        
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.titleString = sign.titleString;
-        cell.iconImage = [UIImage imageNamed:@"unover"];
-        cell.buttonTitle = @"打卡";
+        NSString *temp = [[sign.signArray.lastObject componentsSeparatedByString:@" "] firstObject];
         
-        
+        if ([temp isEqualToString:_currentDate]) {
+            cell.iconImage = [UIImage imageNamed:@"over"];
+            cell.buttonTitle = @"已打卡";
+            cell.addButton.userInteractionEnabled = NO;
+            [cell.addButton setBackgroundColor:PLYELLOW];
+            [cell.addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }else{
+            cell.iconImage = [UIImage imageNamed:@"unover"];
+            cell.buttonTitle = @"打卡";
+            [cell.addButton setBackgroundColor:[UIColor grayColor]];
+            [cell.addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        }
         cell.addButtonBlock = ^(UIButton *button) {
             cell.iconImage = [UIImage imageNamed:@"over"];
             cell.buttonTitle = @"已打卡";
-            
+            cell.addButton.userInteractionEnabled = NO;
+            [cell.addButton setBackgroundColor:PLYELLOW];
+            [cell.addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            NSString *time = [NSDate getSystemTimeStringWithFormat:@"yyyy年MM月dd日 HH:mm"];
+            NSMutableArray *tempArray = [NSMutableArray arrayWithArray:sign.signArray];
+            [tempArray addObject:time];
+            sign.signArray = tempArray;
+            [_dataArray replaceObjectAtIndex:indexPath.row withObject:sign];
+            [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
         };
         return cell;
-
     }
     return 0;
+}
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (_tempFlag == YES) {
+        NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+       
+        if (![userDef boolForKey:@"notFirst"]) {
+            
+        }else{
+            PLSignRecordViewController *recordVC = [[PLSignRecordViewController alloc] init];
+            recordVC.index = indexPath.row;
+            [self presentViewController:recordVC animated:YES completion:nil];
+        }
+    }
+    else{
+        if (self.recommendGoalArray.count != 0) {
+            if (indexPath.section == 1) {
+                PLSignRecordViewController *recordVC = [[PLSignRecordViewController alloc] init];
+                recordVC.index = indexPath.row;
+                [self presentViewController:recordVC animated:YES completion:nil];
+            }
+           
+        }else{
+            PLSignRecordViewController *recordVC = [[PLSignRecordViewController alloc] init];
+            recordVC.index = indexPath.row;
+            [self presentViewController:recordVC animated:YES completion:nil];
+        }
+    }
+    
 }
 
 @end

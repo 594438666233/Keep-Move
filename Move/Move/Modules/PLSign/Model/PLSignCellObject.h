@@ -14,6 +14,8 @@
 >
 
 @property (nonatomic, copy) NSString *titleString;
+@property (nonatomic, retain) NSArray *signArray;
+
 @property (nonatomic, retain) UIImage *imageView;
 
 

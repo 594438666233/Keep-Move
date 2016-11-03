@@ -36,6 +36,11 @@
     }
     
 }
+- (IBAction)deleteButtonAction:(id)sender {
+    if (_deleteButtonBlock) {
+        _deleteButtonBlock(sender);
+    }
+}
 
 - (void)layoutSubviews {
     [super layoutSubviews];
