@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.view.frame = CGRectMake(WIDTH * 2, 0, WIDTH, HEIGHT);
 }
 
 - (void)didReceiveMemoryWarning {

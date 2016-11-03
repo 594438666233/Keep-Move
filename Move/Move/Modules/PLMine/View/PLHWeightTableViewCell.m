@@ -63,7 +63,7 @@ WYLineChartViewDatasource
         [_pointsArray addObject:point];
     }
 
-    self.lineChart = [[WYLineChartView alloc] initWithFrame:CGRectMake(0, 0, WIDTH * 0.9, 250)];
+    self.lineChart = [[WYLineChartView alloc] initWithFrame:CGRectMake(0, 0, WIDTH * 0.9, 260)];
     _lineChart.backgroundColor = [UIColor clearColor];
     _lineChart.delegate = self;
     _lineChart.datasource = self;

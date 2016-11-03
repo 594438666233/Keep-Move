@@ -251,11 +251,58 @@ static NSString *const cellReusableIdentifier = @"cell";
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_dataArray removeObjectAtIndex:indexPath.row];
-        [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
-        [_tableView reloadData];
+
+    
+    if (_tempFlag == YES) {
+        
+        NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+        
+        if (![userDef boolForKey:@"notFirst"]) {
+            
+            if (indexPath.section == 0) {
+                [_recommendGoalArray removeObjectAtIndex:indexPath.row];
+                [_tableView reloadData];
+            }
+            else {
+                if (editingStyle == UITableViewCellEditingStyleDelete) {
+                    [_dataArray removeObjectAtIndex:indexPath.row];
+                    [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                    [_tableView reloadData];
+                }
+            }
+            
+        }else {
+            if (editingStyle == UITableViewCellEditingStyleDelete) {
+                [_dataArray removeObjectAtIndex:indexPath.row];
+                [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                [_tableView reloadData];
+            }
+        }
+    }else {
+        if (self.recommendGoalArray.count != 0) {
+            if (indexPath.section == 0) {
+                [_recommendGoalArray removeObjectAtIndex:indexPath.row];
+                [_tableView reloadData];
+            }else {
+                if (editingStyle == UITableViewCellEditingStyleDelete) {
+                    [_dataArray removeObjectAtIndex:indexPath.row];
+                    [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                    [_tableView reloadData];
+                }
+            }
+        }else {
+            if (editingStyle == UITableViewCellEditingStyleDelete) {
+                [_dataArray removeObjectAtIndex:indexPath.row];
+                [NSKeyedArchiver archiveRootObject:_dataArray toFile:_goalPath];
+                [_tableView reloadData];
+            }
+        }
     }
+
+    
+    
+    
+    
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
