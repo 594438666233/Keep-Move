@@ -24,6 +24,30 @@ PNChartDelegate
 
 @implementation PLXCalorieViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [_barChart strokeChart];
+    
+    for (int i = 0; i < 7; i++) {
+        PNBar *bar =  _barChart.bars[i];
+        CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
+        gradientLayer.colors = @[(__bridge id)[UIColor colorWithRed:1 green:0.8 blue:0 alpha:1].CGColor, (__bridge id)[UIColor colorWithRed:1 green:0.2 + 0.6 * (1 - bar.grade) blue:0 alpha:1].CGColor];
+        gradientLayer.startPoint = CGPointMake(0, 1);
+        gradientLayer.endPoint = CGPointMake(0, 0);
+        
+        gradientLayer.frame = CGRectMake(0, bar.frame.size.height, bar.frame.size.width, bar.frame.size.height * bar.grade);
+        [bar.layer addSublayer:gradientLayer];
+        
+        CABasicAnimation *positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
+        positionAnimation.duration = 0.5f;
+        positionAnimation.removedOnCompletion = NO;
+        positionAnimation.fillMode = kCAFillModeForwards;
+        positionAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(gradientLayer.position.x, gradientLayer.position.y - bar.frame.size.height * bar.grade)];
+        
+        [gradientLayer addAnimation:positionAnimation forKey:@"position"];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.frame = CGRectMake(WIDTH, 0, WIDTH, HEIGHT);
@@ -31,8 +55,6 @@ PNChartDelegate
     [self createLabel];
     [self createTouchView];
     [self createBarChart];
-    
-    
 }
 
 - (void)createLabel {
@@ -67,40 +89,25 @@ PNChartDelegate
 
 
 - (void)createBarChart {
-    self.barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(0, _sumLabel.frame.origin.y + _sumLabel.frame.size.height + 50, WIDTH, HEIGHT - _sumLabel.frame.origin.y - _sumLabel.frame.size.height - 60 - 64 - 49)];
+    self.barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(0, _sumLabel.frame.origin.y + _sumLabel.frame.size.height + 70, WIDTH, HEIGHT - _sumLabel.frame.origin.y - _sumLabel.frame.size.height - 80 - 64 - 49)];
     _barChart.yChartLabelWidth = 20.0;
     _barChart.chartMarginLeft = 30.0;
     _barChart.chartMarginRight = 10.0;
     _barChart.chartMarginTop = 5.0;
     _barChart.chartMarginBottom = 10.0;
     _barChart.labelMarginTop = 2.0;
+    _barChart.labelFont = [UIFont systemFontOfSize:30];
     
-    _barChart.showChartBorder = NO;
+    _barChart.showChartBorder = YES;
     _barChart.isShowNumbers = NO;
     _barChart.isGradientShow = NO;
     _barChart.barBackgroundColor = [UIColor clearColor];
     _barChart.backgroundColor = [UIColor clearColor];
-    [_barChart setStrokeColor:[UIColor colorWithRed:0.9 green:0.7 blue:0.1 alpha:1]];
+    [_barChart setStrokeColor:[UIColor clearColor]];
     
     [_barChart setXLabels:@[@"周一", @"周二", @"周三", @"周四", @"周五", @"周六", @"周日"]];
     [_barChart setYValues:@[@100, @20, @200, @124, @111, @56, @88]];
-    [_barChart strokeChart];
     _barChart.delegate = self;
-    
-    
-    
-    //    for (int i = 0; i < 7; i++) {
-    //        PNBar *bar =  _barChart.bars[i];
-    //        CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
-    //        gradientLayer.colors = @[(__bridge id)[UIColor colorWithRed:0.9 green:0.7 blue:0.1 alpha:1].CGColor, (__bridge id)[UIColor colorWithRed:1 green:0 blue:0 alpha:1].CGColor];
-    //        gradientLayer.startPoint = CGPointMake(0, 1);
-    //        gradientLayer.endPoint = CGPointMake(0, 0);
-    //        gradientLayer.frame = bar.bounds;
-    //        [bar.gradeLayer addSublayer:gradientLayer];
-    //    }
-    
-    
-    
     
     [self.view addSubview:_barChart];
     
