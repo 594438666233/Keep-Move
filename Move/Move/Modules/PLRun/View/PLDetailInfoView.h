@@ -10,4 +10,10 @@
 
 @interface PLDetailInfoView : UIView
 
+@property (nonatomic, copy) NSString *time;
+@property (nonatomic, copy) NSString *km;
+@property (nonatomic, copy) NSString *calorie;
+@property (nonatomic, copy) NSString *rate;
+@property (nonatomic, copy) NSString *stepCount;
+
 @end
