@@ -23,6 +23,10 @@
 		11A10F6F1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11A10F6D1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib */; };
 		11A10F771DC6EF83005EBDA5 /* PLSetInformationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A10F761DC6EF83005EBDA5 /* PLSetInformationTableViewController.m */; };
 		11A10F791DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 11A10F781DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard */; };
+		11ADB2961DCC3A330062920E /* MyCalendarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 11ADB2951DCC3A330062920E /* MyCalendarItem.m */; };
+		11ADB2BD1DCC77F10062920E /* c28.png in Resources */ = {isa = PBXBuildFile; fileRef = 11ADB2BC1DCC77F10062920E /* c28.png */; };
+		11ADB2BF1DCC77F50062920E /* c20.png in Resources */ = {isa = PBXBuildFile; fileRef = 11ADB2BE1DCC77F50062920E /* c20.png */; };
+		11ADB2C11DCC7B600062920E /* c5.png in Resources */ = {isa = PBXBuildFile; fileRef = 11ADB2C01DCC7B600062920E /* c5.png */; };
 		4936716F1DC9E9A00048E098 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 493671451DC9E9A00048E098 /* .gitkeep */; };
 		493671701DC9E9A00048E098 /* .gitkeep in Resources */ = {isa = PBXBuildFile; fileRef = 493671471DC9E9A00048E098 /* .gitkeep */; };
 		493671711DC9E9A00048E098 /* WYLineChartBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4936714B1DC9E9A00048E098 /* WYLineChartBackgroundView.m */; };
@@ -437,6 +441,11 @@
 		11A10F751DC6EF83005EBDA5 /* PLSetInformationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSetInformationTableViewController.h; sourceTree = "<group>"; };
 		11A10F761DC6EF83005EBDA5 /* PLSetInformationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSetInformationTableViewController.m; sourceTree = "<group>"; };
 		11A10F781DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PLSetInformationTableViewController.storyboard; sourceTree = "<group>"; };
+		11ADB2941DCC3A330062920E /* MyCalendarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCalendarItem.h; sourceTree = "<group>"; };
+		11ADB2951DCC3A330062920E /* MyCalendarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCalendarItem.m; sourceTree = "<group>"; };
+		11ADB2BC1DCC77F10062920E /* c28.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = c28.png; sourceTree = "<group>"; };
+		11ADB2BE1DCC77F50062920E /* c20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = c20.png; sourceTree = "<group>"; };
+		11ADB2C01DCC7B600062920E /* c5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = c5.png; sourceTree = "<group>"; };
 		493671451DC9E9A00048E098 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		493671471DC9E9A00048E098 /* .gitkeep */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitkeep; sourceTree = "<group>"; };
 		4936714A1DC9E9A00048E098 /* WYLineChartBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WYLineChartBackgroundView.h; sourceTree = "<group>"; };
@@ -1138,6 +1147,8 @@
 		845372BC1DB78EA300DBE92F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				11ADB2941DCC3A330062920E /* MyCalendarItem.h */,
+				11ADB2951DCC3A330062920E /* MyCalendarItem.m */,
 				84765E771DC9E1CA007F0673 /* PLMenuView.h */,
 				84765E781DC9E1CA007F0673 /* PLMenuView.m */,
 				84765E7A1DC9E1D7007F0673 /* PLMenuView.xib */,
@@ -1721,8 +1732,11 @@
 				84F045941DB8754B009D3BC3 /* activity_circle-9_132x114_@2x.png */,
 				84F045951DB8754B009D3BC3 /* activity_circle-9_150x130_@2x.png */,
 				84F045961DB8754B009D3BC3 /* record.png */,
+				11ADB2BE1DCC77F50062920E /* c20.png */,
 				84F045971DB8754B009D3BC3 /* run.png */,
+				11ADB2C01DCC7B600062920E /* c5.png */,
 				84F045981DB8754B009D3BC3 /* set.png */,
+				11ADB2BC1DCC77F10062920E /* c28.png */,
 				84F045991DB8754B009D3BC3 /* weight_descriptionline@3x.png */,
 			);
 			path = line;
@@ -1873,6 +1887,7 @@
 				84AB976A1DB8E7B70075FDC0 /* icon_level5@3x.png in Resources */,
 				84F045E61DB8754B009D3BC3 /* activity_circle-44_132x114_@2x.png in Resources */,
 				8471C5061DB75B5E008E8A5A /* trends_bar_42mm-67.png in Resources */,
+				11ADB2BD1DCC77F10062920E /* c28.png in Resources */,
 				84F045D21DB8754B009D3BC3 /* activity_circle-35_132x114_@2x.png in Resources */,
 				84D15B6F1DCAE4BD00228D87 /* closeVoice.png in Resources */,
 				84AB97691DB8E7B70075FDC0 /* icon_level5.png in Resources */,
@@ -1906,6 +1921,7 @@
 				84F045F41DB8754B009D3BC3 /* activity_circle-50_132x114_@2x.png in Resources */,
 				8471C4F51DB75B5E008E8A5A /* trends_bar_42mm-51.png in Resources */,
 				8471C5101DB75B5E008E8A5A /* trends_bar_42mm-76.png in Resources */,
+				11ADB2C11DCC7B600062920E /* c5.png in Resources */,
 				8471C5231DB75B5E008E8A5A /* trends_bar_42mm-93.png in Resources */,
 				84F0460A1DB8754B009D3BC3 /* record.png in Resources */,
 				84F045BA1DB8754B009D3BC3 /* activity_circle-24_132x114_@2x.png in Resources */,
@@ -2136,6 +2152,7 @@
 				8471C5131DB75B5E008E8A5A /* trends_bar_42mm-79.png in Resources */,
 				8471C4EF1DB75B5E008E8A5A /* trends_bar_42mm-46.png in Resources */,
 				84F045A31DB8754B009D3BC3 /* activity_circle-13_150x130_@2x.png in Resources */,
+				11ADB2BF1DCC77F50062920E /* c20.png in Resources */,
 				8471C4ED1DB75B5E008E8A5A /* trends_bar_42mm-44.png in Resources */,
 				11A10F791DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard in Resources */,
 				84F045E21DB8754B009D3BC3 /* activity_circle-42_132x114_@2x.png in Resources */,
@@ -2256,6 +2273,7 @@
 				84D6360D1DB764C200AC0E4D /* PLGoalViewController.m in Sources */,
 				84765E551DC9D48A007F0673 /* PLRunNowViewController.m in Sources */,
 				84AB96FC1DB8B6D70075FDC0 /* PLTargetModel.m in Sources */,
+				11ADB2961DCC3A330062920E /* MyCalendarItem.m in Sources */,
 				493671751DC9E9A00048E098 /* WYLineChartReferenceLineView.m in Sources */,
 				4936717F1DC9E9A00048E098 /* WYPieChartView.m in Sources */,
 				8471C5351DB75C03008E8A5A /* UIButton+Block.m in Sources */,
