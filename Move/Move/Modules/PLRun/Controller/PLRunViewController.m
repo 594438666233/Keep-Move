@@ -16,18 +16,25 @@
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *runImageView;
+@property (weak, nonatomic) IBOutlet UIButton *runButton;
 
 
 @end
 
 @implementation PLRunViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"%@",  [NSDate dateWithTimeIntervalSinceReferenceDate:0]);
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self initHKHealth];
     [self createRunNowButton];
-     
+    
+    
 }
 
 - (void)initHKHealth{
@@ -40,20 +47,17 @@
 - (void)createRunNowButton {
     
     UIImage *runImage = [UIImage sd_animatedGIFNamed:@"weRunConnecting"];
-    self.runImageView.image = runImage;
-    _runImageView.userInteractionEnabled = YES;
-    
-    [self.view addSubview:_runImageView];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
-    [tap addTarget:self action:@selector(tapAction:)];
-    [_runImageView addGestureRecognizer:tap];
-    
-}
+    _runButton.imageEdgeInsets = UIEdgeInsetsMake(0, 8, 0, 8);
+    _runButton.layer.cornerRadius = 20.f;
+    _runButton.layer.borderColor = [UIColor grayColor].CGColor;
+    _runButton.layer.borderWidth = 1;
+    [_runButton setImage:runImage forState:UIControlStateNormal];
 
-- (void)tapAction:(UITapGestureRecognizer *)tap {
-    PLRunNowViewController *runNowVC = [[PLRunNowViewController alloc] init];
-    [self presentViewController:runNowVC animated:YES completion:nil];
+    [_runButton handleControlEvent:UIControlEventTouchUpInside withBlock:^{
+        PLRunNowViewController *runNowVC = [[PLRunNowViewController alloc] init];
+        [self presentViewController:runNowVC animated:YES completion:nil];
+    }];
+
 }
 
 

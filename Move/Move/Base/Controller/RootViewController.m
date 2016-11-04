@@ -37,7 +37,19 @@
 #pragma mark - BarbuttonAction
 
 - (void)leftBarButtonAction:(UIBarButtonItem *)leftBarButton {
-    NSLog(@"left");
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"截图已保存到本地相册" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        UIWindow *screenWindow = [[UIApplication sharedApplication] keyWindow];
+        UIGraphicsBeginImageContextWithOptions(screenWindow.frame.size, NO, [UIScreen mainScreen].scale);
+        [screenWindow.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil,nil);
+        
+    }];
+    [alert addAction:sureAction];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (void)rigthBarButtonAction:(UIBarButtonItem *)rightBarButton {
