@@ -51,6 +51,7 @@
 		49A935E81DC8BD8E00BF099E /* PLXTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A935E71DC8BD8E00BF099E /* PLXTouchView.m */; };
 		49A935EA1DC8C48800BF099E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49A935E91DC8C48800BF099E /* Assets.xcassets */; };
 		49D9B2281DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D9B2271DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.m */; };
+		8411CE501DCC200100200E5C /* weather.png in Resources */ = {isa = PBXBuildFile; fileRef = 8411CE4F1DCC200100200E5C /* weather.png */; };
 		842441E51DC7751D00582B41 /* PLSignCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 842441E41DC7751D00582B41 /* PLSignCellObject.m */; };
 		8435C5721DCB232400339846 /* PLDetailInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8435C5711DCB232400339846 /* PLDetailInfoView.m */; };
 		8435C5741DCB232B00339846 /* PLDetailInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8435C5731DCB232B00339846 /* PLDetailInfoView.xib */; };
@@ -193,6 +194,7 @@
 		84765E761DC9DFEE007F0673 /* menuRun.png in Resources */ = {isa = PBXBuildFile; fileRef = 84765E721DC9DFEE007F0673 /* menuRun.png */; };
 		84765E791DC9E1CA007F0673 /* PLMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 84765E781DC9E1CA007F0673 /* PLMenuView.m */; };
 		84765E7B1DC9E1D7007F0673 /* PLMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84765E7A1DC9E1D7007F0673 /* PLMenuView.xib */; };
+		847E30D91DCC7A7B0087114F /* NSString+TimeFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 847E30D81DCC7A7B0087114F /* NSString+TimeFormat.m */; };
 		84AB96F21DB8B2DD0075FDC0 /* PLCareerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB96F11DB8B2DD0075FDC0 /* PLCareerModel.m */; };
 		84AB96F61DB8B5300075FDC0 /* PLDefeatModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB96F51DB8B5300075FDC0 /* PLDefeatModel.m */; };
 		84AB96F91DB8B6000075FDC0 /* PLGoalHeaderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AB96F81DB8B6000075FDC0 /* PLGoalHeaderModel.m */; };
@@ -491,6 +493,7 @@
 		49A935E91DC8C48800BF099E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49D9B2261DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLXAnalyseCollectionViewCell.h; sourceTree = "<group>"; };
 		49D9B2271DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLXAnalyseCollectionViewCell.m; sourceTree = "<group>"; };
+		8411CE4F1DCC200100200E5C /* weather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weather.png; sourceTree = "<group>"; };
 		842441E31DC7751D00582B41 /* PLSignCellObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSignCellObject.h; sourceTree = "<group>"; };
 		842441E41DC7751D00582B41 /* PLSignCellObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSignCellObject.m; sourceTree = "<group>"; };
 		8435C5701DCB232400339846 /* PLDetailInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDetailInfoView.h; sourceTree = "<group>"; };
@@ -647,6 +650,8 @@
 		84765E771DC9E1CA007F0673 /* PLMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLMenuView.h; sourceTree = "<group>"; };
 		84765E781DC9E1CA007F0673 /* PLMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLMenuView.m; sourceTree = "<group>"; };
 		84765E7A1DC9E1D7007F0673 /* PLMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLMenuView.xib; sourceTree = "<group>"; };
+		847E30D71DCC7A7B0087114F /* NSString+TimeFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+TimeFormat.h"; sourceTree = "<group>"; };
+		847E30D81DCC7A7B0087114F /* NSString+TimeFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+TimeFormat.m"; sourceTree = "<group>"; };
 		84AB96F01DB8B2DD0075FDC0 /* PLCareerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLCareerModel.h; sourceTree = "<group>"; };
 		84AB96F11DB8B2DD0075FDC0 /* PLCareerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLCareerModel.m; sourceTree = "<group>"; };
 		84AB96F41DB8B5300075FDC0 /* PLDefeatModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDefeatModel.h; sourceTree = "<group>"; };
@@ -1355,6 +1360,8 @@
 		8471C5321DB75BEA008E8A5A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				847E30D71DCC7A7B0087114F /* NSString+TimeFormat.h */,
+				847E30D81DCC7A7B0087114F /* NSString+TimeFormat.m */,
 				115BE2871DB9A42B003279AC /* NSDate+Categories.h */,
 				115BE2881DB9A42B003279AC /* NSDate+Categories.m */,
 				115BE2891DB9A42B003279AC /* NSUserDefaults+Categories.h */,
@@ -1490,6 +1497,7 @@
 		84AB972D1DB8E7B70075FDC0 /* PLSOURCE */ = {
 			isa = PBXGroup;
 			children = (
+				8411CE4F1DCC200100200E5C /* weather.png */,
 				84D15B6D1DCAE4BD00228D87 /* closeVoice.png */,
 				84D15B6E1DCAE4BD00228D87 /* openVoice.png */,
 				84D15B6B1DCAD87E00228D87 /* myLocation.png */,
@@ -2097,6 +2105,7 @@
 				84F045DB1DB8754B009D3BC3 /* activity_circle-39_150x130_@2x.png in Resources */,
 				8471C4E71DB75B5E008E8A5A /* trends_bar_42mm-39.png in Resources */,
 				4936716F1DC9E9A00048E098 /* .gitkeep in Resources */,
+				8411CE501DCC200100200E5C /* weather.png in Resources */,
 				8471C4F91DB75B5E008E8A5A /* trends_bar_42mm-55.png in Resources */,
 				84F045DD1DB8754B009D3BC3 /* activity_circle-3_150x130_@2x.png in Resources */,
 				84AB97751DB8E7B70075FDC0 /* weight_add_act.png in Resources */,
@@ -2291,6 +2300,7 @@
 				84B7B7F01DC6ECE400715926 /* PLAddGoalViewController.m in Sources */,
 				84B7B7F41DC6EE6D00715926 /* PLNavigationView.m in Sources */,
 				4936717B1DC9E9A00048E098 /* WYPieCenterCircle.m in Sources */,
+				847E30D91DCC7A7B0087114F /* NSString+TimeFormat.m in Sources */,
 				493671711DC9E9A00048E098 /* WYLineChartBackgroundView.m in Sources */,
 				493671791DC9E9A00048E098 /* WYLineChartView.m in Sources */,
 				845372A91DB7796C00DBE92F /* PLGoalHeaderView.m in Sources */,

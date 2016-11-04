@@ -53,9 +53,6 @@ WYLineChartViewDatasource
 #pragma mark - 创建折线图
 
 - (void)createLineChart {
-    self.pointsArray = [NSMutableArray array];
-    self.dateArray = [NSMutableArray array];
-    
     [_dateArray addObjectsFromArray:@[@"10/27", @"10/28", @"10/29", @"10/30", @"10/31", @"11/01", @"11/02"]];
     for (int i = 0; i < 7; i++) {
         WYLineChartPoint *point = [[WYLineChartPoint alloc] init];
@@ -74,7 +71,7 @@ WYLineChartViewDatasource
     _lineChart.lineTopMargin = 0;
     _lineChart.averageLineColor = [UIColor colorWithRed:0.9 green:0.7 blue:0.1 alpha:1];
     
-    _lineChart.gradientColors = @[[UIColor colorWithWhite:1 alpha:1],
+    _lineChart.gradientColors = @[[UIColor colorWithWhite:1 alpha:0.8],
                                   [UIColor colorWithWhite:1 alpha:0]];
     _lineChart.gradientColorsLocation = @[@0, @0.9];
     _lineChart.drawGradient = YES;
@@ -151,6 +148,9 @@ WYLineChartViewDatasource
     
 
     _chartImageView.backgroundColor = [UIColor clearColor];
+    
+    self.pointsArray = [NSMutableArray array];
+    self.dateArray = [NSMutableArray array];
     
     [self createLineChart];
 

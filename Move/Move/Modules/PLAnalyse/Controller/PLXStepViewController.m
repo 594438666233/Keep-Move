@@ -24,6 +24,31 @@ PNChartDelegate
 
 @implementation PLXStepViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [_barChart strokeChart];
+    
+    for (int i = 0; i < 7; i++) {
+        PNBar *bar =  _barChart.bars[i];
+        CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
+        gradientLayer.colors = @[(__bridge id)[UIColor colorWithRed:0.9 green:0.7 blue:0.1 alpha:1].CGColor, (__bridge id)[UIColor colorWithRed:0.9 * (1 - bar.grade) green:0.7 blue:0.7 * bar.grade alpha:1].CGColor];
+        gradientLayer.startPoint = CGPointMake(0, 1);
+        gradientLayer.endPoint = CGPointMake(0, 0);
+        
+        gradientLayer.frame = CGRectMake(0, bar.frame.size.height, bar.frame.size.width, bar.frame.size.height * bar.grade);
+        [bar.layer addSublayer:gradientLayer];
+        
+        CABasicAnimation *positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
+        positionAnimation.duration = 0.5f;
+        positionAnimation.removedOnCompletion = NO;
+        positionAnimation.fillMode = kCAFillModeForwards;
+        positionAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(gradientLayer.position.x, gradientLayer.position.y - bar.frame.size.height * bar.grade)];
+        
+        [gradientLayer addAnimation:positionAnimation forKey:@"position"];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.frame = CGRectMake(0, 0, WIDTH, HEIGHT);
@@ -64,15 +89,16 @@ PNChartDelegate
 }
 
 - (void)createBarChart {
-    self.barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(0, _sumLabel.frame.origin.y + _sumLabel.frame.size.height + 50, WIDTH, HEIGHT - _sumLabel.frame.origin.y - _sumLabel.frame.size.height - 60 - 64 - 49)];
+    self.barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(0, _sumLabel.frame.origin.y + _sumLabel.frame.size.height + 70, WIDTH, HEIGHT - _sumLabel.frame.origin.y - _sumLabel.frame.size.height - 80 - 64 - 49)];
     _barChart.yChartLabelWidth = 20.0;
     _barChart.chartMarginLeft = 30.0;
     _barChart.chartMarginRight = 10.0;
     _barChart.chartMarginTop = 5.0;
     _barChart.chartMarginBottom = 10.0;
     _barChart.labelMarginTop = 2.0;
+    _barChart.labelFont = [UIFont systemFontOfSize:30];
     
-    _barChart.showChartBorder = NO;
+    _barChart.showChartBorder = YES;
     _barChart.isShowNumbers = NO;
     _barChart.isGradientShow = NO;
     _barChart.barBackgroundColor = [UIColor clearColor];
@@ -80,37 +106,11 @@ PNChartDelegate
     [_barChart setStrokeColor:PNGreen];
     
     [_barChart setXLabels:@[@"周一", @"周二", @"周三", @"周四", @"周五", @"周六", @"周日"]];
-    [_barChart setYValues:@[@6000, @2000, @2000, @1240, @1110, @5600, @8800]];
-    [_barChart strokeChart];
+    [_barChart setYValues:@[@6000, @2000, @2000, @300, @1110, @5600, @8800]];
     _barChart.delegate = self;
-    
-    
-    
-//        for (int i = 0; i < 7; i++) {
-//            PNBar *bar =  _barChart.bars[i];
-//            CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
-//            gradientLayer.colors = @[(__bridge id)[UIColor colorWithRed:0.9 green:0.7 blue:0.1 alpha:1].CGColor, (__bridge id)[UIColor colorWithRed:0.9 green:0.7 * (1 - bar.grade) blue:0.1 * (1 - bar.grade) alpha:1].CGColor];
-//            gradientLayer.startPoint = CGPointMake(0, 1);
-//            gradientLayer.endPoint = CGPointMake(0, 0);
-//            gradientLayer.frame = CGRectMake(bar.bounds.origin.x, bar.bounds.origin.y + bar.bounds.size.height * (1 - bar.grade), bar.bounds.size.width, 0);
-//            [bar.chartLine addSublayer:gradientLayer];
-//        
-//    
-//            CABasicAnimation *pathAnimation = [CABasicAnimation animationWithKeyPath:@"frame.size.height"];
-//            pathAnimation.fromValue = @100;
-//            pathAnimation.toValue = @300;
-//            pathAnimation.duration = 2.f;
-//            pathAnimation.autoreverses = NO;
-//            
-//            [gradientLayer addAnimation:pathAnimation forKey:@"animationKey"];
-//            
-//        }
-    
 
     
-    
     [self.view addSubview:_barChart];
-    
 }
 
 - (void)userClickedOnBarAtIndex:(NSInteger)barIndex {

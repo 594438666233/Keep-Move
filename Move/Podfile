@@ -5,4 +5,7 @@ pod 'INTULocationManager'
 pod 'Masonry'
 pod 'SDWebImage'
 pod 'AMap2DMap'
+pod 'AMapSearch'
+pod 'FTPopOverMenu'
+
 end

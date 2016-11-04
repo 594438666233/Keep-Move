@@ -19,5 +19,12 @@
 #import <FMDB.h>
 #import "PLDataBaseManager.h"
 #import <PNChart.h>
+#import <FTPopOverMenu.h>
+
+#pragma mark - 地图API
+
+#import <MAMapKit/MAMapKit.h>
 #import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
+
 #endif /* PrefixHeader_pch */
