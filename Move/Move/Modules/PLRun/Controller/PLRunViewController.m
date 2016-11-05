@@ -12,9 +12,9 @@
 #import "UIImage+GIF.h"
 #import "MyCalendarItem.h"
 @interface PLRunViewController ()
-
 <
-UIGestureRecognizerDelegate
+UIGestureRecognizerDelegate,
+PNChartDelegate
 >
 
 @property (weak, nonatomic) IBOutlet UIImageView *runImageView;
@@ -25,6 +25,8 @@ UIGestureRecognizerDelegate
 @property (nonatomic, strong) UIView *backView;
 
 @property (nonatomic, strong) UILabel *calendarLabel;
+
+@property (nonatomic, strong) PNBarChart *barChart;
 @end
 
 @implementation PLRunViewController
@@ -44,6 +46,7 @@ UIGestureRecognizerDelegate
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     NSLog(@"%@",  [NSDate dateWithTimeIntervalSinceReferenceDate:0]);
+    [_barChart strokeChart];
 }
 
 
@@ -59,7 +62,7 @@ UIGestureRecognizerDelegate
     
     [self createNavigationTitleView];
     
-    
+    [self createBarChart];
 
 }
 
@@ -129,7 +132,7 @@ UIGestureRecognizerDelegate
     tap.delegate = self;
     [_backView addGestureRecognizer:tap];
     
-
+    
     
 
 }
@@ -176,6 +179,7 @@ UIGestureRecognizerDelegate
     
     PLHealthManager *manager = [[PLHealthManager alloc] init];
     [manager getIphoneHealthData];
+ 
     
 }
 
@@ -195,7 +199,47 @@ UIGestureRecognizerDelegate
 
 }
 
-
+#pragma mark - 时间段柱状图
+- (void)createBarChart {
+    self.barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(10, HEIGHT / 1.6, WIDTH - 20, HEIGHT / 16 * 6 - 64 - 55)];
+    _barChart.yChartLabelWidth = 0;
+    _barChart.chartMarginLeft = 0.0;
+    _barChart.chartMarginRight = 0.0;
+    _barChart.chartMarginTop = 5.0;
+    _barChart.chartMarginBottom = 10.0;
+    _barChart.labelMarginTop = 2.0;
+    
+    NSMutableArray *xArray = [NSMutableArray array];
+    NSMutableArray *yArray = [NSMutableArray array];
+    
+    for (int i = 0; i < 96; i++) {
+        [xArray addObject:@""];
+        [yArray addObject:[NSString stringWithFormat:@"%ld", (NSInteger)arc4random() % 200]];
+    }
+    
+    [_barChart setXLabels:xArray];
+    [_barChart setYValues:yArray];
+    
+    [_barChart setStrokeColor:PNWhite];
+    _barChart.showLabel = YES;
+    _barChart.showLevelLine = NO;
+    _barChart.showChartBorder = NO;
+    _barChart.isGradientShow = NO;
+    _barChart.isShowNumbers = NO;
+    
+    _barChart.backgroundColor = [UIColor clearColor];
+    _barChart.barBackgroundColor = [UIColor clearColor];
+    _barChart.delegate = self;
+    [self.view addSubview:_barChart];
+    
+    for (int i = 0; i < 4; i++) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((WIDTH - 20) / 4 * (i + 1) - 15, _barChart.frame.origin.y + _barChart.frame.size.height - 20, 30, 20)];
+        label.text = [NSString stringWithFormat:@"%d:00", 6 * (i + 1)];
+        label.textColor = [UIColor lightGrayColor];
+        label.font = [UIFont systemFontOfSize:10];
+        [self.view addSubview:label];
+    }
+}
 
 
 @end

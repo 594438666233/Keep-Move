@@ -92,6 +92,7 @@ WYLineChartViewDatasource
     _lineChart.lineBottomMargin = 5;
     _lineChart.lineTopMargin = 0;
     _lineChart.averageLineColor = [UIColor colorWithRed:0.9 green:0.7 blue:0.1 alpha:1];
+    _lineChart.labelsColor = [UIColor lightGrayColor];
     
     _lineChart.gradientColors = @[[UIColor colorWithWhite:1 alpha:0.8],
                                   [UIColor colorWithWhite:1 alpha:0]];

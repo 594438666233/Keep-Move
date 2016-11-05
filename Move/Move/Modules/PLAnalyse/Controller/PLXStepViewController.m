@@ -98,7 +98,7 @@ PNChartDelegate
     _barChart.labelMarginTop = 2.0;
     _barChart.labelFont = [UIFont systemFontOfSize:30];
     
-    _barChart.showChartBorder = YES;
+    _barChart.showChartBorder = NO;
     _barChart.isShowNumbers = NO;
     _barChart.isGradientShow = NO;
     _barChart.barBackgroundColor = [UIColor clearColor];

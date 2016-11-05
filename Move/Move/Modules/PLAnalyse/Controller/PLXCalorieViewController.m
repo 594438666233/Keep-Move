@@ -31,7 +31,7 @@ PNChartDelegate
     for (int i = 0; i < 7; i++) {
         PNBar *bar =  _barChart.bars[i];
         CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
-        gradientLayer.colors = @[(__bridge id)[UIColor colorWithRed:1 green:0.8 blue:0 alpha:1].CGColor, (__bridge id)[UIColor colorWithRed:1 green:0.2 + 0.6 * (1 - bar.grade) blue:0 alpha:1].CGColor];
+        gradientLayer.colors = @[(__bridge id)[UIColor colorWithRed:1 green:0.8 blue:0 alpha:1].CGColor, (__bridge id)[UIColor colorWithRed:1 green:0.2 + 0.6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * (1 - bar.grade) blue:0 alpha:1].CGColor];
         gradientLayer.startPoint = CGPointMake(0, 1);
         gradientLayer.endPoint = CGPointMake(0, 0);
         
@@ -98,7 +98,7 @@ PNChartDelegate
     _barChart.labelMarginTop = 2.0;
     _barChart.labelFont = [UIFont systemFontOfSize:30];
     
-    _barChart.showChartBorder = YES;
+    _barChart.showChartBorder = NO;
     _barChart.isShowNumbers = NO;
     _barChart.isGradientShow = NO;
     _barChart.barBackgroundColor = [UIColor clearColor];
