@@ -280,7 +280,7 @@
         if (self.isPlaying)
         {
  
-            [plNavigationView.deleteButton setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+            [plNavigationView.deleteButton setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
             if (self.myLocation == nil)
             {
                 self.myLocation = [[MAPointAnnotation alloc] init];
@@ -296,7 +296,7 @@
         else
         {
 
-            [plNavigationView.deleteButton setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+            [plNavigationView.deleteButton setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
             MAAnnotationView *view = [self.mapView viewForAnnotation:self.myLocation];
             
             if (view != nil)

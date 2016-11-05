@@ -13,12 +13,14 @@
 #import "PLDetailInfoView.h"
 #import <AVFoundation/AVFoundation.h>
 #import "NSString+TimeFormat.h"
+#import "PLInfoModel.h"
 
 #import "Record.h"
 #import "MAMutablePolyline.h"
 #import "MAMutablePolylineRenderer.h"
 #import "FileHelper.h"
 #import "RecordViewController.h"
+#import "NSDate+Categories.h"
 
 @import CoreMotion;
 
@@ -43,6 +45,10 @@
 @property (nonatomic, strong) MAMutablePolyline *mutablePolyline;
 @property (nonatomic, strong) MAMutablePolylineRenderer *render;
 @property (nonatomic, assign) BOOL startMoving;
+@property (nonatomic, retain) PLInfoModel *infoModel;
+
+@property (nonatomic, copy) NSString *goalPath;
+@property (nonatomic, retain) NSMutableArray *runInfoArray;
 
 
 @property (nonatomic, strong) NSString *address;
@@ -55,6 +61,7 @@
 
 @property (nonatomic, retain) PLMenuView *plMenuView;
 @property (nonatomic, retain) PLDetailInfoView *plDetailView;
+@property (nonatomic, retain) PLNavigationView *plNavigationView;
 
 @property (nonatomic, retain) UIView *blurView;
 @property (nonatomic, retain) UILabel *timeLabel;
@@ -83,14 +90,25 @@
 
 @implementation PLRunNowViewController
 
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self setupPath];
+    [self setupCustomView];
+    self.runInfoArray = [NSMutableArray array];
+    NSArray *pArray = [NSKeyedUnarchiver unarchiveObjectWithFile:_goalPath];
+    self.runInfoArray = [NSMutableArray arrayWithArray:pArray];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.infoModel = [[PLInfoModel alloc] init];
     self.commonPolylineCoords = [NSMutableArray array];
     _flag = YES;
     _startMoving = NO;
     _bigCalorie = 0;
     [self setupMap];
+    [self setupNavigationView];
     [self initOverlay];
     [self setupButton];
     [self initLocationButton];
@@ -106,6 +124,18 @@
     self.mapView.visibleMapRect = MAMapRectMake(220880104, 101476980, 272496, 466656);
     
     self.mapView.userTrackingMode = MAUserTrackingModeFollow;
+}
+
+- (void)setupPath {
+    // 拼接路径
+    NSArray *libraryArray = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *libraryPath = [libraryArray firstObject];
+    
+    // 列表
+    NSString *path = [libraryPath stringByAppendingString:@"/Preferences"];
+    path = [path stringByAppendingString:@"/RunRecord.plist"];
+    self.goalPath = path;
+    NSLog(@"%@", _goalPath);
 }
 
 #pragma mark - 懒加载
@@ -145,7 +175,7 @@
 - (void)setupMap {
     // 初始化地图
     self.mapView = [[MAMapView alloc]initWithFrame:CGRectMake(0, PLHEIGHT / 2, PLWIDTH, PLHEIGHT / 2)];
-    [self setupNavigationView];
+
     
     // 地图语言
     _mapView.language = MAMapLanguageZhCN;
@@ -220,12 +250,12 @@
 
 - (void)setupNavigationView {
     // 设置导航栏view
-    PLNavigationView *plNavigationView = [[PLNavigationView alloc] init];
-    plNavigationView.frame = CGRectMake(0, 0, PLWIDTH, 64);
-    plNavigationView.titleString = @"GPS运动";
-    [plNavigationView.cancelButton setBackgroundImage:[UIImage imageNamed:@"weather"] forState:UIControlStateNormal];
-    [plNavigationView.deleteButton setBackgroundImage:[UIImage imageNamed:@"historyRecord"] forState:UIControlStateNormal];
-    plNavigationView.cancelButtonBlock = ^(UIButton *button){
+    self.plNavigationView = [[PLNavigationView alloc] init];
+    _plNavigationView.frame = CGRectMake(0, 0, PLWIDTH, 64);
+    _plNavigationView.titleString = @"GPS运动";
+    [_plNavigationView.cancelButton setBackgroundImage:[UIImage imageNamed:@"weather"] forState:UIControlStateNormal];
+    [_plNavigationView.deleteButton setBackgroundImage:[UIImage imageNamed:@"historyRecord"] forState:UIControlStateNormal];
+    _plNavigationView.cancelButtonBlock = ^(UIButton *button){
         // 天气信息
         NSString *address = [NSString stringWithFormat:@"%@", _live.city];
         NSString *weather = [NSString stringWithFormat:@"天气 : %@", _live.weather];
@@ -235,13 +265,17 @@
 
         [FTPopOverMenu showForSender:button withMenu:@[address, weather, temperature, humidity, wind] doneBlock:nil dismissBlock:nil];
     };
-    plNavigationView.deleteButtonBlock = ^(UIButton *button) {
+    _plNavigationView.deleteButtonBlock = ^(UIButton *button) {
         UIViewController *recordController = [[RecordViewController alloc] initWithNibName:nil bundle:nil];
-        
+        [_plMenuView removeFromSuperview];
+        [_plDetailView removeFromSuperview];
         [self presentViewController:recordController animated:YES completion:nil];
     };
-    [self.view addSubview:plNavigationView];
+    [self.view addSubview:_plNavigationView];
     
+}
+
+- (void)setupCustomView {
     self.plMenuView = [[PLMenuView alloc] init];
     _plMenuView.frame = CGRectMake(0, 64, PLWIDTH, PLHEIGHT - PLHEIGHT / 2 - 64 );
     [self.view addSubview:_plMenuView];
@@ -250,7 +284,6 @@
     _plDetailView.alpha = 0.0;
     _plDetailView.frame = CGRectMake(0, 64, PLWIDTH, PLHEIGHT - PLHEIGHT / 2 - 64 );
     [self.view addSubview:_plDetailView];
-    
 }
 
 - (void)setupButton {
@@ -333,6 +366,9 @@
                         
                         if ([_voiceButton.currentImage isEqual:_voiceOpenImage]) {
                             self.speakingString = @"运动开始";
+                            // 关闭历史记录按钮的交互
+                            _plNavigationView.deleteButton.userInteractionEnabled = NO;
+                            _infoModel.date = [NSDate getSystemTimeStringWithFormat:@"yyyy年MM月dd日 HH:mm"];
                             //创建一个会话
                             self.utterance = [[AVSpeechUtterance alloc] initWithString:_speakingString];
                             //选择语言发音的类别，如果有中文，一定要选择中文，要不然无法播放语音
@@ -365,6 +401,8 @@
                 UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
                     if ([_voiceButton.currentImage isEqual:_voiceOpenImage]) {
                         self.speakingString = @"运动结束";
+                        // 开启历史记录按钮的交互
+                        _plNavigationView.deleteButton.userInteractionEnabled = YES;
                         //创建一个会话
                         self.utterance = [[AVSpeechUtterance alloc] initWithString:_speakingString];
                         _utterance.voice = self.laungeVoices[2];
@@ -376,6 +414,16 @@
                         [self saveRoute];
                         [self.mutablePolyline.pointArray removeAllObjects];
                         [self.render invalidatePath];
+                        
+                        // 销毁定时器
+                        [self.runTimer invalidate];
+                        self.runTimer = nil;
+
+                        [self.runInfoArray insertObject:_infoModel atIndex:0];
+                        [NSKeyedArchiver archiveRootObject:_runInfoArray toFile:_goalPath];
+                        
+                        [_plMenuView removeFromSuperview];
+                        [_plDetailView removeFromSuperview];
                         
                         UIViewController *recordController = [[RecordViewController alloc] initWithNibName:nil bundle:nil];
                         [self presentViewController:recordController animated:YES completion:nil];
@@ -446,6 +494,10 @@
 
 // 实时更新定位
 - (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation {
+    if (!updatingLocation)
+    {
+        return;
+    }
     self.userLocation = userLocation;
     // 参数1 : 纬度   参数2 : 经度
     _regeo.location = [AMapGeoPoint locationWithLatitude:_mapView.userLocation.coordinate.latitude longitude:_mapView.userLocation.coordinate.longitude];
@@ -471,25 +523,6 @@
             
             [self.render invalidatePath];
         }
-        
-        
-        
-        
-//        //构造折线数据对象
-//        CLLocation *currLocation = [[CLLocation alloc] initWithLatitude:_mapView.userLocation.coordinate.latitude longitude:_mapView.userLocation.coordinate.longitude];
-//        [self.commonPolylineCoords addObject:currLocation];
-//        
-//        
-//        MAMapPoint *arrayPoint = malloc(sizeof(MAMapPoint) * _commonPolylineCoords.count);
-//        for (int i = 0; i < _commonPolylineCoords.count; i++) {
-//            CLLocation *location = [_commonPolylineCoords objectAtIndex:i];
-//            MAMapPoint point = MAMapPointForCoordinate(location.coordinate);
-//            arrayPoint[i] = point;
-//        }
-//        MAPolyline *line = [MAPolyline polylineWithPoints:arrayPoint count:_commonPolylineCoords.count];
-//        [_mapView addOverlay:line];
-//        free(arrayPoint);
-//    }
     }
     
 }
@@ -503,24 +536,7 @@
     }
 }
 
-// 设置折线的样式
-//- (MAOverlayView *)mapView:(MAMapView *)mapView viewForOverlay:(id <MAOverlay>)overlay
-//{
-//
-//    if ([overlay isKindOfClass:[MAPolyline class]])
-//    {
-//        MAPolylineView *polylineView = [[MAPolylineView alloc] initWithPolyline:overlay];
-//        
-//        polylineView.lineWidth = 5.0f;
-//        polylineView.strokeColor = [UIColor redColor];
-//        polylineView.lineJoin = kCGLineJoinMiter;//连接类型
-//        polylineView.lineCap = kCGLineCapRound;//端点类型
-//        
-//        return polylineView;
-//    }
-//    return nil;
-//}
-
+// 设置折线样式
 - (MAOverlayPathRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id<MAOverlay>)overlay
 {
     if ([overlay isKindOfClass:[MAMutablePolyline class]])
@@ -584,11 +600,12 @@
     
     // step counting
     if ([CMPedometer isStepCountingAvailable]) {
-        NSLog(@"stepNumber:%@", [pedometerData.numberOfSteps stringValue]);
         self.plDetailView.stepCount = [pedometerData.numberOfSteps stringValue];
+        _infoModel.stepCount =  [pedometerData.numberOfSteps stringValue];
         if ([pedometerData.numberOfSteps integerValue] % 30 >= 0) {
             _bigCalorie++;
             self.plDetailView.calorie = [NSString stringWithFormat:@"%ld", _bigCalorie];
+            _infoModel.calorie = [NSString stringWithFormat:@"%ld", _bigCalorie];
         }
     } else {
         NSLog(@"Step Counter not available");
@@ -597,8 +614,8 @@
     // distance
     if ([CMPedometer isDistanceAvailable]) {
         CGFloat meter = [pedometerData.distance floatValue];
-        NSLog(@"%.1f", meter / 1000);
         self.plDetailView.km = [NSString stringWithFormat:@"%.1f", meter / 1000];
+        _infoModel.km = [NSString stringWithFormat:@"%.1f", meter / 1000];
 
     } else {
         NSLog(@"Distance not available");
@@ -606,8 +623,8 @@
     
     // cadence
     if ([CMPedometer isCadenceAvailable] && pedometerData.currentCadence) {
-        NSLog(@"currentPace : %ld", [pedometerData.currentCadence integerValue]);
-        self.plDetailView.rate = [NSString stringWithFormat:@"%ld", [pedometerData.currentCadence integerValue] ];
+        self.plDetailView.rate = [NSString stringWithFormat:@"%ld", [pedometerData.currentCadence integerValue]];
+        _infoModel.rate = [NSString stringWithFormat:@"%ld", [pedometerData.currentCadence integerValue]];
     }
 }
 
@@ -624,10 +641,14 @@
     if (hour > 0) {
         // 保证数字是两位，如果不满足，使用0来补位
         _plDetailView.time = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
+        _infoModel.time = [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
+
     }else if(minute > 0){
         _plDetailView.time = [NSString stringWithFormat:@"%02d:%02d", minute, second];
+        _infoModel.time = [NSString stringWithFormat:@"%02d:%02d", minute, second];
     }else {
         _plDetailView.time = [NSString stringWithFormat:@"00:%02d", second];
+        _infoModel.time = [NSString stringWithFormat:@"00:%02d", second];
     }
 }
 

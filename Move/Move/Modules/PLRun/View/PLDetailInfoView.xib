@@ -208,7 +208,7 @@
                 <outlet property="stepCountLabel" destination="wdu-3k-Vyo" id="uIH-P1-xcJ"/>
                 <outlet property="timeLabel" destination="a7X-gO-Wmx" id="uzz-bH-3DY"/>
             </connections>
-            <point key="canvasLocation" x="-93.5" y="-1.5"/>
+            <point key="canvasLocation" x="-24.5" y="25.5"/>
         </view>
     </objects>
 </document>
