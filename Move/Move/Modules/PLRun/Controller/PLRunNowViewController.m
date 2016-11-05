@@ -13,6 +13,13 @@
 #import "PLDetailInfoView.h"
 #import <AVFoundation/AVFoundation.h>
 #import "NSString+TimeFormat.h"
+
+#import "Record.h"
+#import "MAMutablePolyline.h"
+#import "MAMutablePolylineRenderer.h"
+#import "FileHelper.h"
+#import "RecordViewController.h"
+
 @import CoreMotion;
 
 @interface PLRunNowViewController ()
@@ -20,6 +27,7 @@
     MAMapViewDelegate,
     AMapSearchDelegate
 >
+// 地图相关属性
 @property (nonatomic, retain) MAMapView *mapView;
 @property (nonatomic, strong) MAUserLocation *userLocation;
 @property (nonatomic, strong) AMapSearchAPI *mapSearchAPI;
@@ -27,6 +35,15 @@
 @property (nonatomic, strong) AMapLocalWeatherForecast *forecast;
 @property (nonatomic, strong) AMapLocalDayWeatherForecast *dayForecast;
 @property (nonatomic, strong) AMapReGeocodeSearchRequest *regeo;
+
+
+// 运动轨迹相关属性
+@property (nonatomic, strong) NSMutableArray *locationsArray;
+@property (nonatomic, strong) Record *currentRecord;
+@property (nonatomic, strong) MAMutablePolyline *mutablePolyline;
+@property (nonatomic, strong) MAMutablePolylineRenderer *render;
+@property (nonatomic, assign) BOOL startMoving;
+
 
 @property (nonatomic, strong) NSString *address;
 
@@ -49,17 +66,16 @@
 @property (nonatomic, retain) AVSpeechUtterance *utterance;
 @property (nonatomic, assign) NSInteger bigCalorie;
 @property (nonatomic, retain) NSMutableArray *commonPolylineCoords;
-@property (nonatomic, assign) BOOL startMoving;
+
 
 /** 计步 */
 @property (strong, nonatomic) CMPedometer *pedometer;
 
-/** 语言数组 */
+// 语音相关属性
 @property (nonatomic, strong) NSArray<AVSpeechSynthesisVoice *> *laungeVoices;
 
 /** 语音合成器 */
 @property (nonatomic, strong) AVSpeechSynthesizer *synthesizer;
-
 @property (nonatomic, copy) NSString *speakingString;
 @property (nonatomic, retain) UIImage *voiceOpenImage;
 @property (nonatomic, retain) UIImage *voiceCloseImage;
@@ -75,9 +91,21 @@
     _startMoving = NO;
     _bigCalorie = 0;
     [self setupMap];
+    [self initOverlay];
     [self setupButton];
     [self initLocationButton];
     [self initVoiceButton];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self.mapView addOverlay:self.mutablePolyline];
+    
+    self.mapView.visibleMapRect = MAMapRectMake(220880104, 101476980, 272496, 466656);
+    
+    self.mapView.userTrackingMode = MAUserTrackingModeFollow;
 }
 
 #pragma mark - 懒加载
@@ -208,7 +236,9 @@
         [FTPopOverMenu showForSender:button withMenu:@[address, weather, temperature, humidity, wind] doneBlock:nil dismissBlock:nil];
     };
     plNavigationView.deleteButtonBlock = ^(UIButton *button) {
-        NSLog(@"hello");
+        UIViewController *recordController = [[RecordViewController alloc] initWithNibName:nil bundle:nil];
+        
+        [self presentViewController:recordController animated:YES completion:nil];
     };
     [self.view addSubview:plNavigationView];
     
@@ -315,8 +345,14 @@
                             // 设置开关
                             _startMoving = YES;
                             
+                            if (self.currentRecord == nil)
+                            {
+                                self.currentRecord = [[Record alloc] init];
+                            }
+                            
                             // 开始计时
                             self.runTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(callTime) userInfo:nil repeats:YES];
+                            [[NSRunLoop currentRunLoop] addTimer:_runTimer forMode:NSRunLoopCommonModes];
                         }
 
                     }
@@ -334,7 +370,15 @@
                         _utterance.voice = self.laungeVoices[2];
                         [self.synthesizer speakUtterance:_utterance];
                         
+                        // 运动结束
                         _startMoving = NO;
+                        [self.locationsArray removeAllObjects];
+                        [self saveRoute];
+                        [self.mutablePolyline.pointArray removeAllObjects];
+                        [self.render invalidatePath];
+                        
+                        UIViewController *recordController = [[RecordViewController alloc] initWithNibName:nil bundle:nil];
+                        [self presentViewController:recordController animated:YES completion:nil];
   
                     }
                     [_beginButton setTitle:@"开始" forState:UIControlStateNormal];
@@ -410,20 +454,42 @@
     [self.mapSearchAPI AMapReGoecodeSearch:_regeo];
     
     if (_startMoving == YES) {
-        //构造折线数据对象
-        CLLocation *currLocation = [[CLLocation alloc] initWithLatitude:_mapView.userLocation.coordinate.latitude longitude:_mapView.userLocation.coordinate.longitude];
-        [self.commonPolylineCoords addObject:currLocation];
         
         
-        MAMapPoint *arrayPoint = malloc(sizeof(MAMapPoint) * _commonPolylineCoords.count);
-        for (int i = 0; i < _commonPolylineCoords.count; i++) {
-            CLLocation *location = [_commonPolylineCoords objectAtIndex:i];
-            MAMapPoint point = MAMapPointForCoordinate(location.coordinate);
-            arrayPoint[i] = point;
+        if (userLocation.location.horizontalAccuracy < 80 && userLocation.location.horizontalAccuracy > 0)
+        {
+            [self.locationsArray addObject:userLocation.location];
+            
+            NSLog(@"date: %@,now :%@",userLocation.location.timestamp,[NSDate date]);
+
+            
+            [self.currentRecord addLocation:userLocation.location];
+            
+            [self.mutablePolyline appendPoint: MAMapPointForCoordinate(userLocation.location.coordinate)];
+            
+            [self.mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
+            
+            [self.render invalidatePath];
         }
-        MAPolyline *line = [MAPolyline polylineWithPoints:arrayPoint count:_commonPolylineCoords.count];
-        [_mapView addOverlay:line];
-        free(arrayPoint);
+        
+        
+        
+        
+//        //构造折线数据对象
+//        CLLocation *currLocation = [[CLLocation alloc] initWithLatitude:_mapView.userLocation.coordinate.latitude longitude:_mapView.userLocation.coordinate.longitude];
+//        [self.commonPolylineCoords addObject:currLocation];
+//        
+//        
+//        MAMapPoint *arrayPoint = malloc(sizeof(MAMapPoint) * _commonPolylineCoords.count);
+//        for (int i = 0; i < _commonPolylineCoords.count; i++) {
+//            CLLocation *location = [_commonPolylineCoords objectAtIndex:i];
+//            MAMapPoint point = MAMapPointForCoordinate(location.coordinate);
+//            arrayPoint[i] = point;
+//        }
+//        MAPolyline *line = [MAPolyline polylineWithPoints:arrayPoint count:_commonPolylineCoords.count];
+//        [_mapView addOverlay:line];
+//        free(arrayPoint);
+//    }
     }
     
 }
@@ -438,19 +504,36 @@
 }
 
 // 设置折线的样式
-- (MAOverlayView *)mapView:(MAMapView *)mapView viewForOverlay:(id <MAOverlay>)overlay
+//- (MAOverlayView *)mapView:(MAMapView *)mapView viewForOverlay:(id <MAOverlay>)overlay
+//{
+//
+//    if ([overlay isKindOfClass:[MAPolyline class]])
+//    {
+//        MAPolylineView *polylineView = [[MAPolylineView alloc] initWithPolyline:overlay];
+//        
+//        polylineView.lineWidth = 5.0f;
+//        polylineView.strokeColor = [UIColor redColor];
+//        polylineView.lineJoin = kCGLineJoinMiter;//连接类型
+//        polylineView.lineCap = kCGLineCapRound;//端点类型
+//        
+//        return polylineView;
+//    }
+//    return nil;
+//}
+
+- (MAOverlayPathRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id<MAOverlay>)overlay
 {
-    if ([overlay isKindOfClass:[MAPolyline class]])
+    if ([overlay isKindOfClass:[MAMutablePolyline class]])
     {
-        MAPolylineView *polylineView = [[MAPolylineView alloc] initWithPolyline:overlay];
+        MAMutablePolylineRenderer *renderer = [[MAMutablePolylineRenderer alloc] initWithOverlay:overlay];
+        renderer.lineWidth = 4.0f;
         
-        polylineView.lineWidth = 5.f;
-        polylineView.strokeColor = [UIColor redColor];
-        polylineView.lineJoin = kCGLineJoinMiter;//连接类型
-        polylineView.lineCap = kCGLineCapRound;//端点类型
+        renderer.strokeColor = [UIColor redColor];
+        self.render = renderer;
         
-        return polylineView;
+        return renderer;
     }
+    
     return nil;
 }
 
@@ -546,7 +629,29 @@
     }else {
         _plDetailView.time = [NSString stringWithFormat:@"00:%02d", second];
     }
-
 }
+
+#pragma mark - Utility
+
+- (void)saveRoute
+{
+    if (self.currentRecord == nil)
+    {
+        return;
+    }
+    
+    NSString *name = self.currentRecord.title;
+    NSString *path = [FileHelper filePathWithName:name];
+    
+    [NSKeyedArchiver archiveRootObject:self.currentRecord toFile:path];
+    
+    self.currentRecord = nil;
+}
+
+- (void)initOverlay
+{
+    self.mutablePolyline = [[MAMutablePolyline alloc] initWithPoints:@[]];
+}
+
 
 @end
