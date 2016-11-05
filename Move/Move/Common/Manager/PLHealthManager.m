@@ -183,7 +183,7 @@
     NSDate *endDate = [NSDate date];
     
     // 获取数据的起始时间 此处取从今日往前推100天的数据
-    NSDate *startDate = [NSDate dateWithTimeIntervalSinceNow:-3*24*60*60];
+    NSDate *startDate = [NSDate dateWithTimeIntervalSinceNow:-(_days)*24*60*60];
     
     // 数据类型
     HKQuantityType *type = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
@@ -250,7 +250,7 @@
     NSDate *anchorDate = [calendar dateFromComponents:anchorComponents];
     
     NSDate *endDate = [NSDate date];
-    NSDate *startDate = [NSDate dateWithTimeIntervalSinceNow:-3*24*60*60];
+    NSDate *startDate = [NSDate dateWithTimeIntervalSinceNow:-(_days)*24*60*60];
     
     HKQuantityType *type = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
     
@@ -314,7 +314,7 @@
     // 获取数据的截止时间 今天
     NSDate *endDate = [NSDate date];
     // 获取数据的起始时间 此处取从今日往前推100天的数据
-    NSDate *startDate = [NSDate dateWithTimeIntervalSinceNow:-3*24*60*60];
+    NSDate *startDate = [NSDate dateWithTimeIntervalSinceNow:-(_days)*24*60*60];
     
     // 数据类型
     HKQuantityType *type = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierFlightsClimbed];
@@ -388,7 +388,7 @@
     // 获取数据的截止时间 今天
     NSDate *endDate = [NSDate date];
     // 获取数据的起始时间 此处取从今日往前推100天的数据
-    NSDate *startDate = [NSDate dateWithTimeIntervalSinceNow:-3*24*60*60];
+    NSDate *startDate = [NSDate dateWithTimeIntervalSinceNow:-(_days)*24*60*60];
     
     // 数据类型
     HKQuantityType *type = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierActiveEnergyBurned];

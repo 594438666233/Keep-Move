@@ -47,13 +47,10 @@
 @property (nonatomic, assign) int runTime;
 
 @property (nonatomic, retain) AVSpeechUtterance *utterance;
-
 @property (nonatomic, assign) NSInteger bigCalorie;
-
 @property (nonatomic, retain) NSMutableArray *commonPolylineCoords;
-
-
 @property (nonatomic, assign) BOOL startMoving;
+
 /** 计步 */
 @property (strong, nonatomic) CMPedometer *pedometer;
 
@@ -64,7 +61,6 @@
 @property (nonatomic, strong) AVSpeechSynthesizer *synthesizer;
 
 @property (nonatomic, copy) NSString *speakingString;
-
 @property (nonatomic, retain) UIImage *voiceOpenImage;
 @property (nonatomic, retain) UIImage *voiceCloseImage;
 @end
@@ -73,7 +69,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     self.commonPolylineCoords = [NSMutableArray array];
     _flag = YES;
     _startMoving = NO;
@@ -85,6 +81,7 @@
 }
 
 #pragma mark - 懒加载
+
 - (NSArray<AVSpeechSynthesisVoice *> *)laungeVoices {
     if (_laungeVoices == nil) {
         _laungeVoices = @[
@@ -139,19 +136,13 @@
     _mapView.allowsBackgroundLocationUpdates = YES;//iOS9以上系统必须配置
     // 设置地图logo位置
     _mapView.logoCenter = CGPointMake(CGRectGetWidth(_mapView.bounds)-35, CGRectGetHeight(_mapView.bounds)-10);
-    
-    
     //代理
     _mapView.delegate = self;
     
     self.mapSearchAPI = [[AMapSearchAPI alloc] init];
     _mapSearchAPI.delegate = self;
     
-    
     self.regeo = [[AMapReGeocodeSearchRequest alloc] init];
-    
- 
-    
     [self.view addSubview:_mapView];
 
 }
@@ -214,13 +205,7 @@
         NSString *humidity = [NSString stringWithFormat:@"湿度 : %@%%", _live.humidity];
         NSString *wind = [NSString stringWithFormat:@"%@风%@级", _live.windDirection, _live.windPower];
 
-        
-        [FTPopOverMenu showForSender:button withMenu:@[address, weather, temperature, humidity, wind] doneBlock:^(NSInteger selectedIndex) {
-
-        } dismissBlock:nil];
-        
-        
-        
+        [FTPopOverMenu showForSender:button withMenu:@[address, weather, temperature, humidity, wind] doneBlock:nil dismissBlock:nil];
     };
     plNavigationView.deleteButtonBlock = ^(UIButton *button) {
         NSLog(@"hello");
@@ -236,10 +221,7 @@
     _plDetailView.frame = CGRectMake(0, 64, PLWIDTH, PLHEIGHT - PLHEIGHT / 2 - 64 );
     [self.view addSubview:_plDetailView];
     
-    
 }
-
-
 
 - (void)setupButton {
     
@@ -259,25 +241,23 @@
         [_beginButton handleControlEvent:UIControlEventTouchUpInside withBlock:^{
             if ([_beginButton.titleLabel.text isEqualToString:@"开始"]) {
                 
-                // start live tracking
+                // 开始计步
                 [self.pedometer startPedometerUpdatesFromDate:[NSDate date] withHandler:^(CMPedometerData * _Nullable pedometerData, NSError * _Nullable error) {
                     
-                    // this block is called for each live update
-                    
+                    // 更新数值
                     [self updateLabels:pedometerData];
                     
                 }];
-                
-       
-                
-                
+
                 // 为地图添加临时模糊效果
                 self.blurView = [[UIView alloc] init];
                 _blurView.backgroundColor = [UIColor blackColor];
                 _blurView.frame = _mapView.frame;
                 _blurView.alpha = 0.5f;
                 
+                // 3秒倒计时
                 self.temp = 3;
+                
                 // 倒计时Label
                 self.timeLabel = [[UILabel alloc] init];
                 _timeLabel.textAlignment = NSTextAlignmentCenter;
@@ -295,13 +275,14 @@
                 _backButton.hidden = YES;
                 [self.view addSubview:_blurView];
                 
+                // 倒计时
                 self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
                 [_timer fire];
             
                 [UIView animateWithDuration:3.0f delay:0.0f options:UIViewAnimationOptionCurveEaseInOut animations:^{
 
-                _plMenuView.alpha = 0.0f;
-                _plDetailView.alpha = 1.0f;
+                    _plMenuView.alpha = 0.0f;
+                    _plDetailView.alpha = 1.0f;
         
                 } completion:^(BOOL finished) {
                 
@@ -354,8 +335,7 @@
                         [self.synthesizer speakUtterance:_utterance];
                         
                         _startMoving = NO;
-
-                        
+  
                     }
                     [_beginButton setTitle:@"开始" forState:UIControlStateNormal];
                     [_backButton setTitle:@"返回" forState:UIControlStateNormal];
@@ -401,8 +381,7 @@
                 self.utterance = [[AVSpeechUtterance alloc] initWithString:_speakingString];
                 _utterance.voice = self.laungeVoices[2];
                 [self.synthesizer speakUtterance:_utterance];
-                
-                
+
                 // 开启定时器
                 self.runTimer = [NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(callTime) userInfo:nil repeats:YES];
             }
@@ -412,6 +391,7 @@
 }
 
 #pragma mark - timerAction
+
 - (void)timerAction {
 
     _timeLabel.text = [NSString stringWithFormat:@"%ld", _temp];

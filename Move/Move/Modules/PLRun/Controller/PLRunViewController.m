@@ -40,13 +40,6 @@ UIGestureRecognizerDelegate
 }
 
 
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    NSLog(@"%@",  [NSDate dateWithTimeIntervalSinceReferenceDate:0]);
-}
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -55,7 +48,7 @@ UIGestureRecognizerDelegate
     [self createRunNowButton];
     
 
-    [self createCalendar];
+//    [self createCalendar];
     
     [self createNavigationTitleView];
     
@@ -194,8 +187,6 @@ UIGestureRecognizerDelegate
     }];
 
 }
-
-
 
 
 @end

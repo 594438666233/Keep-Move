@@ -12,4 +12,6 @@
 
 - (void)getIphoneHealthData;
 
+@property (nonatomic, assign) NSInteger days;
+
 @end
