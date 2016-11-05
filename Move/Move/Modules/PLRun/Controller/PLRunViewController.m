@@ -90,9 +90,10 @@ UIGestureRecognizerDelegate
  
     __weak typeof(self) weakSelf = self;
     
-    self.backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height + [UIScreen mainScreen].bounds.size.width * 6 / 7 +  94)];
+    self.backView = [[UIView alloc] initWithFrame:CGRectMake(0, - ([UIScreen mainScreen].bounds.size.width * 6 / 7 +  94), [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height + [UIScreen mainScreen].bounds.size.width * 6 / 7 +  94)];
     self.calendarView.date = [NSDate date];
     [_backView addSubview:self.calendarView];
+    _backView.hidden = YES;
     _calendarView.calendarBlock = ^(NSInteger day, NSInteger month, NSInteger year) {
         
         NSLog(@"%ld-%02ld-%02ld", year, month, day);
