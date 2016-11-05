@@ -14,4 +14,9 @@
 
 @property (nonatomic, assign) NSInteger days;
 
+
+@property (nonatomic, strong) NSMutableArray *healthSteps;
+@property (nonatomic, strong) NSMutableArray *healthDistances;
+@property (nonatomic, strong) NSMutableArray *healthStairsClimbed;
+
 @end

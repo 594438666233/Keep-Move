@@ -18,6 +18,7 @@
 		115BE2CD1DBA3485003279AC /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 115BE2CC1DBA3485003279AC /* HealthKit.framework */; };
 		115BE2D51DBA39DE003279AC /* PLDataBaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 115BE2D41DBA39DE003279AC /* PLDataBaseManager.m */; };
 		115BE2D71DBA4E71003279AC /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 115BE2D61DBA4E71003279AC /* camera.png */; };
+		1186056D1DCDB57E00459408 /* PLHealthSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 1186056C1DCDB57E00459408 /* PLHealthSource.m */; };
 		11A10F6A1DC6D404005EBDA5 /* PLHistoryInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A10F691DC6D404005EBDA5 /* PLHistoryInformationViewController.m */; };
 		11A10F6E1DC6D76F005EBDA5 /* PLHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A10F6C1DC6D76F005EBDA5 /* PLHistoryTableViewCell.m */; };
 		11A10F6F1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11A10F6D1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib */; };
@@ -435,6 +436,8 @@
 		115BE2D31DBA39DE003279AC /* PLDataBaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDataBaseManager.h; sourceTree = "<group>"; };
 		115BE2D41DBA39DE003279AC /* PLDataBaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLDataBaseManager.m; sourceTree = "<group>"; };
 		115BE2D61DBA4E71003279AC /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		1186056B1DCDB57E00459408 /* PLHealthSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLHealthSource.h; sourceTree = "<group>"; };
+		1186056C1DCDB57E00459408 /* PLHealthSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLHealthSource.m; sourceTree = "<group>"; };
 		11A10F681DC6D404005EBDA5 /* PLHistoryInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLHistoryInformationViewController.h; sourceTree = "<group>"; };
 		11A10F691DC6D404005EBDA5 /* PLHistoryInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLHistoryInformationViewController.m; sourceTree = "<group>"; };
 		11A10F6B1DC6D76F005EBDA5 /* PLHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLHistoryTableViewCell.h; sourceTree = "<group>"; };
@@ -933,6 +936,15 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		1186056A1DCDB55100459408 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1186056B1DCDB57E00459408 /* PLHealthSource.h */,
+				1186056C1DCDB57E00459408 /* PLHealthSource.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		493671431DC9E9A00048E098 /* WYChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -1101,13 +1113,6 @@
 				84E4CF1C1DC9875700C353EE /* PLSignRecordViewController.xib */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		845372B71DB78E9000DBE92F /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		845372B81DB78E9400DBE92F /* Model */ = {
@@ -1418,8 +1423,8 @@
 		8471C53F1DB75CE9008E8A5A /* PLRun */ = {
 			isa = PBXGroup;
 			children = (
+				1186056A1DCDB55100459408 /* Model */,
 				845372B31DB78E7000DBE92F /* Controller */,
-				845372B71DB78E9000DBE92F /* Model */,
 				845372BC1DB78EA300DBE92F /* View */,
 			);
 			path = PLRun;
@@ -2282,6 +2287,7 @@
 				84D6360D1DB764C200AC0E4D /* PLGoalViewController.m in Sources */,
 				84765E551DC9D48A007F0673 /* PLRunNowViewController.m in Sources */,
 				84AB96FC1DB8B6D70075FDC0 /* PLTargetModel.m in Sources */,
+				1186056D1DCDB57E00459408 /* PLHealthSource.m in Sources */,
 				11ADB2961DCC3A330062920E /* MyCalendarItem.m in Sources */,
 				493671751DC9E9A00048E098 /* WYLineChartReferenceLineView.m in Sources */,
 				4936717F1DC9E9A00048E098 /* WYPieChartView.m in Sources */,

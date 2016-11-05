@@ -11,6 +11,7 @@
 #import "PLRunNowViewController.h"
 #import "UIImage+GIF.h"
 #import "MyCalendarItem.h"
+#import "PLHealthSource.h"
 @interface PLRunViewController ()
 
 <
@@ -25,6 +26,14 @@ UIGestureRecognizerDelegate
 @property (nonatomic, strong) UIView *backView;
 
 @property (nonatomic, strong) UILabel *calendarLabel;
+
+@property (nonatomic, copy) NSString *dateTime;
+
+@property (nonatomic, copy) NSString *clickDateTime;
+
+@property (nonatomic, strong) NSMutableArray *healthArray;
+
+
 @end
 
 @implementation PLRunViewController
@@ -94,17 +103,50 @@ UIGestureRecognizerDelegate
     self.calendarView.date = [NSDate date];
     [_backView addSubview:self.calendarView];
     _backView.hidden = YES;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    self.dateTime = [formatter stringFromDate:[NSDate date]];
+    
+    
+    
     _calendarView.calendarBlock = ^(NSInteger day, NSInteger month, NSInteger year) {
         
-        NSLog(@"%ld-%02ld-%02ld", year, month, day);
+        NSLog(@"%ld-%02ld-%02ld", (long)year, month, day);
         
-        weakSelf.calendarLabel.text = [NSString stringWithFormat:@"%02ld月%02ld日", month, day];
+        weakSelf.calendarLabel.text = [NSString stringWithFormat:@"%02ld月%02ld日", month, (long)day];
         
         [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             weakSelf.backView.frame = CGRectMake(0, - ([UIScreen mainScreen].bounds.size.width * 6 / 7 +  94), [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height + [UIScreen mainScreen].bounds.size.width * 6 / 7 +  94);
             weakSelf.backView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+            
+       
+            
         } completion:^(BOOL finished) {
+            
             weakSelf.backView.hidden = YES;
+            
+            weakSelf.clickDateTime = [NSString stringWithFormat:@"%ld-%02ld-%02ld", year, month, day];
+            
+            
+            
+            
+            
+
+            [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                //
+                
+                
+            } completion:^(BOOL finished) {
+                //
+                weakSelf.dateTime = weakSelf.clickDateTime;
+                
+                
+            }];
+            
+            
+            
+            
             
         }];
         
@@ -170,6 +212,25 @@ UIGestureRecognizerDelegate
     PLHealthManager *manager = [[PLHealthManager alloc] init];
     manager.days = 10;
     [manager getIphoneHealthData];
+    
+    
+    
+    
+    
+    
+    
+    self.healthArray = [NSMutableArray array];
+    for (int i = 0; i < manager.healthSteps.count; i++) {
+        PLHealthSource *health = [[PLHealthSource alloc] init];
+        health.step = manager.healthSteps[i][@"value"];
+        health.km = manager.healthDistances[i][@"step and running"];
+        health.floor = manager.healthStairsClimbed[i][@"value"];
+        
+        [self.healthArray addObject:health];
+    }
+    
+    
+    
     
 }
 

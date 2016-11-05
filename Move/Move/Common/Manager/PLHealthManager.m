@@ -15,9 +15,6 @@
     HKHealthStore  *store;    
 }
 
-@property (nonatomic, strong) NSMutableArray *healthSteps;
-@property (nonatomic, strong) NSMutableArray *healthDistances;
-@property (nonatomic, strong) NSMutableArray *healthStairsClimbed;
 
 @end
 
@@ -49,8 +46,8 @@
             return ;
         }
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
+        dispatch_sync(dispatch_get_main_queue(), ^{
+        
             // 3.获取苹果健康数据
             [self getHealthStepData];
             [self getHealthDistanceData];
