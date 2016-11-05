@@ -132,17 +132,24 @@ UIGestureRecognizerDelegate
             
             
             
-
-            [UIView animateWithDuration:0.5f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-                //
+            PLHealthSource *clickHealth = [weakSelf healthSourceWithDateTime:weakSelf.clickDateTime];
+            PLHealthSource *originalHealth = [weakSelf healthSourceWithDateTime:weakSelf.dateTime];
+            
+            int a = abs([originalHealth.step intValue] - [clickHealth.step intValue]);
+            
+            [NSTimer scheduledTimerWithTimeInterval:1.f / a target:weakSelf selector:@selector(stepTimerAction) userInfo:nil repeats:YES];
+                    
+                    
+            
+            
+            
+            
+            
+            ////
+            weakSelf.dateTime = weakSelf.clickDateTime;
                 
                 
-            } completion:^(BOOL finished) {
-                //
-                weakSelf.dateTime = weakSelf.clickDateTime;
-                
-                
-            }];
+            
             
             
             
@@ -169,6 +176,22 @@ UIGestureRecognizerDelegate
 
 }
 
+- (void)stepTimerAction {
+
+}
+
+
+- (PLHealthSource *)healthSourceWithDateTime:(NSString *)dateTime {
+    for (int i = 0; i < self.healthArray.count; i++) {
+        PLHealthSource *health = self.healthArray[i];
+        if ([health.dateTime isEqualToString:dateTime]) {
+            return health;
+        }
+    }
+    return nil;
+
+
+}
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
 
@@ -211,23 +234,27 @@ UIGestureRecognizerDelegate
     
     PLHealthManager *manager = [[PLHealthManager alloc] init];
     manager.days = 10;
-    [manager getIphoneHealthData];
     
     
-    
-    
-    
-    
-    
-    self.healthArray = [NSMutableArray array];
-    for (int i = 0; i < manager.healthSteps.count; i++) {
-        PLHealthSource *health = [[PLHealthSource alloc] init];
-        health.step = manager.healthSteps[i][@"value"];
-        health.km = manager.healthDistances[i][@"step and running"];
-        health.floor = manager.healthStairsClimbed[i][@"value"];
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [manager getIphoneHealthData];
         
-        [self.healthArray addObject:health];
-    }
+        self.healthArray = [NSMutableArray array];
+        for (int i = 0; i < manager.healthSteps.count; i++) {
+            PLHealthSource *health = [[PLHealthSource alloc] init];
+            health.step = manager.healthSteps[i][@"value"];
+            health.km = manager.healthDistances[i][@"step and running"];
+            health.floor = manager.healthStairsClimbed[i][@"value"];
+            health.dateTime = manager.healthSteps[i][@"dateTime"];
+            [self.healthArray addObject:health];
+        }
+    });
+    
+    
+    
+    
+    
+   
     
     
     
