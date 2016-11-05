@@ -48,7 +48,7 @@ UIGestureRecognizerDelegate
     [self createRunNowButton];
     
 
-//    [self createCalendar];
+    [self createCalendar];
     
     [self createNavigationTitleView];
     
@@ -168,6 +168,7 @@ UIGestureRecognizerDelegate
 - (void)initHKHealth{
     
     PLHealthManager *manager = [[PLHealthManager alloc] init];
+    manager.days = 10;
     [manager getIphoneHealthData];
     
 }
