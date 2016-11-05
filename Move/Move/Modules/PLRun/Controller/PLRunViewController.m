@@ -11,6 +11,7 @@
 #import "PLRunNowViewController.h"
 #import "UIImage+GIF.h"
 #import "MyCalendarItem.h"
+#import "PLHealthSource.h"
 @interface PLRunViewController ()
 <
 UIGestureRecognizerDelegate,
@@ -20,13 +21,20 @@ PNChartDelegate
 @property (weak, nonatomic) IBOutlet UIImageView *runImageView;
 @property (weak, nonatomic) IBOutlet UIButton *runButton;
 
-@property (nonatomic, strong)MyCalendarItem *calendarView;
+@property (nonatomic, strong) MyCalendarItem *calendarView;
 
 @property (nonatomic, strong) UIView *backView;
 
 @property (nonatomic, strong) UILabel *calendarLabel;
 
 @property (nonatomic, strong) PNBarChart *barChart;
+
+@property (nonatomic, copy) NSString *dateTime;
+
+@property (nonatomic, copy) NSString *clickDateTime;
+
+@property (nonatomic, strong) NSMutableArray *healthArray;
+
 @end
 
 @implementation PLRunViewController
@@ -42,13 +50,11 @@ PNChartDelegate
 }
 
 
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     NSLog(@"%@",  [NSDate dateWithTimeIntervalSinceReferenceDate:0]);
     [_barChart strokeChart];
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -57,7 +63,6 @@ PNChartDelegate
     
     [self createRunNowButton];
     
-
     [self createCalendar];
     
     [self createNavigationTitleView];
@@ -101,20 +106,61 @@ PNChartDelegate
  
     __weak typeof(self) weakSelf = self;
     
-    self.backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height + [UIScreen mainScreen].bounds.size.width * 6 / 7 +  94)];
+    self.backView = [[UIView alloc] initWithFrame:CGRectMake(0, - ([UIScreen mainScreen].bounds.size.width * 6 / 7 +  94), [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height + [UIScreen mainScreen].bounds.size.width * 6 / 7 +  94)];
     self.calendarView.date = [NSDate date];
     [_backView addSubview:self.calendarView];
+    _backView.hidden = YES;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    self.dateTime = [formatter stringFromDate:[NSDate date]];
+    
+    
+    
     _calendarView.calendarBlock = ^(NSInteger day, NSInteger month, NSInteger year) {
         
-        NSLog(@"%ld-%02ld-%02ld", year, month, day);
+        NSLog(@"%ld-%02ld-%02ld", (long)year, month, day);
         
-        weakSelf.calendarLabel.text = [NSString stringWithFormat:@"%02ld月%02ld日", month, day];
+        weakSelf.calendarLabel.text = [NSString stringWithFormat:@"%02ld月%02ld日", month, (long)day];
         
         [UIView animateWithDuration:0.3f delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
             weakSelf.backView.frame = CGRectMake(0, - ([UIScreen mainScreen].bounds.size.width * 6 / 7 +  94), [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height + [UIScreen mainScreen].bounds.size.width * 6 / 7 +  94);
             weakSelf.backView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+            
+       
+            
         } completion:^(BOOL finished) {
+            
             weakSelf.backView.hidden = YES;
+            
+            weakSelf.clickDateTime = [NSString stringWithFormat:@"%ld-%02ld-%02ld", year, month, day];
+            
+            
+            
+            
+            
+            PLHealthSource *clickHealth = [weakSelf healthSourceWithDateTime:weakSelf.clickDateTime];
+            PLHealthSource *originalHealth = [weakSelf healthSourceWithDateTime:weakSelf.dateTime];
+            
+            int a = abs([originalHealth.step intValue] - [clickHealth.step intValue]);
+            
+            [NSTimer scheduledTimerWithTimeInterval:1.f / a target:weakSelf selector:@selector(stepTimerAction) userInfo:nil repeats:YES];
+                    
+                    
+            
+            
+            
+            
+            
+            ////
+            weakSelf.dateTime = weakSelf.clickDateTime;
+                
+                
+            
+            
+            
+            
+            
             
         }];
         
@@ -137,6 +183,22 @@ PNChartDelegate
 
 }
 
+- (void)stepTimerAction {
+
+}
+
+
+- (PLHealthSource *)healthSourceWithDateTime:(NSString *)dateTime {
+    for (int i = 0; i < self.healthArray.count; i++) {
+        PLHealthSource *health = self.healthArray[i];
+        if ([health.dateTime isEqualToString:dateTime]) {
+            return health;
+        }
+    }
+    return nil;
+
+
+}
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
 
@@ -178,8 +240,27 @@ PNChartDelegate
 - (void)initHKHealth{
     
     PLHealthManager *manager = [[PLHealthManager alloc] init];
+
     [manager getIphoneHealthData];
- 
+
+    manager.days = 10;
+    
+    
+    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [manager getIphoneHealthData];
+        
+        self.healthArray = [NSMutableArray array];
+        for (int i = 0; i < manager.healthSteps.count; i++) {
+            PLHealthSource *health = [[PLHealthSource alloc] init];
+            health.step = manager.healthSteps[i][@"value"];
+            health.km = manager.healthDistances[i][@"step and running"];
+            health.floor = manager.healthStairsClimbed[i][@"value"];
+            health.dateTime = manager.healthSteps[i][@"dateTime"];
+            [self.healthArray addObject:health];
+        }
+    });
+    
+
     
 }
 
