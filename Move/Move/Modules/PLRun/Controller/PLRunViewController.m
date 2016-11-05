@@ -20,7 +20,7 @@ UIGestureRecognizerDelegate
 @property (weak, nonatomic) IBOutlet UIImageView *runImageView;
 @property (weak, nonatomic) IBOutlet UIButton *runButton;
 
-@property (nonatomic, strong)MyCalendarItem *calendarView;
+@property (nonatomic, strong) MyCalendarItem *calendarView;
 
 @property (nonatomic, strong) UIView *backView;
 
@@ -47,8 +47,7 @@ UIGestureRecognizerDelegate
     
     [self createRunNowButton];
     
-
-//    [self createCalendar];
+    [self createCalendar];
     
     [self createNavigationTitleView];
     
@@ -168,6 +167,7 @@ UIGestureRecognizerDelegate
 - (void)initHKHealth{
     
     PLHealthManager *manager = [[PLHealthManager alloc] init];
+    manager.days = 10;
     [manager getIphoneHealthData];
     
 }
