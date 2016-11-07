@@ -1882,7 +1882,7 @@
 				TargetAttributes = {
 					84D0D81D1DB6F48400EDCFB3 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = QWKQAE7W9B;
+						DevelopmentTeam = E4QRC879H5;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2501,7 +2501,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Move/Move.entitlements;
-				DEVELOPMENT_TEAM = QWKQAE7W9B;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 671264151@qq.com (KYAA3C55XV)";
+				DEVELOPMENT_TEAM = E4QRC879H5;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Move/Supporting Files/PrefixHeader.pch";
@@ -2560,7 +2561,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Move/Move.entitlements;
-				DEVELOPMENT_TEAM = QWKQAE7W9B;
+				CODE_SIGN_IDENTITY = "iPhone Developer: 671264151@qq.com (KYAA3C55XV)";
+				DEVELOPMENT_TEAM = E4QRC879H5;
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Move/Supporting Files/PrefixHeader.pch";
