@@ -14,13 +14,14 @@
 @interface PLXHealthManager : NSObject
 
 @property (nonatomic, strong) HKHealthStore *healthStore;
+@property (nonatomic, assign) NSInteger days;
 
 + (id)shareInstance;
 
 - (void)authorizeHealthKit:(void(^)(BOOL success, NSError *error))compltion;
 
-- (void)getStepCount:(void(^)(double value, NSError *error))completion;
+- (void)getStepCount:(void(^)(double value, NSArray *array,NSError *error))completion;
 
-- (void)getDistance:(void(^)(double value, NSError *error))completion;
+- (void)getDistance:(void(^)(double value, NSArray *array,NSError *error))completion;
 
 @end

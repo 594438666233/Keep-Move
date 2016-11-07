@@ -84,7 +84,7 @@
 }
 
 // 当天时间段
-+ (NSPredicate *)predicateForSamplesToday {
+- (NSPredicate *)predicateForSamplesToday {
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDate *now = [NSDate date];
     NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:now];
@@ -93,34 +93,39 @@
     [components setSecond: 0];
     
     NSDate *startDate = [calendar dateFromComponents:components];
-    NSDate *endDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:1 toDate:startDate options:0];
+    NSDate *endDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:_days toDate:startDate options:0];
     NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:startDate endDate:endDate options:HKQueryOptionNone];
     return predicate;
 }
 
 //获取步数
-- (void)getStepCount:(void(^)(double value, NSError *error))completion {
+- (void)getStepCount:(void (^)(double, NSArray *, NSError *))completion {
     HKQuantityType *stepType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
     NSSortDescriptor *timeSortDescriptor = [[NSSortDescriptor alloc] initWithKey:HKSampleSortIdentifierEndDate ascending:NO];
     
     // Since we are interested in retrieving the user's latest sample, we sort the samples in descending order, and set the limit to 1. We are not filtering the data, and so the predicate is set to nil.
-    HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:stepType predicate:[PLXHealthManager predicateForSamplesToday] limit:HKObjectQueryNoLimit sortDescriptors:@[timeSortDescriptor] resultsHandler:^(HKSampleQuery *query, NSArray *results, NSError *error) {
+    HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:stepType predicate:[self predicateForSamplesToday] limit:HKObjectQueryNoLimit sortDescriptors:@[timeSortDescriptor] resultsHandler:^(HKSampleQuery *query, NSArray *results, NSError *error) {
         if(error)
         {
-            completion(0,error);
+            completion(0, @[], error);
         }
         else
         {
-            NSInteger totleSteps = 0;
+            double allSteps = 0;
+            NSMutableArray *array = [NSMutableArray array];
             for(HKQuantitySample *quantitySample in results)
             {
-                HKQuantity *quantity = quantitySample.quantity;
-                HKUnit *heightUnit = [HKUnit countUnit];
-                double usersHeight = [quantity doubleValueForUnit:heightUnit];
-                totleSteps += usersHeight;
+                double totleSteps = [quantitySample.quantity doubleValueForUnit:[HKUnit countUnit]];
+                
+                NSDate *time = quantitySample.startDate;
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd"];
+                NSString *timeString = [formatter stringFromDate:time];
+                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:timeString, @"time", totleSteps, @"steps", nil];
+                [array addObject:dic];
             }
-            NSLog(@"当天行走步数 = %ld",(long)totleSteps);
-            completion(totleSteps,error);
+            NSLog(@"array---------%@", array);
+            completion(allSteps, array, error);
         }
     }];
     
@@ -128,18 +133,19 @@
 }
 
 //获取公里数
-- (void)getDistance:(void(^)(double value, NSError *error))completion {
+- (void)getDistance:(void (^)(double, NSArray *, NSError *))completion {
     HKQuantityType *distanceType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
     NSSortDescriptor *timeSortDescriptor = [[NSSortDescriptor alloc] initWithKey:HKSampleSortIdentifierEndDate ascending:NO];
-    HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:distanceType predicate:[PLXHealthManager predicateForSamplesToday] limit:HKObjectQueryNoLimit sortDescriptors:@[timeSortDescriptor] resultsHandler:^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error) {
+    HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:distanceType predicate:[self predicateForSamplesToday] limit:HKObjectQueryNoLimit sortDescriptors:@[timeSortDescriptor] resultsHandler:^(HKSampleQuery * _Nonnull query, NSArray<__kindof HKSample *> * _Nullable results, NSError * _Nullable error) {
         
         if(error)
         {
-            completion(0,error);
+            completion(0, @[], error);
         }
         else
         {
             double totleSteps = 0;
+            NSMutableArray *array = [NSMutableArray array];
             for(HKQuantitySample *quantitySample in results)
             {
                 HKQuantity *quantity = quantitySample.quantity;
@@ -148,7 +154,7 @@
                 totleSteps += usersHeight;
             }
             NSLog(@"当天行走距离 = %.2f",totleSteps);
-            completion(totleSteps,error);
+            completion(totleSteps, array, error);
         }
     }];
     [self.healthStore executeQuery:query];

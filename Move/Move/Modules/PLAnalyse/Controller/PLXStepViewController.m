@@ -32,7 +32,7 @@ PNChartDelegate
     [manager authorizeHealthKit:^(BOOL success, NSError *error) {
         if (success) {
             NSLog(@"success");
-            [manager getStepCount:^(double value, NSError *error) {
+            [manager getStepCount:^(double value, NSArray *array, NSError *error) {
                 NSLog(@"%lf", value);
                 dispatch_async(dispatch_get_main_queue(), ^{
                     _sumLabel.text = [NSString stringWithFormat:@"%.0lf", value];
