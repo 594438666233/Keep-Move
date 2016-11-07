@@ -122,6 +122,7 @@
                 [formatter setDateFormat:@"yyyy-MM-dd"];
                 NSString *timeString = [formatter stringFromDate:time];
                 NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:timeString, @"time", totleSteps, @"steps", nil];
+                allSteps = allSteps + totleSteps;
                 [array addObject:dic];
             }
             NSLog(@"array---------%@", array);
