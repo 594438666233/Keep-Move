@@ -8,6 +8,7 @@
 
 #import "PLXStepViewController.h"
 #import "PLXTouchView.h"
+#import "PLXHealthManager.h"
 
 @interface PLXStepViewController ()
 <
@@ -26,6 +27,19 @@ PNChartDelegate
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    PLXHealthManager *manager = [PLXHealthManager shareInstance];
+    
+    [manager authorizeHealthKit:^(BOOL success, NSError *error) {
+        if (success) {
+            NSLog(@"success");
+            [manager getStepCount:^(double value, NSError *error) {
+                NSLog(@"%lf", value);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _sumLabel.text = [NSString stringWithFormat:@"%.0lf", value];
+                });
+            }];
+        }
+    }];
     
     [_barChart strokeChart];
     

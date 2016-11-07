@@ -55,6 +55,7 @@
 		49A935E81DC8BD8E00BF099E /* PLXTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A935E71DC8BD8E00BF099E /* PLXTouchView.m */; };
 		49A935EA1DC8C48800BF099E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49A935E91DC8C48800BF099E /* Assets.xcassets */; };
 		49D9B2281DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D9B2271DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.m */; };
+		49F679431DD012B700329C2A /* PLXHealthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F679421DD012B700329C2A /* PLXHealthManager.m */; };
 		8411CE501DCC200100200E5C /* weather.png in Resources */ = {isa = PBXBuildFile; fileRef = 8411CE4F1DCC200100200E5C /* weather.png */; };
 		842441E51DC7751D00582B41 /* PLSignCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 842441E41DC7751D00582B41 /* PLSignCellObject.m */; };
 		842A41CD1DCDD6E4006390CF /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 842A41CB1DCDD6E4006390CF /* pause.png */; };
@@ -513,6 +514,8 @@
 		49A935E91DC8C48800BF099E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49D9B2261DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLXAnalyseCollectionViewCell.h; sourceTree = "<group>"; };
 		49D9B2271DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLXAnalyseCollectionViewCell.m; sourceTree = "<group>"; };
+		49F679411DD012B700329C2A /* PLXHealthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLXHealthManager.h; sourceTree = "<group>"; };
+		49F679421DD012B700329C2A /* PLXHealthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLXHealthManager.m; sourceTree = "<group>"; };
 		8411CE4F1DCC200100200E5C /* weather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weather.png; sourceTree = "<group>"; };
 		842441E31DC7751D00582B41 /* PLSignCellObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSignCellObject.h; sourceTree = "<group>"; };
 		842441E41DC7751D00582B41 /* PLSignCellObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSignCellObject.m; sourceTree = "<group>"; };
@@ -962,6 +965,8 @@
 				115BE2D41DBA39DE003279AC /* PLDataBaseManager.m */,
 				115BE2C91DBA33FC003279AC /* PLHealthManager.h */,
 				115BE2CA1DBA33FC003279AC /* PLHealthManager.m */,
+				49F679411DD012B700329C2A /* PLXHealthManager.h */,
+				49F679421DD012B700329C2A /* PLXHealthManager.m */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -2361,6 +2366,7 @@
 				115BE2C61DBA2E05003279AC /* PLHWeightTableViewCell.m in Sources */,
 				493671891DCA04B60048E098 /* PLXWeightViewController.m in Sources */,
 				84B7B7F01DC6ECE400715926 /* PLAddGoalViewController.m in Sources */,
+				49F679431DD012B700329C2A /* PLXHealthManager.m in Sources */,
 				84B7B7F41DC6EE6D00715926 /* PLNavigationView.m in Sources */,
 				4936717B1DC9E9A00048E098 /* WYPieCenterCircle.m in Sources */,
 				847E30D91DCC7A7B0087114F /* NSString+TimeFormat.m in Sources */,
