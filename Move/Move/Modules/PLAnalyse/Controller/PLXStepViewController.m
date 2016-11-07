@@ -28,7 +28,7 @@ PNChartDelegate
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     PLXHealthManager *manager = [PLXHealthManager shareInstance];
-    
+    manager.days = 7;
     [manager authorizeHealthKit:^(BOOL success, NSError *error) {
         if (success) {
             NSLog(@"success");
