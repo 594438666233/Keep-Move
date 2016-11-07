@@ -239,7 +239,7 @@ PNChartDelegate
 
 - (void)initHKHealth{
     
-    PLHealthManager *manager = [[PLHealthManager alloc] init];
+    PLHealthManager *manager = [PLHealthManager shareInstance];
 
     [manager getIphoneHealthData];
 

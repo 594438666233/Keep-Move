@@ -16,9 +16,23 @@
 }
 
 
+
+
 @end
 
 @implementation PLHealthManager
+
+
+
++ (id)shareInstance {
+    static id manager ;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        manager = [[[self class] alloc] init];
+    });
+    return manager;
+}
+
 
 - (void)getIphoneHealthData{
     self.healthSteps = [NSMutableArray array];
