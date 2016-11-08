@@ -12,13 +12,18 @@
 #import "UIImage+GIF.h"
 #import "MyCalendarItem.h"
 #import "PLHealthSource.h"
+#import "PLPersonInformation.h"
 @interface PLRunViewController ()
 <
 UIGestureRecognizerDelegate,
-PNChartDelegate
+PNChartDelegate,
+PLHealthManagerDelegate
 >
 
-@property (weak, nonatomic) IBOutlet UIImageView *runImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *runImage;
+
+@property (nonatomic, assign) NSInteger runImageNum;
+
 @property (weak, nonatomic) IBOutlet UIButton *runButton;
 
 @property (nonatomic, strong) MyCalendarItem *calendarView;
@@ -34,6 +39,58 @@ PNChartDelegate
 @property (nonatomic, copy) NSString *clickDateTime;
 
 @property (nonatomic, strong) NSMutableArray *healthArray;
+
+@property (weak, nonatomic) IBOutlet UILabel *energyLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *kmLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *floorLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *stepLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *goalLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *percentLabel;
+
+@property (nonatomic, assign) NSInteger goalStep;
+
+@property (nonatomic, assign) NSInteger originalStep;
+
+@property (nonatomic, assign) NSInteger clickStep;
+
+@property (nonatomic, assign) BOOL isStepAdd;
+
+@property (nonatomic, assign) NSInteger originalEnergy;
+
+@property (nonatomic, assign) NSInteger clickEnergy;
+
+@property (nonatomic, assign) BOOL isEnergyAdd;
+
+@property (nonatomic, assign) NSInteger originalFloor;
+
+@property (nonatomic, assign) NSInteger clickFloor;
+
+@property (nonatomic, assign) BOOL isFloorAdd;
+
+@property (nonatomic, assign) double originalKM;
+
+@property (nonatomic, assign) double clickKM;
+
+@property (nonatomic, assign) BOOL isKMAdd;
+
+@property (nonatomic, assign) NSInteger originalPercent;
+
+@property (nonatomic, assign) NSInteger clickPercent;
+
+@property (nonatomic, assign) BOOL isPercentAdd;
+
+@property (nonatomic, assign) NSInteger originalImageNum;
+
+@property (nonatomic, assign) NSInteger clickImageNum;
+
+@property (nonatomic, assign) BOOL isImageNumAdd;
+
+
 
 @end
 
@@ -54,10 +111,16 @@ PNChartDelegate
     [super viewWillAppear:animated];
     NSLog(@"%@",  [NSDate dateWithTimeIntervalSinceReferenceDate:0]);
     [_barChart strokeChart];
+    
+    
+    
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self userDefauls];
     
     [self initHKHealth];
     
@@ -81,6 +144,7 @@ PNChartDelegate
     [navigationTitleView addSubview:calendarImage];
     
     self.calendarLabel = [[UILabel alloc] initWithFrame:CGRectMake(28, 0, 80, 25)];
+    
     _calendarLabel.text = @"11月04日";
     _calendarLabel.textColor = [UIColor whiteColor];
     [navigationTitleView addSubview:_calendarLabel];
@@ -130,9 +194,14 @@ PNChartDelegate
        
             
         } completion:^(BOOL finished) {
-            
+     
+            weakSelf.isStepAdd = NO;
+            weakSelf.isKMAdd = NO;
+            weakSelf.isFloorAdd = NO;
+            weakSelf.isEnergyAdd = NO;
+            weakSelf.isPercentAdd = NO;
+            weakSelf.isImageNumAdd = NO;
             weakSelf.backView.hidden = YES;
-            
             weakSelf.clickDateTime = [NSString stringWithFormat:@"%ld-%02ld-%02ld", year, month, day];
             
             
@@ -142,11 +211,69 @@ PNChartDelegate
             PLHealthSource *clickHealth = [weakSelf healthSourceWithDateTime:weakSelf.clickDateTime];
             PLHealthSource *originalHealth = [weakSelf healthSourceWithDateTime:weakSelf.dateTime];
             
-            int a = abs([originalHealth.step intValue] - [clickHealth.step intValue]);
+            NSInteger stepABS = labs([originalHealth.step integerValue] - [clickHealth.step integerValue]);
+            weakSelf.originalStep = [originalHealth.step integerValue];
+            weakSelf.clickStep = [clickHealth.step integerValue];
+            if (weakSelf.originalStep < weakSelf.clickStep) {
+                weakSelf.isStepAdd = YES;
+            }
+            [NSTimer scheduledTimerWithTimeInterval:1.f / stepABS target:weakSelf selector:@selector(stepTimerAction:) userInfo:nil repeats:YES];
             
-            [NSTimer scheduledTimerWithTimeInterval:1.f / a target:weakSelf selector:@selector(stepTimerAction) userInfo:nil repeats:YES];
-                    
-                    
+            
+            
+            
+            weakSelf.originalFloor = [originalHealth.floor integerValue];
+            weakSelf.clickFloor = [clickHealth.floor integerValue];
+            NSInteger floorABS = labs(weakSelf.originalFloor - weakSelf.clickFloor);
+            if (weakSelf.originalFloor < weakSelf.clickFloor) {
+                weakSelf.isFloorAdd = YES;
+            }
+            [NSTimer scheduledTimerWithTimeInterval:1.f / floorABS target:weakSelf selector:@selector(floorTimerAction:) userInfo:nil repeats:YES];
+            
+            
+            
+            weakSelf.originalKM = [originalHealth.km doubleValue];
+            weakSelf.clickKM = [clickHealth.km doubleValue];
+            double kmABS = fabs(weakSelf.originalKM - weakSelf.clickKM);
+            if (weakSelf.originalKM < weakSelf.clickKM) {
+                weakSelf.isKMAdd = YES;
+            }
+            
+            [NSTimer scheduledTimerWithTimeInterval:1.f / (kmABS * 100) target:weakSelf selector:@selector(kmTimerAction:) userInfo:nil repeats:YES];
+            
+            
+            
+            weakSelf.originalEnergy = weakSelf.originalStep / 30;
+            weakSelf.clickEnergy = weakSelf.clickStep / 30;
+            NSInteger energyABS = labs(weakSelf.originalEnergy - weakSelf.clickEnergy);
+            if (weakSelf.originalEnergy < weakSelf.clickEnergy) {
+                weakSelf.isEnergyAdd = YES;
+            }
+            [NSTimer scheduledTimerWithTimeInterval:1.f / energyABS target:weakSelf selector:@selector(energyTimerAction:) userInfo:nil repeats:YES];
+            
+            
+            
+            
+            CGFloat originalPercentFloat = [originalHealth.step doubleValue] / self.goalStep;
+            weakSelf.originalPercent = originalPercentFloat * 100;
+            CGFloat clickPercentFloat = [clickHealth.step doubleValue] / self.goalStep;
+            weakSelf.clickPercent = clickPercentFloat * 100;
+            NSInteger percentABS = labs(weakSelf.originalPercent - weakSelf.clickPercent);
+            if (weakSelf.originalPercent < weakSelf.clickPercent) {
+                weakSelf.isPercentAdd = YES;
+            }
+            [NSTimer scheduledTimerWithTimeInterval:1.f / percentABS target:weakSelf selector:@selector(percentTimerAction:) userInfo:nil repeats:YES];
+            
+            
+            
+            weakSelf.originalImageNum = originalPercentFloat * 55;
+            weakSelf.clickImageNum = clickPercentFloat * 55;
+            NSInteger imageNumABS = labs(weakSelf.originalImageNum - weakSelf.clickImageNum);
+            if (weakSelf.originalImageNum < weakSelf.clickImageNum) {
+                weakSelf.isImageNumAdd = YES;
+            }
+            [NSTimer scheduledTimerWithTimeInterval:1.f / imageNumABS target:weakSelf selector:@selector(imageTimerAction:) userInfo:nil repeats:YES];
+            
             
             
             
@@ -182,8 +309,105 @@ PNChartDelegate
     
 
 }
+- (void)imageTimerAction:(NSTimer *)timer {
 
-- (void)stepTimerAction {
+    if (self.isImageNumAdd) {
+        self.originalImageNum += 1;
+    } else {
+        
+        self.originalImageNum -= 1;
+    }
+    
+    
+    NSInteger tamp = self.originalImageNum;
+    
+    if (tamp > 55) {
+        tamp = 55;
+    }
+    
+    self.runImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"activity_circle-%ld_150x130_@2x", tamp]];
+    
+    
+    if (self.originalImageNum == self.clickImageNum) {
+        [timer invalidate];
+    }
+    
+
+}
+
+- (void)percentTimerAction:(NSTimer *)timer {
+    if (self.isPercentAdd) {
+        self.originalPercent += 1;
+    } else {
+        
+        self.originalPercent -= 1;
+    }
+    self.percentLabel.text = [NSString stringWithFormat:@"%ld%% 已经完成", self.originalPercent];
+    
+    if ([self.percentLabel.text isEqualToString:[NSString stringWithFormat:@"%ld%% 已经完成", self.clickPercent]]) {
+        [timer invalidate];
+    }
+
+}
+
+- (void)stepTimerAction:(NSTimer *)timer {
+    if (self.isStepAdd) {
+        self.originalStep += 1;
+    } else {
+    
+        self.originalStep -= 1;
+    }
+    self.stepLabel.text = [NSString stringWithFormat:@"%ld", self.originalStep];
+    
+    if ([self.stepLabel.text isEqualToString:[NSString stringWithFormat:@"%ld", self.clickStep]]) {
+        [timer invalidate];
+    }
+
+}
+
+- (void)energyTimerAction:(NSTimer *)timer {
+    if (self.isEnergyAdd) {
+        self.originalEnergy += 1;
+    } else {
+        
+        self.originalEnergy -= 1;
+    }
+    self.energyLabel.text = [NSString stringWithFormat:@"%ld", self.originalEnergy];
+    
+    if ([self.energyLabel.text isEqualToString:[NSString stringWithFormat:@"%ld", self.clickEnergy]]) {
+        [timer invalidate];
+    }
+    
+}
+
+- (void)floorTimerAction:(NSTimer *)timer {
+    if (self.isFloorAdd) {
+        self.originalFloor += 1;
+    } else {
+        
+        self.originalFloor -= 1;
+    }
+    self.floorLabel.text = [NSString stringWithFormat:@"%ld", self.originalFloor];
+    
+    if ([self.floorLabel.text isEqualToString:[NSString stringWithFormat:@"%ld", self.clickFloor]]) {
+        [timer invalidate];
+    }
+
+
+}
+
+- (void)kmTimerAction:(NSTimer *)timer {
+    if (self.isKMAdd) {
+        self.originalKM += 0.01;
+    } else {
+        
+        self.originalKM -= 0.01;
+    }
+    self.kmLabel.text = [NSString stringWithFormat:@"%.2f", self.originalKM];
+    
+    if ([self.kmLabel.text isEqualToString:[NSString stringWithFormat:@"%.2f", self.clickKM]]) {
+        [timer invalidate];
+    }
 
 }
 
@@ -235,7 +459,7 @@ PNChartDelegate
 
 }
 
-#pragma mark - guo work space
+
 
 - (void)initHKHealth{
     
@@ -245,10 +469,92 @@ PNChartDelegate
 
     manager.days = 10;
     
+    manager.delegate = self;
     
-    dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [manager getIphoneHealthData];
-        
+    
+//    
+//    manager.blockSteps = ^(NSArray *stepArray, BOOL flag) {
+//        
+//    
+//        NSLog(@"%@,%d", stepArray, flag);
+//        if (flag) {
+//            self.healthArray = [NSMutableArray array];
+//            for (int i = 0; i < manager.healthSteps.count; i++) {
+//                PLHealthSource *health = [[PLHealthSource alloc] init];
+//                health.step = manager.healthSteps[i][@"value"];
+//                health.km = manager.healthDistances[i][@"step and running"];
+//                health.floor = manager.healthStairsClimbed[i][@"value"];
+//                health.dateTime = manager.healthSteps[i][@"dateTime"];
+//                [weakSelf.healthArray addObject:health];
+//            }
+//        }
+//        
+//    };
+//    manager.blockDistances = ^(NSArray *distanceArray, BOOL flag) {
+//    
+//        NSLog(@"%@, %d", distanceArray, flag);
+//        if (flag) {
+//            self.healthArray = [NSMutableArray array];
+//            for (int i = 0; i < manager.healthSteps.count; i++) {
+//                PLHealthSource *health = [[PLHealthSource alloc] init];
+//                health.step = manager.healthSteps[i][@"value"];
+//                health.km = manager.healthDistances[i][@"step and running"];
+//                health.floor = manager.healthStairsClimbed[i][@"value"];
+//                health.dateTime = manager.healthSteps[i][@"dateTime"];
+//                [weakSelf.healthArray addObject:health];
+//            }
+//        }
+//    };
+//    manager.blockStairs = ^ (NSArray *stairsArray, BOOL flag) {
+//        NSLog(@"%@, %d", stairsArray, flag);
+//        if (flag) {
+//            self.healthArray = [NSMutableArray array];
+//            for (int i = 0; i < manager.healthSteps.count; i++) {
+//                PLHealthSource *health = [[PLHealthSource alloc] init];
+//                health.step = manager.healthSteps[i][@"value"];
+//                health.km = manager.healthDistances[i][@"step and running"];
+//                health.floor = manager.healthStairsClimbed[i][@"value"];
+//                health.dateTime = manager.healthSteps[i][@"dateTime"];
+//                [weakSelf.healthArray addObject:health];
+//            }
+//        }
+//    
+//    };
+    
+    
+    
+    
+    
+
+    
+}
+
+- (void)managerWithStairsArray:(NSArray *)stairsArray flag:(BOOL)flag {
+
+    NSLog(@"%@ %d", stairsArray, flag);
+    [self getSourceWithArray:stairsArray flag:flag];
+}
+
+- (void)managerWithDistancesArray:(NSArray *)distanceArray flag:(BOOL)flag {
+
+    NSLog(@"%@ %d", distanceArray, flag);
+    [self getSourceWithArray:distanceArray flag:flag];
+}
+
+- (void)managerWithStepArray:(NSArray *)stepArray flag:(BOOL)flag {
+    NSLog(@"%@ %d", stepArray, flag);
+    
+    [self getSourceWithArray:stepArray flag:flag];
+}
+
+
+
+- (void)getSourceWithArray:(NSArray *)array flag:(BOOL)flag {
+    
+    PLHealthManager *manager = [PLHealthManager shareInstance];
+    
+    
+    if (flag) {
         self.healthArray = [NSMutableArray array];
         for (int i = 0; i < manager.healthSteps.count; i++) {
             PLHealthSource *health = [[PLHealthSource alloc] init];
@@ -258,11 +564,32 @@ PNChartDelegate
             health.dateTime = manager.healthSteps[i][@"dateTime"];
             [self.healthArray addObject:health];
         }
-    });
-    
-
-    
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            PLHealthSource *todayHealthy = _healthArray.lastObject;
+            self.floorLabel.text = todayHealthy.floor;
+            self.kmLabel.text = todayHealthy.km;
+            self.stepLabel.text = todayHealthy.step;
+            self.energyLabel.text =  [NSString stringWithFormat:@"%ld", [todayHealthy.step integerValue] / 30];
+            CGFloat percentFloat = [todayHealthy.step doubleValue] / self.goalStep;
+            NSInteger percentInteger = percentFloat * 100;
+            self.percentLabel.text = [NSString stringWithFormat:@"%ld%% 已经完成", percentInteger];
+            
+            self.runImageNum = 55 * percentFloat;
+            if (_runImageNum > 55) {
+                _runImageNum = 55;
+            }
+            self.runImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"activity_circle-%ld_150x130_@2x", _runImageNum]];
+            
+            
+            
+        });
+        
+    }
 }
+
+
 
 - (void)createRunNowButton {
     
@@ -278,6 +605,35 @@ PNChartDelegate
         [self presentViewController:runNowVC animated:YES completion:nil];
     }];
 
+}
+
+
+- (void)userDefauls {
+    [[PLDataBaseManager shareManager] createPersonTable];
+    NSUserDefaults *userDefauls1 = [NSUserDefaults standardUserDefaults];
+    
+    if (![userDefauls1 boolForKey:@"notFirst"]) {
+        
+        NSUserDefaults *userDefauls2 = [NSUserDefaults standardUserDefaults];
+        [userDefauls2 setBool:YES forKey:@"notFirst"];
+        
+        PLPersonInformation *person = [[PLPersonInformation alloc] init];
+        person.gender = @"男";
+        person.brithday = 1994;
+        person.height = 178;
+        person.goalWeight = 60.3f;
+        person.goalStep = 10000;
+        
+        [[PLDataBaseManager shareManager] insertPerson:person];
+        
+        
+    }
+    
+    PLPersonInformation *person1 = [[PLDataBaseManager shareManager] personInformation];
+    
+    self.goalLabel.text = [NSString stringWithFormat:@"目标: %ld", person1.goalStep];
+    self.goalStep = person1.goalStep;
+    
 }
 
 #pragma mark - 时间段柱状图

@@ -15,6 +15,9 @@
     HKHealthStore  *store;    
 }
 
+@property (nonatomic, assign) BOOL flag1;
+@property (nonatomic, assign) BOOL flag2;
+@property (nonatomic, assign) BOOL flag3;
 
 
 
@@ -66,6 +69,7 @@
             [self getHealthStepData];
             [self getHealthDistanceData];
             [self getHealthStairsClimbedData];
+            
         });
         
     }];
@@ -145,7 +149,24 @@
         }
         
         
-        NSLog(@"步数: %@", self.healthSteps);
+//        NSLog(@"步数: %@", self.healthSteps);
+//        if (self.blockSteps) {
+//            self.flag1 = YES;
+//            BOOL flag = NO;
+//            if (self.flag1 && self.flag2 && self.flag3) {
+//                flag = YES;
+//            }
+//            self.blockSteps(self.healthSteps, flag);
+//        }
+        
+        if ([self.delegate respondsToSelector:@selector(managerWithStepArray:flag:)]) {
+            self.flag1 = YES;
+            BOOL flag = NO;
+            if (self.flag1 && self.flag2 && self.flag3) {
+                flag = YES;
+            }
+            [self.delegate managerWithStepArray:self.healthSteps flag:flag];
+        }
         
     };
     
@@ -205,7 +226,25 @@
             [self.healthDistances addObject:dic];
         }
         
-        NSLog(@"走和跑的距离：%@",self.healthDistances);
+//        NSLog(@"走和跑的距离：%@",self.healthDistances);
+        
+//        if (self.blockDistances) {
+//            self.flag2 = YES;
+//            BOOL flag = NO;
+//            if (self.flag1 && self.flag2 && self.flag3) {
+//                flag = YES;
+//            }
+//            self.blockDistances(self.healthDistances, flag);
+//        }
+//        
+        if ([self.delegate respondsToSelector:@selector(managerWithDistancesArray:flag:)]) {
+            self.flag2 = YES;
+            BOOL flag = NO;
+            if (self.flag1 && self.flag2 && self.flag3) {
+                flag = YES;
+            }
+            [self.delegate managerWithDistancesArray:self.healthDistances flag:flag];
+        }
     };
     
     [healthStore executeQuery:query];
@@ -276,8 +315,25 @@
         }
         
         
-        NSLog(@"楼层: %@", self.healthStairsClimbed);
+//        NSLog(@"楼层: %@", self.healthStairsClimbed);
+//        if (self.blockStairs) {
+//            self.flag3 = YES;
+//            BOOL flag = NO;
+//            if (self.flag1 && self.flag2 && self.flag3) {
+//                flag = YES;
+//            }
+//            self.blockStairs(self.healthStairsClimbed, flag);
+//        }
         
+        
+        if ([self.delegate respondsToSelector:@selector(managerWithStairsArray:flag:)]) {
+            self.flag3 = YES;
+            BOOL flag = NO;
+            if (self.flag1 && self.flag2 && self.flag3) {
+                flag = YES;
+            }
+            [self.delegate managerWithStepArray:self.healthStairsClimbed flag:flag];
+        }
     };
     
     [healthStore executeQuery:query];

@@ -168,7 +168,6 @@ UITextFieldDelegate
            
 
             
-            
             [((PLMineViewController *)[self ml_viewController]).tableView reloadData];
             
             
@@ -211,7 +210,6 @@ UITextFieldDelegate
     
     
     
-    
     PLBounceWeightView *bounceWeight = [[NSBundle mainBundle] loadNibNamed:@"PLBounceWeightView" owner:nil options:nil].lastObject;
     bounceWeight.layer.cornerRadius = 10.f;
     bounceWeight.delegate = self;
@@ -222,6 +220,8 @@ UITextFieldDelegate
     
 
 }
+
+
 
 - (UIViewController *)ml_viewController {
     for (UIView* next = [self superview]; next; next = next.superview) {
