@@ -85,25 +85,28 @@
 
 // 当天时间段
 - (NSPredicate *)predicateForSamplesToday {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDate *now = [NSDate date];
-    NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:now];
-    [components setHour:0];
-    [components setMinute:0];
-    [components setSecond: 0];
+    NSDate *endDate = [NSDate date];
     
-    NSDate *startDate = [calendar dateFromComponents:components];
-    NSDate *endDate = [calendar dateByAddingUnit:NSCalendarUnitDay value:_days toDate:startDate options:0];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:endDate];
+    [components setHour:24];
+    [components setMinute:0];
+    [components setSecond:0];
+    NSDate *date = [calendar dateFromComponents:components];
+    
+    NSDate *startDate = [NSDate dateWithTimeInterval:-(_days) * 24 * 60 * 60 sinceDate:date];
+    NSLog(@"%@", startDate);
+    NSLog(@"%@", endDate);
     NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:startDate endDate:endDate options:HKQueryOptionNone];
     return predicate;
 }
 
-//获取步数
+// 获取每段时间的步数
 - (void)getStepCount:(void (^)(double, NSArray *, NSError *))completion {
-    HKQuantityType *stepType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
-    NSSortDescriptor *timeSortDescriptor = [[NSSortDescriptor alloc] initWithKey:HKSampleSortIdentifierEndDate ascending:NO];
     
-    // Since we are interested in retrieving the user's latest sample, we sort the samples in descending order, and set the limit to 1. We are not filtering the data, and so the predicate is set to nil.
+    HKQuantityType *stepType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
+    NSSortDescriptor *timeSortDescriptor = [[NSSortDescriptor alloc] initWithKey:HKSampleSortIdentifierStartDate ascending:NO];
+    
     HKSampleQuery *query = [[HKSampleQuery alloc] initWithSampleType:stepType predicate:[self predicateForSamplesToday] limit:HKObjectQueryNoLimit sortDescriptors:@[timeSortDescriptor] resultsHandler:^(HKSampleQuery *query, NSArray *results, NSError *error) {
         if(error)
         {
@@ -116,22 +119,59 @@
             for(HKQuantitySample *quantitySample in results)
             {
                 double totleSteps = [quantitySample.quantity doubleValueForUnit:[HKUnit countUnit]];
-                
+                NSString *stepString = [NSString stringWithFormat:@"%lf", totleSteps];
                 NSDate *time = quantitySample.startDate;
-                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                [formatter setDateFormat:@"yyyy-MM-dd"];
-                NSString *timeString = [formatter stringFromDate:time];
-                NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:timeString, @"time", totleSteps, @"steps", nil];
-                allSteps = allSteps + totleSteps;
+ 
+
+                NSDictionary *dic = @{@"dateTime" : time, @"value" : stepString};
                 [array addObject:dic];
+                allSteps = allSteps + totleSteps;
             }
-            NSLog(@"array---------%@", array);
-            completion(allSteps, array, error);
+            if (_isDay == YES) {
+                completion(allSteps, [[[self getArrayByDay:array] reverseObjectEnumerator] allObjects], error);
+            } else {
+                completion(allSteps, array, error);
+            }
         }
     }];
     
     [self.healthStore executeQuery:query];
 }
+
+- (NSArray *)getArrayByDay:(NSArray *)array {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:[NSDate date]];
+    [components setHour:24];
+    [components setMinute:0];
+    [components setSecond:0];
+    NSDate *date2 = [calendar dateFromComponents:components];
+    NSMutableArray *array2 = [NSMutableArray array];
+    NSInteger sum = 0;
+    NSInteger b = 24 * 60 * 60;
+    NSDate *date = [[NSDate alloc] init];
+    for (int i = 0; i < array.count; i++) {
+        NSDictionary *dic = array[i];
+        NSDate *date1 = [dic valueForKey:@"dateTime"];
+        NSString *string = [dic valueForKey:@"value"];
+        double a = [string doubleValue];
+        NSTimeInterval between = [date2 timeIntervalSinceDate:date1];
+        if (between < b && i < array.count - 1) {
+            sum = sum + a;
+            date = date1;
+        }else {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"yyyy-MM-dd"];
+            NSString *timeString = [formatter stringFromDate:date];
+            NSDictionary *dic2 = @{@"dateTime" : timeString, @"value" : [NSString stringWithFormat:@"%ld", sum]};
+            [array2 addObject:dic2];
+            sum = 0;
+            sum = sum + a;
+            b = b + 24 * 60 * 60;
+        }
+    }
+    return array2;
+}
+
 
 //获取公里数
 - (void)getDistance:(void (^)(double, NSArray *, NSError *))completion {
@@ -161,7 +201,9 @@
     [self.healthStore executeQuery:query];
 }
 
-
+- (void)getKilocalorie:(void (^)(double, NSArray *, NSError *))completion {
+    
+}
 
 
 
