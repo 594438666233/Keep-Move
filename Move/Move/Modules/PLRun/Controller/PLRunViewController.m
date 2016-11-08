@@ -73,18 +73,24 @@ PNChartDelegate
                     NSMutableArray *xArray = [NSMutableArray array];
                     NSMutableArray *yArray = [NSMutableArray array];
                     for (int i = 0; i < 96; i++) {
-                        for (int j = 0; j < array.count; j++) {
-                            NSDictionary *dic = array[j];
-                            NSDate *date2 = [dic valueForKey:@"dateTime"];
-                            NSTimeInterval time = [date2 timeIntervalSinceDate:date1];
-                            if (i == (int)(time / 86400 * 96 + 0.5)) {
-                                [yArray addObject:[dic valueForKey:@"value"]];
-                                break;
-                            }
-                            if (j == array.count - 1) {
-                                [yArray addObject:@"0"];
+                        if (array.count > 0) {
+                            for (int j = 0; j < array.count; j++) {
+                                NSDictionary *dic = array[j];
+                                NSDate *date2 = [dic valueForKey:@"dateTime"];
+                                NSTimeInterval time = [date2 timeIntervalSinceDate:date1];
+                                if (i == (int)(time / 86400 * 96 + 0.5)) {
+                                    [yArray addObject:[dic valueForKey:@"value"]];
+                                    break;
+                                }
+                                if (j == array.count - 1) {
+                                    [yArray addObject:@"0"];
+                                }
                             }
                         }
+                        else {
+                            [yArray addObject:@"0"];
+                        }
+
                         [xArray addObject:@""];
                     }
                     
