@@ -90,7 +90,17 @@ PLHealthManagerDelegate
 
 @property (nonatomic, assign) BOOL isImageNumAdd;
 
+@property (nonatomic, strong) NSTimer *stepTimer;
 
+@property (nonatomic, strong) NSTimer *energyTimer;
+
+@property (nonatomic, strong) NSTimer *floorTimer;
+
+@property (nonatomic, strong) NSTimer *kmTimer;
+
+@property (nonatomic, strong) NSTimer *imageTimer;
+
+@property (nonatomic, strong) NSTimer *percentTimer;
 
 @end
 
@@ -144,8 +154,10 @@ PLHealthManagerDelegate
     [navigationTitleView addSubview:calendarImage];
     
     self.calendarLabel = [[UILabel alloc] initWithFrame:CGRectMake(28, 0, 80, 25)];
-    
-    _calendarLabel.text = @"11月04日";
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@" MM月dd日"];
+    NSString *dateTime = [formatter stringFromDate:[NSDate date]];
+    _calendarLabel.text = dateTime;
     _calendarLabel.textColor = [UIColor whiteColor];
     [navigationTitleView addSubview:_calendarLabel];
     
@@ -195,6 +207,13 @@ PLHealthManagerDelegate
             
         } completion:^(BOOL finished) {
      
+            [weakSelf.stepTimer invalidate];
+            [weakSelf.energyTimer invalidate];
+            [weakSelf.floorTimer invalidate];
+            [weakSelf.kmTimer invalidate];
+            [weakSelf.percentTimer invalidate];
+            [weakSelf.imageTimer invalidate];
+            weakSelf.imageTimer = nil;
             weakSelf.isStepAdd = NO;
             weakSelf.isKMAdd = NO;
             weakSelf.isFloorAdd = NO;
@@ -207,82 +226,85 @@ PLHealthManagerDelegate
             
             
             
+//            dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             
-            PLHealthSource *clickHealth = [weakSelf healthSourceWithDateTime:weakSelf.clickDateTime];
-            PLHealthSource *originalHealth = [weakSelf healthSourceWithDateTime:weakSelf.dateTime];
+
+                
+                PLHealthSource *clickHealth = [weakSelf healthSourceWithDateTime:weakSelf.clickDateTime];
+                PLHealthSource *originalHealth = [weakSelf healthSourceWithDateTime:weakSelf.dateTime];
+                
+                NSInteger stepABS = labs([originalHealth.step integerValue] - [clickHealth.step integerValue]);
+                weakSelf.originalStep = [originalHealth.step integerValue];
+                weakSelf.clickStep = [clickHealth.step integerValue];
+                if (weakSelf.originalStep < weakSelf.clickStep) {
+                    weakSelf.isStepAdd = YES;
+                }
+                weakSelf.stepTimer = [NSTimer scheduledTimerWithTimeInterval:1.f / stepABS target:weakSelf selector:@selector(stepTimerAction:) userInfo:nil repeats:YES];
+                
+                
+                
+                
+                weakSelf.originalFloor = [originalHealth.floor integerValue];
+                weakSelf.clickFloor = [clickHealth.floor integerValue];
+                NSInteger floorABS = labs(weakSelf.originalFloor - weakSelf.clickFloor);
+                if (weakSelf.originalFloor < weakSelf.clickFloor) {
+                    weakSelf.isFloorAdd = YES;
+                }
+                weakSelf.floorTimer = [NSTimer scheduledTimerWithTimeInterval:1.f / floorABS target:weakSelf selector:@selector(floorTimerAction:) userInfo:nil repeats:YES];
+                
+                
+                
+                weakSelf.originalKM = [originalHealth.km doubleValue];
+                weakSelf.clickKM = [clickHealth.km doubleValue];
+                double kmABS = fabs(weakSelf.originalKM - weakSelf.clickKM);
+                if (weakSelf.originalKM < weakSelf.clickKM) {
+                    weakSelf.isKMAdd = YES;
+                }
+                
+                weakSelf.kmTimer = [NSTimer scheduledTimerWithTimeInterval:1.f / (kmABS * 100) target:weakSelf selector:@selector(kmTimerAction:) userInfo:nil repeats:YES];
+                
+                
+                
+                weakSelf.originalEnergy = weakSelf.originalStep / 30;
+                weakSelf.clickEnergy = weakSelf.clickStep / 30;
+                NSInteger energyABS = labs(weakSelf.originalEnergy - weakSelf.clickEnergy);
+                if (weakSelf.originalEnergy < weakSelf.clickEnergy) {
+                    weakSelf.isEnergyAdd = YES;
+                }
+                weakSelf.energyTimer = [NSTimer scheduledTimerWithTimeInterval:1.f / energyABS target:weakSelf selector:@selector(energyTimerAction:) userInfo:nil repeats:YES];
+                
+                
+                
+                
+                CGFloat originalPercentFloat = [originalHealth.step doubleValue] / self.goalStep;
+                weakSelf.originalPercent = originalPercentFloat * 100;
+                CGFloat clickPercentFloat = [clickHealth.step doubleValue] / self.goalStep;
+                weakSelf.clickPercent = clickPercentFloat * 100;
+                NSInteger percentABS = labs(weakSelf.originalPercent - weakSelf.clickPercent);
+                if (weakSelf.originalPercent < weakSelf.clickPercent) {
+                    weakSelf.isPercentAdd = YES;
+                }
+                weakSelf.percentTimer = [NSTimer scheduledTimerWithTimeInterval:1.f / percentABS target:weakSelf selector:@selector(percentTimerAction:) userInfo:nil repeats:YES];
+                
+                
+                
+                weakSelf.originalImageNum = originalPercentFloat * 55;
+                weakSelf.clickImageNum = clickPercentFloat * 55;
+                NSInteger imageNumABS = labs(weakSelf.originalImageNum - weakSelf.clickImageNum);
+                if (weakSelf.originalImageNum < weakSelf.clickImageNum) {
+                    weakSelf.isImageNumAdd = YES;
+                }
+                weakSelf.imageTimer = [NSTimer scheduledTimerWithTimeInterval:1.f / imageNumABS target:weakSelf selector:@selector(imageTimerAction:) userInfo:nil repeats:YES];
+                
             
-            NSInteger stepABS = labs([originalHealth.step integerValue] - [clickHealth.step integerValue]);
-            weakSelf.originalStep = [originalHealth.step integerValue];
-            weakSelf.clickStep = [clickHealth.step integerValue];
-            if (weakSelf.originalStep < weakSelf.clickStep) {
-                weakSelf.isStepAdd = YES;
-            }
-            [NSTimer scheduledTimerWithTimeInterval:1.f / stepABS target:weakSelf selector:@selector(stepTimerAction:) userInfo:nil repeats:YES];
-            
-            
-            
-            
-            weakSelf.originalFloor = [originalHealth.floor integerValue];
-            weakSelf.clickFloor = [clickHealth.floor integerValue];
-            NSInteger floorABS = labs(weakSelf.originalFloor - weakSelf.clickFloor);
-            if (weakSelf.originalFloor < weakSelf.clickFloor) {
-                weakSelf.isFloorAdd = YES;
-            }
-            [NSTimer scheduledTimerWithTimeInterval:1.f / floorABS target:weakSelf selector:@selector(floorTimerAction:) userInfo:nil repeats:YES];
-            
-            
-            
-            weakSelf.originalKM = [originalHealth.km doubleValue];
-            weakSelf.clickKM = [clickHealth.km doubleValue];
-            double kmABS = fabs(weakSelf.originalKM - weakSelf.clickKM);
-            if (weakSelf.originalKM < weakSelf.clickKM) {
-                weakSelf.isKMAdd = YES;
-            }
-            
-            [NSTimer scheduledTimerWithTimeInterval:1.f / (kmABS * 100) target:weakSelf selector:@selector(kmTimerAction:) userInfo:nil repeats:YES];
-            
-            
-            
-            weakSelf.originalEnergy = weakSelf.originalStep / 30;
-            weakSelf.clickEnergy = weakSelf.clickStep / 30;
-            NSInteger energyABS = labs(weakSelf.originalEnergy - weakSelf.clickEnergy);
-            if (weakSelf.originalEnergy < weakSelf.clickEnergy) {
-                weakSelf.isEnergyAdd = YES;
-            }
-            [NSTimer scheduledTimerWithTimeInterval:1.f / energyABS target:weakSelf selector:@selector(energyTimerAction:) userInfo:nil repeats:YES];
-            
-            
-            
-            
-            CGFloat originalPercentFloat = [originalHealth.step doubleValue] / self.goalStep;
-            weakSelf.originalPercent = originalPercentFloat * 100;
-            CGFloat clickPercentFloat = [clickHealth.step doubleValue] / self.goalStep;
-            weakSelf.clickPercent = clickPercentFloat * 100;
-            NSInteger percentABS = labs(weakSelf.originalPercent - weakSelf.clickPercent);
-            if (weakSelf.originalPercent < weakSelf.clickPercent) {
-                weakSelf.isPercentAdd = YES;
-            }
-            [NSTimer scheduledTimerWithTimeInterval:1.f / percentABS target:weakSelf selector:@selector(percentTimerAction:) userInfo:nil repeats:YES];
-            
-            
-            
-            weakSelf.originalImageNum = originalPercentFloat * 55;
-            weakSelf.clickImageNum = clickPercentFloat * 55;
-            NSInteger imageNumABS = labs(weakSelf.originalImageNum - weakSelf.clickImageNum);
-            if (weakSelf.originalImageNum < weakSelf.clickImageNum) {
-                weakSelf.isImageNumAdd = YES;
-            }
-            [NSTimer scheduledTimerWithTimeInterval:1.f / imageNumABS target:weakSelf selector:@selector(imageTimerAction:) userInfo:nil repeats:YES];
-            
-            
-            
+//            });
             
             
             
             ////
             weakSelf.dateTime = weakSelf.clickDateTime;
-                
-                
+            
+            
             
             
             
