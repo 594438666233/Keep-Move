@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) HKHealthStore *healthStore;
 @property (nonatomic, assign) NSInteger days;
+@property (nonatomic, assign) BOOL isDay;
 
 + (id)shareInstance;
 
@@ -23,5 +24,8 @@
 - (void)getStepCount:(void(^)(double value, NSArray *array,NSError *error))completion;
 
 - (void)getDistance:(void(^)(double value, NSArray *array,NSError *error))completion;
+
+- (void)getKilocalorie:(void(^)(double value, NSArray *array,NSError *error))completion;
+
 
 @end

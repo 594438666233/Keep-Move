@@ -8,6 +8,7 @@
 
 #import "PLXCalorieViewController.h"
 #import "PLXTouchView.h"
+#import "PLXHealthManager.h"
 
 @interface PLXCalorieViewController ()
 <
@@ -26,26 +27,50 @@ PNChartDelegate
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [_barChart strokeChart];
     
-    for (int i = 0; i < 7; i++) {
-        PNBar *bar =  _barChart.bars[i];
-        CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
-        gradientLayer.colors = @[(__bridge id)[UIColor colorWithRed:1 green:0.8 blue:0 alpha:1].CGColor, (__bridge id)[UIColor colorWithRed:1 green:0.2 + 0.6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * (1 - bar.grade) blue:0 alpha:1].CGColor];
-        gradientLayer.startPoint = CGPointMake(0, 1);
-        gradientLayer.endPoint = CGPointMake(0, 0);
-        
-        gradientLayer.frame = CGRectMake(0, bar.frame.size.height, bar.frame.size.width, bar.frame.size.height * bar.grade);
-        [bar.layer addSublayer:gradientLayer];
-        
-        CABasicAnimation *positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
-        positionAnimation.duration = 0.5f;
-        positionAnimation.removedOnCompletion = NO;
-        positionAnimation.fillMode = kCAFillModeForwards;
-        positionAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(gradientLayer.position.x, gradientLayer.position.y - bar.frame.size.height * bar.grade)];
-        
-        [gradientLayer addAnimation:positionAnimation forKey:@"position"];
-    }
+    PLXHealthManager *manager = [PLXHealthManager shareInstance];
+    manager.days = 7;
+    manager.isDay = YES;
+    [manager authorizeHealthKit:^(BOOL success, NSError *error) {
+        if (success) {
+            NSLog(@"success");
+            [manager getStepCount:^(double value, NSArray *array, NSError *error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _sumLabel.text = [NSString stringWithFormat:@"%.0lf", value / 50];
+                    _avgLabel.text = [NSString stringWithFormat:@"%.0lf", value / 7 / 50];
+                    NSMutableArray *valueArray = [NSMutableArray arrayWithArray:@[@"0", @"0", @"0", @"0", @"0", @"0", @"0"]];
+                    //                    NSMutableArray *timeArray = [NSMutableArray array];
+                    for (NSDictionary *dic in array) {
+                        CGFloat value1 = [[dic objectForKey:@"value"] floatValue] / 50;
+                        [valueArray addObject:[NSString stringWithFormat:@"%.0lf", value1]];
+                    }
+                    [_barChart setYValues:valueArray];
+                    [_barChart strokeChart];
+                    
+                    
+                    for (int i = 0; i < 7; i++) {
+                        PNBar *bar =  _barChart.bars[i];
+                        CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
+                        gradientLayer.colors = @[(__bridge id)[UIColor colorWithRed:1 green:0.8 blue:0 alpha:1].CGColor, (__bridge id)[UIColor colorWithRed:1 green:0.2 + 0.6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * (1 - bar.grade) blue:0 alpha:1].CGColor];
+                        gradientLayer.startPoint = CGPointMake(0, 1);
+                        gradientLayer.endPoint = CGPointMake(0, 0);
+                        
+                        gradientLayer.frame = CGRectMake(0, bar.frame.size.height, bar.frame.size.width, bar.frame.size.height * bar.grade);
+                        [bar.layer addSublayer:gradientLayer];
+                        
+                        CABasicAnimation *positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
+                        positionAnimation.duration = 0.5f;
+                        positionAnimation.removedOnCompletion = NO;
+                        positionAnimation.fillMode = kCAFillModeForwards;
+                        positionAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(gradientLayer.position.x, gradientLayer.position.y - bar.frame.size.height * bar.grade)];
+                        
+                        [gradientLayer addAnimation:positionAnimation forKey:@"position"];
+                    }
+                    
+                });
+            }];
+        }
+    }];
 }
 
 - (void)viewDidLoad {
@@ -105,9 +130,39 @@ PNChartDelegate
     _barChart.backgroundColor = [UIColor clearColor];
     [_barChart setStrokeColor:[UIColor clearColor]];
     
-    [_barChart setXLabels:@[@"周一", @"周二", @"周三", @"周四", @"周五", @"周六", @"周日"]];
-    [_barChart setYValues:@[@100, @20, @200, @124, @111, @56, @88]];
+    NSMutableArray *weekArray = [NSMutableArray array];
+    for (int i = 0; i < 7; i++) {
+        NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *comps = [calendar components:NSWeekdayCalendarUnit fromDate:[NSDate dateWithTimeIntervalSinceNow:24 * 60 * 60 * (i + 1)]];
+        switch ([comps weekday]) {
+            case 1:
+                [weekArray addObject:@"周日"];
+                break;
+            case 2:
+                [weekArray addObject:@"周一"];
+                break;
+            case 3:
+                [weekArray addObject:@"周二"];
+                break;
+            case 4:
+                [weekArray addObject:@"周三"];
+                break;
+            case 5:
+                [weekArray addObject:@"周四"];
+                break;
+            case 6:
+                [weekArray addObject:@"周五"];
+                break;
+            default:
+                [weekArray addObject:@"周六"];
+                break;
+        }
+    }
+    
+    [_barChart setXLabels:weekArray];
+    [_barChart setYValues:@[@"0", @"0", @"0", @"0", @"0", @"0", @"0"]];
     _barChart.delegate = self;
+
     
     [self.view addSubview:_barChart];
     

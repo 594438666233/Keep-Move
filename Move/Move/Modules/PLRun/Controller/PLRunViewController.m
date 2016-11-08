@@ -13,6 +13,7 @@
 #import "MyCalendarItem.h"
 #import "PLHealthSource.h"
 #import "PLPersonInformation.h"
+#import "PLXHealthManager.h"
 @interface PLRunViewController ()
 <
 UIGestureRecognizerDelegate,
@@ -125,6 +126,58 @@ PLHealthManagerDelegate
     
     
     
+
+    
+    PLXHealthManager *manager = [PLXHealthManager shareInstance];
+    manager.days = 1;
+    manager.isDay = NO;
+    [manager authorizeHealthKit:^(BOOL success, NSError *error) {
+        if (success) {
+            NSLog(@"success");
+            [manager getStepCount:^(double value, NSArray *array, NSError *error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    NSCalendar *calendar = [NSCalendar currentCalendar];
+                    NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:[NSDate date]];
+                    [components setHour:0];
+                    [components setMinute:0];
+                    [components setSecond:0];
+                    NSDate *date1 = [calendar dateFromComponents:components];
+                    NSMutableArray *xArray = [NSMutableArray array];
+                    NSMutableArray *yArray = [NSMutableArray array];
+                    for (int i = 0; i < 96; i++) {
+                        if (array.count > 0) {
+                            for (int j = 0; j < array.count; j++) {
+                                NSDictionary *dic = array[j];
+                                NSDate *date2 = [dic valueForKey:@"dateTime"];
+                                NSTimeInterval time = [date2 timeIntervalSinceDate:date1];
+                                if (i == (int)(time / 86400 * 96 + 0.5)) {
+                                    [yArray addObject:[dic valueForKey:@"value"]];
+                                    break;
+                                }
+                                if (j == array.count - 1) {
+                                    [yArray addObject:@"0"];
+                                }
+                            }
+                        }
+                        else {
+                            [yArray addObject:@"0"];
+                        }
+
+                        [xArray addObject:@""];
+                    }
+                    
+                    [_barChart setXLabels:xArray];
+                    [_barChart setYValues:yArray];
+                    
+                    
+                    [_barChart strokeChart];
+                });
+            }];
+        }
+    }];
+
+
 }
 
 - (void)viewDidLoad {
@@ -668,17 +721,6 @@ PLHealthManagerDelegate
     _barChart.chartMarginBottom = 10.0;
     _barChart.labelMarginTop = 2.0;
     
-    NSMutableArray *xArray = [NSMutableArray array];
-    NSMutableArray *yArray = [NSMutableArray array];
-    
-    for (int i = 0; i < 96; i++) {
-        [xArray addObject:@""];
-        [yArray addObject:[NSString stringWithFormat:@"%ld", (NSInteger)arc4random() % 200]];
-    }
-    
-    [_barChart setXLabels:xArray];
-    [_barChart setYValues:yArray];
-    
     [_barChart setStrokeColor:PNWhite];
     _barChart.showLabel = YES;
     _barChart.showLevelLine = NO;
@@ -691,8 +733,8 @@ PLHealthManagerDelegate
     _barChart.delegate = self;
     [self.view addSubview:_barChart];
     
-    for (int i = 0; i < 4; i++) {
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake((WIDTH - 20) / 4 * (i + 1) - 15, _barChart.frame.origin.y + _barChart.frame.size.height - 20, 30, 20)];
+    for (int i = 0; i < 3; i++) {
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH / 4 * (i + 1) - 15, _barChart.frame.origin.y + _barChart.frame.size.height - 20, 30, 20)];
         label.text = [NSString stringWithFormat:@"%d:00", 6 * (i + 1)];
         label.textColor = [UIColor lightGrayColor];
         label.font = [UIFont systemFontOfSize:10];
