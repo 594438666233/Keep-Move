@@ -37,7 +37,7 @@ PNChartDelegate
                 dispatch_async(dispatch_get_main_queue(), ^{
                     _sumLabel.text = [NSString stringWithFormat:@"%.0lf", value];
                     _avgLabel.text = [NSString stringWithFormat:@"%.0lf", value / 7];
-                    NSMutableArray *valueArray = [NSMutableArray array];
+                    NSMutableArray *valueArray = [NSMutableArray arrayWithArray:@[@"0", @"0", @"0", @"0", @"0", @"0", @"0"]];
 //                    NSMutableArray *timeArray = [NSMutableArray array];
                     for (NSDictionary *dic in array) {
                         [valueArray addObject:[dic objectForKey:@"value"]];
