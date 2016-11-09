@@ -548,8 +548,8 @@
                 
                 NSString *temp = [NSString stringWithFormat:@"%.0f", (speedTime / speedDistance)];
                 NSString *speedRate = [NSString stringWithFormat:@"%@", [temp timeFormat]];
-                self.plDetailView.stepCount = speedRate;
-                _infoModel.stepCount = speedRate;
+                self.plDetailView.rate = speedRate;
+                _infoModel.rate = speedRate;
 
             }
  
