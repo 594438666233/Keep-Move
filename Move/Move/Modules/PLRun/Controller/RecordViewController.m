@@ -1,9 +1,9 @@
 //
 //  RecordViewController.m
-//  iOS_2D_RecordPath
+//  Move
 //
-//  Created by PC on 15/8/3.
-//  Copyright (c) 2015年 FENGSHENG. All rights reserved.
+//  Created by PhelanGeek on 2016/11/2.
+//  Copyright © 2016年 PhelanGeek. All rights reserved.
 //
 
 #import "RecordViewController.h"
@@ -12,16 +12,16 @@
 #import "FileHelper.h"
 #import "PLNavigationView.h"
 #import "PLInformationCell.h"
+#import "PLInformationTwoCell.h"
 #import "PLInfoModel.h"
 
 static NSString *cellIndentifier = @"recordCell";
+static NSString *cellTwoIdentifier = @"cellTwo";
 
 @interface RecordViewController()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-
 @property (nonatomic, copy) NSString *goalPath;
-
 @property (nonatomic, strong) NSMutableArray *recordArray;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 
@@ -65,9 +65,14 @@ static NSString *cellIndentifier = @"recordCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DisplayViewController *displayController = [[DisplayViewController alloc] initWithNibName:nil bundle:nil];
-    [displayController setRecord:self.recordArray[indexPath.row]];
-    [self presentViewController:displayController animated:YES completion:nil];
+    
+    PLInfoModel *infoModel = _dataArray[indexPath.row];
+    NSString *type = [infoModel.type stringValue];
+    if (![type isEqualToString:@"2"]) {
+        DisplayViewController *displayController = [[DisplayViewController alloc] initWithNibName:nil bundle:nil];
+        [displayController setRecord:self.recordArray[indexPath.row]];
+        [self presentViewController:displayController animated:YES completion:nil];
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -95,36 +100,39 @@ static NSString *cellIndentifier = @"recordCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    return self.recordArray.count;
     return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIndentifier];
-    PLInformationCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIndentifier];
-    
-    if (cell == nil)
-    {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIndentifier];
-        cell = [[PLInformationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIndentifier];
+    PLInfoModel *infoModel = _dataArray[indexPath.row];
+    NSString *type = [infoModel.type stringValue];
+    if ([type isEqualToString:@"0"] || [type isEqualToString:@"1"]) {
+        
+        PLInformationCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIndentifier];
+        
+        if (cell == nil)
+        {
+            
+            cell = [[PLInformationCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIndentifier];
+        }
+        cell.infoModel = infoModel;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+
+    }else {
+        PLInformationTwoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellTwoIdentifier];
+        if (cell == nil) {
+            cell = [[PLInformationTwoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellTwoIdentifier];
+        }
+        cell.infoModel = infoModel;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
     }
     
-//    Record *record = self.recordArray[indexPath.row];
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    cell.backgroundColor = PLBLACK;
-//    cell.textLabel.text = [record title];
-//    cell.textLabel.textColor = [UIColor whiteColor];
-//    cell.detailTextLabel.text = [record subTitle];
-//    cell.detailTextLabel.font = [UIFont systemFontOfSize:15];
-//    cell.detailTextLabel.textColor = [UIColor whiteColor];
-    PLInfoModel *infoModel = _dataArray[indexPath.row];
-    cell.infoModel = infoModel;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
     
-    return cell;
+    return 0;
 }
 
 #pragma mark - Life Cycle
@@ -135,6 +143,7 @@ static NSString *cellIndentifier = @"recordCell";
     if (self)
     {
        _recordArray = [FileHelper recordsArray];
+        NSLog(@"%@", _recordArray);
     }
     
     return self;
@@ -156,6 +165,8 @@ static NSString *cellIndentifier = @"recordCell";
     _tableView.rowHeight = PLHEIGHT * 0.35;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tableView registerNib:[UINib nibWithNibName:@"PLInformationCell" bundle:nil] forCellReuseIdentifier:cellIndentifier];
+    [_tableView registerNib:[UINib nibWithNibName:@"PLInformationTwoCell" bundle:nil] forCellReuseIdentifier:cellTwoIdentifier];
+    
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -177,8 +188,6 @@ static NSString *cellIndentifier = @"recordCell";
         NSLog(@"hello");
     };
     [self.view addSubview:plNavigationView];
-    
-
     
 }
 

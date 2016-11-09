@@ -13,6 +13,8 @@
 #import "PLAnalyseViewController.h"
 #import "PLMineViewController.h"
 
+#import "PLRunNowViewController.h"
+
 @interface AppDelegate ()
 
 @end
@@ -23,10 +25,38 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    
+    
+    //自定义icon类型
+    UIApplicationShortcutIcon *icon0 =
+    [UIApplicationShortcutIcon iconWithTemplateImageName:@"achievement"];
+    UIApplicationShortcutIcon *icon1 =
+    [UIApplicationShortcutIcon iconWithTemplateImageName:@"sign"];
+    UIApplicationShortcutIcon *icon2 =
+    [UIApplicationShortcutIcon iconWithTemplateImageName:@"analysis"];
+    UIApplicationShortcutIcon *icon3 =
+    [UIApplicationShortcutIcon iconWithTemplateImageName:@"run"];
+    
+    //创建第一个标题
+    UIApplicationShortcutItem *item0 = [[UIApplicationShortcutItem alloc] initWithType:@"first" localizedTitle:@"我的成就" localizedSubtitle:nil icon:icon0 userInfo:nil];
+    //创建第二个标题
+    UIApplicationShortcutItem *item1 = [[UIApplicationShortcutItem alloc] initWithType:@"second" localizedTitle:@"每日打卡" localizedSubtitle:nil icon:icon1 userInfo:nil];
+                                        
+    //创建第三个标题
+    UIApplicationShortcutItem *item2 = [[UIApplicationShortcutItem alloc] initWithType:@"third" localizedTitle:@"运动分析" localizedSubtitle:nil icon:icon2 userInfo:nil];
+    
+    //创建第四个标题
+    UIApplicationShortcutItem *item3 = [[UIApplicationShortcutItem alloc] initWithType:@"fourth" localizedTitle:@"GPS运动" localizedSubtitle:nil icon:icon3 userInfo:nil];
+    
+    //设置shortcutItems
+    application.shortcutItems = @[item0, item1, item2, item3];
+ 
+    
+    
     [AMapServices sharedServices].apiKey = @"da1ec365d8432bee00b41009fa360a80";
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = ColorWith51Black;
     [self.window makeKeyAndVisible];
     
     // 成就
@@ -135,6 +165,29 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)application:(UIApplication *)application performActionForShortcutItem:
+(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
+    
+    
+    if ([shortcutItem.type isEqual:@"first"])
+    {
+        _rootTabBarController.selectedIndex = 0;
+
+    }
+    else if([shortcutItem.type isEqual:@"second"])
+    {
+        _rootTabBarController.selectedIndex = 3;
+        
+    }else if([shortcutItem.type isEqual:@"third"]){
+        _rootTabBarController.selectedIndex = 1;
+    }else {
+        UINavigationController *myNAV = [_rootTabBarController.viewControllers objectAtIndex:2];
+        PLRunNowViewController *runNowVC = [[PLRunNowViewController alloc] init];
+        runNowVC.hidesBottomBarWhenPushed = YES;
+        [myNAV pushViewController:runNowVC animated:YES];
+    }
 }
 
 

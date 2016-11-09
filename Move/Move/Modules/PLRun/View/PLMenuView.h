@@ -10,6 +10,6 @@
 
 @interface PLMenuView : UIView
 
-
+@property (nonatomic, assign) BOOL type;
 
 @end

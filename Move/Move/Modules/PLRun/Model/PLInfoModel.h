@@ -19,4 +19,8 @@
 @property (nonatomic, copy) NSString *stepCount;
 @property (nonatomic, copy) NSString *date;
 
+@property (nonatomic, copy) NSString *title;
+
+@property (nonatomic, retain) NSNumber *type;
+
 @end

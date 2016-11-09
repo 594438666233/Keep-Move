@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="451" height="196"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="413" height="195.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="418" height="195"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menuRun.png" translatesAutoresizingMaskIntoConstraints="NO" id="maU-x7-JqU">
@@ -118,10 +118,13 @@
                 <outlet property="dateLabel" destination="j59-pw-Xdi" id="hne-CW-vz8"/>
                 <outlet property="distanceLabel" destination="sYR-ld-6R2" id="qe3-PQ-88Z"/>
                 <outlet property="rhythmLabel" destination="BQg-xW-RON" id="gEZ-Dg-aJ6"/>
+                <outlet property="rhythmOrRateLabel" destination="zOt-EH-B3w" id="MfW-73-E0g"/>
                 <outlet property="stepCountLabel" destination="qE1-fw-jjw" id="24h-dv-Hxt"/>
+                <outlet property="stepOrSpeedLabel" destination="ghH-qL-OMN" id="RYo-sO-tHZ"/>
                 <outlet property="timeLabel" destination="ccg-F2-SfT" id="PXs-uU-H6y"/>
+                <outlet property="typeIcon" destination="maU-x7-JqU" id="DSC-eM-NLo"/>
             </connections>
-            <point key="canvasLocation" x="74.5" y="155"/>
+            <point key="canvasLocation" x="37" y="125"/>
         </tableViewCell>
     </objects>
     <resources>

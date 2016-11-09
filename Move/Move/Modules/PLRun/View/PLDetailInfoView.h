@@ -16,4 +16,7 @@
 @property (nonatomic, copy) NSString *rate;
 @property (nonatomic, copy) NSString *stepCount;
 
+@property (weak, nonatomic) IBOutlet UILabel *rateTitleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *speedRate;
+
 @end

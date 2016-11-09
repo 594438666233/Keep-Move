@@ -1,9 +1,9 @@
 //
 //  Record.m
-//  iOS_2D_RecordPath
+//  Move
 //
-//  Created by PC on 15/8/3.
-//  Copyright (c) 2015年 FENGSHENG. All rights reserved.
+//  Created by PhelanGeek on 2016/11/5.
+//  Copyright © 2016年 PhelanGeek. All rights reserved.
 //
 
 #import "Record.h"
@@ -25,7 +25,12 @@
 @implementation Record
 
 #pragma mark - interface
-
+- (NSMutableArray *)locationsArray {
+    if (!_locationsArray) {
+        _locationsArray = [NSMutableArray array];
+    }
+    return _locationsArray;
+}
 - (CLLocation *)startLocation
 {
     return [self.locationsArray firstObject];
@@ -39,7 +44,9 @@
 - (void)addLocation:(CLLocation *)location
 {
     _endTime = [NSDate date];
-    [self.locationsArray addObject:location];
+    self.locationsArray = [NSMutableArray array];
+//    [self.locationsArray addObject:location];
+    [self.locationsArray insertObject:location atIndex:0];
 }
 
 - (CLLocationCoordinate2D *)coordinates
@@ -72,7 +79,8 @@
 
 - (NSString *)subTitle
 {
-    return [NSString stringWithFormat:@"点:%ld, 距离: %.2fm, 持续时间: %.2fs", self.locationsArray.count, [self totalDistance], [self totalDuration]];
+//    return [NSString stringWithFormat:@"点:%ld, 距离: %.2fm, 持续时间: %.2fs", self.locationsArray.count, [self totalDistance], [self totalDuration]];
+    return [NSString stringWithFormat:@"%.2f", [self totalDistance] / [self totalDuration]];
 }
 
 - (CLLocationDistance)totalDistance
@@ -88,7 +96,7 @@
             currentLocation = location;
         }
     }
-    
+
     return distance;
 }
 

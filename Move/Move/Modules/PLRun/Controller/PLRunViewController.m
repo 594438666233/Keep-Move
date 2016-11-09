@@ -52,8 +52,10 @@ PNChartDelegate
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+//    self.navigationController.navigationBar.hidden = NO;
     NSLog(@"%@",  [NSDate dateWithTimeIntervalSinceReferenceDate:0]);
     [_barChart strokeChart];
+
 }
 
 - (void)viewDidLoad {
@@ -275,7 +277,9 @@ PNChartDelegate
 
     [_runButton handleControlEvent:UIControlEventTouchUpInside withBlock:^{
         PLRunNowViewController *runNowVC = [[PLRunNowViewController alloc] init];
-        [self presentViewController:runNowVC animated:YES completion:nil];
+        runNowVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:runNowVC animated:YES];
+
     }];
 
 }
