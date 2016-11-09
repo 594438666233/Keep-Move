@@ -121,6 +121,9 @@ PLHealthManagerDelegate
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     NSLog(@"%@",  [NSDate dateWithTimeIntervalSinceReferenceDate:0]);
+    
+    [self userDefauls];
+    
     [_barChart strokeChart];
     
     
@@ -183,7 +186,7 @@ PLHealthManagerDelegate
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self userDefauls];
+    
     
     [self initHKHealth];
     
@@ -634,8 +637,26 @@ PLHealthManagerDelegate
         for (int i = 0; i < manager.healthSteps.count; i++) {
             PLHealthSource *health = [[PLHealthSource alloc] init];
             health.step = manager.healthSteps[i][@"value"];
-            health.km = manager.healthDistances[i][@"step and running"];
-            health.floor = manager.healthStairsClimbed[i][@"value"];
+            
+            
+            if (i <= manager.healthDistances.count - 1) {
+                health.km = manager.healthDistances[i][@"step and running"];
+            } else {
+            
+                health.km = @"0.00";
+            }
+            
+            
+            
+            
+            
+            if (i <= manager.healthStairsClimbed.count - 1) {
+                
+                health.floor = manager.healthStairsClimbed[i][@"value"];
+            } else {
+                health.floor = @"0";
+            }
+            
             health.dateTime = manager.healthSteps[i][@"dateTime"];
             [self.healthArray addObject:health];
         }

@@ -34,6 +34,7 @@ WYLineChartViewDatasource
 
 
 @property (nonatomic, assign) BOOL isHaveDian;
+
 @property (nonatomic, assign) BOOL isFirstZero;
 
 @property (weak, nonatomic) IBOutlet UIImageView *chartImageView;
