@@ -39,13 +39,13 @@
             /*
              组装需要读写的数据类型
              */
-            NSSet *writeDataTypes = [self dataTypesToWrite];
+//            NSSet *writeDataTypes = [self dataTypesToWrite];
             NSSet *readDataTypes = [self dataTypesRead];
             
             /*
              注册需要读写的数据类型，也可以在“健康”APP中重新修改
              */
-            [self.healthStore requestAuthorizationToShareTypes:writeDataTypes readTypes:readDataTypes completion:^(BOOL success, NSError *error) {
+            [self.healthStore requestAuthorizationToShareTypes:nil readTypes:readDataTypes completion:^(BOOL success, NSError *error) {
                 
                 if (compltion != nil) {
                     NSLog(@"error->%@", error.localizedDescription);
@@ -79,8 +79,9 @@
     HKQuantityType *stepCountType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
     HKQuantityType *distance = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
     HKQuantityType *activeEnergyType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierActiveEnergyBurned];
+    HKQuantityType *stairs = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierFlightsClimbed];
     
-    return [NSSet setWithObjects:heightType, temperatureType,birthdayType,sexType,weightType,stepCountType, distance, activeEnergyType,nil];
+    return [NSSet setWithObjects:heightType, temperatureType,birthdayType,sexType,weightType,stepCountType, distance, activeEnergyType, stairs,nil];
 }
 
 // 当天时间段

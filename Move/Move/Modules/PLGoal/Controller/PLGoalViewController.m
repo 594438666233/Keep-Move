@@ -8,7 +8,9 @@
 
 #import "PLGoalViewController.h"
 #import "PLGoalHeaderView.h"
+#import "PLGoalHeaderModel.h"
 #import "PLTargetView.h"
+#import "PLTargetModel.h"
 #import "PLDefeatView.h"
 #import "PLCareerView.h"
 #import "UIImage+GIF.h"
@@ -46,6 +48,9 @@
 - (void)createHeaderView {
     self.plGoalHeaderView = [[PLGoalHeaderView alloc] init];
     _plGoalHeaderView.frame = CGRectMake(0, 0, PLWIDTH, HEIGHT / 4);
+    PLGoalHeaderModel *model = [[PLGoalHeaderModel alloc] init];
+
+    _plGoalHeaderView.plGoalHeaderModel = model;
     [self.view addSubview:_plGoalHeaderView];
 }
 
