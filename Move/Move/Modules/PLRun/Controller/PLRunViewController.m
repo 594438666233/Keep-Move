@@ -121,6 +121,9 @@ PLHealthManagerDelegate
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     NSLog(@"%@",  [NSDate dateWithTimeIntervalSinceReferenceDate:0]);
+    
+    [self userDefauls];
+    
     [_barChart strokeChart];
     
     
@@ -183,7 +186,7 @@ PLHealthManagerDelegate
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self userDefauls];
+    
     
     [self initHKHealth];
     
