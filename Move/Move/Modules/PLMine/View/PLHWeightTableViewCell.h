@@ -10,4 +10,6 @@
 
 @interface PLHWeightTableViewCell : UITableViewCell
 
+- (IBAction)writeWeight:(id)sender;
+
 @end

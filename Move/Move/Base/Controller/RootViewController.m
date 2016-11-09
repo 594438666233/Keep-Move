@@ -9,7 +9,8 @@
 #import "RootViewController.h"
 #import "PLRunNowViewController.h"
 #import "PLAddRunRecordViewController.h"
-
+#import "PLHWeightTableViewCell.h"
+#import "PLSetInformationTableViewController.h"
 
 @interface RootViewController ()
 
@@ -68,7 +69,7 @@
 - (void)rigthBarButtonAction:(UIBarButtonItem *)rightBarButton {
 
     [FTPopOverMenu showFromSenderFrame:CGRectMake(PLWIDTH - 40, 20, 100, 40)
-                              withMenu:@[@"GPS运动",@"录入运动",@"录入体重"]
+                              withMenu:@[@"GPS运动",@"录入运动",@"录入信息"]
                         imageNameArray:@[@"run",@"writeData",@"writeWeight"]
                              doneBlock:^(NSInteger selectedIndex) {
                                  _rightBarButton.image = [UIImage imageNamed:@"dd_creategroup@2x.png"];
@@ -97,8 +98,8 @@
                                      {
                                          // 录入体重
                                          self.tabBarController.selectedViewController = self.tabBarController.viewControllers[4];
-                                         
-                                         
+                                         PLSetInformationTableViewController *informationVC = [PLSetInformationTableViewController pl_setInformationTableViewController];
+                                         [(UINavigationController *)self.tabBarController.viewControllers[4] pushViewController:informationVC animated:YES];
                                          
 
                                      }
