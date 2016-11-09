@@ -55,6 +55,8 @@
 		49A935E81DC8BD8E00BF099E /* PLXTouchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49A935E71DC8BD8E00BF099E /* PLXTouchView.m */; };
 		49A935EA1DC8C48800BF099E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49A935E91DC8C48800BF099E /* Assets.xcassets */; };
 		49D9B2281DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D9B2271DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.m */; };
+		8401F3911DD2C5DC00133CF9 /* PLInformationTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8401F38F1DD2C5DC00133CF9 /* PLInformationTwoCell.m */; };
+		8401F3921DD2C5DC00133CF9 /* PLInformationTwoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8401F3901DD2C5DC00133CF9 /* PLInformationTwoCell.xib */; };
 		49F679431DD012B700329C2A /* PLXHealthManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F679421DD012B700329C2A /* PLXHealthManager.m */; };
 		8411CE501DCC200100200E5C /* weather.png in Resources */ = {isa = PBXBuildFile; fileRef = 8411CE4F1DCC200100200E5C /* weather.png */; };
 		842441E51DC7751D00582B41 /* PLSignCellObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 842441E41DC7751D00582B41 /* PLSignCellObject.m */; };
@@ -64,6 +66,30 @@
 		842A41D61DCDF275006390CF /* PLInformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842A41D41DCDF275006390CF /* PLInformationCell.xib */; };
 		8435C5721DCB232400339846 /* PLDetailInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8435C5711DCB232400339846 /* PLDetailInfoView.m */; };
 		8435C5741DCB232B00339846 /* PLDetailInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8435C5731DCB232B00339846 /* PLDetailInfoView.xib */; };
+		843A42DD1DD1672300F9658B /* writeData.png in Resources */ = {isa = PBXBuildFile; fileRef = 843A42DB1DD1672300F9658B /* writeData.png */; };
+		843A42DE1DD1672300F9658B /* writeWeight.png in Resources */ = {isa = PBXBuildFile; fileRef = 843A42DC1DD1672300F9658B /* writeWeight.png */; };
+		843A42E01DD1681C00F9658B /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 843A42DF1DD1681C00F9658B /* close.png */; };
+		843A42E41DD16E2500F9658B /* PLAddRunRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843A42E21DD16E2500F9658B /* PLAddRunRecordViewController.m */; };
+		843A42E51DD16E2500F9658B /* PLAddRunRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843A42E31DD16E2500F9658B /* PLAddRunRecordViewController.xib */; };
+		843A42E91DD1702200F9658B /* PLAddRunRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843A42E71DD1702200F9658B /* PLAddRunRecordCell.m */; };
+		843A42EA1DD1702200F9658B /* PLAddRunRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843A42E81DD1702200F9658B /* PLAddRunRecordCell.xib */; };
+		843A42EE1DD1759900F9658B /* walk.png in Resources */ = {isa = PBXBuildFile; fileRef = 843A42ED1DD1759900F9658B /* walk.png */; };
+		843A42F51DD179F900F9658B /* wreiteRun.png in Resources */ = {isa = PBXBuildFile; fileRef = 843A42EF1DD179F900F9658B /* wreiteRun.png */; };
+		843A42F61DD179F900F9658B /* writeO2.png in Resources */ = {isa = PBXBuildFile; fileRef = 843A42F01DD179F900F9658B /* writeO2.png */; };
+		843A42F71DD179F900F9658B /* writeRide.png in Resources */ = {isa = PBXBuildFile; fileRef = 843A42F11DD179F900F9658B /* writeRide.png */; };
+		843A42F81DD179F900F9658B /* writeSports.png in Resources */ = {isa = PBXBuildFile; fileRef = 843A42F21DD179F900F9658B /* writeSports.png */; };
+		843A42F91DD179F900F9658B /* writeSwim.png in Resources */ = {isa = PBXBuildFile; fileRef = 843A42F31DD179F900F9658B /* writeSwim.png */; };
+		843A42FA1DD179F900F9658B /* writeYoga.png in Resources */ = {isa = PBXBuildFile; fileRef = 843A42F41DD179F900F9658B /* writeYoga.png */; };
+		843A43471DD1BD1E00F9658B /* PLDetailRecordTypeOneCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843A43451DD1BD1E00F9658B /* PLDetailRecordTypeOneCell.m */; };
+		843A43481DD1BD1E00F9658B /* PLDetailRecordTypeOneCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843A43461DD1BD1E00F9658B /* PLDetailRecordTypeOneCell.xib */; };
+		843A434C1DD1C51100F9658B /* PLDetailRunRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 843A43491DD1C51100F9658B /* PLDetailRunRecordViewController.m */; };
+		843A434D1DD1C51100F9658B /* PLDetailRunRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843A434A1DD1C51100F9658B /* PLDetailRunRecordViewController.xib */; };
+		843A43511DD1D42E00F9658B /* PLDetailRecordTypeTwoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843A434F1DD1D42E00F9658B /* PLDetailRecordTypeTwoCell.m */; };
+		843A43521DD1D42E00F9658B /* PLDetailRecordTypeTwoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843A43501DD1D42E00F9658B /* PLDetailRecordTypeTwoCell.xib */; };
+		843A43541DD1EAB600F9658B /* touch.png in Resources */ = {isa = PBXBuildFile; fileRef = 843A43531DD1EAB600F9658B /* touch.png */; };
+		84484DDD1DD0A4DB0040DA0E /* achievement.png in Resources */ = {isa = PBXBuildFile; fileRef = 84484DDC1DD0A4DB0040DA0E /* achievement.png */; };
+		84484DDF1DD0A4FE0040DA0E /* sign.png in Resources */ = {isa = PBXBuildFile; fileRef = 84484DDE1DD0A4FE0040DA0E /* sign.png */; };
+		84484DE11DD0A5240040DA0E /* analysis.png in Resources */ = {isa = PBXBuildFile; fileRef = 84484DE01DD0A5240040DA0E /* analysis.png */; };
 		845372A91DB7796C00DBE92F /* PLGoalHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */; };
 		845372AB1DB7798000DBE92F /* PLGoalHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 845372AA1DB7798000DBE92F /* PLGoalHeaderView.xib */; };
 		845372C01DB799F300DBE92F /* PLTargetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 845372BF1DB799F300DBE92F /* PLTargetView.m */; };
@@ -514,6 +540,9 @@
 		49A935E91DC8C48800BF099E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49D9B2261DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLXAnalyseCollectionViewCell.h; sourceTree = "<group>"; };
 		49D9B2271DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLXAnalyseCollectionViewCell.m; sourceTree = "<group>"; };
+		8401F38E1DD2C5DC00133CF9 /* PLInformationTwoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLInformationTwoCell.h; sourceTree = "<group>"; };
+		8401F38F1DD2C5DC00133CF9 /* PLInformationTwoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLInformationTwoCell.m; sourceTree = "<group>"; };
+		8401F3901DD2C5DC00133CF9 /* PLInformationTwoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLInformationTwoCell.xib; sourceTree = "<group>"; };
 		49F679411DD012B700329C2A /* PLXHealthManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLXHealthManager.h; sourceTree = "<group>"; };
 		49F679421DD012B700329C2A /* PLXHealthManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLXHealthManager.m; sourceTree = "<group>"; };
 		8411CE4F1DCC200100200E5C /* weather.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = weather.png; sourceTree = "<group>"; };
@@ -527,6 +556,36 @@
 		8435C5701DCB232400339846 /* PLDetailInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDetailInfoView.h; sourceTree = "<group>"; };
 		8435C5711DCB232400339846 /* PLDetailInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLDetailInfoView.m; sourceTree = "<group>"; };
 		8435C5731DCB232B00339846 /* PLDetailInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLDetailInfoView.xib; sourceTree = "<group>"; };
+		843A42DB1DD1672300F9658B /* writeData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writeData.png; sourceTree = "<group>"; };
+		843A42DC1DD1672300F9658B /* writeWeight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writeWeight.png; sourceTree = "<group>"; };
+		843A42DF1DD1681C00F9658B /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
+		843A42E11DD16E2500F9658B /* PLAddRunRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLAddRunRecordViewController.h; sourceTree = "<group>"; };
+		843A42E21DD16E2500F9658B /* PLAddRunRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLAddRunRecordViewController.m; sourceTree = "<group>"; };
+		843A42E31DD16E2500F9658B /* PLAddRunRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLAddRunRecordViewController.xib; sourceTree = "<group>"; };
+		843A42E61DD1702200F9658B /* PLAddRunRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLAddRunRecordCell.h; sourceTree = "<group>"; };
+		843A42E71DD1702200F9658B /* PLAddRunRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLAddRunRecordCell.m; sourceTree = "<group>"; };
+		843A42E81DD1702200F9658B /* PLAddRunRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLAddRunRecordCell.xib; sourceTree = "<group>"; };
+		843A42ED1DD1759900F9658B /* walk.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = walk.png; sourceTree = "<group>"; };
+		843A42EF1DD179F900F9658B /* wreiteRun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wreiteRun.png; sourceTree = "<group>"; };
+		843A42F01DD179F900F9658B /* writeO2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writeO2.png; sourceTree = "<group>"; };
+		843A42F11DD179F900F9658B /* writeRide.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writeRide.png; sourceTree = "<group>"; };
+		843A42F21DD179F900F9658B /* writeSports.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writeSports.png; sourceTree = "<group>"; };
+		843A42F31DD179F900F9658B /* writeSwim.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writeSwim.png; sourceTree = "<group>"; };
+		843A42F41DD179F900F9658B /* writeYoga.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = writeYoga.png; sourceTree = "<group>"; };
+		843A43441DD1BD1E00F9658B /* PLDetailRecordTypeOneCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDetailRecordTypeOneCell.h; sourceTree = "<group>"; };
+		843A43451DD1BD1E00F9658B /* PLDetailRecordTypeOneCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLDetailRecordTypeOneCell.m; sourceTree = "<group>"; };
+		843A43461DD1BD1E00F9658B /* PLDetailRecordTypeOneCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLDetailRecordTypeOneCell.xib; sourceTree = "<group>"; };
+		843A43491DD1C51100F9658B /* PLDetailRunRecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLDetailRunRecordViewController.m; sourceTree = "<group>"; };
+		843A434A1DD1C51100F9658B /* PLDetailRunRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLDetailRunRecordViewController.xib; sourceTree = "<group>"; };
+		843A434B1DD1C51100F9658B /* PLDetailRunRecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDetailRunRecordViewController.h; sourceTree = "<group>"; };
+		843A434E1DD1D42E00F9658B /* PLDetailRecordTypeTwoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLDetailRecordTypeTwoCell.h; sourceTree = "<group>"; };
+		843A434F1DD1D42E00F9658B /* PLDetailRecordTypeTwoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLDetailRecordTypeTwoCell.m; sourceTree = "<group>"; };
+		843A43501DD1D42E00F9658B /* PLDetailRecordTypeTwoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLDetailRecordTypeTwoCell.xib; sourceTree = "<group>"; };
+		843A43531DD1EAB600F9658B /* touch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = touch.png; sourceTree = "<group>"; };
+		843A435A1DD1F23500F9658B /* PLTransferValueProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTransferValueProtocol.h; sourceTree = "<group>"; };
+		84484DDC1DD0A4DB0040DA0E /* achievement.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = achievement.png; sourceTree = "<group>"; };
+		84484DDE1DD0A4FE0040DA0E /* sign.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sign.png; sourceTree = "<group>"; };
+		84484DE01DD0A5240040DA0E /* analysis.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = analysis.png; sourceTree = "<group>"; };
 		8448B6AC1DB76F6B00F10D49 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		845372A71DB7796C00DBE92F /* PLGoalHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLGoalHeaderView.h; sourceTree = "<group>"; };
 		845372A81DB7796C00DBE92F /* PLGoalHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLGoalHeaderView.m; sourceTree = "<group>"; };
@@ -926,7 +985,7 @@
 		84F045941DB8754B009D3BC3 /* activity_circle-9_132x114_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity_circle-9_132x114_@2x.png"; sourceTree = "<group>"; };
 		84F045951DB8754B009D3BC3 /* activity_circle-9_150x130_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity_circle-9_150x130_@2x.png"; sourceTree = "<group>"; };
 		84F045961DB8754B009D3BC3 /* record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = record.png; sourceTree = "<group>"; };
-		84F045971DB8754B009D3BC3 /* run.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = run.png; sourceTree = "<group>"; };
+		84F045971DB8754B009D3BC3 /* run.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = run.png; path = line/run.png; sourceTree = "<group>"; };
 		84F045981DB8754B009D3BC3 /* set.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = set.png; sourceTree = "<group>"; };
 		84F045991DB8754B009D3BC3 /* weight_descriptionline@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weight_descriptionline@3x.png"; sourceTree = "<group>"; };
 		8B0711DB2C7BEE42D9AB7963 /* Pods-Move.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Move.release.xcconfig"; path = "Pods/Target Support Files/Pods-Move/Pods-Move.release.xcconfig"; sourceTree = "<group>"; };
@@ -1101,6 +1160,27 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		84484DDB1DD0A48A0040DA0E /* 3DTouchImage */ = {
+			isa = PBXGroup;
+			children = (
+				843A43531DD1EAB600F9658B /* touch.png */,
+				843A42EF1DD179F900F9658B /* wreiteRun.png */,
+				843A42F01DD179F900F9658B /* writeO2.png */,
+				843A42F11DD179F900F9658B /* writeRide.png */,
+				843A42F21DD179F900F9658B /* writeSports.png */,
+				843A42F31DD179F900F9658B /* writeSwim.png */,
+				843A42F41DD179F900F9658B /* writeYoga.png */,
+				843A42DB1DD1672300F9658B /* writeData.png */,
+				843A42ED1DD1759900F9658B /* walk.png */,
+				843A42DC1DD1672300F9658B /* writeWeight.png */,
+				84484DE01DD0A5240040DA0E /* analysis.png */,
+				84484DDE1DD0A4FE0040DA0E /* sign.png */,
+				84484DDC1DD0A4DB0040DA0E /* achievement.png */,
+				84F045971DB8754B009D3BC3 /* run.png */,
+			);
+			name = 3DTouchImage;
+			sourceTree = "<group>";
+		};
 		845372B01DB78E5000DBE92F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -1135,6 +1215,12 @@
 				84D636111DB764D200AC0E4D /* PLRunViewController.xib */,
 				84765E531DC9D48A007F0673 /* PLRunNowViewController.h */,
 				84765E541DC9D48A007F0673 /* PLRunNowViewController.m */,
+				843A42E11DD16E2500F9658B /* PLAddRunRecordViewController.h */,
+				843A42E21DD16E2500F9658B /* PLAddRunRecordViewController.m */,
+				843A42E31DD16E2500F9658B /* PLAddRunRecordViewController.xib */,
+				843A434B1DD1C51100F9658B /* PLDetailRunRecordViewController.h */,
+				843A43491DD1C51100F9658B /* PLDetailRunRecordViewController.m */,
+				843A434A1DD1C51100F9658B /* PLDetailRunRecordViewController.xib */,
 				84EDB6C11DCD7855000A4FBD /* RecordViewController.h */,
 				84EDB6C21DCD7855000A4FBD /* RecordViewController.m */,
 				84EDB6C41DCD78BA000A4FBD /* DisplayViewController.h */,
@@ -1204,6 +1290,7 @@
 		845372BC1DB78EA300DBE92F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				843A435A1DD1F23500F9658B /* PLTransferValueProtocol.h */,
 				84EDB6B51DCD74FA000A4FBD /* MAMutablePolylineRenderer.h */,
 				84EDB6B61DCD74FA000A4FBD /* MAMutablePolylineRenderer.m */,
 				11ADB2941DCC3A330062920E /* MyCalendarItem.h */,
@@ -1217,6 +1304,18 @@
 				842A41D21DCDF275006390CF /* PLInformationCell.h */,
 				842A41D31DCDF275006390CF /* PLInformationCell.m */,
 				842A41D41DCDF275006390CF /* PLInformationCell.xib */,
+				8401F38E1DD2C5DC00133CF9 /* PLInformationTwoCell.h */,
+				8401F38F1DD2C5DC00133CF9 /* PLInformationTwoCell.m */,
+				8401F3901DD2C5DC00133CF9 /* PLInformationTwoCell.xib */,
+				843A42E61DD1702200F9658B /* PLAddRunRecordCell.h */,
+				843A42E71DD1702200F9658B /* PLAddRunRecordCell.m */,
+				843A42E81DD1702200F9658B /* PLAddRunRecordCell.xib */,
+				843A43441DD1BD1E00F9658B /* PLDetailRecordTypeOneCell.h */,
+				843A43451DD1BD1E00F9658B /* PLDetailRecordTypeOneCell.m */,
+				843A43461DD1BD1E00F9658B /* PLDetailRecordTypeOneCell.xib */,
+				843A434E1DD1D42E00F9658B /* PLDetailRecordTypeTwoCell.h */,
+				843A434F1DD1D42E00F9658B /* PLDetailRecordTypeTwoCell.m */,
+				843A43501DD1D42E00F9658B /* PLDetailRecordTypeTwoCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1554,6 +1653,7 @@
 		84AB972D1DB8E7B70075FDC0 /* PLSOURCE */ = {
 			isa = PBXGroup;
 			children = (
+				843A42DF1DD1681C00F9658B /* close.png */,
 				842A41CB1DCDD6E4006390CF /* pause.png */,
 				842A41CC1DCDD6E4006390CF /* play.png */,
 				8411CE4F1DCC200100200E5C /* weather.png */,
@@ -1800,7 +1900,6 @@
 				84F045951DB8754B009D3BC3 /* activity_circle-9_150x130_@2x.png */,
 				84F045961DB8754B009D3BC3 /* record.png */,
 				11ADB2BE1DCC77F50062920E /* c20.png */,
-				84F045971DB8754B009D3BC3 /* run.png */,
 				11ADB2C01DCC7B600062920E /* c5.png */,
 				84F045981DB8754B009D3BC3 /* set.png */,
 				11ADB2BC1DCC77F10062920E /* c28.png */,
@@ -1812,6 +1911,7 @@
 		84F0460E1DB8754F009D3BC3 /* ImageSource */ = {
 			isa = PBXGroup;
 			children = (
+				84484DDB1DD0A48A0040DA0E /* 3DTouchImage */,
 				49A935E91DC8C48800BF099E /* Assets.xcassets */,
 				84B7B7D31DC6DE8000715926 /* RecommendGoal */,
 				84AB972D1DB8E7B70075FDC0 /* PLSOURCE */,
@@ -1960,6 +2060,7 @@
 				84D15B6F1DCAE4BD00228D87 /* closeVoice.png in Resources */,
 				84AB97691DB8E7B70075FDC0 /* icon_level5.png in Resources */,
 				84F045EA1DB8754B009D3BC3 /* activity_circle-46_132x114_@2x.png in Resources */,
+				843A42EE1DD1759900F9658B /* walk.png in Resources */,
 				8471C5041DB75B5E008E8A5A /* trends_bar_42mm-65.png in Resources */,
 				84AB97101DB8D4100075FDC0 /* PLBounceWeightView.xib in Resources */,
 				8471C5141DB75B5E008E8A5A /* trends_bar_42mm-8.png in Resources */,
@@ -1968,6 +2069,7 @@
 				84F046041DB8754B009D3BC3 /* activity_circle-7_132x114_@2x.png in Resources */,
 				8471C4CF1DB75B5E008E8A5A /* trends_bar_42mm-17.png in Resources */,
 				8471C4E81DB75B5E008E8A5A /* trends_bar_42mm-4.png in Resources */,
+				8401F3921DD2C5DC00133CF9 /* PLInformationTwoCell.xib in Resources */,
 				84F045B31DB8754B009D3BC3 /* activity_circle-20_150x130_@2x.png in Resources */,
 				84F045BE1DB8754B009D3BC3 /* activity_circle-26_132x114_@2x.png in Resources */,
 				84F0459F1DB8754B009D3BC3 /* activity_circle-11_150x130_@2x.png in Resources */,
@@ -1977,14 +2079,18 @@
 				8471C4C61DB75B5E008E8A5A /* trends_bar_42mm-1.png in Resources */,
 				8471C5111DB75B5E008E8A5A /* trends_bar_42mm-77.png in Resources */,
 				84F0459C1DB8754B009D3BC3 /* activity_circle-10_132x114_@2x.png in Resources */,
+				84484DDD1DD0A4DB0040DA0E /* achievement.png in Resources */,
 				84572CD11DC737B400B8CD0D /* PLDetailGoalViewController.xib in Resources */,
 				84AB971C1DB8E26A0075FDC0 /* runSelected.png in Resources */,
 				8471C52F1DB75B5E008E8A5A /* weight_setgoal_icon@2x.png in Resources */,
+				843A43521DD1D42E00F9658B /* PLDetailRecordTypeTwoCell.xib in Resources */,
 				84F045B61DB8754B009D3BC3 /* activity_circle-22_132x114_@2x.png in Resources */,
 				8471C52E1DB75B5E008E8A5A /* weight_input_icon_grey@3x.png in Resources */,
 				84F045FD1DB8754B009D3BC3 /* activity_circle-54_150x130_@2x.png in Resources */,
 				84F045B51DB8754B009D3BC3 /* activity_circle-21_150x130_@2x.png in Resources */,
+				843A42F81DD179F900F9658B /* writeSports.png in Resources */,
 				8471C4CB1DB75B5E008E8A5A /* trends_bar_42mm-13.png in Resources */,
+				843A434D1DD1C51100F9658B /* PLDetailRunRecordViewController.xib in Resources */,
 				84F0460D1DB8754B009D3BC3 /* weight_descriptionline@3x.png in Resources */,
 				84F045F41DB8754B009D3BC3 /* activity_circle-50_132x114_@2x.png in Resources */,
 				8471C4F51DB75B5E008E8A5A /* trends_bar_42mm-51.png in Resources */,
@@ -2024,9 +2130,11 @@
 				49A935EA1DC8C48800BF099E /* Assets.xcassets in Resources */,
 				84AB97701DB8E7B70075FDC0 /* tips_icon.png in Resources */,
 				8471C4C41DB75B5E008E8A5A /* tips_icon@3x.png in Resources */,
+				843A42E01DD1681C00F9658B /* close.png in Resources */,
 				8471C4CA1DB75B5E008E8A5A /* trends_bar_42mm-12.png in Resources */,
 				842A41D61DCDF275006390CF /* PLInformationCell.xib in Resources */,
 				8471C50E1DB75B5E008E8A5A /* trends_bar_42mm-74.png in Resources */,
+				843A42F71DD179F900F9658B /* writeRide.png in Resources */,
 				8471C4DD1DB75B5E008E8A5A /* trends_bar_42mm-3.png in Resources */,
 				84F045F51DB8754B009D3BC3 /* activity_circle-50_150x130_@2x.png in Resources */,
 				8471C5291DB75B5E008E8A5A /* trends_bar_42mm-99.png in Resources */,
@@ -2050,6 +2158,7 @@
 				84F045AE1DB8754B009D3BC3 /* activity_circle-19_132x114_@2x.png in Resources */,
 				84B7B7E31DC6DE8E00715926 /* dumbbell.png in Resources */,
 				84F045C91DB8754B009D3BC3 /* activity_circle-30_150x130_@2x.png in Resources */,
+				843A42E51DD16E2500F9658B /* PLAddRunRecordViewController.xib in Resources */,
 				84F045EC1DB8754B009D3BC3 /* activity_circle-47_132x114_@2x.png in Resources */,
 				8471C4D11DB75B5E008E8A5A /* trends_bar_42mm-19.png in Resources */,
 				84B7B7DE1DC6DE8E00715926 /* milk.png in Resources */,
@@ -2093,6 +2202,7 @@
 				84AB97651DB8E7B70075FDC0 /* icon_level3.png in Resources */,
 				84F0459E1DB8754B009D3BC3 /* activity_circle-11_132x114_@2x.png in Resources */,
 				8471C5271DB75B5E008E8A5A /* trends_bar_42mm-97.png in Resources */,
+				84484DDF1DD0A4FE0040DA0E /* sign.png in Resources */,
 				84AB975A1DB8E7B70075FDC0 /* goalAlbumCellEmptyBg_5.jpg in Resources */,
 				84AB97791DB8E7B70075FDC0 /* weRunConnecting.gif in Resources */,
 				84F045F11DB8754B009D3BC3 /* activity_circle-49_150x130_@2x.png in Resources */,
@@ -2100,6 +2210,7 @@
 				84F045F21DB8754B009D3BC3 /* activity_circle-4_132x114_@2x.png in Resources */,
 				8471C4F11DB75B5E008E8A5A /* trends_bar_42mm-48.png in Resources */,
 				84AB972C1DB8E4780075FDC0 /* goalNormal.png in Resources */,
+				843A42DD1DD1672300F9658B /* writeData.png in Resources */,
 				84F045A11DB8754B009D3BC3 /* activity_circle-12_150x130_@2x.png in Resources */,
 				8471C4E11DB75B5E008E8A5A /* trends_bar_42mm-33.png in Resources */,
 				84F045A71DB8754B009D3BC3 /* activity_circle-15_150x130_@2x.png in Resources */,
@@ -2111,6 +2222,7 @@
 				8471C4C11DB75B5E008E8A5A /* activity_a_off@2x.png in Resources */,
 				84D15B701DCAE4BD00228D87 /* openVoice.png in Resources */,
 				8471C4EB1DB75B5E008E8A5A /* trends_bar_42mm-42.png in Resources */,
+				843A42F51DD179F900F9658B /* wreiteRun.png in Resources */,
 				8471C50D1DB75B5E008E8A5A /* trends_bar_42mm-73.png in Resources */,
 				84D0D8311DB6F48500EDCFB3 /* LaunchScreen.storyboard in Resources */,
 				84AB972B1DB8E4780075FDC0 /* mineNormal.png in Resources */,
@@ -2132,6 +2244,7 @@
 				84F045C41DB8754B009D3BC3 /* activity_circle-29_132x114_@2x.png in Resources */,
 				84F045D61DB8754B009D3BC3 /* activity_circle-37_132x114_@2x.png in Resources */,
 				8471C4E51DB75B5E008E8A5A /* trends_bar_42mm-37.png in Resources */,
+				843A42EA1DD1702200F9658B /* PLAddRunRecordCell.xib in Resources */,
 				8471C4E91DB75B5E008E8A5A /* trends_bar_42mm-40.png in Resources */,
 				84AB975E1DB8E7B70075FDC0 /* gps_music_btn@2x.png in Resources */,
 				8471C4D51DB75B5E008E8A5A /* trends_bar_42mm-22.png in Resources */,
@@ -2139,6 +2252,7 @@
 				84572CD81DC74BC900B8CD0D /* skipping-rope.png in Resources */,
 				84B7B7E51DC6DE8E00715926 /* stopwatch.png in Resources */,
 				84F045CE1DB8754B009D3BC3 /* activity_circle-33_132x114_@2x.png in Resources */,
+				843A42FA1DD179F900F9658B /* writeYoga.png in Resources */,
 				84F045AF1DB8754B009D3BC3 /* activity_circle-19_150x130_@2x.png in Resources */,
 				8471C5051DB75B5E008E8A5A /* trends_bar_42mm-66.png in Resources */,
 				84F045E71DB8754B009D3BC3 /* activity_circle-44_150x130_@2x.png in Resources */,
@@ -2186,6 +2300,7 @@
 				84F045D41DB8754B009D3BC3 /* activity_circle-36_132x114_@2x.png in Resources */,
 				8471C51E1DB75B5E008E8A5A /* trends_bar_42mm-89.png in Resources */,
 				8471C4C21DB75B5E008E8A5A /* dd_more_icon_plus@3x.png in Resources */,
+				843A42F91DD179F900F9658B /* writeSwim.png in Resources */,
 				84572CDE1DC74CC600B8CD0D /* tea.png in Resources */,
 				8471C4D31DB75B5E008E8A5A /* trends_bar_42mm-20.png in Resources */,
 				84F045BC1DB8754B009D3BC3 /* activity_circle-25_132x114_@2x.png in Resources */,
@@ -2204,10 +2319,12 @@
 				8471C4D61DB75B5E008E8A5A /* trends_bar_42mm-23.png in Resources */,
 				8471C50B1DB75B5E008E8A5A /* trends_bar_42mm-71.png in Resources */,
 				84AB97771DB8E7B70075FDC0 /* weight_bmi_icon.png in Resources */,
+				843A42DE1DD1672300F9658B /* writeWeight.png in Resources */,
 				84B7B7DD1DC6DE8E00715926 /* bicycle.png in Resources */,
 				84C612011DB855C40029CEC5 /* PLDefeatView.xib in Resources */,
 				84F045EE1DB8754B009D3BC3 /* activity_circle-48_132x114_@2x.png in Resources */,
 				8471C5281DB75B5E008E8A5A /* trends_bar_42mm-98.png in Resources */,
+				843A43481DD1BD1E00F9658B /* PLDetailRecordTypeOneCell.xib in Resources */,
 				84AB97671DB8E7B70075FDC0 /* icon_level4.png in Resources */,
 				84F045AA1DB8754B009D3BC3 /* activity_circle-17_132x114_@2x.png in Resources */,
 				84AB97611DB8E7B70075FDC0 /* icon_level1.png in Resources */,
@@ -2217,6 +2334,7 @@
 				84F045D11DB8754B009D3BC3 /* activity_circle-34_150x130_@2x.png in Resources */,
 				84AB97541DB8E7B70075FDC0 /* Avatars.plist in Resources */,
 				8471C4DE1DB75B5E008E8A5A /* trends_bar_42mm-30.png in Resources */,
+				84484DE11DD0A5240040DA0E /* analysis.png in Resources */,
 				8471C5071DB75B5E008E8A5A /* trends_bar_42mm-68.png in Resources */,
 				8471C51F1DB75B5E008E8A5A /* trends_bar_42mm-9.png in Resources */,
 				8471C5131DB75B5E008E8A5A /* trends_bar_42mm-79.png in Resources */,
@@ -2236,6 +2354,7 @@
 				8471C4E61DB75B5E008E8A5A /* trends_bar_42mm-38.png in Resources */,
 				84F045CB1DB8754B009D3BC3 /* activity_circle-31_150x130_@2x.png in Resources */,
 				84F045F01DB8754B009D3BC3 /* activity_circle-49_132x114_@2x.png in Resources */,
+				843A43541DD1EAB600F9658B /* touch.png in Resources */,
 				84F046001DB8754B009D3BC3 /* activity_circle-5_132x114_@2x.png in Resources */,
 				8471C4D91DB75B5E008E8A5A /* trends_bar_42mm-26.png in Resources */,
 				8471C5171DB75B5E008E8A5A /* trends_bar_42mm-82.png in Resources */,
@@ -2260,6 +2379,7 @@
 				84B7B7F81DC6F56100715926 /* back.png in Resources */,
 				8471C52C1DB75B5E008E8A5A /* weight_empty_pic@3x.png in Resources */,
 				84F045B81DB8754B009D3BC3 /* activity_circle-23_132x114_@2x.png in Resources */,
+				843A42F61DD179F900F9658B /* writeO2.png in Resources */,
 				8471C5211DB75B5E008E8A5A /* trends_bar_42mm-91.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2323,13 +2443,17 @@
 				8435C5721DCB232400339846 /* PLDetailInfoView.m in Sources */,
 				493671831DCA047C0048E098 /* PLXStepViewController.m in Sources */,
 				84D636121DB764D200AC0E4D /* PLRunViewController.m in Sources */,
+				843A434C1DD1C51100F9658B /* PLDetailRunRecordViewController.m in Sources */,
 				84AC593A1DB7697500E7D8C0 /* UILabel+SizeToHeight.m in Sources */,
 				4936717D1DC9E9A00048E098 /* WYSectorLayer.m in Sources */,
 				49D9B2281DCAD0B800C0E709 /* PLXAnalyseCollectionViewCell.m in Sources */,
 				84AB97111DB8D4100075FDC0 /* PLInitialWeightTableViewCell.m in Sources */,
+				843A42E41DD16E2500F9658B /* PLAddRunRecordViewController.m in Sources */,
 				84AB96F91DB8B6000075FDC0 /* PLGoalHeaderModel.m in Sources */,
 				8471C44E1DB75AFD008E8A5A /* BaseModel.m in Sources */,
 				842A41D51DCDF275006390CF /* PLInformationCell.m in Sources */,
+				8401F3911DD2C5DC00133CF9 /* PLInformationTwoCell.m in Sources */,
+				843A43511DD1D42E00F9658B /* PLDetailRecordTypeTwoCell.m in Sources */,
 				1186058F1DCDEF6E00459408 /* Record.m in Sources */,
 				84C612081DB85B1D0029CEC5 /* PLCareerView.m in Sources */,
 				84D636171DB764E300AC0E4D /* PLAnalyseViewController.m in Sources */,
@@ -2338,6 +2462,7 @@
 				493671801DC9E9A00048E098 /* WYPieSector.m in Sources */,
 				845372C01DB799F300DBE92F /* PLTargetView.m in Sources */,
 				493671771DC9E9A00048E098 /* WYLineChartCalculator.m in Sources */,
+				843A42E91DD1702200F9658B /* PLAddRunRecordCell.m in Sources */,
 				11A10F6E1DC6D76F005EBDA5 /* PLHistoryTableViewCell.m in Sources */,
 				84EDB6C31DCD7855000A4FBD /* RecordViewController.m in Sources */,
 				493671741DC9E9A00048E098 /* WYLineChartMainLineView.m in Sources */,
@@ -2351,6 +2476,7 @@
 				84AB96FC1DB8B6D70075FDC0 /* PLTargetModel.m in Sources */,
 				1186056D1DCDB57E00459408 /* PLHealthSource.m in Sources */,
 				11ADB2961DCC3A330062920E /* MyCalendarItem.m in Sources */,
+				843A43471DD1BD1E00F9658B /* PLDetailRecordTypeOneCell.m in Sources */,
 				493671751DC9E9A00048E098 /* WYLineChartReferenceLineView.m in Sources */,
 				4936717F1DC9E9A00048E098 /* WYPieChartView.m in Sources */,
 				8471C5351DB75C03008E8A5A /* UIButton+Block.m in Sources */,

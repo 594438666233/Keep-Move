@@ -17,7 +17,8 @@
     [aCoder encodeObject:_rate forKey:@"rate"];
     [aCoder encodeObject:_stepCount forKey:@"stepCount"];
     [aCoder encodeObject:_date forKey:@"date"];
-
+    [aCoder encodeObject:_type forKey:@"type"];
+    [aCoder encodeObject:_title forKey:@"title"];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
@@ -29,7 +30,8 @@
         self.rate = [aDecoder decodeObjectForKey:@"rate"];
         self.stepCount = [aDecoder decodeObjectForKey:@"stepCount"];
         self.date = [aDecoder decodeObjectForKey:@"date"];
-        
+        self.type = [aDecoder decodeObjectForKey:@"type"];
+        self.title = [aDecoder decodeObjectForKey:@"title"];
     }
     return self;
 }

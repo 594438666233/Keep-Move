@@ -1,8 +1,8 @@
 //
 //  MAAdditivePolylineRenderer.m
-//  iOS_2D_RecordPath
+//  Move
 //
-//  Created by PC on 15/7/17.
+//  Created by PhelanGeek on 2016/11/2.
 //  Copyright (c) 2015年 FENGSHENG. All rights reserved.
 //
 

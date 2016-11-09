@@ -29,8 +29,9 @@
     if (self) {
         self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:nil options:nil].lastObject;
         
+        _type = YES;
+        
         _runLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
-
         _runView.userInteractionEnabled = YES;
         _rideView.userInteractionEnabled = YES;
         
@@ -46,7 +47,7 @@
 }
 
 - (void)tapRunAction:(UITapGestureRecognizer *)tap {
-
+    _type = YES;
     _runLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
     _iconRunImageView.image = [UIImage imageNamed:@"menuSelected"];
     
@@ -55,7 +56,7 @@
 }
 
 - (void)tapRideAction:(UITapGestureRecognizer *)tap {
-
+    _type = NO;
     _rideLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
     _iconRideImageView.image = [UIImage imageNamed:@"menuSelected"];
     

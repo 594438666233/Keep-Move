@@ -25,6 +25,9 @@
 @property (nonatomic, retain) UIImageView *roopImageView;
 @property (nonatomic, assign) BOOL isSwitch;
 
+@property (nonatomic, assign) BOOL roopFlag;
+@property (nonatomic, assign) BOOL hoopFlag;
+
 
 @end
 
@@ -34,6 +37,8 @@
     [super viewDidLoad];
     self.mul = WIDTH / 320;
     _isSwitch = YES;
+    _roopFlag = YES;
+    _hoopFlag = YES;
     [self createHeaderView];
     [self createTargetView];
     [self createDefeatView];
@@ -175,10 +180,21 @@
     _hoopImageView.frame = CGRectMake(30, _imageView.frame.origin.y + _imageView.frame.size.height + 10, 82 * _mul * 0.7, 100 * _mul * 0.7);
     [self.view addSubview:_hoopImageView];
     
+    
+    UITapGestureRecognizer *tapHoop = [[UITapGestureRecognizer alloc] init];
+    [tapHoop addTarget:self action:@selector(tapHoopAction:)];
+    _hoopImageView.userInteractionEnabled = YES;
+    [_hoopImageView addGestureRecognizer:tapHoop];
+
     UIImage *roopImage = [UIImage sd_animatedGIFNamed:@"dongdongjun_skip_rope"];
     self.roopImageView = [[UIImageView alloc] initWithImage:roopImage];
     _roopImageView.frame = CGRectMake(WIDTH - 30 - 82 * _mul * 0.7, _imageView.frame.origin.y + _imageView.frame.size.height + 10, 82 * _mul * 0.7, 100 * _mul * 0.7);
     [self.view addSubview:_roopImageView];
+    
+    UITapGestureRecognizer *tapRoop = [[UITapGestureRecognizer alloc] init];
+    [tapRoop addTarget:self action:@selector(tapRoopAction:)];
+    _roopImageView.userInteractionEnabled = YES;
+    [_roopImageView addGestureRecognizer:tapRoop];
     
 }
 
@@ -217,6 +233,31 @@
             _roopImageView.frame = CGRectMake(PLWIDTH - 30 - 82 * _mul * 0.7, _imageView.frame.origin.y + _imageView.frame.size.height + 10, 82 * _mul * 0.7, 100 * _mul * 0.7);
             
         } completion:nil];
+    }
+}
+
+- (void)tapHoopAction:(UITapGestureRecognizer *)tap {
+    if (_hoopFlag == YES) {
+        UIImage *roopImage = [UIImage sd_animatedGIFNamed:@"dongdongjun_skip_rope"];
+        self.hoopImageView.image = roopImage;
+        _hoopFlag = NO;
+    }else {        
+        UIImage *hoopImage = [UIImage sd_animatedGIFNamed:@"dongdongjun_hula_hoop"];
+        self.hoopImageView.image = hoopImage;
+        _hoopFlag = YES;
+    }
+}
+
+- (void)tapRoopAction:(UITapGestureRecognizer *)tap {
+    if (_roopFlag == YES) {
+        UIImage *hoopImage = [UIImage sd_animatedGIFNamed:@"dongdongjun_hula_hoop"];
+        self.roopImageView.image = hoopImage;
+        _roopFlag = NO;
+
+    }else {
+        UIImage *roopImage = [UIImage sd_animatedGIFNamed:@"dongdongjun_skip_rope"];
+        self.roopImageView.image = roopImage;
+        _roopFlag = YES;
     }
 }
 
