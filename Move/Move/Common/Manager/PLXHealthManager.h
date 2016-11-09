@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) HKHealthStore *healthStore;
 @property (nonatomic, assign) NSInteger days;
+@property (nonatomic, strong) NSDate *startDate;
 @property (nonatomic, assign) BOOL isDay;
 
 + (id)shareInstance;

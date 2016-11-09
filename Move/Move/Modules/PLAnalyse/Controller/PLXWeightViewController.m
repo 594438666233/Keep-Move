@@ -11,6 +11,7 @@
 #import "WYLineChartPoint.h"
 #import "PLDataBaseManager.h"
 #import "PLHistoryInformation.h"
+#import "PLPersonInformation.h"
 
 @interface PLXWeightViewController ()
 <
@@ -41,6 +42,10 @@ WYLineChartViewDatasource
     
     PLHistoryInformation *infomation = [array firstObject];
     _nLabel.text = [NSString stringWithFormat:@"%.1lf", infomation.weight];
+    PLPersonInformation *person = [manager personInformation];
+    CGFloat height = person.height / 100.0;
+    _bLabel.text = [NSString stringWithFormat:@"%.1lf", infomation.weight / (height * height)];
+    
     
     if (array.count > 0) {
         [self.view addSubview:_lineChart];
@@ -175,7 +180,7 @@ WYLineChartViewDatasource
     _lineChart.gradientColorsLocation = @[@0, @0.9];
     _lineChart.drawGradient = YES;
     
-    _lineChart.yAxisHeaderPrefix = @"体重(kg)";
+    _lineChart.yAxisHeaderPrefix = @"体重";
     _lineChart.yAxisHeaderSuffix = @"日期";
     
 }
