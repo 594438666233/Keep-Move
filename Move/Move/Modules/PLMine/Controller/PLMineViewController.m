@@ -39,7 +39,7 @@ UIScrollViewDelegate
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
+    self.navigationItem.title = @"我";
     self.view.backgroundColor = [UIColor blackColor];
     
     

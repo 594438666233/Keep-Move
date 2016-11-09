@@ -54,6 +54,7 @@ static NSString *const cellReusableIdentifier = @"cell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     _tempFlag = YES;
+    self.navigationItem.title = @"目标";
     [self setupTableView];
     
 }

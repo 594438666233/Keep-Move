@@ -39,6 +39,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"成就";
     self.mul = WIDTH / 320;
     _isSwitch = YES;
     _roopFlag = YES;

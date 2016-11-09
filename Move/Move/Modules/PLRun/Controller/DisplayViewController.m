@@ -230,7 +230,7 @@
     self.mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 64, PLWIDTH, PLHEIGHT - 64)];
     self.mapView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.mapView.delegate = self;
-    
+
     [self.view addSubview:self.mapView];
 }
 
