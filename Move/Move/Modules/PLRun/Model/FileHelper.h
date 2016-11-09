@@ -1,9 +1,9 @@
 //
 //  FileHelper.h
-//  iOS_2D_RecordPath
+//  Move
 //
-//  Created by PC on 15/8/3.
-//  Copyright (c) 2015年 FENGSHENG. All rights reserved.
+//  Created by PhelanGeek on 2016/11/5.
+//  Copyright © 2016年 PhelanGeek. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

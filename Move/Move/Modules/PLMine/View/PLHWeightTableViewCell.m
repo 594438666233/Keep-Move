@@ -15,6 +15,8 @@
 #import "WYLineChartView.h"
 #import "WYLineChartPoint.h"
 
+#import "PLPersonInformation.h"
+
 @interface PLHWeightTableViewCell ()
 
 <
@@ -195,8 +197,20 @@ WYLineChartViewDatasource
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.currentWeight.text = [NSString stringWithFormat:@"%.1f", [[PLDataBaseManager shareManager] currentWeight]];
+    
+    CGFloat weight = [[PLDataBaseManager shareManager] currentWeight];
+    self.currentWeight.text = [NSString stringWithFormat:@"%.1f", weight];
 
+    
+    PLPersonInformation *person = [[PLDataBaseManager shareManager] personInformation];
+    
+    NSInteger height = person.height;
+    CGFloat fHeight = height  / 100.f;
+    
+    
+    CGFloat fBMI = weight / (fHeight * fHeight);
+
+    self.BMI.text = [NSString stringWithFormat:@"BMI %.1f", fBMI];
     
     self.goalWeight.text = [NSString stringWithFormat:@"目标体重%.1fkg",[[PLDataBaseManager shareManager] goalWeight]];
     

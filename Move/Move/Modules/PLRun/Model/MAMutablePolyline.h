@@ -1,9 +1,9 @@
 //
 //  MAMutablePolyline.h
-//  officialDemo2D
+//  Move
 //
-//  Created by PC on 15/7/15.
-//  Copyright (c) 2015年 AutoNavi. All rights reserved.
+//  Created by PhelanGeek on 2016/11/5.
+//  Copyright © 2016年 PhelanGeek. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

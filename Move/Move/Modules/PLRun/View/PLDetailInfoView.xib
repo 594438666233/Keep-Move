@@ -205,10 +205,12 @@
                 <outlet property="calorieLabel" destination="XnU-Jk-4yq" id="byo-6d-Bw4"/>
                 <outlet property="kmLabel" destination="VQB-ng-oJj" id="nWa-E3-V1Q"/>
                 <outlet property="rateLabel" destination="PpA-TW-XZW" id="gyT-Iz-7eN"/>
+                <outlet property="rateTitleLabel" destination="ZoO-f5-v7J" id="fhF-c0-Ar3"/>
+                <outlet property="speedRate" destination="AGi-eZ-e8V" id="HNv-kc-yX8"/>
                 <outlet property="stepCountLabel" destination="wdu-3k-Vyo" id="uIH-P1-xcJ"/>
                 <outlet property="timeLabel" destination="a7X-gO-Wmx" id="uzz-bH-3DY"/>
             </connections>
-            <point key="canvasLocation" x="-24.5" y="25.5"/>
+            <point key="canvasLocation" x="-107" y="-57"/>
         </view>
     </objects>
 </document>

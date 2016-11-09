@@ -7,12 +7,25 @@
 //
 
 #import "RootViewController.h"
+#import "PLRunNowViewController.h"
+#import "PLAddRunRecordViewController.h"
+
 
 @interface RootViewController ()
+
+@property (nonatomic, retain) UIBarButtonItem *rightBarButton;
+@property (nonatomic, assign) BOOL flag;
 
 @end
 
 @implementation RootViewController
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    //修改状态栏颜色为白色
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    self.navigationController.navigationBar.hidden = NO;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,14 +35,15 @@
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.barTintColor = ColorWith51Black;
     self.navigationController.navigationBar.tintColor = PLYELLOW;
+    _flag = YES;
     
     // leftBarButton
     UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"camera"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonAction:)];
     self.navigationItem.leftBarButtonItem = leftBarButton;
     
     // rightBarButton
-    UIBarButtonItem *rightBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"dd_creategroup@2x.png"] style:UIBarButtonItemStylePlain target:self action:@selector(rigthBarButtonAction:)];
-    self.navigationItem.rightBarButtonItem = rightBarButton;
+    self.rightBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"dd_creategroup@2x.png"] style:UIBarButtonItemStylePlain target:self action:@selector(rigthBarButtonAction:)];
+    self.navigationItem.rightBarButtonItem = _rightBarButton;
     
 }
 
@@ -52,7 +66,55 @@
 }
 
 - (void)rigthBarButtonAction:(UIBarButtonItem *)rightBarButton {
-    NSLog(@"fd");
+
+    [FTPopOverMenu showFromSenderFrame:CGRectMake(PLWIDTH - 40, 20, 100, 40)
+                              withMenu:@[@"GPS运动",@"录入运动",@"录入体重"]
+                        imageNameArray:@[@"run",@"writeData",@"writeWeight"]
+                             doneBlock:^(NSInteger selectedIndex) {
+                                 _rightBarButton.image = [UIImage imageNamed:@"dd_creategroup@2x.png"];
+                                 _flag = YES;
+                                 
+                                 switch (selectedIndex) {
+                                     case 0:
+                                     {
+                                         // GPS运动
+                                         PLRunNowViewController *runNowVC = [[PLRunNowViewController alloc] init];
+                                         runNowVC.hidesBottomBarWhenPushed = YES;
+                                         [self.navigationController pushViewController:runNowVC animated:YES];
+                                     }
+                                         break;
+                                         
+                                     case 1:
+                                     {
+                                         // 录入运动
+                                         PLAddRunRecordViewController *runRecordVC = [[PLAddRunRecordViewController alloc] init];
+                                         
+                                         [self presentViewController:runRecordVC animated:YES completion:nil];
+                                     }
+                                         break;
+                                         
+                                     case 2:
+                                     {
+                                         // 录入体重
+
+                                     }
+                                         break;
+                                         
+                                     default:
+                                         break;
+                                 }
+                             } dismissBlock:^{
+                                 _rightBarButton.image = [UIImage imageNamed:@"dd_creategroup@2x.png"];
+                                 _flag = YES;
+                             }];
+    if (_flag == YES) {
+        _rightBarButton.image = [UIImage imageNamed:@"close"];
+        _flag = NO;
+    }else {
+        _rightBarButton.image = [UIImage imageNamed:@"dd_creategroup@2x.png"];
+        _flag = YES;
+    }
+    
 }
 
 @end

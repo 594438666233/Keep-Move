@@ -1,9 +1,9 @@
 //
 //  MAAdditivePolylineRenderer.h
-//  iOS_2D_RecordPath
+//  Move
 //
-//  Created by PC on 15/7/17.
-//  Copyright (c) 2015年 FENGSHENG. All rights reserved.
+//  Created by PhelanGeek on 2016/11/2.
+//  Copyright © 2016年 PhelanGeek. All rights reserved.
 //
 
 #import <MAMapKit/MAMapKit.h>
