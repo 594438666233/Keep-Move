@@ -96,6 +96,10 @@
                                      case 2:
                                      {
                                          // 录入体重
+                                         self.tabBarController.selectedViewController = self.tabBarController.viewControllers[4];
+                                         
+                                         
+                                         
 
                                      }
                                          break;
