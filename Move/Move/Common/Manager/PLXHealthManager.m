@@ -122,9 +122,9 @@
                 double totleSteps = [quantitySample.quantity doubleValueForUnit:[HKUnit countUnit]];
                 NSString *stepString = [NSString stringWithFormat:@"%lf", totleSteps];
                 NSDate *time = quantitySample.startDate;
- 
-
-                NSDictionary *dic = @{@"dateTime" : time, @"value" : stepString};
+                NSDate *time2 = quantitySample.endDate;
+                NSString *duration = [NSString stringWithFormat:@"%f", [time2 timeIntervalSinceDate:time]];
+                NSDictionary *dic = @{@"dateTime" : time, @"value" : stepString, @"duration" : duration};
                 [array addObject:dic];
                 allSteps = allSteps + totleSteps;
             }
@@ -195,7 +195,6 @@
                 double usersHeight = [quantity doubleValueForUnit:distanceUnit];
                 totleSteps += usersHeight;
             }
-            NSLog(@"当天行走距离 = %.2f",totleSteps);
             completion(totleSteps, array, error);
         }
     }];
