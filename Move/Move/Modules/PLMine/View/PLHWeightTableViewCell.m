@@ -34,6 +34,7 @@ WYLineChartViewDatasource
 
 
 @property (nonatomic, assign) BOOL isHaveDian;
+
 @property (nonatomic, assign) BOOL isFirstZero;
 
 @property (weak, nonatomic) IBOutlet UIImageView *chartImageView;
@@ -44,7 +45,8 @@ WYLineChartViewDatasource
 
 @property (nonatomic, strong) NSMutableArray *dateArray;
 
-
+@property (nonatomic, assign) CGFloat maxWeight;
+@property (nonatomic, assign) CGFloat minWeight;
 
 @end
 
@@ -53,11 +55,61 @@ WYLineChartViewDatasource
 #pragma mark - 创建折线图
 
 - (void)createLineChart {
-    [_dateArray addObjectsFromArray:@[@"10/27", @"10/28", @"10/29", @"10/30", @"10/31", @"11/01", @"11/02"]];
+    PLDataBaseManager *manager = [PLDataBaseManager shareManager];
+    
+    NSArray *array = [[[manager ArrayWithRecordWeight] reverseObjectEnumerator] allObjects];
+    
+    NSString *temp = @"";
+    [_dateArray removeAllObjects];
+    [_pointsArray removeAllObjects];
     for (int i = 0; i < 7; i++) {
-        WYLineChartPoint *point = [[WYLineChartPoint alloc] init];
-        point.value = arc4random() % 10 + 50;
-        [_pointsArray addObject:point];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MM.dd"];
+        NSString *timeString = [formatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:- (5 - i + 1) * 24 * 60 * 60]];
+        [_dateArray addObject:timeString];
+    }
+    _maxWeight = 0;
+    _minWeight = 10000;
+    CGFloat lastWeight = 0;
+    for (int i = 0; i < 7; i++) {
+        for (int j = 0; j < array.count; j++) {
+            PLHistoryInformation *infomation = array[j];
+            NSString *str = [infomation.time substringWithRange:NSMakeRange(6, 5)];
+            NSString *str2 = [str stringByReplacingOccurrencesOfString:@"月" withString:@"."];
+            if (![temp isEqualToString:str2]) {
+                WYLineChartPoint *point = [[WYLineChartPoint alloc] init];
+                NSLog(@"6246245624---%@", str2);
+                NSLog(@"6426426246246---%@", _dateArray[i]);
+                if ([str2 isEqualToString:_dateArray[i]]) {
+                    point.value = infomation.weight;
+                    NSLog(@"%lf", point.value);
+                    lastWeight = infomation.weight;
+                    _maxWeight = _maxWeight > infomation.weight ? _maxWeight : infomation.weight;
+                    _minWeight = _minWeight < infomation.weight ? _minWeight : infomation.weight;
+                    [_pointsArray addObject:point];
+                    temp = str2;
+                    break;
+                }
+            }
+            if (j == array.count - 1) {
+                WYLineChartPoint *point = [[WYLineChartPoint alloc] init];
+                point.value = lastWeight;
+                [_pointsArray addObject:point];
+            }
+        }
+    }
+    for (int i = 0; i < 7; i++) {
+        WYLineChartPoint *point = _pointsArray[i];
+        if (point.value > 0) {
+            lastWeight = point.value;
+            break;
+        }
+    }
+    for (int j = 0; j < 7; j++) {
+        WYLineChartPoint *point = _pointsArray[j];
+        if (point.value == 0) {
+            point.value = lastWeight;
+        }
     }
 
     self.lineChart = [[WYLineChartView alloc] initWithFrame:CGRectMake(0, 0, WIDTH * 0.9, 260)];
@@ -66,7 +118,9 @@ WYLineChartViewDatasource
     _lineChart.datasource = self;
     _lineChart.scrollable = NO;
     _lineChart.lineStyle = kWYLineChartMainBezierWaveLine;
+    
     _lineChart.points = [NSArray arrayWithArray:_pointsArray];
+    
     _lineChart.lineBottomMargin = 5;
     _lineChart.lineTopMargin = 0;
     _lineChart.averageLineColor = [UIColor colorWithRed:0.9 green:0.7 blue:0.1 alpha:1];
@@ -92,11 +146,11 @@ WYLineChartViewDatasource
     return 60.f;
 }
 - (CGFloat)maxValueForPointsInLineChartView:(WYLineChartView *)chartView {
-    return 60;
+    return _maxWeight + 5;
 }
 
 - (CGFloat)minValueForPointsInLineChartView:(WYLineChartView *)chartView {
-    return 50;
+    return _minWeight - 5;
 }
 
 - (NSInteger)numberOfReferenceLineVerticalInLineChartView:(WYLineChartView *)chartView {

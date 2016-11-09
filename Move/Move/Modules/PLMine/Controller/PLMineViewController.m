@@ -44,11 +44,11 @@ UITableViewDataSource
     
     [self createButton];
     
-    [[PLDataBaseManager shareManager] createPersonTable];
+   
     
     
     
-    [self userDefauls];
+    
     
     
     
@@ -278,29 +278,7 @@ UITableViewDataSource
 }
 
 
-- (void)userDefauls {
-    NSUserDefaults *userDefauls1 = [NSUserDefaults standardUserDefaults];
-    
-    if (![userDefauls1 boolForKey:@"notFirst"]) {
-        
-        NSUserDefaults *userDefauls2 = [NSUserDefaults standardUserDefaults];
-        [userDefauls2 setBool:YES forKey:@"notFirst"];
-        
-        PLPersonInformation *person = [[PLPersonInformation alloc] init];
-        person.gender = @"男";
-        person.brithday = 1994;
-        person.height = 178;
-        person.goalWeight = 60.3f;
-        person.goalStep = 10000.f;
-        
-        [[PLDataBaseManager shareManager] insertPerson:person];
-        
-        
-    }
-    
-
-}
-    
+ 
 
 
 

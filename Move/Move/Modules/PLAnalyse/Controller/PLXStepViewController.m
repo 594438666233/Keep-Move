@@ -8,6 +8,7 @@
 
 #import "PLXStepViewController.h"
 #import "PLXTouchView.h"
+#import "PLXHealthManager.h"
 
 @interface PLXStepViewController ()
 <
@@ -26,27 +27,50 @@ PNChartDelegate
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    PLXHealthManager *manager = [PLXHealthManager shareInstance];
+    manager.days = 7;
+    manager.isDay = YES;
+    [manager authorizeHealthKit:^(BOOL success, NSError *error) {
+        if (success) {
+            NSLog(@"success");
+            [manager getStepCount:^(double value, NSArray *array, NSError *error) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    _sumLabel.text = [NSString stringWithFormat:@"%.0lf", value];
+                    _avgLabel.text = [NSString stringWithFormat:@"%.0lf", value / 7];
+                    NSMutableArray *valueArray = [NSMutableArray arrayWithArray:@[@"0", @"0", @"0", @"0", @"0", @"0", @"0"]];
+//                    NSMutableArray *timeArray = [NSMutableArray array];
+                    for (NSDictionary *dic in array) {
+                        [valueArray addObject:[dic objectForKey:@"value"]];
+                    }
+                    [_barChart setYValues:valueArray];
+                    [_barChart strokeChart];
+
+                    
+                    for (int i = 0; i < 7; i++) {
+                        PNBar *bar =  _barChart.bars[i];
+                        CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
+                        gradientLayer.colors = @[(__bridge id)[UIColor colorWithRed:0.9 green:0.7 blue:0.1 alpha:1].CGColor, (__bridge id)[UIColor colorWithRed:0.9 * (1 - bar.grade) green:0.7 blue:0.7 * bar.grade alpha:1].CGColor];
+                        gradientLayer.startPoint = CGPointMake(0, 1);
+                        gradientLayer.endPoint = CGPointMake(0, 0);
+                        
+                        gradientLayer.frame = CGRectMake(0, bar.frame.size.height, bar.frame.size.width, bar.frame.size.height * bar.grade);
+                        [bar.layer addSublayer:gradientLayer];
+                        
+                        CABasicAnimation *positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
+                        positionAnimation.duration = 0.5f;
+                        positionAnimation.removedOnCompletion = NO;
+                        positionAnimation.fillMode = kCAFillModeForwards;
+                        positionAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(gradientLayer.position.x, gradientLayer.position.y - bar.frame.size.height * bar.grade)];
+                        
+                        [gradientLayer addAnimation:positionAnimation forKey:@"position"];
+                    }
+                    
+                });
+            }];
+        }
+    }];
     
-    [_barChart strokeChart];
-    
-    for (int i = 0; i < 7; i++) {
-        PNBar *bar =  _barChart.bars[i];
-        CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
-        gradientLayer.colors = @[(__bridge id)[UIColor colorWithRed:0.9 green:0.7 blue:0.1 alpha:1].CGColor, (__bridge id)[UIColor colorWithRed:0.9 * (1 - bar.grade) green:0.7 blue:0.7 * bar.grade alpha:1].CGColor];
-        gradientLayer.startPoint = CGPointMake(0, 1);
-        gradientLayer.endPoint = CGPointMake(0, 0);
-        
-        gradientLayer.frame = CGRectMake(0, bar.frame.size.height, bar.frame.size.width, bar.frame.size.height * bar.grade);
-        [bar.layer addSublayer:gradientLayer];
-        
-        CABasicAnimation *positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
-        positionAnimation.duration = 0.5f;
-        positionAnimation.removedOnCompletion = NO;
-        positionAnimation.fillMode = kCAFillModeForwards;
-        positionAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(gradientLayer.position.x, gradientLayer.position.y - bar.frame.size.height * bar.grade)];
-        
-        [gradientLayer addAnimation:positionAnimation forKey:@"position"];
-    }
+
 }
 
 - (void)viewDidLoad {
@@ -105,8 +129,37 @@ PNChartDelegate
     _barChart.backgroundColor = [UIColor clearColor];
     [_barChart setStrokeColor:PNGreen];
     
-    [_barChart setXLabels:@[@"周一", @"周二", @"周三", @"周四", @"周五", @"周六", @"周日"]];
-    [_barChart setYValues:@[@6000, @2000, @2000, @300, @1110, @5600, @8800]];
+    NSMutableArray *weekArray = [NSMutableArray array];
+    for (int i = 0; i < 7; i++) {
+        NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *comps = [calendar components:NSWeekdayCalendarUnit fromDate:[NSDate dateWithTimeIntervalSinceNow:24 * 60 * 60 * (i + 1)]];
+        switch ([comps weekday]) {
+            case 1:
+                [weekArray addObject:@"周日"];
+                break;
+            case 2:
+                [weekArray addObject:@"周一"];
+                break;
+            case 3:
+                [weekArray addObject:@"周二"];
+                break;
+            case 4:
+                [weekArray addObject:@"周三"];
+                break;
+            case 5:
+                [weekArray addObject:@"周四"];
+                break;
+            case 6:
+                [weekArray addObject:@"周五"];
+                break;
+            default:
+                [weekArray addObject:@"周六"];
+                break;
+        }
+    }
+    
+    [_barChart setXLabels:weekArray];
+    [_barChart setYValues:@[@"0", @"0", @"0", @"0", @"0", @"0", @"0"]];
     _barChart.delegate = self;
 
     
