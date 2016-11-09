@@ -71,24 +71,29 @@ WYLineChartViewDatasource
     _minWeight = 10000;
     CGFloat lastWeight = 0;
     for (int i = 0; i < 7; i++) {
-        for (PLHistoryInformation *infomation in array) {
+        for (int j = 0; j < array.count; j++) {
+            PLHistoryInformation *infomation = array[j];
             NSString *str = [infomation.time substringWithRange:NSMakeRange(6, 5)];
             NSString *str2 = [str stringByReplacingOccurrencesOfString:@"月" withString:@"."];
             if (![temp isEqualToString:str2]) {
                 WYLineChartPoint *point = [[WYLineChartPoint alloc] init];
+                NSLog(@"6246245624---%@", str2);
+                NSLog(@"6426426246246---%@", _dateArray[i]);
                 if ([str2 isEqualToString:_dateArray[i]]) {
                     point.value = infomation.weight;
                     NSLog(@"%lf", point.value);
                     lastWeight = infomation.weight;
                     _maxWeight = _maxWeight > infomation.weight ? _maxWeight : infomation.weight;
                     _minWeight = _minWeight < infomation.weight ? _minWeight : infomation.weight;
+                    [_pointsArray addObject:point];
+                    temp = str2;
+                    break;
                 }
-                else {
-                    point.value = lastWeight;
-                }
+            }
+            if (j == array.count - 1) {
+                WYLineChartPoint *point = [[WYLineChartPoint alloc] init];
+                point.value = lastWeight;
                 [_pointsArray addObject:point];
-                temp = str2;
-                break;
             }
         }
     }

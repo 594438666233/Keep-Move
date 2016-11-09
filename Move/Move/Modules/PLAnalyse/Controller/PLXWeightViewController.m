@@ -38,60 +38,74 @@ WYLineChartViewDatasource
     
     NSArray *array = [[[manager ArrayWithRecordWeight] reverseObjectEnumerator] allObjects];
 //    NSArray *array = [manager ArrayWithRecordWeight];
-
-    
-    NSString *temp = @"";
-    [_dateArray removeAllObjects];
-    [_pointsArray removeAllObjects];
-    for (int i = 0; i < 7; i++) {
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"MM.dd"];
-        NSString *timeString = [formatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:- (5 - i + 1) * 24 * 60 * 60]];
-        [_dateArray addObject:timeString];
-    }
-    _maxWeight = 0;
-    _minWeight = 10000;
-
-    CGFloat lastWeight = 0;
-    for (int i = 0; i < 7; i++) {
-        for (PLHistoryInformation *infomation in array) {
-            NSString *str = [infomation.time substringWithRange:NSMakeRange(6, 5)];
-            NSString *str2 = [str stringByReplacingOccurrencesOfString:@"月" withString:@"."];
-            if (![temp isEqualToString:str2]) {
-                WYLineChartPoint *point = [[WYLineChartPoint alloc] init];
-                if ([str2 isEqualToString:_dateArray[i]]) {
-                    point.value = infomation.weight;
-                    NSLog(@"%lf", point.value);
-                    lastWeight = infomation.weight;
-                    _maxWeight = _maxWeight > infomation.weight ? _maxWeight : infomation.weight;
-                    _minWeight = _minWeight < infomation.weight ? _minWeight : infomation.weight;
+    if (array.count > 0) {
+        [self.view addSubview:_lineChart];
+        
+        NSString *temp = @"";
+        [_dateArray removeAllObjects];
+        [_pointsArray removeAllObjects];
+        for (int i = 0; i < 7; i++) {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"MM.dd"];
+            NSString *timeString = [formatter stringFromDate:[NSDate dateWithTimeIntervalSinceNow:- (5 - i + 1) * 24 * 60 * 60]];
+            [_dateArray addObject:timeString];
+        }
+        _maxWeight = 0;
+        _minWeight = 10000;
+        
+        CGFloat lastWeight = 0;
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < array.count; j++) {
+                PLHistoryInformation *infomation = array[j];
+                NSString *str = [infomation.time substringWithRange:NSMakeRange(6, 5)];
+                NSString *str2 = [str stringByReplacingOccurrencesOfString:@"月" withString:@"."];
+                if (![temp isEqualToString:str2]) {
+                    WYLineChartPoint *point = [[WYLineChartPoint alloc] init];
+                    NSLog(@"6246245624---%@", str2);
+                    NSLog(@"6426426246246---%@", _dateArray[i]);
+                    if ([str2 isEqualToString:_dateArray[i]]) {
+                        point.value = infomation.weight;
+                        NSLog(@"%lf", point.value);
+                        lastWeight = infomation.weight;
+                        _maxWeight = _maxWeight > infomation.weight ? _maxWeight : infomation.weight;
+                        _minWeight = _minWeight < infomation.weight ? _minWeight : infomation.weight;
+                        [_pointsArray addObject:point];
+                        temp = str2;
+                        break;
+                    }
                 }
-                else {
+                if (j == array.count - 1) {
+                    WYLineChartPoint *point = [[WYLineChartPoint alloc] init];
                     point.value = lastWeight;
+                    [_pointsArray addObject:point];
                 }
-                [_pointsArray addObject:point];
-                temp = str2;
+            }
+        }
+        for (int i = 0; i < 7; i++) {
+            WYLineChartPoint *point = _pointsArray[i];
+            if (point.value > 0) {
+                lastWeight = point.value;
                 break;
             }
         }
-    }
-    for (int i = 0; i < 7; i++) {
-         WYLineChartPoint *point = _pointsArray[i];
-        if (point.value > 0) {
-            lastWeight = point.value;
-            break;
+        for (int j = 0; j < 7; j++) {
+            WYLineChartPoint *point = _pointsArray[j];
+            if (point.value == 0) {
+                point.value = lastWeight;
+            }
         }
+        
+        
+        _lineChart.points = [NSArray arrayWithArray:_pointsArray];
+        
+        [_lineChart updateGraph];
+
     }
-    for (int j = 0; j < 7; j++) {
-        WYLineChartPoint *point = _pointsArray[j];
-        if (point.value == 0) {
-            point.value = lastWeight;
-        }
+    else {
+        [_lineChart removeFromSuperview];
     }
     
     
-    _lineChart.points = [NSArray arrayWithArray:_pointsArray];
-    [_lineChart updateGraph];
 }
 
 - (void)viewDidLoad {
@@ -163,7 +177,6 @@ WYLineChartViewDatasource
     _lineChart.yAxisHeaderPrefix = @"体重";
     _lineChart.yAxisHeaderSuffix = @"日期";
     
-    [self.view addSubview:_lineChart];
 }
 
 #pragma mark - delegate
