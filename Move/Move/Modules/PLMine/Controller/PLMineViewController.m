@@ -22,7 +22,8 @@ static NSString *const WeightCell = @"PLHWeightTableViewCell";
 @interface PLMineViewController ()
 <
 UITableViewDelegate,
-UITableViewDataSource
+UITableViewDataSource,
+UIScrollViewDelegate
 >
 
 
@@ -37,7 +38,9 @@ UITableViewDataSource
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.view.backgroundColor = ColorWithBackGround;
+    
+    
+    self.view.backgroundColor = [UIColor blackColor];
     
     
     [self.view addSubview:self.tableView];
@@ -45,28 +48,24 @@ UITableViewDataSource
     [self createButton];
     
    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
-    
     
     
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
+
+}
 
 
 - (UITableView *)tableView {
 
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, - 34, WIDTH, HEIGHT - 34) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, - 34, WIDTH, HEIGHT - 64 - 49 + 34 ) style:UITableViewStyleGrouped];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

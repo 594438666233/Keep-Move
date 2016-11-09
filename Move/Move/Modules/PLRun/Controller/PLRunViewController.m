@@ -727,8 +727,8 @@ PLHealthManagerDelegate
     
     PLPersonInformation *person1 = [[PLDataBaseManager shareManager] personInformation];
     
-    self.goalLabel.text = [NSString stringWithFormat:@"目标: %ld", person1.goalStep];
     self.goalStep = person1.goalStep;
+    self.goalLabel.text = [NSString stringWithFormat:@"目标: %ld", person1.goalStep];
     
 }
 
