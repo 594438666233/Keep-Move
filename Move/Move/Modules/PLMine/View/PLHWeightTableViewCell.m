@@ -392,13 +392,13 @@ WYLineChartViewDatasource
     [_glassView addSubview:visualView];
     [self.window addSubview:_glassView];
     
+    
     UIView *view = [[UIView alloc] init];
     view.layer.cornerRadius = 10.f;
     view.frame = CGRectMake((WIDTH - (WIDTH - 40)) / 2, 100, WIDTH - 40, 240);
     view.backgroundColor = [UIColor blackColor];
     view.alpha = 0.7;
     [_glassView addSubview:view];
-    
     
     
     

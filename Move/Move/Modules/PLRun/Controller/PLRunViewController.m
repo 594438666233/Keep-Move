@@ -550,7 +550,7 @@ PLHealthManagerDelegate
 
     [manager getIphoneHealthData];
 
-    manager.days = 10;
+    manager.days = 100;
     
     manager.delegate = self;
     
