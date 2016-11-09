@@ -39,13 +39,13 @@
             /*
              组装需要读写的数据类型
              */
-            NSSet *writeDataTypes = [self dataTypesToWrite];
+//            NSSet *writeDataTypes = [self dataTypesToWrite];
             NSSet *readDataTypes = [self dataTypesRead];
             
             /*
              注册需要读写的数据类型，也可以在“健康”APP中重新修改
              */
-            [self.healthStore requestAuthorizationToShareTypes:writeDataTypes readTypes:readDataTypes completion:^(BOOL success, NSError *error) {
+            [self.healthStore requestAuthorizationToShareTypes:nil readTypes:readDataTypes completion:^(BOOL success, NSError *error) {
                 
                 if (compltion != nil) {
                     NSLog(@"error->%@", error.localizedDescription);
@@ -79,8 +79,9 @@
     HKQuantityType *stepCountType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierStepCount];
     HKQuantityType *distance = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierDistanceWalkingRunning];
     HKQuantityType *activeEnergyType = [HKObjectType quantityTypeForIdentifier:HKQuantityTypeIdentifierActiveEnergyBurned];
+    HKQuantityType *stairs = [HKQuantityType quantityTypeForIdentifier:HKQuantityTypeIdentifierFlightsClimbed];
     
-    return [NSSet setWithObjects:heightType, temperatureType,birthdayType,sexType,weightType,stepCountType, distance, activeEnergyType,nil];
+    return [NSSet setWithObjects:heightType, temperatureType,birthdayType,sexType,weightType,stepCountType, distance, activeEnergyType, stairs,nil];
 }
 
 // 当天时间段
@@ -121,9 +122,9 @@
                 double totleSteps = [quantitySample.quantity doubleValueForUnit:[HKUnit countUnit]];
                 NSString *stepString = [NSString stringWithFormat:@"%lf", totleSteps];
                 NSDate *time = quantitySample.startDate;
- 
-
-                NSDictionary *dic = @{@"dateTime" : time, @"value" : stepString};
+                NSDate *time2 = quantitySample.endDate;
+                NSString *duration = [NSString stringWithFormat:@"%f", [time2 timeIntervalSinceDate:time]];
+                NSDictionary *dic = @{@"dateTime" : time, @"value" : stepString, @"duration" : duration};
                 [array addObject:dic];
                 allSteps = allSteps + totleSteps;
             }
@@ -194,7 +195,6 @@
                 double usersHeight = [quantity doubleValueForUnit:distanceUnit];
                 totleSteps += usersHeight;
             }
-            NSLog(@"当天行走距离 = %.2f",totleSteps);
             completion(totleSteps, array, error);
         }
     }];

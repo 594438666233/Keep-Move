@@ -141,6 +141,14 @@
     self.window.rootViewController = _rootTabBarController;
     
     
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"firstLaunchDate"];
+    }
+    
+    
+    
+    
     return YES;
 }
 

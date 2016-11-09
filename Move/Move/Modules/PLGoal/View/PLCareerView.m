@@ -8,6 +8,7 @@
 
 #import "PLCareerView.h"
 #import "PLCareerModel.h"
+#import "PLXHealthManager.h"
 
 @interface PLCareerView ()
 
@@ -30,11 +31,38 @@
 }
 
 - (void)setPlCareerModel:(PLCareerModel *)plCareerModel {
-    
-    _stepCountLabel.text = plCareerModel.stepCount;
-    _calorieLabel.text = plCareerModel.calorie;
-    _kilometreLabel.text = plCareerModel.kilometre;
-    _hoursLabel.text = plCareerModel.hours;
+    NSDate *firstDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"firstLaunchDate"];
+    NSDate *date = [NSDate date];
+    NSLog(@"---%@", date);
+    NSLog(@"-----%@", firstDate);
+    NSInteger days = (NSInteger)[firstDate timeIntervalSinceDate:date] / 86400 + 1 ;
+    NSLog(@"days-------%ld", days);
+    PLXHealthManager *manager = [PLXHealthManager shareInstance];
+    manager.days = days;
+    manager.isDay = YES;
+    [manager getStepCount:^(double value, NSArray *array, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _stepCountLabel.text = [NSString stringWithFormat:@"%.0lf", value];
+            _calorieLabel.text = [NSString stringWithFormat:@"%.0lf", value / 50];
+            CGFloat time = 0;
+            for (NSDictionary *dic in array) {
+                CGFloat duration = [[dic objectForKey:@"duration"] floatValue];
+                time = time + duration;
+            }
+            if (time / 3600 < 1) {
+                _hoursLabel.text = @"<1";
+            }
+            else {
+               _hoursLabel.text = [NSString stringWithFormat:@"%.0lf", time / 3600]; 
+            }
+        });
+    }];
+    [manager getDistance:^(double value, NSArray *array, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            _kilometreLabel.text = [NSString stringWithFormat:@"%.0lf", value];
+        });
+
+    }];
 }
 
 @end
