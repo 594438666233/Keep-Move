@@ -25,12 +25,7 @@
 @implementation Record
 
 #pragma mark - interface
-- (NSMutableArray *)locationsArray {
-    if (!_locationsArray) {
-        _locationsArray = [NSMutableArray array];
-    }
-    return _locationsArray;
-}
+
 - (CLLocation *)startLocation
 {
     return [self.locationsArray firstObject];
@@ -44,9 +39,8 @@
 - (void)addLocation:(CLLocation *)location
 {
     _endTime = [NSDate date];
-    self.locationsArray = [NSMutableArray array];
-//    [self.locationsArray addObject:location];
-    [self.locationsArray insertObject:location atIndex:0];
+    [self.locationsArray addObject:location];
+//    [self.locationsArray insertObject:location atIndex:0];
 }
 
 - (CLLocationCoordinate2D *)coordinates

@@ -141,7 +141,6 @@ static NSString *const cellDetailRunRecordTwoIdentifier = @"cellTwo";
     [footView addSubview:button];
     [button handleControlEvent:UIControlEventTouchUpInside withBlock:^{
         self.currentRecord = [[Record alloc] init];
-//        [self.sportRecordArray insertObject:_infoModel atIndex:0];
         [self.sportRecordArray addObject:_infoModel];
         [NSKeyedArchiver archiveRootObject:_sportRecordArray toFile:_goalPath];
         [self saveRoute];
@@ -354,8 +353,7 @@ static NSString *const cellDetailRunRecordTwoIdentifier = @"cellTwo";
         string = [string stringByAppendingString:[NSString stringWithFormat:@"%@分钟", _minutesArray[_selectedTwoIndex]]];
         NSLog(@"time :%@", string);
         [_timeView removeFromSuperview];
-        
-        
+    
         _infoModel.time = string;
         
         // 刷新指定行cell

@@ -93,7 +93,7 @@
     }
     
     _stepCountTextField.text = _infoModel.stepCount;
-//    _kmTextFiled.text = _infoModel.km;
+    _kmTextFiled.text = _infoModel.km;
     _calorieTextField.text = _infoModel.calorie;
 
 }

@@ -33,6 +33,9 @@ static NSString *cellTwoIdentifier = @"cellTwo";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self setupPath];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
     NSArray *pArray = [NSKeyedUnarchiver unarchiveObjectWithFile:_goalPath];
     self.dataArray = [NSMutableArray arrayWithArray:pArray];
     
@@ -49,7 +52,6 @@ static NSString *cellTwoIdentifier = @"cellTwo";
 
 - (void)setupPath {
     
- 
     // 拼接路径
     NSArray *libraryArray = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     NSString *libraryPath = [libraryArray firstObject];
@@ -162,7 +164,7 @@ static NSString *cellTwoIdentifier = @"cellTwo";
 - (void)setupTableView {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, PLWIDTH, PLHEIGHT - 64)];
     _tableView.backgroundColor = PLBLACK;
-    _tableView.rowHeight = PLHEIGHT * 0.35;
+    _tableView.rowHeight = PLHEIGHT * 0.3;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tableView registerNib:[UINib nibWithNibName:@"PLInformationCell" bundle:nil] forCellReuseIdentifier:cellIndentifier];
     [_tableView registerNib:[UINib nibWithNibName:@"PLInformationTwoCell" bundle:nil] forCellReuseIdentifier:cellTwoIdentifier];

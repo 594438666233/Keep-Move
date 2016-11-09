@@ -108,7 +108,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-
+    [self.mapView addOverlay:self.mutablePolyline];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
 }
 
@@ -129,7 +129,7 @@
     [super viewDidAppear:animated];
     [self.mapView addOverlay:self.mutablePolyline];
 
-    [_mapView setZoomLevel:18 animated:YES];;
+    [_mapView setZoomLevel:17 animated:YES];
     self.mapView.userTrackingMode = MAUserTrackingModeFollow;
 }
 
@@ -527,8 +527,6 @@
     _regeo.requireExtension = YES;
     [self.mapSearchAPI AMapReGoecodeSearch:_regeo];
     
-    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(_mapView.userLocation.coordinate.latitude, _mapView.userLocation.coordinate.longitude);
-    [_mapView setCenterCoordinate:centerCoordinate animated:NO];
     
     if (_startMoving == YES) {
         
@@ -536,10 +534,8 @@
         if (userLocation.location.horizontalAccuracy < 80 && userLocation.location.horizontalAccuracy > 0)
         {
             [self.locationsArray addObject:userLocation.location];
-            
-            NSLog(@"date: %@,now :%@",userLocation.location.timestamp,[NSDate date]);
-
             [self.currentRecord addLocation:userLocation.location];
+            
             if (_plMenuView.type == NO) {
                 // 平均速度(KM/H)
                 double rate = [[_currentRecord subTitle] doubleValue] * 3.4;
@@ -552,8 +548,8 @@
                 
                 NSString *temp = [NSString stringWithFormat:@"%.0f", (speedTime / speedDistance)];
                 NSString *speedRate = [NSString stringWithFormat:@"%@", [temp timeFormat]];
-                self.plDetailView.rate = speedRate;
-                _infoModel.rate = speedRate;
+                self.plDetailView.stepCount = speedRate;
+                _infoModel.stepCount = speedRate;
 
             }
  
@@ -596,7 +592,7 @@
 - (void)actionLocation
 {
     [self.mapView setUserTrackingMode:MAUserTrackingModeFollow];
-    [_mapView setZoomLevel:18 animated:YES];
+    [_mapView setZoomLevel:17 animated:YES];
 }
 
 #pragma mark - 天气信息
@@ -680,14 +676,6 @@
             // 跑步节奏
             self.plDetailView.rate = [NSString stringWithFormat:@"%ld", [pedometerData.currentCadence integerValue]];
             _infoModel.rate = [NSString stringWithFormat:@"%ld", [pedometerData.currentCadence integerValue]];
-        }else{
-            // 骑车配速
-            double speedTime = 1000 / 60;
-            double speedDistance = 10000 / 1000;
-            NSString *temp = [NSString stringWithFormat:@"%ld", (NSInteger)(speedTime / speedDistance)];
-            NSString *speedRate = [NSString stringWithFormat:@"%@", [temp timeFormat]];
-            self.plDetailView.rate = speedRate;
-            _infoModel.rate = speedRate;
         }
     }
 }
