@@ -38,6 +38,10 @@ WYLineChartViewDatasource
     
     NSArray *array = [[[manager ArrayWithRecordWeight] reverseObjectEnumerator] allObjects];
 //    NSArray *array = [manager ArrayWithRecordWeight];
+    
+    PLHistoryInformation *infomation = [array firstObject];
+    _nLabel.text = [NSString stringWithFormat:@"%.1lf", infomation.weight];
+    
     if (array.count > 0) {
         [self.view addSubview:_lineChart];
         
@@ -61,11 +65,8 @@ WYLineChartViewDatasource
                 NSString *str2 = [str stringByReplacingOccurrencesOfString:@"月" withString:@"."];
                 if (![temp isEqualToString:str2]) {
                     WYLineChartPoint *point = [[WYLineChartPoint alloc] init];
-                    NSLog(@"6246245624---%@", str2);
-                    NSLog(@"6426426246246---%@", _dateArray[i]);
                     if ([str2 isEqualToString:_dateArray[i]]) {
                         point.value = infomation.weight;
-                        NSLog(@"%lf", point.value);
                         lastWeight = infomation.weight;
                         _maxWeight = _maxWeight > infomation.weight ? _maxWeight : infomation.weight;
                         _minWeight = _minWeight < infomation.weight ? _minWeight : infomation.weight;
@@ -174,7 +175,7 @@ WYLineChartViewDatasource
     _lineChart.gradientColorsLocation = @[@0, @0.9];
     _lineChart.drawGradient = YES;
     
-    _lineChart.yAxisHeaderPrefix = @"体重";
+    _lineChart.yAxisHeaderPrefix = @"体重(kg)";
     _lineChart.yAxisHeaderSuffix = @"日期";
     
 }

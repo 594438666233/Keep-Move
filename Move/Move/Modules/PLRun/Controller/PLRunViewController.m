@@ -125,14 +125,6 @@ PLHealthManagerDelegate
     
     [self userDefauls];
     
-    [_barChart strokeChart];
-
-    
-    
-    
-    
-
-    
     PLXHealthManager *manager = [PLXHealthManager shareInstance];
     manager.days = 1;
     manager.isDay = NO;
@@ -732,8 +724,8 @@ PLHealthManagerDelegate
     
     PLPersonInformation *person1 = [[PLDataBaseManager shareManager] personInformation];
     
-    self.goalLabel.text = [NSString stringWithFormat:@"目标: %ld", person1.goalStep];
     self.goalStep = person1.goalStep;
+    self.goalLabel.text = [NSString stringWithFormat:@"目标: %ld", person1.goalStep];
     
 }
 
@@ -741,7 +733,7 @@ PLHealthManagerDelegate
 - (void)createBarChart {
     self.barChart = [[PNBarChart alloc] initWithFrame:CGRectMake(10, HEIGHT / 1.6, WIDTH - 20, HEIGHT / 16 * 6 - 64 - 55)];
     _barChart.yChartLabelWidth = 0;
-    _barChart.chartMarginLeft = 0.0;
+    _barChart.chartMarginLeft = -1.0;
     _barChart.chartMarginRight = 0.0;
     _barChart.chartMarginTop = 5.0;
     _barChart.chartMarginBottom = 10.0;
@@ -750,7 +742,7 @@ PLHealthManagerDelegate
     [_barChart setStrokeColor:PNWhite];
     _barChart.showLabel = YES;
     _barChart.showLevelLine = NO;
-    _barChart.showChartBorder = NO;
+    _barChart.showChartBorder = YES;
     _barChart.isGradientShow = NO;
     _barChart.isShowNumbers = NO;
     

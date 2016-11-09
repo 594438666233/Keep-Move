@@ -80,6 +80,8 @@ UITextFieldDelegate
     person.goalWeight = [self.weight.text floatValue];
     person.goalStep = [self.steps.text integerValue];
     [[PLDataBaseManager shareManager] updatePerson:person];
+    
+    
 
 }
 

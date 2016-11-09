@@ -37,7 +37,10 @@ PNChartDelegate
                 dispatch_async(dispatch_get_main_queue(), ^{
                     _sumLabel.text = [NSString stringWithFormat:@"%.0lf", value];
                     _avgLabel.text = [NSString stringWithFormat:@"%.0lf", value / 7];
-                    NSMutableArray *valueArray = [NSMutableArray arrayWithArray:@[@"0", @"0", @"0", @"0", @"0", @"0", @"0"]];
+                    NSMutableArray *valueArray = [NSMutableArray array];
+                    if (array.count == 0) {
+                        [valueArray addObjectsFromArray:@[@"0", @"0", @"0", @"0", @"0", @"0", @"0"]];
+                    }
 //                    NSMutableArray *timeArray = [NSMutableArray array];
                     for (NSDictionary *dic in array) {
                         [valueArray addObject:[dic objectForKey:@"value"]];
@@ -131,8 +134,9 @@ PNChartDelegate
     
     NSMutableArray *weekArray = [NSMutableArray array];
     for (int i = 0; i < 7; i++) {
-        NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents *comps = [calendar components:NSWeekdayCalendarUnit fromDate:[NSDate dateWithTimeIntervalSinceNow:24 * 60 * 60 * (i + 1)]];
+        NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+
+        NSDateComponents *comps = [calendar components:NSCalendarUnitWeekday fromDate:[NSDate dateWithTimeIntervalSinceNow:24 * 60 * 60 * (i + 1)]];
         switch ([comps weekday]) {
             case 1:
                 [weekArray addObject:@"周日"];

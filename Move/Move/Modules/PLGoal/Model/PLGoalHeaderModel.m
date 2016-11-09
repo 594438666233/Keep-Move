@@ -7,7 +7,9 @@
 //
 
 #import "PLGoalHeaderModel.h"
+#import "PLXHealthManager.h"
 
 @implementation PLGoalHeaderModel
+
 
 @end

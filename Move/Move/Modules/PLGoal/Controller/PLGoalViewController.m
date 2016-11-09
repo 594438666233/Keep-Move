@@ -8,9 +8,13 @@
 
 #import "PLGoalViewController.h"
 #import "PLGoalHeaderView.h"
+#import "PLGoalHeaderModel.h"
 #import "PLTargetView.h"
+#import "PLTargetModel.h"
 #import "PLDefeatView.h"
+#import "PLDefeatModel.h"
 #import "PLCareerView.h"
+#import "PLCareerModel.h"
 #import "UIImage+GIF.h"
 
 @interface PLGoalViewController ()
@@ -51,6 +55,9 @@
 - (void)createHeaderView {
     self.plGoalHeaderView = [[PLGoalHeaderView alloc] init];
     _plGoalHeaderView.frame = CGRectMake(0, 0, PLWIDTH, HEIGHT / 4);
+    PLGoalHeaderModel *model = [[PLGoalHeaderModel alloc] init];
+
+    _plGoalHeaderView.plGoalHeaderModel = model;
     [self.view addSubview:_plGoalHeaderView];
 }
 
@@ -58,6 +65,8 @@
     self.plTargetView = [[PLTargetView alloc] init];
     _plTargetView.alpha = 0.0;
     _plTargetView.frame = CGRectMake(0, 0, PLWIDTH, HEIGHT / 4);
+    PLTargetModel *model = [[PLTargetModel alloc] init];
+    _plTargetView.plTargetModel = model;
     [self.view addSubview:_plTargetView];
 }
 
@@ -65,6 +74,8 @@
     self.plDefeatView = [[PLDefeatView alloc] init];
     _plDefeatView.alpha = 0.0;
     _plDefeatView.frame = CGRectMake(0, 0, PLWIDTH, HEIGHT / 4);
+    PLDefeatModel *model = [[PLDefeatModel alloc] init];
+    _plDefeatView.plDefeatModel = model;
     [self.view addSubview:_plDefeatView];
 }
 
@@ -72,6 +83,8 @@
     self.plCareerView = [[PLCareerView alloc] init];
     _plCareerView.alpha = 0.0;
     _plCareerView.frame = CGRectMake(0, 0, PLWIDTH, HEIGHT / 4);
+    PLCareerModel *model = [[PLCareerModel alloc] init];
+    _plCareerView.plCareerModel = model;
     [self.view addSubview:_plCareerView];
 }
 
