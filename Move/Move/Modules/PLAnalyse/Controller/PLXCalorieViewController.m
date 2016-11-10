@@ -31,6 +31,7 @@ PNChartDelegate
     PLXHealthManager *manager = [PLXHealthManager shareInstance];
     manager.days = 7;
     manager.isDay = YES;
+    manager.startDate = [NSDate date];
     [manager authorizeHealthKit:^(BOOL success, NSError *error) {
         if (success) {
             NSLog(@"success");

@@ -86,7 +86,7 @@
 
 // 当天时间段
 - (NSPredicate *)predicateForSamplesToday {
-    NSDate *endDate = [NSDate date];
+    NSDate *endDate = self.startDate;
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:endDate];

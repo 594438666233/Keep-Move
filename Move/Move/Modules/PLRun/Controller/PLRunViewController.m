@@ -103,6 +103,8 @@ PLHealthManagerDelegate
 
 @property (nonatomic, strong) NSTimer *percentTimer;
 
+@property (nonatomic, strong) NSDate *lastDate;
+
 @end
 
 @implementation PLRunViewController
@@ -117,25 +119,19 @@ PLHealthManagerDelegate
     return _calendarView;
 }
 
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-//    self.navigationController.navigationBar.hidden = NO;
-    NSLog(@"%@",  [NSDate dateWithTimeIntervalSinceReferenceDate:0]);
-    
-    [self userDefauls];
-    
+// 绘图
+- (void)drawBarChartWithDate:(NSDate *)date {
     PLXHealthManager *manager = [PLXHealthManager shareInstance];
     manager.days = 1;
     manager.isDay = NO;
+    manager.startDate = date;
     [manager authorizeHealthKit:^(BOOL success, NSError *error) {
         if (success) {
             NSLog(@"success");
             [manager getStepCount:^(double value, NSArray *array, NSError *error) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
                     NSCalendar *calendar = [NSCalendar currentCalendar];
-                    NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:[NSDate date]];
+                    NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
                     [components setHour:0];
                     [components setMinute:0];
                     [components setSecond:0];
@@ -160,7 +156,7 @@ PLHealthManagerDelegate
                         else {
                             [yArray addObject:@"0"];
                         }
-
+                        
                         [xArray addObject:@""];
                     }
                     
@@ -174,14 +170,23 @@ PLHealthManagerDelegate
         }
     }];
 
+}
 
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+//    self.navigationController.navigationBar.hidden = NO;
+    NSLog(@"%@",  [NSDate dateWithTimeIntervalSinceReferenceDate:0]);
+    
+    [self userDefauls];
+    
+    [self drawBarChartWithDate:_lastDate];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    self.lastDate = [NSDate date];
     
     [self initHKHealth];
     
@@ -247,6 +252,11 @@ PLHealthManagerDelegate
     _calendarView.calendarBlock = ^(NSInteger day, NSInteger month, NSInteger year) {
         
         NSLog(@"%ld-%02ld-%02ld", (long)year, month, day);
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        weakSelf.lastDate = [formatter dateFromString:[NSString stringWithFormat:@"%ld-%02ld-%02ld 23:59:59", (long)year, month, day]];
+        [weakSelf drawBarChartWithDate:weakSelf.lastDate];
         
         weakSelf.calendarLabel.text = [NSString stringWithFormat:@"%02ld月%02ld日", month, (long)day];
         

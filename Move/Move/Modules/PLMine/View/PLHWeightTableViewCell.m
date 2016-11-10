@@ -132,7 +132,7 @@ WYLineChartViewDatasource
     _lineChart.gradientColorsLocation = @[@0, @0.9];
     _lineChart.drawGradient = YES;
     
-    _lineChart.yAxisHeaderPrefix = @"体重(kg)";
+    _lineChart.yAxisHeaderPrefix = @"体重";
     _lineChart.yAxisHeaderSuffix = @"日期";
 
     

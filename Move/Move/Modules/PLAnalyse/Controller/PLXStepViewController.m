@@ -27,9 +27,12 @@ PNChartDelegate
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    
     PLXHealthManager *manager = [PLXHealthManager shareInstance];
     manager.days = 7;
     manager.isDay = YES;
+    manager.startDate = [NSDate date];
     [manager authorizeHealthKit:^(BOOL success, NSError *error) {
         if (success) {
             NSLog(@"success");
@@ -84,6 +87,7 @@ PNChartDelegate
     [self createTouchView];
     [self createBarChart];
 }
+
 
 - (void)createLabel {
     UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, HEIGHT / 20, WIDTH / 2 - 20, HEIGHT / 30)];
@@ -165,8 +169,6 @@ PNChartDelegate
     [_barChart setXLabels:weekArray];
     [_barChart setYValues:@[@"0", @"0", @"0", @"0", @"0", @"0", @"0"]];
     _barChart.delegate = self;
-
-    
     [self.view addSubview:_barChart];
 }
 

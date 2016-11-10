@@ -32,6 +32,7 @@
 - (void)setPlDefeatModel:(PLDefeatModel *)plDefeatModel {
     PLXHealthManager *manager = [PLXHealthManager shareInstance];
     manager.isDay = YES;
+    manager.startDate = [NSDate date];
     NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *comps = [calendar components:NSCalendarUnitWeekday fromDate:[NSDate date]];
     switch ([comps weekday]) {

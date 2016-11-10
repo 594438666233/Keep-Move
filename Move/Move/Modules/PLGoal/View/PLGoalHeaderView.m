@@ -37,6 +37,7 @@
     PLXHealthManager *manager = [PLXHealthManager shareInstance];
     manager.isDay = YES;
     manager.days = 1;
+    manager.startDate = [NSDate date];
     [manager getStepCount:^(double value, NSArray *array, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             _stepLabel.text = [NSString stringWithFormat:@"%.0lf", value];
