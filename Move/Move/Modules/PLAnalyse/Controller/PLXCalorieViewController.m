@@ -27,54 +27,66 @@ PNChartDelegate
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [_barChart removeFromSuperview];
     
     PLXHealthManager *manager = [PLXHealthManager shareInstance];
     manager.days = 7;
     manager.isDay = YES;
     manager.startDate = [NSDate date];
-    [manager authorizeHealthKit:^(BOOL success, NSError *error) {
-        if (success) {
-            NSLog(@"success");
             [manager getStepCount:^(double value, NSArray *array, NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    _sumLabel.text = [NSString stringWithFormat:@"%.0lf", value / 50];
-                    _avgLabel.text = [NSString stringWithFormat:@"%.0lf", value / 7 / 50];
-                    NSMutableArray *valueArray = [NSMutableArray array];
-                    if (array.count == 0) {
-                        [valueArray addObjectsFromArray:@[@"0", @"0", @"0", @"0", @"0", @"0", @"0"]];
-                    }
-                    //                    NSMutableArray *timeArray = [NSMutableArray array];
-                    for (NSDictionary *dic in array) {
-                        CGFloat value1 = [[dic objectForKey:@"value"] floatValue] / 50;
-                        [valueArray addObject:[NSString stringWithFormat:@"%.0lf", value1]];
-                    }
-                    [_barChart setYValues:valueArray];
-                    [_barChart strokeChart];
-                    
-                    
-                    for (int i = 0; i < 7; i++) {
-                        PNBar *bar =  _barChart.bars[i];
-                        CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
-                        gradientLayer.colors = @[(__bridge id)[UIColor colorWithRed:1 green:0.8 blue:0 alpha:1].CGColor, (__bridge id)[UIColor colorWithRed:1 green:0.2 + 0.6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * (1 - bar.grade) blue:0 alpha:1].CGColor];
-                        gradientLayer.startPoint = CGPointMake(0, 1);
-                        gradientLayer.endPoint = CGPointMake(0, 0);
+                if (array.count > 0) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        _sumLabel.text = [NSString stringWithFormat:@"%.0lf", value / 50];
+                        _avgLabel.text = [NSString stringWithFormat:@"%.0lf", value / 7 / 50];
+                        NSMutableArray *valueArray = [NSMutableArray array];
+                        if (array.count == 0) {
+                            [valueArray addObjectsFromArray:@[@"0", @"0", @"0", @"0", @"0", @"0", @"0"]];
+                        }
+                        //                    NSMutableArray *timeArray = [NSMutableArray array];
+                        for (NSDictionary *dic in array) {
+                            CGFloat value1 = [[dic objectForKey:@"value"] floatValue] / 35;
+                            [valueArray addObject:[NSString stringWithFormat:@"%.0lf", value1]];
+                        }
+                        [_barChart setYValues:valueArray];
                         
-                        gradientLayer.frame = CGRectMake(0, bar.frame.size.height, bar.frame.size.width, bar.frame.size.height * bar.grade);
-                        [bar.layer addSublayer:gradientLayer];
+                        [self.view addSubview:_barChart];
+                        [_barChart strokeChart];
                         
-                        CABasicAnimation *positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
-                        positionAnimation.duration = 0.5f;
-                        positionAnimation.removedOnCompletion = NO;
-                        positionAnimation.fillMode = kCAFillModeForwards;
-                        positionAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(gradientLayer.position.x, gradientLayer.position.y - bar.frame.size.height * bar.grade)];
                         
-                        [gradientLayer addAnimation:positionAnimation forKey:@"position"];
-                    }
-                    
-                });
+                        for (int i = 0; i < 7; i++) {
+                            PNBar *bar =  _barChart.bars[i];
+                            CAGradientLayer *gradientLayer = [[CAGradientLayer alloc] init];
+                            gradientLayer.colors = @[(__bridge id)[UIColor colorWithRed:1 green:0.8 blue:0 alpha:1].CGColor, (__bridge id)[UIColor colorWithRed:1 green:0.2 + 0.6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           * (1 - bar.grade) blue:0 alpha:1].CGColor];
+                            gradientLayer.startPoint = CGPointMake(0, 1);
+                            gradientLayer.endPoint = CGPointMake(0, 0);
+                            
+                            gradientLayer.frame = CGRectMake(0, bar.frame.size.height, bar.frame.size.width, bar.frame.size.height * bar.grade);
+                            [bar.layer addSublayer:gradientLayer];
+                            
+                            CABasicAnimation *positionAnimation = [CABasicAnimation animationWithKeyPath:@"position"];
+                            positionAnimation.duration = 0.5f;
+                            positionAnimation.removedOnCompletion = NO;
+                            positionAnimation.fillMode = kCAFillModeForwards;
+                            positionAnimation.toValue = [NSValue valueWithCGPoint:CGPointMake(gradientLayer.position.x, gradientLayer.position.y - bar.frame.size.height * bar.grade)];
+                            
+                            [gradientLayer addAnimation:positionAnimation forKey:@"position"];
+                        }
+                        
+                    });
+
+                }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH / 2 - 100, HEIGHT / 2, 200, 40)];
+                    label.text = @"请在设置->隐私->健康中允许Keep Move访问数据";
+                    label.font = [UIFont systemFontOfSize:16];
+                    label.textColor = [UIColor lightGrayColor];
+                    label.numberOfLines = 0;
+                    label.textAlignment = NSTextAlignmentCenter;
+                    [self.view addSubview:label];
+                    });
+                }
             }];
-        }
-    }];
 }
 
 - (void)viewDidLoad {
@@ -95,7 +107,7 @@ PNChartDelegate
     [self.view addSubview:label1];
     
     self.avgLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, label1.frame.size.height + label1.frame.origin.y + 10, WIDTH / 2 - 20,  HEIGHT / 28)];
-    _avgLabel.text = @"100";
+    _avgLabel.text = @"0";
     _avgLabel.textAlignment = NSTextAlignmentCenter;
     _avgLabel.textColor = [UIColor colorWithRed:0.9 green:0.7 blue:0.1 alpha:1];
     _avgLabel.font = [UIFont systemFontOfSize:WIDTH / 12];
@@ -109,7 +121,7 @@ PNChartDelegate
     [self.view addSubview:label2];
     
     self.sumLabel = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH / 2, label2.frame.size.height + label2.frame.origin.y + 10, WIDTH / 2 - 20,  HEIGHT / 28)];
-    _sumLabel.text = @"697";
+    _sumLabel.text = @"0";
     _sumLabel.textAlignment = NSTextAlignmentCenter;
     _sumLabel.textColor = [UIColor colorWithRed:0.9 green:0.7 blue:0.1 alpha:1];
     _sumLabel.font = [UIFont systemFontOfSize:WIDTH / 12];
@@ -166,9 +178,6 @@ PNChartDelegate
     [_barChart setXLabels:weekArray];
     [_barChart setYValues:@[@"0", @"0", @"0", @"0", @"0", @"0", @"0"]];
     _barChart.delegate = self;
-
-    
-    [self.view addSubview:_barChart];
     
 }
 

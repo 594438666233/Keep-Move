@@ -122,6 +122,7 @@ PLHealthManagerDelegate
 
 // 绘图
 - (void)drawBarChartWithDate:(NSDate *)date {
+    [_barChart removeFromSuperview];
     PLXHealthManager *manager = [PLXHealthManager shareInstance];
     manager.days = 1;
     manager.isDay = NO;
@@ -130,43 +131,60 @@ PLHealthManagerDelegate
         if (success) {
             NSLog(@"success");
             [manager getStepCount:^(double value, NSArray *array, NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSCalendar *calendar = [NSCalendar currentCalendar];
-                    NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
-                    [components setHour:0];
-                    [components setMinute:0];
-                    [components setSecond:0];
-                    NSDate *date1 = [calendar dateFromComponents:components];
-                    NSMutableArray *xArray = [NSMutableArray array];
-                    NSMutableArray *yArray = [NSMutableArray array];
-                    for (int i = 0; i < 96; i++) {
-                        if (array.count > 0) {
-                            for (int j = 0; j < array.count; j++) {
-                                NSDictionary *dic = array[j];
-                                NSDate *date2 = [dic valueForKey:@"dateTime"];
-                                NSTimeInterval time = [date2 timeIntervalSinceDate:date1];
-                                if (i == (int)(time / 86400 * 96 + 0.5)) {
-                                    [yArray addObject:[dic valueForKey:@"value"]];
-                                    break;
-                                }
-                                if (j == array.count - 1) {
-                                    [yArray addObject:@"0"];
+                if (array.count > 0) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        NSCalendar *calendar = [NSCalendar currentCalendar];
+                        NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
+                        [components setHour:0];
+                        [components setMinute:0];
+                        [components setSecond:0];
+                        NSDate *date1 = [calendar dateFromComponents:components];
+                        NSMutableArray *xArray = [NSMutableArray array];
+                        NSMutableArray *yArray = [NSMutableArray array];
+                        for (int i = 0; i < 96; i++) {
+                            if (array.count > 0) {
+                                for (int j = 0; j < array.count; j++) {
+                                    NSDictionary *dic = array[j];
+                                    NSDate *date2 = [dic valueForKey:@"dateTime"];
+                                    NSTimeInterval time = [date2 timeIntervalSinceDate:date1];
+                                    if (i == (int)(time / 86400 * 96 + 0.5)) {
+                                        [yArray addObject:[dic valueForKey:@"value"]];
+                                        break;
+                                    }
+                                    if (j == array.count - 1) {
+                                        [yArray addObject:@"0"];
+                                    }
                                 }
                             }
-                        }
-                        else {
-                            [yArray addObject:@"0"];
+                            else {
+                                [yArray addObject:@"0"];
+                            }
+                            
+                            [xArray addObject:@""];
                         }
                         
-                        [xArray addObject:@""];
-                    }
-                    
-                    [_barChart setXLabels:xArray];
-                    [_barChart setYValues:yArray];
-                    
-                    
-                    [_barChart strokeChart];
-                });
+                        [_barChart setXLabels:xArray];
+                        [_barChart setYValues:yArray];
+                        
+                        [self.view addSubview:_barChart];
+                        [_barChart strokeChart];
+                    });
+
+                }
+                
+                
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+
+                    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH / 2 - 100, HEIGHT / 1.5, 200, 40)];
+                    label.text = @"请在设置->隐私->健康中允许Keep Move访问数据";
+                    label.font = [UIFont systemFontOfSize:16];
+                    label.textColor = [UIColor lightGrayColor];
+                    label.numberOfLines = 0;
+                    label.textAlignment = NSTextAlignmentCenter;
+                    [self.view addSubview:label];
+                    });
+                }
             }];
         }
     }];
@@ -779,7 +797,6 @@ PLHealthManagerDelegate
     _barChart.backgroundColor = [UIColor clearColor];
     _barChart.barBackgroundColor = [UIColor clearColor];
     _barChart.delegate = self;
-    [self.view addSubview:_barChart];
     
     for (int i = 0; i < 3; i++) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH / 4 * (i + 1) - 15, _barChart.frame.origin.y + _barChart.frame.size.height - 20, 30, 20)];

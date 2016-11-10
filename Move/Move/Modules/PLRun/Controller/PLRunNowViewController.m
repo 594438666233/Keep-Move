@@ -22,6 +22,8 @@
 #import "NSDate+Categories.h"
 #import "NSString+TimeFormat.h"
 
+#import <CoreLocation/CLLocationManager.h>
+
 @import CoreMotion;
 
 @interface PLRunNowViewController ()
@@ -118,6 +120,7 @@
     self.commonPolylineCoords = [NSMutableArray array];
     _flag = YES;
     _startMoving = NO;
+   
     [self setupNavigationView];
     [self initOverlay];
     [self initLocationButton];
@@ -180,6 +183,7 @@
 #pragma mark - 设置
 
 - (void)setupMap {
+    //定位功能可用
     // 初始化地图
     self.mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, _plMenuView.frame.origin.y + _plMenuView.frame.size.height, PLWIDTH, PLHEIGHT - _plMenuView.frame.size.height - 64)];
     // 地图语言
@@ -199,7 +203,7 @@
     _mapView.allowsBackgroundLocationUpdates = YES;//iOS9以上系统必须配置
     // 设置地图logo位置
     _mapView.logoCenter = CGPointMake(CGRectGetWidth(_mapView.bounds)-35, CGRectGetHeight(_mapView.bounds)-10);
-
+    
     //代理
     _mapView.delegate = self;
     self.mapSearchAPI = [[AMapSearchAPI alloc] init];
@@ -207,6 +211,18 @@
     
     self.regeo = [[AMapReGeocodeSearchRequest alloc] init];
     [self.view addSubview:_mapView];
+    
+    if ([CLLocationManager authorizationStatus] ==kCLAuthorizationStatusDenied) {
+        
+        //定位不能用
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"为了更准确的定位计步,请前往\n设置->隐私->定位服务\n开启对Keep Move的授权" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+        [alert addAction:sureAction];
+        [self presentViewController:alert animated:YES completion:nil];
+        _mapView = nil;   
+    }
 
 }
 
@@ -516,10 +532,12 @@
 
 // 实时更新定位
 - (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation {
+    
     if (!updatingLocation)
     {
         return;
     }
+    
     self.userLocation = userLocation;
     // 参数1 : 纬度   参数2 : 经度
     _regeo.location = [AMapGeoPoint locationWithLatitude:_mapView.userLocation.coordinate.latitude longitude:_mapView.userLocation.coordinate.longitude];
@@ -535,23 +553,6 @@
         {
             [self.locationsArray addObject:userLocation.location];
             [self.currentRecord addLocation:userLocation.location];
-            
-            if (_plMenuView.type == NO) {
-                // 平均速度(KM/H)
-                double rate = [[_currentRecord subTitle] doubleValue] * 3.4;
-                _plDetailView.stepCount = [NSString stringWithFormat:@"%.2f", rate];
-                _infoModel.stepCount = [NSString stringWithFormat:@"%.2f", rate];
-                
-                // 骑车配速
-                double speedTime = [_currentRecord totalDuration] / 60;
-                double speedDistance = [_currentRecord totalDistance] / 1000;
-                
-                NSString *temp = [NSString stringWithFormat:@"%.0f", (speedTime / speedDistance)];
-                NSString *speedRate = [NSString stringWithFormat:@"%@", [temp timeFormat]];
-                self.plDetailView.rate = speedRate;
-                _infoModel.rate = speedRate;
-
-            }
  
             [self.mutablePolyline appendPoint: MAMapPointForCoordinate(userLocation.location.coordinate)];
             
@@ -650,20 +651,37 @@
    
     // distance
     if ([CMPedometer isDistanceAvailable]) {
+        CGFloat meter = [pedometerData.distance floatValue];
         if (_plMenuView.type == YES) {
             // 跑步距离
-            CGFloat meter = [pedometerData.distance floatValue];
             self.plDetailView.km = [NSString stringWithFormat:@"%.1f", meter / 1000];
             _infoModel.km = [NSString stringWithFormat:@"%.1f", meter / 1000];
         }else {
-            // 骑车距离
-            double km = [_currentRecord totalDistance];
-            self.plDetailView.km = [NSString stringWithFormat:@"%.1f", km];
-            _infoModel.km = [NSString stringWithFormat:@"%.1f", km];
             
+            NSString *tempOne = [NSString stringWithFormat:@"%.1f", meter / 1000];
+            float distance = [tempOne floatValue];
+            
+            // 骑车距离
+            self.plDetailView.km = [NSString stringWithFormat:@"%.1f", distance];
+            _infoModel.km = [NSString stringWithFormat:@"%.1f", distance];
+        
             // 骑车大卡
-            self.plDetailView.calorie = [NSString stringWithFormat:@"%.2f", km * 43];
-            _infoModel.calorie = [NSString stringWithFormat:@"%.2f", km * 43];
+            self.plDetailView.calorie = [NSString stringWithFormat:@"%.2f", distance * 43];
+            _infoModel.calorie = [NSString stringWithFormat:@"%.2f", distance * 43];
+            
+            // 骑车速度(KM/H)
+            // 小时
+            double rate = meter  / _runTime;
+            _plDetailView.stepCount = [NSString stringWithFormat:@"%.2f", rate * 3.6];
+            _infoModel.stepCount = [NSString stringWithFormat:@"%.2f", rate * 3.6];
+            
+            // 骑车配速
+            NSString *temp = [NSString stringWithFormat:@"%.1f", ((meter / _runTime) * 0.06)];
+            
+            NSString *speedRate = [NSString stringWithFormat:@"%@", [temp timeFormat]];
+            self.plDetailView.rate = speedRate;
+            _infoModel.rate = speedRate;
+
         }
 
     } else {

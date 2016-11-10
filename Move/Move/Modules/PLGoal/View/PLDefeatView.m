@@ -68,16 +68,16 @@
             _defeatPeoplePercentageLabel.text = [NSString stringWithFormat:@"%.1lf%%", a];
             if (a > 80) {
                 _activeAgeLabel.text = @"21岁";
-                _describeLabel.text = @"快来看上帝!!!";
+                _describeLabel.text = @"精力很旺盛啊!";
             } else if (a > 60) {
                 _activeAgeLabel.text = @"27岁";
                 _describeLabel.text = @"人类已经无法阻止你了!";
             } else if (a == 0) {
                 _activeAgeLabel.text = @"???岁";
-                _describeLabel.text = @"你咋不去死呢?";
+                _describeLabel.text = @"你来自太空吗?";
             } else {
                 _activeAgeLabel.text = @"30岁";
-                _describeLabel.text = @"继续加油。";
+                _describeLabel.text = @"继续加油.";
             }
         });
     }];

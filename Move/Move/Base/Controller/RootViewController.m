@@ -12,6 +12,8 @@
 #import "PLHWeightTableViewCell.h"
 #import "PLSetInformationTableViewController.h"
 
+#import <AssetsLibrary/AssetsLibrary.h>
+
 @interface RootViewController ()
 
 @property (nonatomic, retain) UIBarButtonItem *rightBarButton;
@@ -51,19 +53,33 @@
 #pragma mark - BarbuttonAction
 
 - (void)leftBarButtonAction:(UIBarButtonItem *)leftBarButton {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"截图已保存到本地相册" preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        
-        UIWindow *screenWindow = [[UIApplication sharedApplication] keyWindow];
-        UIGraphicsBeginImageContextWithOptions(screenWindow.frame.size, NO, [UIScreen mainScreen].scale);
-        [screenWindow.layer renderInContext:UIGraphicsGetCurrentContext()];
-        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        UIImageWriteToSavedPhotosAlbum(image, nil, nil,nil);
-        
-    }];
-    [alert addAction:sureAction];
-    [self presentViewController:alert animated:YES completion:nil];
+    
+    ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
+    if (author == ALAuthorizationStatusNotDetermined) {
+        return;
+    }
+    if (author == ALAuthorizationStatusRestricted || author ==ALAuthorizationStatusDenied){
+        //无权限 做一个友好的提示
+        UIAlertView * alart = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"请先设置允许Keep Move访问您的相册\n设置->隐私->照片" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alart show];
+    } else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"截图已保存到本地相册" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *sureAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            
+            UIWindow *screenWindow = [[UIApplication sharedApplication] keyWindow];
+            UIGraphicsBeginImageContextWithOptions(screenWindow.frame.size, NO, [UIScreen mainScreen].scale);
+            [screenWindow.layer renderInContext:UIGraphicsGetCurrentContext()];
+            UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+            UIGraphicsEndImageContext();
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil,nil);
+            
+        }];
+        [alert addAction:sureAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    
+    
+
 }
 
 - (void)rigthBarButtonAction:(UIBarButtonItem *)rightBarButton {
