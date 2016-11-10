@@ -54,7 +54,10 @@
 
 - (void)leftBarButtonAction:(UIBarButtonItem *)leftBarButton {
     
-    ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];;
+    ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
+    if (author == ALAuthorizationStatusNotDetermined) {
+        return;
+    }
     if (author == ALAuthorizationStatusRestricted || author ==ALAuthorizationStatusDenied){
         //无权限 做一个友好的提示
         UIAlertView * alart = [[UIAlertView alloc]initWithTitle:@"温馨提示" message:@"请先设置允许Keep Move访问您的相册\n设置->隐私->照片" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
