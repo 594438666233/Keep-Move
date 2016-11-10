@@ -53,10 +53,16 @@
 #pragma mark - BarbuttonAction
 
 - (void)leftBarButtonAction:(UIBarButtonItem *)leftBarButton {
-    
     ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
     if (author == ALAuthorizationStatusNotDetermined) {
+        UIWindow *screenWindow = [[UIApplication sharedApplication] keyWindow];
+        UIGraphicsBeginImageContextWithOptions(screenWindow.frame.size, NO, [UIScreen mainScreen].scale);
+        [screenWindow.layer renderInContext:UIGraphicsGetCurrentContext()];
+        UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil,nil);
         return;
+
     }
     if (author == ALAuthorizationStatusRestricted || author ==ALAuthorizationStatusDenied){
         //无权限 做一个友好的提示
@@ -77,9 +83,6 @@
         [alert addAction:sureAction];
         [self presentViewController:alert animated:YES completion:nil];
     }
-    
-    
-
 }
 
 - (void)rigthBarButtonAction:(UIBarButtonItem *)rightBarButton {

@@ -12,10 +12,14 @@
 @interface PLNewFeatureView ()
 
 @property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIImageView *moveImageView;
+
 @property (nonatomic, strong) UIButton *registerButton;
 @property (nonatomic, strong) UIButton *loginButton;
 @property (nonatomic, strong) PLScrollView *adScrollView;
 @property (nonatomic, strong) UIPageControl *pageControl;
+
+@property (nonatomic, assign) CGFloat mul;
 
 @end
 
@@ -24,13 +28,13 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        
+        self.mul = WIDTH / 320;
         [self addSubview:self.imageView];
+        [self addSubview:self.moveImageView];
         
 //        [self addSubview:self.registerButton];
         
         [self addSubview:self.loginButton];
-        
         [self addSubview:self.adScrollView];
         
         self.adScrollView.titles = @[@"全程记录你的运动数据",@"规范你的训练过程",@"陪伴你迈出跑步的第一步",@"分享汗水后你的性感"];
@@ -61,11 +65,24 @@
         UIImage *image = [UIImage imageNamed:@"keep"];
         _imageView = [[UIImageView alloc] initWithImage:image];
         CGFloat X = ([UIScreen mainScreen].bounds.size.width - image.size.width) * 0.5;
-        CGFloat Y = [UIScreen mainScreen].bounds.size.height * 0.25;
+        CGFloat Y = [UIScreen mainScreen].bounds.size.height * 0.3;
         _imageView.frame = CGRectMake(X, Y, image.size.width, image.size.height);
-        [self addSubview:_imageView];
+    
     }
     return _imageView;
+}
+
+- (UIImageView *)moveImageView {
+    if (!_moveImageView) {
+        UIImage *moveImage = [UIImage imageNamed:@"move"];
+        _moveImageView = [[UIImageView alloc] initWithImage:moveImage];
+        
+        CGFloat X = ([UIScreen mainScreen].bounds.size.width - moveImage.size.width * 0.5) * 0.5;
+        CGFloat Y = _imageView.bounds.origin.y + _imageView.bounds.size.height + 180 * _mul;
+        _moveImageView.frame = CGRectMake(X, Y, moveImage.size.width * 0.5, moveImage.size.height * 0.5);
+
+    }
+    return _moveImageView;
 }
 
 - (UIButton *)registerButton
