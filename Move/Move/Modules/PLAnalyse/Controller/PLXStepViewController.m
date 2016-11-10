@@ -21,13 +21,14 @@ PNChartDelegate
 @property (nonatomic, strong) PLXTouchView *touchView;
 @property (nonatomic, assign) NSInteger lastTouch;
 
+@property (nonatomic, strong) UILabel *noteLabel;
 @end
 
 @implementation PLXStepViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [_noteLabel removeFromSuperview];
     [_barChart removeFromSuperview];
     PLXHealthManager *manager = [PLXHealthManager shareInstance];
     manager.days = 7;
@@ -79,13 +80,7 @@ PNChartDelegate
                 else {
                     dispatch_async(dispatch_get_main_queue(), ^{
 
-                    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH / 2 - 100, HEIGHT / 2, 200, 40)];
-                    label.text = @"请在设置->隐私->健康中允许Keep Move访问数据";
-                    label.font = [UIFont systemFontOfSize:16];
-                    label.textColor = [UIColor lightGrayColor];
-                    label.numberOfLines = 0;
-                    label.textAlignment = NSTextAlignmentCenter;
-                    [self.view addSubview:label];
+                    [self.view addSubview:_noteLabel];
                     });
                 }
                 
@@ -104,8 +99,19 @@ PNChartDelegate
     [self createLabel];
     [self createTouchView];
     [self createBarChart];
+    [self createNoteLabel];
 }
 
+- (void)createNoteLabel {
+    self.noteLabel = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH / 2 - 100, HEIGHT / 2, 200, 40)];
+    _noteLabel.text = @"请在设置->隐私->健康中允许Keep Move访问数据";
+    _noteLabel.font = [UIFont systemFontOfSize:16];
+    _noteLabel.textColor = [UIColor lightGrayColor];
+    _noteLabel.numberOfLines = 0;
+    _noteLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:_noteLabel];
+    
+}
 
 - (void)createLabel {
     UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, HEIGHT / 20, WIDTH / 2 - 20, HEIGHT / 30)];
