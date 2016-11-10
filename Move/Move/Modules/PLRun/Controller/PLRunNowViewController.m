@@ -535,23 +535,6 @@
         {
             [self.locationsArray addObject:userLocation.location];
             [self.currentRecord addLocation:userLocation.location];
-            
-            if (_plMenuView.type == NO) {
-                // 平均速度(KM/H)
-                double rate = [[_currentRecord subTitle] doubleValue] * 3.4;
-                _plDetailView.stepCount = [NSString stringWithFormat:@"%.2f", rate];
-                _infoModel.stepCount = [NSString stringWithFormat:@"%.2f", rate];
-                
-                // 骑车配速
-                double speedTime = [_currentRecord totalDuration] / 60;
-                double speedDistance = [_currentRecord totalDistance] / 1000;
-                
-                NSString *temp = [NSString stringWithFormat:@"%.0f", (speedTime / speedDistance)];
-                NSString *speedRate = [NSString stringWithFormat:@"%@", [temp timeFormat]];
-                self.plDetailView.rate = speedRate;
-                _infoModel.rate = speedRate;
-
-            }
  
             [self.mutablePolyline appendPoint: MAMapPointForCoordinate(userLocation.location.coordinate)];
             
@@ -650,20 +633,37 @@
    
     // distance
     if ([CMPedometer isDistanceAvailable]) {
+        CGFloat meter = [pedometerData.distance floatValue];
         if (_plMenuView.type == YES) {
             // 跑步距离
-            CGFloat meter = [pedometerData.distance floatValue];
             self.plDetailView.km = [NSString stringWithFormat:@"%.1f", meter / 1000];
             _infoModel.km = [NSString stringWithFormat:@"%.1f", meter / 1000];
         }else {
-            // 骑车距离
-            double km = [_currentRecord totalDistance];
-            self.plDetailView.km = [NSString stringWithFormat:@"%.1f", km];
-            _infoModel.km = [NSString stringWithFormat:@"%.1f", km];
             
+            NSString *tempOne = [NSString stringWithFormat:@"%.1f", meter / 1000];
+            float distance = [tempOne floatValue];
+            
+            // 骑车距离
+            self.plDetailView.km = [NSString stringWithFormat:@"%.1f", distance];
+            _infoModel.km = [NSString stringWithFormat:@"%.1f", distance];
+        
             // 骑车大卡
-            self.plDetailView.calorie = [NSString stringWithFormat:@"%.2f", km * 43];
-            _infoModel.calorie = [NSString stringWithFormat:@"%.2f", km * 43];
+            self.plDetailView.calorie = [NSString stringWithFormat:@"%.2f", distance * 43];
+            _infoModel.calorie = [NSString stringWithFormat:@"%.2f", distance * 43];
+            
+            // 骑车速度(KM/H)
+            // 小时
+            double rate = meter  / _runTime;
+            _plDetailView.stepCount = [NSString stringWithFormat:@"%.2f", rate * 3.6];
+            _infoModel.stepCount = [NSString stringWithFormat:@"%.2f", rate * 3.6];
+            
+            // 骑车配速
+            NSString *temp = [NSString stringWithFormat:@"%.1f", ((meter / _runTime) * 0.06)];
+            
+            NSString *speedRate = [NSString stringWithFormat:@"%@", [temp timeFormat]];
+            self.plDetailView.rate = speedRate;
+            _infoModel.rate = speedRate;
+
         }
 
     } else {

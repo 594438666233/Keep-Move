@@ -162,9 +162,9 @@ static NSString *cellTwoIdentifier = @"cellTwo";
 }
 
 - (void)setupTableView {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, PLWIDTH, PLHEIGHT - 64)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, PLWIDTH, HEIGHT - 64)];
     _tableView.backgroundColor = PLBLACK;
-    _tableView.rowHeight = PLHEIGHT * 0.3;
+    _tableView.rowHeight = PLHEIGHT * 0.32;
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [_tableView registerNib:[UINib nibWithNibName:@"PLInformationCell" bundle:nil] forCellReuseIdentifier:cellIndentifier];
     [_tableView registerNib:[UINib nibWithNibName:@"PLInformationTwoCell" bundle:nil] forCellReuseIdentifier:cellTwoIdentifier];
