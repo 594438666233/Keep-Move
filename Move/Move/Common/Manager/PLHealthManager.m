@@ -50,7 +50,7 @@
         getData = [self getData];
         
     } else {
-        NSLog(@"---------不支持 HealthKit 框架");
+        //NSLog(@"---------不支持 HealthKit 框架");
     }
     
     store = [[HKHealthStore alloc] init];
@@ -58,7 +58,7 @@
     // 2.请求苹果健康的认证
     [store requestAuthorizationToShareTypes:nil readTypes:getData completion:^(BOOL success, NSError * _Nullable error) {
         if (!success) {
-            NSLog(@"--------请求苹果健康认证失败");
+            //NSLog(@"--------请求苹果健康认证失败");
             
             return ;
         }
@@ -119,7 +119,7 @@
     query.initialResultsHandler = ^(HKStatisticsCollectionQuery *query, HKStatisticsCollection *result, NSError *error) {
         
         for (HKStatistics *sample in [result statistics]) {
-            //            NSLog(@"--------------%@ 至 %@ : %@", sample.startDate, sample.endDate, sample.sumQuantity);
+            //            //NSLog(@"--------------%@ 至 %@ : %@", sample.startDate, sample.endDate, sample.sumQuantity);
             NSDate *date = sample.startDate;
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
             [formatter setDateFormat:@"yyyy-MM-dd"];
@@ -146,11 +146,11 @@
                                  dateTime,@"dateTime",
                                  value,@"value",nil];
             [self.healthSteps addObject:dic];
-            //            NSLog(@"gaizaoDateStyle:%@  Dic = %@",self.healthSteps,dic);
+            //            //NSLog(@"gaizaoDateStyle:%@  Dic = %@",self.healthSteps,dic);
         }
         
         
-//        NSLog(@"步数: %@", self.healthSteps);
+//        //NSLog(@"步数: %@", self.healthSteps);
 //        if (self.blockSteps) {
 //            self.flag1 = YES;
 //            BOOL flag = NO;
@@ -198,7 +198,7 @@
     HKStatisticsCollectionQuery *query = [[HKStatisticsCollectionQuery alloc] initWithQuantityType:type quantitySamplePredicate:predicate options:HKStatisticsOptionCumulativeSum anchorDate:anchorDate intervalComponents:intervalComponents];
     query.initialResultsHandler = ^(HKStatisticsCollectionQuery *query, HKStatisticsCollection *result, NSError *error) {
         for (HKStatistics *sample in [result statistics]) {
-            //            NSLog(@"+++++++++++++++%@ 至 %@ : %@", sample.startDate, sample.endDate, sample.sumQuantity);
+            //            //NSLog(@"+++++++++++++++%@ 至 %@ : %@", sample.startDate, sample.endDate, sample.sumQuantity);
             NSDate *date = sample.startDate;
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
             [formatter setDateFormat:@"yyyy-MM-dd"];
@@ -227,7 +227,7 @@
             [self.healthDistances addObject:dic];
         }
         
-//        NSLog(@"走和跑的距离：%@",self.healthDistances);
+//        //NSLog(@"走和跑的距离：%@",self.healthDistances);
         
 //        if (self.blockDistances) {
 //            self.flag2 = YES;
@@ -285,7 +285,7 @@
     query.initialResultsHandler = ^(HKStatisticsCollectionQuery *query, HKStatisticsCollection *result, NSError *error) {
         
         for (HKStatistics *sample in [result statistics]) {
-            //            NSLog(@"--------------%@ 至 %@ : %@", sample.startDate, sample.endDate, sample.sumQuantity);
+            //            //NSLog(@"--------------%@ 至 %@ : %@", sample.startDate, sample.endDate, sample.sumQuantity);
             NSDate *date = sample.startDate;
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
             [formatter setDateFormat:@"yyyy-MM-dd"];
@@ -312,11 +312,11 @@
                                  dateTime,@"dateTime",
                                  value,@"value",nil];
             [self.healthStairsClimbed addObject:dic];
-            //            NSLog(@"gaizaoDateStyle:%@  Dic = %@",self.healthSteps,dic);
+            //            //NSLog(@"gaizaoDateStyle:%@  Dic = %@",self.healthSteps,dic);
         }
         
         
-//        NSLog(@"楼层: %@", self.healthStairsClimbed);
+//        //NSLog(@"楼层: %@", self.healthStairsClimbed);
 //        if (self.blockStairs) {
 //            self.flag3 = YES;
 //            BOOL flag = NO;

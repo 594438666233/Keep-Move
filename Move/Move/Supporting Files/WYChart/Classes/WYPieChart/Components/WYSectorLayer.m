@@ -182,8 +182,8 @@
 - (void)draggingReload {
     
     CGFloat radius = _sector.radius + ((CALayer *)_controlLayer.presentationLayer).position.x;
-//    NSLog(@"radius = %f", radius);
-//    NSLog(@"angle = %f", _sector.angle);
+//    //NSLog(@"radius = %f", radius);
+//    //NSLog(@"angle = %f", _sector.angle);
     UIBezierPath *path = [self sectorPathWithVertex:_sector.vertex
                                              radius:radius
                                         innerRadius:_sector.innerRadius
@@ -199,7 +199,7 @@
     
     controlPosition = [_controlLayer wy_centerForPresentationLayer:true];
     radius = controlPosition.x;
-//    NSLog(@"idx = %f, radius = %f", _sector.startAngle, radius);
+//    //NSLog(@"idx = %f, radius = %f", _sector.startAngle, radius);
     UIBezierPath *path = [self sectorPathWithVertex:_sector.vertex
                                              radius:radius
                                         innerRadius:_sector.innerRadius
@@ -217,7 +217,7 @@
     
     scale = [_controlLayer wy_transformScaleForPresentationLayer:true];
     radius = scale*_sector.radius;
-//    NSLog(@"scale = %f", scale);
+//    //NSLog(@"scale = %f", scale);
     
     vertex.x = _sector.vertex.x + cosf(_sector.centerAngle)*(1-scale)*_sector.radius/2;
     vertex.y = _sector.vertex.y + sinf(_sector.centerAngle)*(1-scale)*_sector.radius/2;

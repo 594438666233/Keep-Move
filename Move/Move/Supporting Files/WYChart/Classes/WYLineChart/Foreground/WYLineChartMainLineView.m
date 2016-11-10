@@ -486,9 +486,9 @@
 
 - (void)handleGestureRecognize:(UIGestureRecognizer *)recognize {
    
-//    NSLog(@"gesture.view = %@", recognize.view);
+//    //NSLog(@"gesture.view = %@", recognize.view);
     CGPoint location = [recognize locationInView:self];
-    NSLog(@"location : %@", NSStringFromCGPoint(location));
+    //NSLog(@"location : %@", NSStringFromCGPoint(location));
     
     
     WYLineChartPoint *originalPoint;
@@ -534,14 +534,14 @@
         touchViewCenter.x = movingPoint.x;
         touchViewCenter.y = movingPoint.y + para * ( 5 + scale * CGRectGetWidth(_touchView.frame)/2);
         _touchView.center = touchViewCenter;
-        //    NSLog(@"touch view frame : %@", NSStringFromCGRect(_touchView.frame));
+        //    //NSLog(@"touch view frame : %@", NSStringFromCGRect(_touchView.frame));
         
         
         if (recognize.state == UIGestureRecognizerStateEnded
             || recognize.state == UIGestureRecognizerStateCancelled
             || recognize.state == UIGestureRecognizerStateRecognized
             )/*|| movingPoint.x <= minX || movingPoint.x >= maxX*/ {
-//            NSLog(@"gesture end with state : %lu", recognize.state);
+//            //NSLog(@"gesture end with state : %lu", recognize.state);
             
             [self addScaleSpringAnimationForView:_movingPoint reverse:true delay:0 forKeyPath:@"moving"];
             selector = @selector(mainLineView:didEndedTouchAtPoint:belongToSegmentOfPoint:);

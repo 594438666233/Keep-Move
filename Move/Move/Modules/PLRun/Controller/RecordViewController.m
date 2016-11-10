@@ -60,7 +60,7 @@ static NSString *cellTwoIdentifier = @"cellTwo";
     NSString *path = [libraryPath stringByAppendingString:@"/Preferences"];
     path = [path stringByAppendingString:@"/RunRecord.plist"];
     self.goalPath = path;
-    NSLog(@"%@", _goalPath);
+    //NSLog(@"%@", _goalPath);
 }
 
 #pragma mark - UITableView delegate
@@ -145,7 +145,7 @@ static NSString *cellTwoIdentifier = @"cellTwo";
     if (self)
     {
        _recordArray = [FileHelper recordsArray];
-        NSLog(@"%@", _recordArray);
+        //NSLog(@"%@", _recordArray);
     }
     
     return self;
@@ -187,7 +187,7 @@ static NSString *cellTwoIdentifier = @"cellTwo";
 
     };
     plNavigationView.deleteButtonBlock = ^(UIButton *button) {
-        NSLog(@"hello");
+        //NSLog(@"hello");
     };
     [self.view addSubview:plNavigationView];
     

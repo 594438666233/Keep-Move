@@ -145,7 +145,7 @@
     NSString *path = [libraryPath stringByAppendingString:@"/Preferences"];
     path = [path stringByAppendingString:@"/RunRecord.plist"];
     self.goalPath = path;
-    NSLog(@"%@", _goalPath);
+    //NSLog(@"%@", _goalPath);
 }
 
 #pragma mark - 懒加载
@@ -646,7 +646,7 @@
             _infoModel.calorie = [NSString stringWithFormat:@"%.2f", [pedometerData.numberOfSteps integerValue] * 0.04];
         }
     } else {
-        NSLog(@"Step Counter not available");
+        //NSLog(@"Step Counter not available");
     }
    
     // distance
@@ -685,7 +685,7 @@
         }
 
     } else {
-        NSLog(@"Distance not available");
+        //NSLog(@"Distance not available");
     }
     
     // cadence

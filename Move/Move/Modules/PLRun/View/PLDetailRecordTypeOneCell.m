@@ -61,22 +61,22 @@
 
 
 - (void)tapTopView:(UITapGestureRecognizer *)tap {
-    NSLog(@"tapView");
+    //NSLog(@"tapView");
     [self.delegate tapViewDelegate];
 }
 
 - (void)tapStepCountView:(UITapGestureRecognizer *)tap {
-    NSLog(@"tapStepCountView");
+    //NSLog(@"tapStepCountView");
     [self.delegate tapStepCountDelegate];
 }
 
 - (void)tapkmView:(UITapGestureRecognizer *)tap {
-    NSLog(@"tapkmView");
+    //NSLog(@"tapkmView");
     [self.delegate tapKmDelegate];
 }
 
 - (void)tapCalorieView:(UITapGestureRecognizer *)tap {
-    NSLog(@"tapCalorieView");
+    //NSLog(@"tapCalorieView");
     [self.delegate tapCalorieDelegate];
 }
 
@@ -99,7 +99,7 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    NSLog(@"%@", string);
+    //NSLog(@"%@", string);
     if (string.length > 0) {
         if (textField.text.length >= 4) {
             return NO;
@@ -108,7 +108,7 @@
     return YES;
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField {
-    NSLog(@"%@", textField.text);
+    //NSLog(@"%@", textField.text);
     NSString *string = textField.text;
     
     if ([string hasPrefix:@"0"]) {
@@ -176,7 +176,7 @@
             _infoModel.calorie = string;
         }
     }
-    NSLog(@"%@", _infoModel);
+    //NSLog(@"%@", _infoModel);
 }
 
 

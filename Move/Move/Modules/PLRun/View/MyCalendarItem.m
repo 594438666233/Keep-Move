@@ -225,11 +225,11 @@
 #pragma mark 月份选择按钮
 -(void)btnClick:(UIButton *)btn{
     if (btn.tag == 20) {
-        NSLog(@"上");
+        //NSLog(@"上");
         _date = [self lastMonth:_date];
         headlabel.text   = [NSString stringWithFormat:@"%li年%li月",[self year:_date],[self month:_date]];
     }else{
-        NSLog(@"下");
+        //NSLog(@"下");
         _date = [self nextMonth:_date];
         headlabel.text   = [NSString stringWithFormat:@"%li年%li月",[self year:_date],[self month:_date]];
     }
@@ -297,7 +297,7 @@
             
             
             NSDateComponents *comps = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:[NSDate date]];
-            NSLog(@"%ld", comps.day);
+            //NSLog(@"%ld", comps.day);
             
             if ([self isThisYearAndLastMonth] && _flag == NO) {
                 if (i > firstWeekday - 1 && i <= firstWeekday + daysInThisMonth - 1 - self.dayday + comps.day) {

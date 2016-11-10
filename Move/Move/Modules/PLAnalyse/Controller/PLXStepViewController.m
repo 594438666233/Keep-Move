@@ -36,7 +36,7 @@ PNChartDelegate
     manager.startDate = [NSDate date];
 //    [manager authorizeHealthKit:^(BOOL success, NSError *error) {
 //        if (success) {
-//            NSLog(@"success");
+//            //NSLog(@"success");
             [manager getStepCount:^(double value, NSArray *array, NSError *error) {
                 if (array.count > 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{

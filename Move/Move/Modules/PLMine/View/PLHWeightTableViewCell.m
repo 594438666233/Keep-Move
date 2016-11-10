@@ -80,11 +80,11 @@ WYLineChartViewDatasource
             NSString *str2 = [str stringByReplacingOccurrencesOfString:@"月" withString:@"."];
             if (![temp isEqualToString:str2]) {
                 WYLineChartPoint *point = [[WYLineChartPoint alloc] init];
-                NSLog(@"6246245624---%@", str2);
-                NSLog(@"6426426246246---%@", _dateArray[i]);
+                //NSLog(@"6246245624---%@", str2);
+                //NSLog(@"6426426246246---%@", _dateArray[i]);
                 if ([str2 isEqualToString:_dateArray[i]]) {
                     point.value = infomation.weight;
-                    NSLog(@"%lf", point.value);
+                    //NSLog(@"%lf", point.value);
                     lastWeight = infomation.weight;
                     _maxWeight = _maxWeight > infomation.weight ? _maxWeight : infomation.weight;
                     _minWeight = _minWeight < infomation.weight ? _minWeight : infomation.weight;

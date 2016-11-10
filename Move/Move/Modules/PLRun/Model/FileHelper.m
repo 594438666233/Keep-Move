@@ -57,7 +57,7 @@
     }
     
     NSString *documentPath = [path stringByAppendingPathComponent:name];
-    NSLog(@"documentPath : %@", documentPath);
+    //NSLog(@"documentPath : %@", documentPath);
     return documentPath;
 }
 
@@ -69,7 +69,7 @@
     BOOL success = [[NSFileManager defaultManager] removeItemAtPath:path error:&error];
     if (error != nil)
     {
-        NSLog(@"%@",error);
+        //NSLog(@"%@",error);
     }
     
     return success;

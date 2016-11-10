@@ -132,7 +132,7 @@ PLHealthManagerDelegate
     manager.startDate = date;
     [manager authorizeHealthKit:^(BOOL success, NSError *error) {
         if (success) {
-            NSLog(@"success");
+            //NSLog(@"success");
             [manager getStepCount:^(double value, NSArray *array, NSError *error) {
                 if (array.count > 0) {
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -192,7 +192,7 @@ PLHealthManagerDelegate
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 //    self.navigationController.navigationBar.hidden = NO;
-    NSLog(@"%@",  [NSDate dateWithTimeIntervalSinceReferenceDate:0]);
+    //NSLog(@"%@",  [NSDate dateWithTimeIntervalSinceReferenceDate:0]);
     
     [self userDefauls];
     
@@ -280,7 +280,7 @@ PLHealthManagerDelegate
     
     _calendarView.calendarBlock = ^(NSInteger day, NSInteger month, NSInteger year) {
         
-        NSLog(@"%ld-%02ld-%02ld", (long)year, month, day);
+        //NSLog(@"%ld-%02ld-%02ld", (long)year, month, day);
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -588,7 +588,7 @@ PLHealthManagerDelegate
 //    manager.blockSteps = ^(NSArray *stepArray, BOOL flag) {
 //        
 //    
-//        NSLog(@"%@,%d", stepArray, flag);
+//        //NSLog(@"%@,%d", stepArray, flag);
 //        if (flag) {
 //            self.healthArray = [NSMutableArray array];
 //            for (int i = 0; i < manager.healthSteps.count; i++) {
@@ -604,7 +604,7 @@ PLHealthManagerDelegate
 //    };
 //    manager.blockDistances = ^(NSArray *distanceArray, BOOL flag) {
 //    
-//        NSLog(@"%@, %d", distanceArray, flag);
+//        //NSLog(@"%@, %d", distanceArray, flag);
 //        if (flag) {
 //            self.healthArray = [NSMutableArray array];
 //            for (int i = 0; i < manager.healthSteps.count; i++) {
@@ -618,7 +618,7 @@ PLHealthManagerDelegate
 //        }
 //    };
 //    manager.blockStairs = ^ (NSArray *stairsArray, BOOL flag) {
-//        NSLog(@"%@, %d", stairsArray, flag);
+//        //NSLog(@"%@, %d", stairsArray, flag);
 //        if (flag) {
 //            self.healthArray = [NSMutableArray array];
 //            for (int i = 0; i < manager.healthSteps.count; i++) {
@@ -643,18 +643,18 @@ PLHealthManagerDelegate
 
 - (void)managerWithStairsArray:(NSArray *)stairsArray flag:(BOOL)flag {
 
-    NSLog(@"%@ %d", stairsArray, flag);
+    //NSLog(@"%@ %d", stairsArray, flag);
     [self getSourceWithArray:stairsArray flag:flag];
 }
 
 - (void)managerWithDistancesArray:(NSArray *)distanceArray flag:(BOOL)flag {
 
-    NSLog(@"%@ %d", distanceArray, flag);
+    //NSLog(@"%@ %d", distanceArray, flag);
     [self getSourceWithArray:distanceArray flag:flag];
 }
 
 - (void)managerWithStepArray:(NSArray *)stepArray flag:(BOOL)flag {
-    NSLog(@"%@ %d", stepArray, flag);
+    //NSLog(@"%@ %d", stepArray, flag);
     
     [self getSourceWithArray:stepArray flag:flag];
 }

@@ -80,7 +80,7 @@ static NSString *const cellDetailRunRecordTwoIdentifier = @"cellTwo";
     NSString *path = [libraryPath stringByAppendingString:@"/Preferences"];
     path = [path stringByAppendingString:@"/RunRecord.plist"];
     self.goalPath = path;
-    NSLog(@"%@", _goalPath);
+    //NSLog(@"%@", _goalPath);
 }
 
 - (void)saveRoute
@@ -261,14 +261,14 @@ static NSString *const cellDetailRunRecordTwoIdentifier = @"cellTwo";
 #pragma mark - Custom Delegate Way
 
 - (void)tapViewDelegate {
-    NSLog(@"one");
+    //NSLog(@"one");
     [self.view endEditing:YES];
     [self setupPickerView];
 
 }
 
 - (void)tapStepCountDelegate {
-    NSLog(@"two");
+    //NSLog(@"two");
     if (_pickerFlag == YES) {
         [_timeView removeFromSuperview];
         _pickerFlag = NO;
@@ -276,7 +276,7 @@ static NSString *const cellDetailRunRecordTwoIdentifier = @"cellTwo";
 }
 
 - (void)tapKmDelegate {
-    NSLog(@"three");
+    //NSLog(@"three");
     if (_pickerFlag == YES) {
         [_timeView removeFromSuperview];
         _pickerFlag = NO;
@@ -284,7 +284,7 @@ static NSString *const cellDetailRunRecordTwoIdentifier = @"cellTwo";
 }
 
 - (void)tapCalorieDelegate {
-    NSLog(@"four");
+    //NSLog(@"four");
     if (_pickerFlag == YES) {
         [_timeView removeFromSuperview];
         _pickerFlag = NO;
@@ -351,7 +351,7 @@ static NSString *const cellDetailRunRecordTwoIdentifier = @"cellTwo";
         
         NSString *string = [NSString stringWithFormat:@"%@小时", _hoursArray[_selectedIndex]];
         string = [string stringByAppendingString:[NSString stringWithFormat:@"%@分钟", _minutesArray[_selectedTwoIndex]]];
-        NSLog(@"time :%@", string);
+        //NSLog(@"time :%@", string);
         [_timeView removeFromSuperview];
     
         _infoModel.time = string;
@@ -364,11 +364,11 @@ static NSString *const cellDetailRunRecordTwoIdentifier = @"cellTwo";
     _pickerFlag = NO;
     PLDetailRecordTypeOneCell *cell = [_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
     self.infoModel = cell.infoModel;
-    NSLog(@"%@", _infoModel);
+    //NSLog(@"%@", _infoModel);
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    NSLog(@"return");
-    NSLog(@"%@", textField.text);
+    //NSLog(@"return");
+    //NSLog(@"%@", textField.text);
 
     [textField resignFirstResponder];
     return YES;

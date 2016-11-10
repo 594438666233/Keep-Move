@@ -64,7 +64,7 @@ static NSString *const cellIdentifier = @"cell";
             {
                 cell.titleString = @"作息时间";
                 cell.addButtonBlock = ^(UIButton *button) {
-                    NSLog(@"hello world");
+                    //NSLog(@"hello world");
                 };
                 return cell;
             }
@@ -74,7 +74,7 @@ static NSString *const cellIdentifier = @"cell";
                 cell.titleString = @"运动";
                 cell.iconImage = [UIImage imageNamed:@"dumbbell"];
                 cell.addButtonBlock = ^(UIButton *button) {
-                    NSLog(@"hello");
+                    //NSLog(@"hello");
                 };
                 return cell;
             }
@@ -84,7 +84,7 @@ static NSString *const cellIdentifier = @"cell";
                 cell.titleString = @"健康饮食";
                 cell.iconImage = [UIImage imageNamed:@"cheese"];
                 cell.addButtonBlock = ^(UIButton *button) {
-                    NSLog(@"hello beer");
+                    //NSLog(@"hello beer");
                 };
                 return cell;
             }
@@ -94,7 +94,7 @@ static NSString *const cellIdentifier = @"cell";
                 cell.titleString = @"跑步";
                 cell.iconImage = [UIImage imageNamed:@"shoe-1"];
                 cell.addButtonBlock = ^(UIButton *button) {
-                    NSLog(@"run");
+                    //NSLog(@"run");
                 };
                 return cell;
             }
@@ -104,7 +104,7 @@ static NSString *const cellIdentifier = @"cell";
                 cell.titleString = @"骑车";
                 cell.iconImage = [UIImage imageNamed:@"bicycle"];
                 cell.addButtonBlock = ^(UIButton *button) {
-                    NSLog(@"bicyle");
+                    //NSLog(@"bicyle");
                 };
                 return cell;
             }

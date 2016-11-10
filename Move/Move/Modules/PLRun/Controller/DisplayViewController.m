@@ -37,7 +37,7 @@
 {
     if (self.record == nil || [self.record numOfLocations] == 0)
     {
-        NSLog(@"invaled route");
+        //NSLog(@"invaled route");
     }
     
     MAPointAnnotation *startPoint = [[MAPointAnnotation alloc] init];

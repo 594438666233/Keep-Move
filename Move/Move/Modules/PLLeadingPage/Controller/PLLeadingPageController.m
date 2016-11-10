@@ -68,7 +68,7 @@
 }
 // 注册
 - (void)PLNewFeatrueView:(nullable PLNewFeatureView *)keepNewFeatrueView didRegister:(nullable UIButton *)registerButton {
-    NSLog(@"world");
+    //NSLog(@"world");
 }
 
 #pragma mark - setter and getter

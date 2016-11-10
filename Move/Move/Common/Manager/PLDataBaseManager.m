@@ -55,10 +55,10 @@
         BOOL success = [db executeUpdate:@"create table if not exists Person (id integer primary key autoincrement, gender text , brithday integer , height integer , goalweight real, goalstep real)"];
         
         if (success) {
-            NSLog(@"创建表成功");
+            //NSLog(@"创建表成功");
             _flag1 = YES;
         } else {
-            NSLog(@"创建表失败");
+            //NSLog(@"创建表失败");
         }
         
     }];
@@ -68,10 +68,10 @@
         BOOL success = [db executeUpdate:@"create table if not exists Record (id integer primary key autoincrement, time text , weight real)"];
         
         if (success) {
-            NSLog(@"创建表成功");
+            //NSLog(@"创建表成功");
             _flag2 = YES;
         } else {
-            NSLog(@"创建表失败");
+            //NSLog(@"创建表失败");
         }
         
     }];
@@ -91,11 +91,11 @@
         BOOL success = [db executeUpdate:[NSString stringWithFormat:@"insert into Person values (null,'%@','%ld', '%ld','%f','%ld')", person.gender, person.brithday, person.height, person.goalWeight, person.goalStep]];
         
         if (success) {
-            NSLog(@"插入成功");
+            //NSLog(@"插入成功");
             _flag1 = YES;
             
         } else {
-            NSLog(@"插入失败");
+            //NSLog(@"插入失败");
         }
         
         
@@ -125,10 +125,10 @@
         BOOL success4 = [db executeUpdate:[NSString stringWithFormat:@"update Person set goalweight = '%f' ", person.goalWeight]];
         BOOL success5 = [db executeUpdate:[NSString stringWithFormat:@"update Person set goalstep = '%ld' ", person.goalStep]];
         if (success1&&success2&&success3&&success4&&success5) {
-            NSLog(@"修改成功");
+            //NSLog(@"修改成功");
             _flag1 = YES;
         } else {
-            NSLog(@"修改失败");
+            //NSLog(@"修改失败");
         }
         
 
@@ -164,11 +164,11 @@
         BOOL success = [db executeUpdate:[NSString stringWithFormat:@"insert into Record values (null,'%@','%f')",history.time, history.weight]];
         
         if (success) {
-            NSLog(@"插入成功");
+            //NSLog(@"插入成功");
             _flag1 = YES;
             
         } else {
-            NSLog(@"插入失败");
+            //NSLog(@"插入失败");
         }
         
         
@@ -235,7 +235,7 @@
         if (success) {
             _flag1 = YES;
         } else {
-            NSLog(@"失败");
+            //NSLog(@"失败");
         }
     }];
 

@@ -103,7 +103,7 @@ static NSString *const cellRecordIdentifier = @"cell";
     NSString *path = [libraryPath stringByAppendingString:@"/Preferences"];
     path = [path stringByAppendingString:@"/Goal.plist"];
     self.goalPath = path;
-    NSLog(@"%@", _goalPath);
+    //NSLog(@"%@", _goalPath);
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

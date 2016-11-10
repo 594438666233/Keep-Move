@@ -19,7 +19,7 @@
 @implementation PLDetailRecordTypeTwoCell
 
 - (void)setTitleString:(NSString *)titleString {
-    NSLog(@"cell : %@", titleString);
+    //NSLog(@"cell : %@", titleString);
     _typeLabel.text = titleString;
 }
 

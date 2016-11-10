@@ -33,10 +33,10 @@
 - (void)setPlCareerModel:(PLCareerModel *)plCareerModel {
     NSDate *firstDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"firstLaunchDate"];
     NSDate *date = [NSDate date];
-    NSLog(@"---%@", date);
-    NSLog(@"-----%@", firstDate);
+    //NSLog(@"---%@", date);
+    //NSLog(@"-----%@", firstDate);
     NSInteger days = (NSInteger)([date timeIntervalSinceDate:firstDate] / 86400) + 1 ;
-    NSLog(@"days-------%ld", days);
+    //NSLog(@"days-------%ld", days);
     PLXHealthManager *manager = [PLXHealthManager shareInstance];
     manager.days = days;
     manager.isDay = NO;
@@ -49,7 +49,7 @@
             for (NSDictionary *dic in array) {
                 CGFloat duration = [[dic objectForKey:@"duration"] floatValue];
                 time = time + duration;
-                NSLog(@"time------------%lf", time);
+                //NSLog(@"time------------%lf", time);
             }
             if (time / 3600 < 1) {
                 _hoursLabel.text = @"<1";

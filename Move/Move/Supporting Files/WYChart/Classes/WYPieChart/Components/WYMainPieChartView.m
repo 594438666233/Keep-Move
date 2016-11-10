@@ -193,7 +193,7 @@
 
 - (void)animationDidStart:(CAAnimation *)anim {
     
-//    NSLog(@"start");
+//    //NSLog(@"start");
 //    _animating = true;
     
     CALayer *layer = [anim valueForKeyPath:@"scale"];
@@ -252,7 +252,7 @@
 //        _link = nil;
 //        [anim setValue:nil forKey:@"draggingSpring"];
 //    }
-//    NSLog(@"end");
+//    //NSLog(@"end");
 }
 
 #pragma mark - getter and setter
@@ -336,11 +336,11 @@
     WYSectorLayer *pieLayer;
     CAShapeLayer *mask;
     maxAngle = ([_controlPoint.layer wy_centerForPresentationLayer:true].x-self.wy_boundsCenter.x)/10;
-//    NSLog(@"angle = %f", maxAngle);
+//    //NSLog(@"angle = %f", maxAngle);
     if (maxAngle > 2) maxAngle = 4 - maxAngle;
     maxAngle *= M_PI;
     maxAngle -= M_PI_2;
-//    NSLog(@"angle = %f", maxAngle/M_PI);
+//    //NSLog(@"angle = %f", maxAngle/M_PI);
     
     if (!_currentSectorLayers) _currentSectorLayers = [NSMutableArray array];
     NSArray *currentSectors;
@@ -398,7 +398,7 @@
 //}
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-//    NSLog(@"touch");
+//    //NSLog(@"touch");
     
     _canRotate = false;
     _currentTransform = self.layer.transform;
@@ -407,7 +407,7 @@
     
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
-//    NSLog(@"touch at : %@", NSStringFromCGPoint(point));
+//    //NSLog(@"touch at : %@", NSStringFromCGPoint(point));
     
     if (_selectable && !_animating) {
         [_currentSectorLayers enumerateObjectsUsingBlock:^(WYSectorLayer *layer, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -459,17 +459,17 @@
         [layer stopAllAnimations];
         
         panDistance = fabs(cosf(sector.centerAngle-curAngle)*panDistance) - _beginningDragDistance;
-//        NSLog(@"1  pandistance = %f", panDistance);
+//        //NSLog(@"1  pandistance = %f", panDistance);
         if (panDistance > 150 || panDistance < -150) panDistance = 150 * fabs(panDistance)/panDistance;
         
         panDistance = 17 * (2*(fabs(panDistance)/150)-powf((fabs(panDistance)/150), 2))
                       *(fabs(panDistance)/panDistance);
-//        NSLog(@"2  pandistance = %f", panDistance);
+//        //NSLog(@"2  pandistance = %f", panDistance);
         panDistance += sector.radius;
         if (panDistance < sector.innerRadius+10 && panDistance > -(sector.innerRadius+10)) {
             panDistance = (sector.innerRadius+10) * fabs(panDistance)/panDistance;
         }
-//        NSLog(@"3  pandistance = %f", panDistance);
+//        //NSLog(@"3  pandistance = %f", panDistance);
         UIBezierPath *path = [self sectorPathWithVertex:sector.vertex
                                                  radius:panDistance
                                             innerRadius:sector.innerRadius
@@ -479,7 +479,7 @@
     }
     
     if (((rotateAngle < M_PI/16 && rotateAngle > -M_PI/16) && !_canRotate) || !_rotatabel) {
-//        NSLog(@"return");
+//        //NSLog(@"return");
         return;
     } else {
         
@@ -488,17 +488,17 @@
             rotateAngle = 0;
         }
         _canRotate = true;
-//        NSLog(@"center point = %@", NSStringFromCGPoint(center));
-//        NSLog(@"current point = %@", NSStringFromCGPoint(point));
-//        NSLog(@"curAngle = %f, preAngle = %f", curAngle, preAngle);
-//        NSLog(@"current angle = %f, rotate angle = %f", _currentRotateAngle, rotateAngle);
-//        NSLog(@"pass");
+//        //NSLog(@"center point = %@", NSStringFromCGPoint(center));
+//        //NSLog(@"current point = %@", NSStringFromCGPoint(point));
+//        //NSLog(@"curAngle = %f, preAngle = %f", curAngle, preAngle);
+//        //NSLog(@"current angle = %f, rotate angle = %f", _currentRotateAngle, rotateAngle);
+//        //NSLog(@"pass");
     }
     
     _currentRotateAngle += rotateAngle;
     
-    //    NSLog(@"curAngle = %f, preAngle = %f", curAngle, preAngle);
-    //    NSLog(@"current angle = %f, rotate angle = %f", _currentRotateAngle, rotateAngle);
+    //    //NSLog(@"curAngle = %f, preAngle = %f", curAngle, preAngle);
+    //    //NSLog(@"current angle = %f, rotate angle = %f", _currentRotateAngle, rotateAngle);
     
     //    self.transform = CGAffineTransformRotate(_currentTransform, _currentRotateAngle);
     self.layer.transform = CATransform3DRotate(_currentTransform, _currentRotateAngle, 0, 0, 1.0);
@@ -527,10 +527,10 @@
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-//    NSLog(@"end");
+//    //NSLog(@"end");
     UITouch *touch = [touches anyObject];
     CGPoint point = [touch locationInView:self];
-//    NSLog(@"touch at : %@", NSStringFromCGPoint(point));
+//    //NSLog(@"touch at : %@", NSStringFromCGPoint(point));
     _generalRotateAngle += _currentRotateAngle;
     
     if (_selectable && !_animating) {

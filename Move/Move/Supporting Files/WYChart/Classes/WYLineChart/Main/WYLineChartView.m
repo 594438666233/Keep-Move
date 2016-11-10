@@ -270,7 +270,7 @@
 //    
 //    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 //    formatter.dateFormat = @"hh:mm:ss";
-//    NSLog(@" begin %@", [formatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:[NSDate timeIntervalSinceReferenceDate]]]);
+//    //NSLog(@" begin %@", [formatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:[NSDate timeIntervalSinceReferenceDate]]]);
     
     // recalculate points coordinate
     [_calculator recaclculatePointsCoordinate];
@@ -390,7 +390,7 @@
     _lineGraph.showJunctionShape = _showJunctionShape;
     [_lineGraph setNeedsDisplay];
 //    
-//    NSLog(@"after %@", [formatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:[NSDate timeIntervalSinceReferenceDate]]]);
+//    //NSLog(@"after %@", [formatter stringFromDate:[NSDate dateWithTimeIntervalSinceReferenceDate:[NSDate timeIntervalSinceReferenceDate]]]);
 }
 
 #pragma mark - setup and handle pinch gesture
@@ -407,14 +407,14 @@
     
     [self transformComponentsWithPinchScale:recognize.scale];
     if (recognize.state == UIGestureRecognizerStateBegan) {
-//        NSLog(@"scale : %f,  state : began", recognize.scale);
+//        //NSLog(@"scale : %f,  state : began", recognize.scale);
         if (_respondToPinchBeginMethor)
             [_delegate lineChartView:self didBeganPinchWithScale:recognize.scale];
     } else if (recognize.state == UIGestureRecognizerStateChanged) {
-//        NSLog(@"scale : %f,  state : change", recognize.scale);
+//        //NSLog(@"scale : %f,  state : change", recognize.scale);
         if (_respondToPinchChangeBeginMethor) [_delegate lineChartView:self didChangedPinchWithScale:recognize.scale];
     } else if (recognize.state == UIGestureRecognizerStateEnded) {
-//        NSLog(@"scale : %f,  state : end", recognize.scale);
+//        //NSLog(@"scale : %f,  state : end", recognize.scale);
         
         WYLineChartViewScaleOption opt = kWYLineChartViewScaleNoChange;
         if (recognize.scale > 0.7 && recognize.scale < 1.5) {
@@ -520,7 +520,7 @@
 #pragma mark - WYLineChartMainLineViewDelegate
 
 - (void)mainLineView:(WYLineChartMainLineView *)lineView didBeganTouchAtPoint:(CGPoint)point belongToSegmentOfPoint:(WYLineChartPoint *)originalPoint {
-//    NSLog(@"touch point : %li", (long)originalPoint.index);
+//    //NSLog(@"touch point : %li", (long)originalPoint.index);
     [_horizontalReferenceLineGraph moveReferenceLineToPoint:point];
     [_verticalReferenceLineGraph moveReferenceLineToPoint:point];
     if ([_delegate respondsToSelector:@selector(lineChartView:didBeganTouchAtSegmentOfPoint:value:)]) {
@@ -538,7 +538,7 @@
 }
 
 - (void)mainLineView:(WYLineChartMainLineView *)lineView didEndedTouchAtPoint:(CGPoint)point belongToSegmentOfPoint:(WYLineChartPoint *)originalPoint {
-//    NSLog(@"touch point : %li", (long)originalPoint.index);
+//    //NSLog(@"touch point : %li", (long)originalPoint.index);
     [_horizontalReferenceLineGraph dismissReferenceLine];
     [_verticalReferenceLineGraph dismissReferenceLine];
     if ([_delegate respondsToSelector:@selector(lineChartView:didEndedTouchToSegmentOfPoint:value:)]) {

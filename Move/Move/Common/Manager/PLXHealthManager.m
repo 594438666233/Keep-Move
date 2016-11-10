@@ -48,7 +48,7 @@
             [self.healthStore requestAuthorizationToShareTypes:nil readTypes:readDataTypes completion:^(BOOL success, NSError *error) {
                 
                 if (compltion != nil) {
-                    NSLog(@"error->%@", error.localizedDescription);
+                    //NSLog(@"error->%@", error.localizedDescription);
                     compltion (success, error);
                 }
             }];
@@ -91,8 +91,8 @@
     NSDate *date = [calendar dateFromComponents:components];
     
     NSDate *startDate = [NSDate dateWithTimeInterval:-(_days) * 24 * 60 * 60 sinceDate:date];
-    NSLog(@"%@", startDate);
-    NSLog(@"%@", endDate);
+    //NSLog(@"%@", startDate);
+    //NSLog(@"%@", endDate);
     NSPredicate *predicate = [HKQuery predicateForSamplesWithStartDate:startDate endDate:endDate options:HKQueryOptionNone];
     return predicate;
 }
