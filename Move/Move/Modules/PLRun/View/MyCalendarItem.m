@@ -9,6 +9,13 @@
 #import "MyCalendarItem.h"
 
 
+@interface MyCalendarItem ()
+
+@property (nonatomic, assign) NSInteger days;
+@property (nonatomic, assign) BOOL flag;
+
+@end
+
 @implementation MyCalendarItem
 {
     UILabel *headlabel;
@@ -188,6 +195,9 @@
             day = i - firstWeekday + 1;
             [self setStyle_notToday:dayButton];
         }
+        
+        
+        
         [dayButton setTitle:[NSString stringWithFormat:@"%li", day] forState:UIControlStateNormal];
         
         // this month
@@ -196,6 +206,13 @@
             if(i ==  todayIndex){
                 [self setStyle_Today:dayButton];
             }
+            
+            if (todayIndex > self.dayday  + firstWeekday - 1) {
+                if (i < todayIndex - self.dayday + 1 && i > firstWeekday - 1) {
+                    [self setStyle_gray:dayButton];
+                }
+            }
+            
             
             if (i > todayIndex && i <= firstWeekday + daysInThisMonth - 1) {
                 [self setStyle_AfterToday:dayButton];
@@ -253,6 +270,13 @@
             if(i ==  todayIndex){
                 [self setStyle_Today:btn];
             }
+            if (todayIndex > self.dayday  + firstWeekday - 1) {
+                if (i < todayIndex - self.dayday + 1 && i > firstWeekday - 1) {
+                    [self setStyle_gray:btn];
+                    self.flag = YES;
+                }
+            }
+            
             if (i > todayIndex &&  i <= firstWeekday + daysInThisMonth - 1) {
                 [self setStyle_AfterToday:btn];
             }
@@ -271,9 +295,22 @@
         
         }else {
             
-            if (i == todayIndex) {
-                [self setStyle_notToday:btn];
+            
+            NSDateComponents *comps = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:[NSDate date]];
+            NSLog(@"%ld", comps.day);
+            
+            if ([self isThisYearAndLastMonth] && _flag == NO) {
+                if (i > firstWeekday - 1 && i <= firstWeekday + daysInThisMonth - 1 - self.dayday + comps.day) {
+                    [self setStyle_gray:btn];
+                }
+            } else {
+                [self setStyle_gray:btn];
             }
+            
+            
+//            if (i == todayIndex) {
+//                [self setStyle_notToday:btn];
+//            }
         }
     }
     
@@ -289,9 +326,22 @@
     int unit = NSCalendarUnitYear | NSCalendarUnitMonth;
     // 1.获得当前时间的年月日
     NSDateComponents *nowCmps = [calendar components:unit fromDate:[NSDate date]];
+    
     // 2.获得self的年月日
     NSDateComponents *selfCmps = [calendar components:unit fromDate:self.date];
     return (nowCmps.year == selfCmps.year)&&(nowCmps.month == selfCmps.month);
+}
+
+- (BOOL)isThisYearAndLastMonth {
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    int unit = NSCalendarUnitYear | NSCalendarUnitMonth;
+    // 1.获得当前时间的年月日
+    NSDateComponents *nowCmps = [calendar components:unit fromDate:[NSDate date]];
+    // 2.获得self的年月日
+    NSDateComponents *selfCmps = [calendar components:unit fromDate:self.date];
+    return (nowCmps.year == selfCmps.year)&&(nowCmps.month - 1 == selfCmps.month);
+
+
 }
 
 - (BOOL) isAfterThisMonth {
@@ -340,6 +390,17 @@
 
 
 #pragma mark - date button style
+
+// 单纯置灰
+
+- (void)setStyle_gray:(UIButton *)btn {
+
+    btn.enabled = NO;
+    [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+
+
+}
+
 //不是这个月的 置灰点击
 - (void)setStyle_BeyondThisMonth:(UIButton *)btn
 {
