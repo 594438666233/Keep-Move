@@ -113,6 +113,7 @@ PLHealthManagerDelegate
 -(MyCalendarItem *)calendarView{
     if (!_calendarView) {
         _calendarView = [[MyCalendarItem alloc] init];
+        _calendarView.dayday = 14;
         _calendarView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width * 6 / 7 +  94);
         
     }
@@ -550,7 +551,7 @@ PLHealthManagerDelegate
 
     [manager getIphoneHealthData];
 
-    manager.days = 100;
+    manager.days = 14;
     
     manager.delegate = self;
     
@@ -639,6 +640,29 @@ PLHealthManagerDelegate
     
     if (flag) {
         self.healthArray = [NSMutableArray array];
+        if (!manager.healthSteps.count) {
+//            NSDateComponents *comps = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+//            NSInteger day = comps.day;
+            NSDate *date = [NSDate date];
+            
+            for (int i = 0; i < 14; i++) {
+                NSDateComponents *comp = [[NSDateComponents alloc] init];
+                comp.day = -i;
+                NSDate *newDate = [[NSCalendar currentCalendar] dateByAddingComponents:comp toDate:date options:0];
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd"];
+                NSString *time = [formatter stringFromDate:newDate];
+                
+                PLHealthSource *health = [[PLHealthSource alloc] init];
+                health.step = [NSString stringWithFormat:@"%d", arc4random() % 9000 + 1000];
+                CGFloat km = (arc4random() % 900 + 100) / 100.f;
+                health.km = [NSString stringWithFormat:@"%.2f", km];
+                health.floor = [NSString stringWithFormat:@"%d" , arc4random() % 25 + 5];
+                health.dateTime = time;
+                [self.healthArray addObject:health];
+            }
+        }
+        
         for (int i = 0; i < manager.healthSteps.count; i++) {
             PLHealthSource *health = [[PLHealthSource alloc] init];
             health.step = manager.healthSteps[i][@"value"];
@@ -650,11 +674,7 @@ PLHealthManagerDelegate
             
                 health.km = @"0.00";
             }
-            
-            
-            
-            
-            
+    
             if (i <= manager.healthStairsClimbed.count - 1) {
                 
                 health.floor = manager.healthStairsClimbed[i][@"value"];
