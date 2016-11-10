@@ -21,22 +21,24 @@ PNChartDelegate
 @property (nonatomic, strong) PLXTouchView *touchView;
 @property (nonatomic, assign) NSInteger lastTouch;
 
+@property (nonatomic, strong) UILabel *noteLabel;
 @end
 
 @implementation PLXStepViewController
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    
+    [_noteLabel removeFromSuperview];
+    [_barChart removeFromSuperview];
     PLXHealthManager *manager = [PLXHealthManager shareInstance];
     manager.days = 7;
     manager.isDay = YES;
     manager.startDate = [NSDate date];
-    [manager authorizeHealthKit:^(BOOL success, NSError *error) {
-        if (success) {
-            NSLog(@"success");
+//    [manager authorizeHealthKit:^(BOOL success, NSError *error) {
+//        if (success) {
+//            NSLog(@"success");
             [manager getStepCount:^(double value, NSArray *array, NSError *error) {
+                if (array.count > 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     _sumLabel.text = [NSString stringWithFormat:@"%.0lf", value];
                     _avgLabel.text = [NSString stringWithFormat:@"%.0lf", value / 7];
@@ -49,6 +51,8 @@ PNChartDelegate
                         [valueArray addObject:[dic objectForKey:@"value"]];
                     }
                     [_barChart setYValues:valueArray];
+                    
+                    [self.view addSubview:_barChart];
                     [_barChart strokeChart];
 
                     
@@ -72,12 +76,21 @@ PNChartDelegate
                     }
                     
                 });
+            }
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+
+                    [self.view addSubview:_noteLabel];
+                    });
+                }
+                
             }];
-        }
-    }];
-    
+//        }
+//    }];
+
 
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -86,8 +99,19 @@ PNChartDelegate
     [self createLabel];
     [self createTouchView];
     [self createBarChart];
+    [self createNoteLabel];
 }
 
+- (void)createNoteLabel {
+    self.noteLabel = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH / 2 - 100, HEIGHT / 2, 200, 40)];
+    _noteLabel.text = @"请在设置->隐私->健康中允许Keep Move访问数据";
+    _noteLabel.font = [UIFont systemFontOfSize:16];
+    _noteLabel.textColor = [UIColor lightGrayColor];
+    _noteLabel.numberOfLines = 0;
+    _noteLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:_noteLabel];
+    
+}
 
 - (void)createLabel {
     UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(20, HEIGHT / 20, WIDTH / 2 - 20, HEIGHT / 30)];
@@ -98,7 +122,7 @@ PNChartDelegate
     [self.view addSubview:label1];
     
     self.avgLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, label1.frame.size.height + label1.frame.origin.y + 10, WIDTH / 2 - 20,  HEIGHT / 28)];
-    _avgLabel.text = @"6000";
+    _avgLabel.text = @"0";
     _avgLabel.textAlignment = NSTextAlignmentCenter;
     _avgLabel.textColor = [UIColor colorWithRed:0.9 green:0.7 blue:0.1 alpha:1];
     _avgLabel.font = [UIFont systemFontOfSize:WIDTH / 12];
@@ -112,7 +136,7 @@ PNChartDelegate
     [self.view addSubview:label2];
     
     self.sumLabel = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH / 2, label2.frame.size.height + label2.frame.origin.y + 10, WIDTH / 2 - 20,  HEIGHT / 28)];
-    _sumLabel.text = @"30003";
+    _sumLabel.text = @"0";
     _sumLabel.textAlignment = NSTextAlignmentCenter;
     _sumLabel.textColor = [UIColor colorWithRed:0.9 green:0.7 blue:0.1 alpha:1];
     _sumLabel.font = [UIFont systemFontOfSize:WIDTH / 12];
@@ -169,7 +193,6 @@ PNChartDelegate
     [_barChart setXLabels:weekArray];
     [_barChart setYValues:@[@"0", @"0", @"0", @"0", @"0", @"0", @"0"]];
     _barChart.delegate = self;
-    [self.view addSubview:_barChart];
 }
 
 - (void)userClickedOnBarAtIndex:(NSInteger)barIndex {

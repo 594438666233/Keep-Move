@@ -35,20 +35,21 @@
     NSDate *date = [NSDate date];
     NSLog(@"---%@", date);
     NSLog(@"-----%@", firstDate);
-    NSInteger days = (NSInteger)[firstDate timeIntervalSinceDate:date] / 86400 + 1 ;
+    NSInteger days = (NSInteger)([date timeIntervalSinceDate:firstDate] / 86400) + 1 ;
     NSLog(@"days-------%ld", days);
     PLXHealthManager *manager = [PLXHealthManager shareInstance];
     manager.days = days;
-    manager.isDay = YES;
+    manager.isDay = NO;
     manager.startDate = [NSDate date];
     [manager getStepCount:^(double value, NSArray *array, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             _stepCountLabel.text = [NSString stringWithFormat:@"%.0lf", value];
-            _calorieLabel.text = [NSString stringWithFormat:@"%.0lf", value / 50];
+            _calorieLabel.text = [NSString stringWithFormat:@"%.0lf", value / 35];
             CGFloat time = 0;
             for (NSDictionary *dic in array) {
                 CGFloat duration = [[dic objectForKey:@"duration"] floatValue];
                 time = time + duration;
+                NSLog(@"time------------%lf", time);
             }
             if (time / 3600 < 1) {
                 _hoursLabel.text = @"<1";

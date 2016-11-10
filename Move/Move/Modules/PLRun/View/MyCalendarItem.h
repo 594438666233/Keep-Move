@@ -15,5 +15,6 @@
 
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, copy) void(^calendarBlock)(NSInteger day, NSInteger month, NSInteger year);
+@property (nonatomic, assign) NSInteger dayday;
 
 @end

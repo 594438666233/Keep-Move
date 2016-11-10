@@ -105,6 +105,8 @@ PLHealthManagerDelegate
 
 @property (nonatomic, strong) NSDate *lastDate;
 
+@property (nonatomic, strong) UILabel *noteLabel;
+
 @end
 
 @implementation PLRunViewController
@@ -113,6 +115,7 @@ PLHealthManagerDelegate
 -(MyCalendarItem *)calendarView{
     if (!_calendarView) {
         _calendarView = [[MyCalendarItem alloc] init];
+        _calendarView.dayday = 14;
         _calendarView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.width * 6 / 7 +  94);
         
     }
@@ -121,6 +124,8 @@ PLHealthManagerDelegate
 
 // 绘图
 - (void)drawBarChartWithDate:(NSDate *)date {
+    [_barChart removeFromSuperview];
+    [_noteLabel removeFromSuperview];
     PLXHealthManager *manager = [PLXHealthManager shareInstance];
     manager.days = 1;
     manager.isDay = NO;
@@ -129,43 +134,54 @@ PLHealthManagerDelegate
         if (success) {
             NSLog(@"success");
             [manager getStepCount:^(double value, NSArray *array, NSError *error) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    NSCalendar *calendar = [NSCalendar currentCalendar];
-                    NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
-                    [components setHour:0];
-                    [components setMinute:0];
-                    [components setSecond:0];
-                    NSDate *date1 = [calendar dateFromComponents:components];
-                    NSMutableArray *xArray = [NSMutableArray array];
-                    NSMutableArray *yArray = [NSMutableArray array];
-                    for (int i = 0; i < 96; i++) {
-                        if (array.count > 0) {
-                            for (int j = 0; j < array.count; j++) {
-                                NSDictionary *dic = array[j];
-                                NSDate *date2 = [dic valueForKey:@"dateTime"];
-                                NSTimeInterval time = [date2 timeIntervalSinceDate:date1];
-                                if (i == (int)(time / 86400 * 96 + 0.5)) {
-                                    [yArray addObject:[dic valueForKey:@"value"]];
-                                    break;
-                                }
-                                if (j == array.count - 1) {
-                                    [yArray addObject:@"0"];
+                if (array.count > 0) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        NSCalendar *calendar = [NSCalendar currentCalendar];
+                        NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
+                        [components setHour:0];
+                        [components setMinute:0];
+                        [components setSecond:0];
+                        NSDate *date1 = [calendar dateFromComponents:components];
+                        NSMutableArray *xArray = [NSMutableArray array];
+                        NSMutableArray *yArray = [NSMutableArray array];
+                        for (int i = 0; i < 96; i++) {
+                            if (array.count > 0) {
+                                for (int j = 0; j < array.count; j++) {
+                                    NSDictionary *dic = array[j];
+                                    NSDate *date2 = [dic valueForKey:@"dateTime"];
+                                    NSTimeInterval time = [date2 timeIntervalSinceDate:date1];
+                                    if (i == (int)(time / 86400 * 96 + 0.5)) {
+                                        [yArray addObject:[dic valueForKey:@"value"]];
+                                        break;
+                                    }
+                                    if (j == array.count - 1) {
+                                        [yArray addObject:@"0"];
+                                    }
                                 }
                             }
-                        }
-                        else {
-                            [yArray addObject:@"0"];
+                            else {
+                                [yArray addObject:@"0"];
+                            }
+                            
+                            [xArray addObject:@""];
                         }
                         
-                        [xArray addObject:@""];
-                    }
-                    
-                    [_barChart setXLabels:xArray];
-                    [_barChart setYValues:yArray];
-                    
-                    
-                    [_barChart strokeChart];
-                });
+                        [_barChart setXLabels:xArray];
+                        [_barChart setYValues:yArray];
+                        
+                        [self.view addSubview:_barChart];
+                        [_barChart strokeChart];
+                    });
+
+                }
+                
+                
+                else {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+
+                        [self.view addSubview:_noteLabel];
+                    });
+                }
             }];
         }
     }];
@@ -197,7 +213,20 @@ PLHealthManagerDelegate
     [self createNavigationTitleView];
     
     [self createBarChart];
+    
+    [self createNoteLabel];
 
+}
+
+- (void)createNoteLabel {
+    self.noteLabel = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH / 2 - 100, HEIGHT / 1.5, 200, 40)];
+    _noteLabel.text = @"请在设置->隐私->健康中允许Keep Move访问数据";
+    _noteLabel.font = [UIFont systemFontOfSize:16];
+    _noteLabel.textColor = [UIColor lightGrayColor];
+    _noteLabel.numberOfLines = 0;
+    _noteLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:_noteLabel];
+    
 }
 
 - (void)createNavigationTitleView {
@@ -550,7 +579,7 @@ PLHealthManagerDelegate
 
     [manager getIphoneHealthData];
 
-    manager.days = 100;
+    manager.days = 14;
     
     manager.delegate = self;
     
@@ -639,6 +668,29 @@ PLHealthManagerDelegate
     
     if (flag) {
         self.healthArray = [NSMutableArray array];
+        if (!manager.healthSteps.count) {
+//            NSDateComponents *comps = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
+//            NSInteger day = comps.day;
+            NSDate *date = [NSDate date];
+            
+            for (int i = 0; i < 14; i++) {
+                NSDateComponents *comp = [[NSDateComponents alloc] init];
+                comp.day = -i;
+                NSDate *newDate = [[NSCalendar currentCalendar] dateByAddingComponents:comp toDate:date options:0];
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateFormat:@"yyyy-MM-dd"];
+                NSString *time = [formatter stringFromDate:newDate];
+                
+                PLHealthSource *health = [[PLHealthSource alloc] init];
+                health.step = [NSString stringWithFormat:@"%d", arc4random() % 9000 + 1000];
+                CGFloat km = (arc4random() % 900 + 100) / 100.f;
+                health.km = [NSString stringWithFormat:@"%.2f", km];
+                health.floor = [NSString stringWithFormat:@"%d" , arc4random() % 25 + 5];
+                health.dateTime = time;
+                [self.healthArray addObject:health];
+            }
+        }
+        
         for (int i = 0; i < manager.healthSteps.count; i++) {
             PLHealthSource *health = [[PLHealthSource alloc] init];
             health.step = manager.healthSteps[i][@"value"];
@@ -650,11 +702,7 @@ PLHealthManagerDelegate
             
                 health.km = @"0.00";
             }
-            
-            
-            
-            
-            
+    
             if (i <= manager.healthStairsClimbed.count - 1) {
                 
                 health.floor = manager.healthStairsClimbed[i][@"value"];
@@ -759,7 +807,6 @@ PLHealthManagerDelegate
     _barChart.backgroundColor = [UIColor clearColor];
     _barChart.barBackgroundColor = [UIColor clearColor];
     _barChart.delegate = self;
-    [self.view addSubview:_barChart];
     
     for (int i = 0; i < 3; i++) {
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH / 4 * (i + 1) - 15, _barChart.frame.origin.y + _barChart.frame.size.height - 20, 30, 20)];

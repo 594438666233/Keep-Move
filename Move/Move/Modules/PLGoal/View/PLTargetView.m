@@ -43,7 +43,7 @@
     
     PLDataBaseManager *dataBaseManager = [PLDataBaseManager shareManager];
     PLPersonInformation *imformation = [dataBaseManager personInformation];
-    _basicGoalLabel.text = [NSString stringWithFormat:@"基础目标:%ld大卡", imformation.goalStep / 50 * 7];
+    _basicGoalLabel.text = [NSString stringWithFormat:@"基础目标:%ld大卡", imformation.goalStep / 35 * 7];
     
     PLXHealthManager *manager = [PLXHealthManager shareInstance];
     manager.isDay = YES;
@@ -75,10 +75,10 @@
     }
     [manager getStepCount:^(double value, NSArray *array, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            _targetLabel.text = [NSString stringWithFormat:@"%.0lf", value / 50];
+            _targetLabel.text = [NSString stringWithFormat:@"%.0lf", value / 35];
             
             [UIView animateWithDuration:3 animations:^{
-                CGFloat a = [_targetLabel.text floatValue] / (imformation.goalStep / 50 * 7);
+                CGFloat a = [_targetLabel.text floatValue] / (imformation.goalStep / 35 * 7);
                 if (a > 1) {
                     a = 1;
                 }
