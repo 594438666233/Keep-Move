@@ -730,15 +730,11 @@ PLHealthManagerDelegate
                 _runImageNum = 55;
             }
             self.runImage.image = [UIImage imageNamed:[NSString stringWithFormat:@"activity_circle-%ld_150x130_@2x", _runImageNum]];
-            
-            
-            
+        
         });
         
     }
 }
-
-
 
 - (void)createRunNowButton {
     
