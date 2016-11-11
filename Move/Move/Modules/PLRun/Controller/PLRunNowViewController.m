@@ -23,7 +23,6 @@
 #import "NSDate+Categories.h"
 #import "NSString+TimeFormat.h"
 
-
 @import CoreMotion;
 
 @interface PLRunNowViewController ()
@@ -130,7 +129,6 @@
 {
     [super viewDidAppear:animated];
     [self.mapView addOverlay:self.mutablePolyline];
-
     [_mapView setZoomLevel:17 animated:YES];
     self.mapView.userTrackingMode = MAUserTrackingModeFollow;
 }
@@ -182,7 +180,6 @@
 #pragma mark - 设置
 
 - (void)setupMap {
-    //定位功能可用
     // 初始化地图
     self.mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, _plMenuView.frame.origin.y + _plMenuView.frame.size.height, PLWIDTH, PLHEIGHT - _plMenuView.frame.size.height - 64)];
     // 地图语言
@@ -211,7 +208,7 @@
     self.regeo = [[AMapReGeocodeSearchRequest alloc] init];
     [self.view addSubview:_mapView];
     
-    if ([CLLocationManager authorizationStatus] ==kCLAuthorizationStatusDenied) {
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
         
         //定位不能用
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"为了更准确的定位计步,请前往\n设置->隐私->定位服务\n开启对Keep Move的授权" preferredStyle:UIAlertControllerStyleAlert];
@@ -227,7 +224,6 @@
 
 - (void)initLocationButton
 {
-
     self.locationButton = [[UIButton alloc] initWithFrame:CGRectMake(PLWIDTH - 40, 10, 30, 30)];
     _locationButton.backgroundColor = [UIColor blackColor];
     _locationButton.layer.cornerRadius = 15;
@@ -238,7 +234,6 @@
 }
 
 - (void)initVoiceButton {
-    
     self.voiceButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
     _voiceButton.backgroundColor = [UIColor blackColor];
     _voiceButton.layer.cornerRadius = 15;
@@ -332,7 +327,7 @@
                 }];
 
                 NSString *typeNumber = [NSString stringWithFormat:@"%ld", (NSInteger)_plMenuView.type];
-                
+
                 NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
                 [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
                 NSNumber *numTemp = [numberFormatter numberFromString:typeNumber];
@@ -401,13 +396,12 @@
                             _infoModel.date = [NSDate getSystemTimeStringWithFormat:@"yyyy年MM月dd日 HH:mm"];
                             //创建一个会话
                             self.utterance = [[AVSpeechUtterance alloc] initWithString:_speakingString];
-                            //选择语言发音的类别，如果有中文，一定要选择中文，要不然无法播放语音
+                            //选择语言发音的类别
                             _utterance.voice = self.laungeVoices[2];
                             
                             //播放语言
                             [self.synthesizer speakUtterance:_utterance];
-                            
-                            
+
                             // 设置开关
                             _startMoving = YES;
                             
@@ -450,8 +444,7 @@
                         // 销毁定时器
                         [self.runTimer invalidate];
                         self.runTimer = nil;
-
-//                        [self.runInfoArray insertObject:_infoModel atIndex:0];
+                        
                         [self.runInfoArray addObject:_infoModel];
                         [NSKeyedArchiver archiveRootObject:_runInfoArray toFile:_goalPath];
                         
@@ -544,10 +537,8 @@
     _regeo.requireExtension = YES;
     [self.mapSearchAPI AMapReGoecodeSearch:_regeo];
     
-    
     if (_startMoving == YES) {
-        
-        
+
         if (userLocation.location.horizontalAccuracy < 80 && userLocation.location.horizontalAccuracy > 0)
         {
             [self.locationsArray addObject:userLocation.location];

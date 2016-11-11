@@ -64,7 +64,7 @@ static NSString *const cellIdentifier = @"cell";
             {
                 cell.titleString = @"作息时间";
                 cell.addButtonBlock = ^(UIButton *button) {
-                    //NSLog(@"hello world");
+                    
                 };
                 return cell;
             }
