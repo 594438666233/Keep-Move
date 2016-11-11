@@ -181,28 +181,28 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
-//- (void)application:(UIApplication *)application performActionForShortcutItem:
-//(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
-//    
-//    
-//    if ([shortcutItem.type isEqual:@"first"])
-//    {
-//        _rootTabBarController.selectedIndex = 0;
-//
-//    }
-//    else if([shortcutItem.type isEqual:@"second"])
-//    {
-//        _rootTabBarController.selectedIndex = 3;
-//        
-//    }else if([shortcutItem.type isEqual:@"third"]){
-//        _rootTabBarController.selectedIndex = 1;
-//    }else {
-//        UINavigationController *myNAV = [_rootTabBarController.viewControllers objectAtIndex:2];
-//        PLRunNowViewController *runNowVC = [[PLRunNowViewController alloc] init];
-//        runNowVC.hidesBottomBarWhenPushed = YES;
-//        [myNAV pushViewController:runNowVC animated:YES];
-//    }
-//}
+- (void)application:(UIApplication *)application performActionForShortcutItem:
+(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler {
+    
+    
+    if ([shortcutItem.type isEqual:@"first"])
+    {
+        _rootTabBarController.selectedIndex = 0;
+
+    }
+    else if([shortcutItem.type isEqual:@"second"])
+    {
+        _rootTabBarController.selectedIndex = 3;
+        
+    }else if([shortcutItem.type isEqual:@"third"]){
+        _rootTabBarController.selectedIndex = 1;
+    }else {
+        UINavigationController *myNAV = [_rootTabBarController.viewControllers objectAtIndex:2];
+        PLRunNowViewController *runNowVC = [[PLRunNowViewController alloc] init];
+        runNowVC.hidesBottomBarWhenPushed = YES;
+        [myNAV pushViewController:runNowVC animated:YES];
+    }
+}
 
 
 
