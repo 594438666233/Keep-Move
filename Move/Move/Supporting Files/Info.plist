@@ -7,7 +7,7 @@
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string></string>
 	<key>NSMotionUsageDescription</key>
-	<string></string>
+	<string>Keep Move 使用运动协处理器进行计步，更加节省电量</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -42,7 +42,7 @@
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>some string value stating the reason</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string></string>
+	<string>为了更有效的记录您的每日运动轨迹，Keep Move需要后台获取您的位置信息</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

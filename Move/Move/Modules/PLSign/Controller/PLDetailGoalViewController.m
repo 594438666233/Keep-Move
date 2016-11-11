@@ -543,7 +543,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                 case 2:
                 {
                     __block BOOL index = YES;
-                    NSString *temp = array[1];
+                    NSString *temp = array[2];
                     for (NSString *string in _titleStringArray) {
                         if ([temp isEqualToString:string]) {
                             [self codeBlock:cell];
@@ -552,7 +552,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                         }
                     }
                     cell.titleString = temp;
-                    cell.iconImage = [UIImage imageNamed:@"skipping-rope"];
+                    cell.iconImage = [UIImage imageNamed:@"carrot"];
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
                             [self Added:cell andTemp:temp];
@@ -579,7 +579,7 @@ static NSString *const cellDetailIdentifier = @"cell";
                         }
                     }
                     cell.titleString = temp;
-                    cell.iconImage = [UIImage imageNamed:@"carrot"];
+                    cell.iconImage = [UIImage imageNamed:@"美食"];
                     cell.addButtonBlock = ^(UIButton *button) {
                         if (index == YES) {
                             [self Added:cell andTemp:temp];

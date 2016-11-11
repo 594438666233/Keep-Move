@@ -8,10 +8,11 @@
 
 #import "PLRunNowViewController.h"
 #import <MAMapKit/MAMapKit.h>
+#import <AVFoundation/AVFoundation.h>
+#import <CoreLocation/CLLocationManager.h>
 #import "PLNavigationView.h"
 #import "PLMenuView.h"
 #import "PLDetailInfoView.h"
-#import <AVFoundation/AVFoundation.h>
 #import "NSString+TimeFormat.h"
 #import "PLInfoModel.h"
 #import "Record.h"
@@ -22,7 +23,6 @@
 #import "NSDate+Categories.h"
 #import "NSString+TimeFormat.h"
 
-#import <CoreLocation/CLLocationManager.h>
 
 @import CoreMotion;
 
@@ -51,7 +51,6 @@
 @property (nonatomic, copy) NSString *goalPath;
 @property (nonatomic, retain) NSMutableArray *runInfoArray;
 @property (nonatomic, retain) NSMutableArray *commonPolylineCoords;
-
 @property (nonatomic, strong) NSString *address;
 
 // 按钮
