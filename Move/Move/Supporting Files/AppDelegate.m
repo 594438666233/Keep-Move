@@ -102,19 +102,23 @@
     _rootTabBarController.tabBar.tintColor = PLYELLOW;
     _rootTabBarController.tabBar.barTintColor = [UIColor whiteColor];
     
-    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-    // 判断是否第一次进入应用
-    if (![userDef boolForKey:@"notFirsts"]) {
-        // 如果第一次，进入引导动画
-        PLLeadingPageController *feature = [[PLLeadingPageController alloc] init];
-        UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:feature];
-        self.window.rootViewController = navigation;
-    } else {
-        // 否则直接进入应用
-
-        self.window.rootViewController = _rootTabBarController;
-
-    }
+//    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+//    // 判断是否第一次进入应用
+//    if (![userDef boolForKey:@"notFirsts"]) {
+//        // 如果第一次，进入引导动画
+//        PLLeadingPageController *feature = [[PLLeadingPageController alloc] init];
+//        UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:feature];
+//        self.window.rootViewController = navigation;
+//    } else {
+//        // 否则直接进入应用
+//
+//        self.window.rootViewController = _rootTabBarController;
+//
+//    }
+    
+    PLLeadingPageController *feature = [[PLLeadingPageController alloc] init];
+    UINavigationController *navigation = [[UINavigationController alloc] initWithRootViewController:feature];
+    self.window.rootViewController = navigation;
 
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"firstLaunch"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
