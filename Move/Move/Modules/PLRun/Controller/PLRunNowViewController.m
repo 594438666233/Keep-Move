@@ -96,11 +96,7 @@
     self.navigationController.navigationBar.hidden = YES;
     _runTime = 0;
     [self setupPath];
-    [self setupCustomView];
-    [self setupMap];
-    [self initVoiceButton];
-    [self initLocationButton];
-    [self setupButton];
+
     self.runInfoArray = [NSMutableArray array];
     NSArray *pArray = [NSKeyedUnarchiver unarchiveObjectWithFile:_goalPath];
     self.runInfoArray = [NSMutableArray arrayWithArray:pArray];
@@ -118,7 +114,11 @@
     self.commonPolylineCoords = [NSMutableArray array];
     _flag = YES;
     _startMoving = NO;
-   
+    [self setupCustomView];
+    [self setupMap];
+    [self initVoiceButton];
+    [self initLocationButton];
+    [self setupButton];
     [self setupNavigationView];
     [self initOverlay];
     [self initLocationButton];
