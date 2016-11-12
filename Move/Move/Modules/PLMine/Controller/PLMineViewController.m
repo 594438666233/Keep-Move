@@ -13,11 +13,17 @@
 #import "PLHWeightTableViewCell.h"
 #import "PLHistoryInformationViewController.h"
 #import "PLSetInformationTableViewController.h"
+#import "PLProtocolViewController.h"
 static NSString *const InitialWeight = @"PLInitialWeightTableViewCell";
 static NSString *const cellID = @"cell";
 static NSString *const recordCell = @"recordCell";
 static NSString *const setCell = @"setCell";
 static NSString *const WeightCell = @"PLHWeightTableViewCell";
+static NSString *const protocolCell = @"protocol";
+static NSString *const haveToKnowCell = @"haveToKnow";
+
+
+
 
 @interface PLMineViewController ()
 <
@@ -81,7 +87,7 @@ UIScrollViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return 3;
+    return 4;
 
 }
 
@@ -99,6 +105,11 @@ UIScrollViewDelegate
         case 2:
             return 1;
             break;
+            
+        case 3:
+            return 1;
+            break;
+            
             
         default:
             break;
@@ -138,6 +149,12 @@ UIScrollViewDelegate
         PLSetInformationTableViewController *informationVC = [PLSetInformationTableViewController pl_setInformationTableViewController];
         [self.navigationController pushViewController:informationVC animated:YES];
     
+    } else if(indexPath.section == 3){
+        
+        PLProtocolViewController *protocolVC = [[PLProtocolViewController alloc] init];
+        protocolVC.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:protocolVC animated:YES];
+        
     }
 
 }
@@ -210,7 +227,7 @@ UIScrollViewDelegate
         
     
     
-    } else {
+    } else if (indexPath.section == 2){
     
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:setCell];
         if (!cell) {
@@ -224,6 +241,38 @@ UIScrollViewDelegate
         }
         return cell;
     
+    
+    } else {
+//        if (indexPath.row == 0) {
+//            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:haveToKnowCell];
+//            if (!cell) {
+//                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:haveToKnowCell];
+//                cell.backgroundColor = ColorWith51Black;
+//                cell.imageView.image = [UIImage imageNamed:@"yonghuxuzhi"];
+//                cell.textLabel.text = @"用户须知";
+//                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//                cell.textLabel.textColor = [UIColor grayColor];
+//                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//                
+//            }
+//            return cell;
+//        } else {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:protocolCell];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:protocolCell];
+                cell.imageView.image = [UIImage imageNamed:@"yinsizhengce"];
+                cell.textLabel.text = @"隐私政策";
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.backgroundColor = ColorWith51Black;
+                cell.textLabel.textColor = [UIColor grayColor];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+            }
+            return cell;
+            
+//        }
+        
+       
     
     }
 

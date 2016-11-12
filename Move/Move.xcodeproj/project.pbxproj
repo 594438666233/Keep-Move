@@ -22,6 +22,8 @@
 		1186058D1DCDEF6E00459408 /* FileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 118605881DCDEF6E00459408 /* FileHelper.m */; };
 		1186058E1DCDEF6E00459408 /* MAMutablePolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 1186058A1DCDEF6E00459408 /* MAMutablePolyline.m */; };
 		1186058F1DCDEF6E00459408 /* Record.m in Sources */ = {isa = PBXBuildFile; fileRef = 1186058C1DCDEF6E00459408 /* Record.m */; };
+		1197D0CE1DD5DA4800A55AFE /* PLProtocolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1197D0CC1DD5DA4800A55AFE /* PLProtocolViewController.m */; };
+		1197D0CF1DD5DA4800A55AFE /* PLProtocolViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1197D0CD1DD5DA4800A55AFE /* PLProtocolViewController.xib */; };
 		11A10F6A1DC6D404005EBDA5 /* PLHistoryInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A10F691DC6D404005EBDA5 /* PLHistoryInformationViewController.m */; };
 		11A10F6E1DC6D76F005EBDA5 /* PLHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A10F6C1DC6D76F005EBDA5 /* PLHistoryTableViewCell.m */; };
 		11A10F6F1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11A10F6D1DC6D76F005EBDA5 /* PLHistoryTableViewCell.xib */; };
@@ -291,6 +293,8 @@
 		84AC593A1DB7697500E7D8C0 /* UILabel+SizeToHeight.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AC59391DB7697500E7D8C0 /* UILabel+SizeToHeight.m */; };
 		84B3328D1DC8824F00681A71 /* unover.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B3328B1DC8824F00681A71 /* unover.png */; };
 		84B3328E1DC8824F00681A71 /* over.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B3328C1DC8824F00681A71 /* over.png */; };
+		84B45AC61DD5A70D005E79AE /* yonghuxuzhi.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B45AC41DD5A70D005E79AE /* yonghuxuzhi.png */; };
+		84B45AC71DD5A70D005E79AE /* yinsizhengce.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B45AC51DD5A70D005E79AE /* yinsizhengce.png */; };
 		84B7B7D11DC6DE4F00715926 /* PLRecommendGoalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B7B7CF1DC6DE4E00715926 /* PLRecommendGoalCell.m */; };
 		84B7B7D21DC6DE4F00715926 /* PLRecommendGoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B7B7D01DC6DE4F00715926 /* PLRecommendGoalCell.xib */; };
 		84B7B7DD1DC6DE8E00715926 /* bicycle.png in Resources */ = {isa = PBXBuildFile; fileRef = 84B7B7D41DC6DE8D00715926 /* bicycle.png */; };
@@ -487,6 +491,9 @@
 		1186058A1DCDEF6E00459408 /* MAMutablePolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMutablePolyline.m; sourceTree = "<group>"; };
 		1186058B1DCDEF6E00459408 /* Record.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Record.h; sourceTree = "<group>"; };
 		1186058C1DCDEF6E00459408 /* Record.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Record.m; sourceTree = "<group>"; };
+		1197D0CB1DD5DA4800A55AFE /* PLProtocolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLProtocolViewController.h; sourceTree = "<group>"; };
+		1197D0CC1DD5DA4800A55AFE /* PLProtocolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLProtocolViewController.m; sourceTree = "<group>"; };
+		1197D0CD1DD5DA4800A55AFE /* PLProtocolViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLProtocolViewController.xib; sourceTree = "<group>"; };
 		11A10F681DC6D404005EBDA5 /* PLHistoryInformationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLHistoryInformationViewController.h; sourceTree = "<group>"; };
 		11A10F691DC6D404005EBDA5 /* PLHistoryInformationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLHistoryInformationViewController.m; sourceTree = "<group>"; };
 		11A10F6B1DC6D76F005EBDA5 /* PLHistoryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLHistoryTableViewCell.h; sourceTree = "<group>"; };
@@ -812,6 +819,8 @@
 		84AC59391DB7697500E7D8C0 /* UILabel+SizeToHeight.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+SizeToHeight.m"; sourceTree = "<group>"; };
 		84B3328B1DC8824F00681A71 /* unover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unover.png; sourceTree = "<group>"; };
 		84B3328C1DC8824F00681A71 /* over.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = over.png; sourceTree = "<group>"; };
+		84B45AC41DD5A70D005E79AE /* yonghuxuzhi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yonghuxuzhi.png; sourceTree = "<group>"; };
+		84B45AC51DD5A70D005E79AE /* yinsizhengce.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yinsizhengce.png; sourceTree = "<group>"; };
 		84B7B7CE1DC6DE4E00715926 /* PLRecommendGoalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLRecommendGoalCell.h; sourceTree = "<group>"; };
 		84B7B7CF1DC6DE4E00715926 /* PLRecommendGoalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLRecommendGoalCell.m; sourceTree = "<group>"; };
 		84B7B7D01DC6DE4F00715926 /* PLRecommendGoalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PLRecommendGoalCell.xib; sourceTree = "<group>"; };
@@ -1641,6 +1650,9 @@
 				11A10F751DC6EF83005EBDA5 /* PLSetInformationTableViewController.h */,
 				11A10F761DC6EF83005EBDA5 /* PLSetInformationTableViewController.m */,
 				11A10F781DC6EF9B005EBDA5 /* PLSetInformationTableViewController.storyboard */,
+				1197D0CB1DD5DA4800A55AFE /* PLProtocolViewController.h */,
+				1197D0CC1DD5DA4800A55AFE /* PLProtocolViewController.m */,
+				1197D0CD1DD5DA4800A55AFE /* PLProtocolViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1667,6 +1679,8 @@
 		84AB972D1DB8E7B70075FDC0 /* PLSOURCE */ = {
 			isa = PBXGroup;
 			children = (
+				84B45AC41DD5A70D005E79AE /* yonghuxuzhi.png */,
+				84B45AC51DD5A70D005E79AE /* yinsizhengce.png */,
 				84AB972E1DB8E7B70075FDC0 /* Avatars.plist */,
 				84AB97491DB8E7B70075FDC0 /* Tips.txt */,
 				84B7B7F71DC6F56100715926 /* back.png */,
@@ -2100,6 +2114,7 @@
 				8471C4CE1DB75B5E008E8A5A /* trends_bar_42mm-16.png in Resources */,
 				84F0459A1DB8754B009D3BC3 /* activity_circle-0_132x114_@2x.png in Resources */,
 				84AB976A1DB8E7B70075FDC0 /* icon_level5@3x.png in Resources */,
+				84B45AC71DD5A70D005E79AE /* yinsizhengce.png in Resources */,
 				84F045E61DB8754B009D3BC3 /* activity_circle-44_132x114_@2x.png in Resources */,
 				8471C5061DB75B5E008E8A5A /* trends_bar_42mm-67.png in Resources */,
 				11ADB2BD1DCC77F10062920E /* c28.png in Resources */,
@@ -2190,6 +2205,7 @@
 				84C611F91DB845040029CEC5 /* goal3.png in Resources */,
 				8471C51C1DB75B5E008E8A5A /* trends_bar_42mm-87.png in Resources */,
 				84765E751DC9DFEE007F0673 /* menuRide.png in Resources */,
+				84B45AC61DD5A70D005E79AE /* yonghuxuzhi.png in Resources */,
 				84AB97581DB8E7B70075FDC0 /* dd_more_icon_plus@2x.png in Resources */,
 				84B7B7EC1DC6EAEC00715926 /* charter.png in Resources */,
 				84F045E01DB8754B009D3BC3 /* activity_circle-41_132x114_@2x.png in Resources */,
@@ -2256,6 +2272,7 @@
 				84F045A61DB8754B009D3BC3 /* activity_circle-15_132x114_@2x.png in Resources */,
 				84F045F21DB8754B009D3BC3 /* activity_circle-4_132x114_@2x.png in Resources */,
 				8471C4F11DB75B5E008E8A5A /* trends_bar_42mm-48.png in Resources */,
+				1197D0CF1DD5DA4800A55AFE /* PLProtocolViewController.xib in Resources */,
 				84AB972C1DB8E4780075FDC0 /* goalNormal.png in Resources */,
 				843A42DD1DD1672300F9658B /* writeData.png in Resources */,
 				84F045A11DB8754B009D3BC3 /* activity_circle-12_150x130_@2x.png in Resources */,
@@ -2567,6 +2584,7 @@
 				8471C44D1DB75AFD008E8A5A /* RootViewController.m in Sources */,
 				115BE2D51DBA39DE003279AC /* PLDataBaseManager.m in Sources */,
 				4936717C1DC9E9A00048E098 /* WYPieChartForegroundView.m in Sources */,
+				1197D0CE1DD5DA4800A55AFE /* PLProtocolViewController.m in Sources */,
 				4936718C1DCA04D00048E098 /* PLXCalorieViewController.m in Sources */,
 				84EDB6B71DCD74FA000A4FBD /* MAMutablePolylineRenderer.m in Sources */,
 				84EDB6C61DCD78BA000A4FBD /* DisplayViewController.m in Sources */,
