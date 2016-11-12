@@ -11,5 +11,6 @@
 @interface PLDetailRunRecordViewController : RootViewController
 
 @property (nonatomic, copy) NSString *typeString;
+@property (nonatomic, assign) NSInteger index;
 
 @end

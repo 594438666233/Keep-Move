@@ -110,6 +110,7 @@ static NSString *const cellRecordIdentifier = @"cell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
     PLDetailRunRecordViewController *detailRunVC = [[PLDetailRunRecordViewController alloc] init];
+    detailRunVC.index = indexPath.row;
     detailRunVC.typeString = _titleArray[indexPath.row];
     [self presentViewController:detailRunVC animated:YES completion:nil];
 }

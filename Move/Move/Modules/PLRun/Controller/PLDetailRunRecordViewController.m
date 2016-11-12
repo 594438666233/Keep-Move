@@ -50,6 +50,7 @@ static NSString *const cellDetailRunRecordTwoIdentifier = @"cellTwo";
 @property (nonatomic, assign) BOOL stepCountFlag;
 
 @property (nonatomic, strong) Record *currentRecord;
+@property (nonatomic, assign) float baseParameter;
 
 
 @end
@@ -60,8 +61,8 @@ static NSString *const cellDetailRunRecordTwoIdentifier = @"cellTwo";
     [super viewDidLoad];
     [self setupNavigationView];
     [self setupPath];
-    self.infoModel = [[PLInfoModel alloc] init];
-    _infoModel.time = @"30分钟";
+//    self.infoModel = [[PLInfoModel alloc] init];
+//    _infoModel.time = @"30分钟";
     
 
     
@@ -69,6 +70,66 @@ static NSString *const cellDetailRunRecordTwoIdentifier = @"cellTwo";
     NSArray *pArray = [NSKeyedUnarchiver unarchiveObjectWithFile:_goalPath];
     self.sportRecordArray = [NSMutableArray arrayWithArray:pArray];
 
+}
+
+- (PLInfoModel *)infoModel {
+    if (!_infoModel) {
+        _infoModel = [[PLInfoModel alloc] init];
+        _infoModel.time = @"30分钟";
+        _infoModel.calorie = [NSString stringWithFormat:@"%.0f", 30 * self.baseParameter];
+        
+    }
+    return _infoModel;
+}
+
+- (float)baseParameter {
+    switch (_index) {
+        case 0:
+            _baseParameter = 2.5;
+            break;
+        case 1:
+            _baseParameter = 3.4;
+            break;
+        case 2:
+            _baseParameter = 5.2;
+            break;
+        case 3:
+            _baseParameter = 6.4;
+            break;
+        case 4:
+            _baseParameter = 9.0;
+            break;
+        case 5:
+            _baseParameter = 11.7;
+            break;
+        case 6:
+            _baseParameter = 6.9;
+            break;
+        case 7:
+            _baseParameter = 12.8;
+            break;
+        case 8:
+            _baseParameter = 5.5;
+            break;
+        case 9:
+            _baseParameter = 9.0;
+            break;
+        case 10:
+            _baseParameter = 7.8;
+            break;
+        case 11:
+            _baseParameter = 9.9;
+            break;
+        case 12:
+            _baseParameter = 6.7;
+            break;
+        case 13:
+            _baseParameter = 3.0;
+            break;
+        default:
+            break;
+    }
+    return _baseParameter;
 }
 
 - (void)setupPath {
@@ -226,7 +287,7 @@ static NSString *const cellDetailRunRecordTwoIdentifier = @"cellTwo";
         }
         cell.contentView.backgroundColor = ColorWith51Black;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.infoModel = _infoModel;
+        cell.infoModel = self.infoModel;
         return cell;
     }else{
         PLDetailRecordTypeTwoCell *cell = [tableView dequeueReusableCellWithIdentifier:cellDetailRunRecordTwoIdentifier];
@@ -351,9 +412,14 @@ static NSString *const cellDetailRunRecordTwoIdentifier = @"cellTwo";
         
         NSString *string = [NSString stringWithFormat:@"%@小时", _hoursArray[_selectedIndex]];
         string = [string stringByAppendingString:[NSString stringWithFormat:@"%@分钟", _minutesArray[_selectedTwoIndex]]];
-        //NSLog(@"time :%@", string);
+        NSLog(@"time :%@", string);
         [_timeView removeFromSuperview];
-    
+        NSLog(@"%@ %@",_hoursArray[_selectedIndex], _minutesArray[_selectedTwoIndex] );
+        NSString *hours = _hoursArray[_selectedIndex];
+        NSString *minute = _minutesArray[_selectedTwoIndex];
+        NSInteger minutes = [hours integerValue] * 60 + [minute integerValue];
+
+        _infoModel.calorie = [NSString stringWithFormat:@"%.0f", minutes * self.baseParameter];
         _infoModel.time = string;
         
         // 刷新指定行cell

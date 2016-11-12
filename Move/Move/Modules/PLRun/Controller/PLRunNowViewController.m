@@ -326,7 +326,7 @@
                     
                 }];
 
-                NSString *typeNumber = [NSString stringWithFormat:@"%ld", (NSInteger)_plMenuView.type];
+                NSString *typeNumber = [NSString stringWithFormat:@"%d", _plMenuView.type];
 
                 NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
                 [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
@@ -488,6 +488,7 @@
                 [_pedometer stopPedometerUpdates];
                 
                 _speakingString = @"运动暂停";
+                _startMoving = NO;
                 self.utterance = [[AVSpeechUtterance alloc] initWithString:_speakingString];
                 _utterance.voice = self.laungeVoices[2];
                 [self.synthesizer speakUtterance:_utterance];
@@ -500,6 +501,7 @@
             [_backButton setTitle:@"暂停" forState:UIControlStateNormal];
             if ([_voiceButton.currentImage isEqual:_voiceOpenImage]) {
                 _speakingString = @"运动继续";
+                _startMoving = YES;
                 self.utterance = [[AVSpeechUtterance alloc] initWithString:_speakingString];
                 _utterance.voice = self.laungeVoices[2];
                 [self.synthesizer speakUtterance:_utterance];
@@ -516,7 +518,7 @@
 
 - (void)timerAction {
 
-    _timeLabel.text = [NSString stringWithFormat:@"%ld", _temp];
+    _timeLabel.text = [NSString stringWithFormat:@"%ld", (long)_temp];
     _temp--;
 }
 

@@ -2,12 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<true/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string></string>
-	<key>NSMotionUsageDescription</key>
-	<string>Keep Move 使用运动协处理器进行计步，更加节省电量</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -25,7 +19,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1001</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>iosmap</string>
@@ -43,6 +37,10 @@
 	<string>some string value stating the reason</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>为了更有效的记录您的每日运动轨迹，Keep Move需要后台获取您的位置信息</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Keep Move 使用运动协处理器进行计步，更加节省电量</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string></string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>
@@ -60,5 +58,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<true/>
 </dict>
 </plist>
