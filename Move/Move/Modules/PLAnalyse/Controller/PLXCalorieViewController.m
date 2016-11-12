@@ -44,10 +44,22 @@ PNChartDelegate
                         if (array.count == 0) {
                             [valueArray addObjectsFromArray:@[@"0", @"0", @"0", @"0", @"0", @"0", @"0"]];
                         }
-                        //                    NSMutableArray *timeArray = [NSMutableArray array];
-                        for (NSDictionary *dic in array) {
-                            CGFloat value1 = [[dic objectForKey:@"value"] floatValue] / 35;
-                            [valueArray addObject:[NSString stringWithFormat:@"%.0lf", value1]];
+                        int k = 0;
+                        for (int i = 0; i < 7; i++) {
+                            NSDate *date = [NSDate dateWithTimeInterval:-(6 - i) * 24 * 60 * 60 sinceDate:[NSDate date]];
+                            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                            [formatter setDateFormat:@"yyyy-MM-dd"];
+                            NSString *timeString = [formatter stringFromDate:date];
+                            
+                            
+                            NSDictionary *dic = array[k];
+                            if ([[dic objectForKey:@"dateTime"] isEqualToString:timeString]) {
+                                CGFloat value1 = [[dic objectForKey:@"value"] floatValue] / 35;
+                                [valueArray addObject:[NSString stringWithFormat:@"%.0lf", value1]];
+                                k++;
+                            }else {
+                                [valueArray addObject:@"0"];
+                            }
                         }
                         [_barChart setYValues:valueArray];
                         

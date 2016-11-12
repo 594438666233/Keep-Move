@@ -220,7 +220,7 @@ PLHealthManagerDelegate
 
 - (void)createNoteLabel {
     self.noteLabel = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH / 2 - 100, HEIGHT / 1.5, 200, 40)];
-    _noteLabel.text = @"请在设置->隐私->健康中允许Keep Move访问数据";
+    _noteLabel.text = @"未获取到今日步数";
     _noteLabel.font = [UIFont systemFontOfSize:16];
     _noteLabel.textColor = [UIColor lightGrayColor];
     _noteLabel.numberOfLines = 0;

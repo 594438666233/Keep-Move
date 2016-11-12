@@ -269,21 +269,22 @@
     _plNavigationView.titleString = @"GPS运动";
     [_plNavigationView.cancelButton setBackgroundImage:[UIImage imageNamed:@"weather"] forState:UIControlStateNormal];
     [_plNavigationView.deleteButton setBackgroundImage:[UIImage imageNamed:@"historyRecord"] forState:UIControlStateNormal];
+    __weak typeof(self) weekSelf = self;
     _plNavigationView.cancelButtonBlock = ^(UIButton *button){
         // 天气信息
-        NSString *address = [NSString stringWithFormat:@"%@", _live.city];
-        NSString *weather = [NSString stringWithFormat:@"天气 : %@", _live.weather];
-        NSString *temperature = [NSString stringWithFormat:@"温度 : %@°", _live.temperature];
-        NSString *humidity = [NSString stringWithFormat:@"湿度 : %@%%", _live.humidity];
-        NSString *wind = [NSString stringWithFormat:@"%@风%@级", _live.windDirection, _live.windPower];
+        NSString *address = [NSString stringWithFormat:@"%@", weekSelf.live.city];
+        NSString *weather = [NSString stringWithFormat:@"天气 : %@", weekSelf.live.weather];
+        NSString *temperature = [NSString stringWithFormat:@"温度 : %@°", weekSelf.live.temperature];
+        NSString *humidity = [NSString stringWithFormat:@"湿度 : %@%%", weekSelf.live.humidity];
+        NSString *wind = [NSString stringWithFormat:@"%@风%@级", weekSelf.live.windDirection, weekSelf.live.windPower];
 
         [FTPopOverMenu showForSender:button withMenu:@[address, weather, temperature, humidity, wind] doneBlock:nil dismissBlock:nil];
     };
     _plNavigationView.deleteButtonBlock = ^(UIButton *button) {
         UIViewController *recordController = [[RecordViewController alloc] initWithNibName:nil bundle:nil];
-        [_plMenuView removeFromSuperview];
-        [_plDetailView removeFromSuperview];
-        [self presentViewController:recordController animated:YES completion:nil];
+        [weekSelf.plMenuView removeFromSuperview];
+        [weekSelf.plDetailView removeFromSuperview];
+        [weekSelf presentViewController:recordController animated:YES completion:nil];
     };
     [self.view addSubview:_plNavigationView];
     

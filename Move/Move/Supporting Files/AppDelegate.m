@@ -16,6 +16,8 @@
 
 #import "PLLeadingPageController.h"
 
+#import "PLXHealthManager.h"
+
 
 
 @interface AppDelegate ()
@@ -33,6 +35,9 @@
     
     // 配置地图
     [AMapServices sharedServices].apiKey = @"da1ec365d8432bee00b41009fa360a80";
+    
+    // 允许healthKit
+    [self setupHealthKit];
     
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -135,6 +140,13 @@
     return YES;
 }
 
+
+- (void)setupHealthKit {
+    PLXHealthManager *manager = [PLXHealthManager shareInstance];
+    [manager authorizeHealthKit:^(BOOL success, NSError *error) {
+        
+    }];
+}
 
 - (void)setup3DTouch {
     
