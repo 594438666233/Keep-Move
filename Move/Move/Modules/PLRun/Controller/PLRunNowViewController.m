@@ -96,7 +96,11 @@
     self.navigationController.navigationBar.hidden = YES;
     _runTime = 0;
     [self setupPath];
-
+    [self setupCustomView];
+    [self setupMap];
+    [self initVoiceButton];
+    [self initLocationButton];
+    [self setupButton];
     self.runInfoArray = [NSMutableArray array];
     NSArray *pArray = [NSKeyedUnarchiver unarchiveObjectWithFile:_goalPath];
     self.runInfoArray = [NSMutableArray arrayWithArray:pArray];
@@ -106,6 +110,9 @@
     [super viewWillDisappear:animated];
     [self.mapView addOverlay:self.mutablePolyline];
     [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [_plMenuView removeFromSuperview];
+    [_plDetailView removeFromSuperview];
+    [_mapView removeFromSuperview];
 }
 
 - (void)viewDidLoad {
@@ -114,11 +121,12 @@
     self.commonPolylineCoords = [NSMutableArray array];
     _flag = YES;
     _startMoving = NO;
-    [self setupCustomView];
-    [self setupMap];
-    [self initVoiceButton];
-    [self initLocationButton];
-    [self setupButton];
+ 
+//    [self setupCustomView];
+//    [self setupMap];
+//    [self initVoiceButton];
+//    [self initLocationButton];
+//    [self setupButton];
     [self setupNavigationView];
     [self initOverlay];
     [self initLocationButton];
@@ -181,7 +189,7 @@
 
 - (void)setupMap {
     // 初始化地图
-    self.mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, _plMenuView.frame.origin.y + _plMenuView.frame.size.height, PLWIDTH, PLHEIGHT - _plMenuView.frame.size.height - 64)];
+    self.mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, _plMenuView.frame.origin.y + _plMenuView.frame.size.height, PLWIDTH, HEIGHT - _plMenuView.frame.size.height - 64)];
     // 地图语言
     _mapView.language = MAMapLanguageZhCN;
     // 地图类型
@@ -292,13 +300,13 @@
 
 - (void)setupCustomView {
     self.plMenuView = [[PLMenuView alloc] init];
-    _plMenuView.frame = CGRectMake(0, 64, PLWIDTH, PLHEIGHT * 0.35);
+    _plMenuView.frame = CGRectMake(0, 64, PLWIDTH, HEIGHT * 0.35);
     [self.view addSubview:_plMenuView];
     
     self.plDetailView = [[PLDetailInfoView alloc] init];
     _plDetailView.alpha = 0.0;
-    _plDetailView.frame = CGRectMake(0, 64, PLWIDTH, _plMenuView.frame.size.height);
-    [self.view addSubview:_plDetailView];
+    _plDetailView.frame = CGRectMake(0, 64, PLWIDTH, HEIGHT * 0.35);
+
 }
 
 - (void)setupButton {
@@ -372,6 +380,7 @@
                         _plDetailView.rateTitleLabel.text = @"速度(KM/H)";
                     }
                     _plDetailView.alpha = 1.0f;
+                     [self.view addSubview:_plDetailView];
         
                 } completion:^(BOOL finished) {
                 
@@ -448,10 +457,7 @@
                         
                         [self.runInfoArray addObject:_infoModel];
                         [NSKeyedArchiver archiveRootObject:_runInfoArray toFile:_goalPath];
-                        
-                        [_plMenuView removeFromSuperview];
-                        [_plDetailView removeFromSuperview];
-                        
+
                         UIViewController *recordController = [[RecordViewController alloc] initWithNibName:nil bundle:nil];
                         [self presentViewController:recordController animated:YES completion:nil];
   
