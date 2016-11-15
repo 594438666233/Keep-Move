@@ -174,7 +174,6 @@
     UIApplicationShortcutItem *item3 = [[UIApplicationShortcutItem alloc] initWithType:@"fourth" localizedTitle:@"GPS运动" localizedSubtitle:nil icon:icon3 userInfo:nil];
     
     //设置shortcutItems
-//    application.shortcutItems = @[item0, item1, item2, item3];
     [UIApplication sharedApplication].shortcutItems = @[item0, item1, item2, item3];
 }
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -29,9 +29,25 @@
 - (void)setInfoModel:(PLInfoModel *)infoModel {
     _typeLabel.text = infoModel.title;
     _sportTime.text = infoModel.time;
-    _stepCountLabel.text = infoModel.stepCount;
-    _kmLabel.text = infoModel.km;
-    _calorieLabel.text = infoModel.calorie;
+    if (infoModel.stepCount == nil) {
+        _stepCountLabel.text = @"---";
+    }else{
+        _stepCountLabel.text = infoModel.stepCount;
+    }
+    
+    if (infoModel.km == nil) {
+        _kmLabel.text = @"---";
+    }else{
+        
+        _kmLabel.text = infoModel.km;
+    }
+    
+    if (infoModel.calorie == nil) {
+        _calorieLabel.text = @"---";
+    }else{
+        
+        _calorieLabel.text = infoModel.calorie;
+    }
     _dateLabel.text = infoModel.date;
 }
 

@@ -147,6 +147,7 @@ UIScrollViewDelegate
     } else if(indexPath.section == 2) {
     
         PLSetInformationTableViewController *informationVC = [PLSetInformationTableViewController pl_setInformationTableViewController];
+        informationVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:informationVC animated:YES];
     
     } else if(indexPath.section == 3){
