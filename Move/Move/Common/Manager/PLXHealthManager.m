@@ -27,7 +27,7 @@
     if(HKVersion >= 8.0)
     {
         if (![HKHealthStore isHealthDataAvailable]) {
-            NSError *error = [NSError errorWithDomain: @"com.raywenderlich.tutorials.healthkit" code: 2 userInfo: [NSDictionary dictionaryWithObject:@"HealthKit is not available in th is Device"                                                                      forKey:NSLocalizedDescriptionKey]];
+            NSError *error = [NSError errorWithDomain: @"com.raywenderlich.tutorials.healthkit" code: 2 userInfo: [NSDictionary dictionaryWithObject:@"HealthKit is not available in this Device"                                                                      forKey:NSLocalizedDescriptionKey]];
             if (compltion != nil) {
                 compltion(false, error);
             }

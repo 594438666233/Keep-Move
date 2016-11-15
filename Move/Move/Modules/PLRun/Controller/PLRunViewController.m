@@ -131,10 +131,10 @@ PLHealthManagerDelegate
     manager.isDay = NO;
     manager.startDate = date;
     [manager authorizeHealthKit:^(BOOL success, NSError *error) {
-        if (success) {
+        if (error == nil) {
             //NSLog(@"success");
             [manager getStepCount:^(double value, NSArray *array, NSError *error) {
-                if (array.count > 0) {
+                if (error == nil && array.count > 0) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         NSCalendar *calendar = [NSCalendar currentCalendar];
                         NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
@@ -174,16 +174,15 @@ PLHealthManagerDelegate
                     });
 
                 }
-                
-                
                 else {
                     dispatch_async(dispatch_get_main_queue(), ^{
-
+                        
                         [self.view addSubview:_noteLabel];
                     });
                 }
             }];
         }
+
     }];
 
 }
@@ -220,7 +219,7 @@ PLHealthManagerDelegate
 
 - (void)createNoteLabel {
     self.noteLabel = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH / 2 - 100, HEIGHT / 1.5, 200, 40)];
-    _noteLabel.text = @"未获取到今日步数";
+    _noteLabel.text = @"请在设置->隐私->健康中允许Keep Move访问数据";
     _noteLabel.font = [UIFont systemFontOfSize:16];
     _noteLabel.textColor = [UIColor lightGrayColor];
     _noteLabel.numberOfLines = 0;

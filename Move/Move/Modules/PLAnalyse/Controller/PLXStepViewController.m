@@ -34,11 +34,11 @@ PNChartDelegate
     manager.days = 7;
     manager.isDay = YES;
     manager.startDate = [NSDate date];
-//    [manager authorizeHealthKit:^(BOOL success, NSError *error) {
-//        if (success) {
-//            //NSLog(@"success");
+    [manager authorizeHealthKit:^(BOOL success, NSError *error) {
+        if (error == nil) {
+            //NSLog(@"success");
             [manager getStepCount:^(double value, NSArray *array, NSError *error) {
-                if (array.count > 0) {
+                if (error == nil && array.count > 0) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     _sumLabel.text = [NSString stringWithFormat:@"%.0lf", value];
                     _avgLabel.text = [NSString stringWithFormat:@"%.0lf", value / 7];
@@ -46,22 +46,24 @@ PNChartDelegate
                     if (array.count == 0) {
                         [valueArray addObjectsFromArray:@[@"0", @"0", @"0", @"0", @"0", @"0", @"0"]];
                     }
-//                    NSMutableArray *timeArray = [NSMutableArray array];
-                    int k = 0;
-                    for (int i = 0; i < 7; i++) {
-                        NSDate *date = [NSDate dateWithTimeInterval:-(6 - i) * 24 * 60 * 60 sinceDate:[NSDate date]];
-                        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-                        [formatter setDateFormat:@"yyyy-MM-dd"];
-                        NSString *timeString = [formatter stringFromDate:date];
-                        
-                        
-                        NSDictionary *dic = array[k];
-                        if ([[dic objectForKey:@"dateTime"] isEqualToString:timeString]) {
-                            [valueArray addObject:[dic objectForKey:@"value"]];
-                            k++;
-                        }else {
-                            [valueArray addObject:@"0"];
+                    else {
+                        int k = 0;
+                        for (int i = 0; i < 7; i++) {
+                            NSDate *date = [NSDate dateWithTimeInterval:-(6 - i) * 24 * 60 * 60 sinceDate:[NSDate date]];
+                            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                            [formatter setDateFormat:@"yyyy-MM-dd"];
+                            NSString *timeString = [formatter stringFromDate:date];
+                            
+                            
+                            NSDictionary *dic = array[k];
+                            if ([[dic objectForKey:@"dateTime"] isEqualToString:timeString]) {
+                                [valueArray addObject:[dic objectForKey:@"value"]];
+                                k++;
+                            }else {
+                                [valueArray addObject:@"0"];
+                            }
                         }
+
                     }
                     [_barChart setYValues:valueArray];
                     
@@ -92,14 +94,13 @@ PNChartDelegate
             }
                 else {
                     dispatch_async(dispatch_get_main_queue(), ^{
-
-                    [self.view addSubview:_noteLabel];
+                        
+                        [self.view addSubview:_noteLabel];
                     });
                 }
-                
             }];
-//        }
-//    }];
+        }
+    }];
 
 
 }
