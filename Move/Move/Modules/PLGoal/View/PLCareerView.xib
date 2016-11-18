@@ -61,7 +61,6 @@
                     <rect key="frame" x="192.5" y="179" width="36" height="36"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="AFf-vc-V4X"/>
-                        <constraint firstAttribute="width" constant="36" id="CmD-6X-G35"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                     <color key="textColor" red="0.96078431372549022" green="0.72156862745098038" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -114,7 +113,7 @@
                 <outlet property="kilometreLabel" destination="2Ap-mM-BiD" id="DB2-qv-oPC"/>
                 <outlet property="stepCountLabel" destination="SUl-ZA-x8r" id="ka8-gf-Q1f"/>
             </connections>
-            <point key="canvasLocation" x="169" y="-329"/>
+            <point key="canvasLocation" x="-237" y="-408"/>
         </view>
     </objects>
 </document>
