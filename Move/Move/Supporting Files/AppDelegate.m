@@ -142,12 +142,15 @@
 
 
 - (void)setupHealthKit {
-    PLXHealthManager *manager = [PLXHealthManager shareInstance];
-    [manager authorizeHealthKit:^(BOOL success, NSError *error) {
-        if (error != nil) {
-            NSLog(@"111111");
-        }
-    }];
+     NSString *model = [[UIDevice currentDevice] model];
+    if ([model hasPrefix:@"iPh"]) {
+        PLXHealthManager *manager = [PLXHealthManager shareInstance];
+        [manager authorizeHealthKit:^(BOOL success, NSError *error) {
+            if (error != nil) {
+                NSLog(@"111111");
+            }
+        }];
+    }
 }
 
 - (void)setup3DTouch {

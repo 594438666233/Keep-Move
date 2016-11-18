@@ -126,64 +126,64 @@ PLHealthManagerDelegate
 - (void)drawBarChartWithDate:(NSDate *)date {
     [_barChart removeFromSuperview];
     [_noteLabel removeFromSuperview];
-    PLXHealthManager *manager = [PLXHealthManager shareInstance];
-    manager.days = 1;
-    manager.isDay = NO;
-    manager.startDate = date;
-    [manager authorizeHealthKit:^(BOOL success, NSError *error) {
-        if (error == nil) {
-            //NSLog(@"success");
-            [manager getStepCount:^(double value, NSArray *array, NSError *error) {
-                if (error == nil && array.count > 0) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        NSCalendar *calendar = [NSCalendar currentCalendar];
-                        NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
-                        [components setHour:0];
-                        [components setMinute:0];
-                        [components setSecond:0];
-                        NSDate *date1 = [calendar dateFromComponents:components];
-                        NSMutableArray *xArray = [NSMutableArray array];
-                        NSMutableArray *yArray = [NSMutableArray array];
-                        for (int i = 0; i < 96; i++) {
-                            if (array.count > 0) {
-                                for (int j = 0; j < array.count; j++) {
-                                    NSDictionary *dic = array[j];
-                                    NSDate *date2 = [dic valueForKey:@"dateTime"];
-                                    NSTimeInterval time = [date2 timeIntervalSinceDate:date1];
-                                    if (i == (int)(time / 86400 * 96 + 0.5)) {
-                                        [yArray addObject:[dic valueForKey:@"value"]];
-                                        break;
-                                    }
-                                    if (j == array.count - 1) {
-                                        [yArray addObject:@"0"];
+        PLXHealthManager *manager = [PLXHealthManager shareInstance];
+        manager.days = 1;
+        manager.isDay = NO;
+        manager.startDate = date;
+        [manager authorizeHealthKit:^(BOOL success, NSError *error) {
+            if (error == nil) {
+                //NSLog(@"success");
+                [manager getStepCount:^(double value, NSArray *array, NSError *error) {
+                    if (error == nil && array.count > 0) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            NSCalendar *calendar = [NSCalendar currentCalendar];
+                            NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
+                            [components setHour:0];
+                            [components setMinute:0];
+                            [components setSecond:0];
+                            NSDate *date1 = [calendar dateFromComponents:components];
+                            NSMutableArray *xArray = [NSMutableArray array];
+                            NSMutableArray *yArray = [NSMutableArray array];
+                            for (int i = 0; i < 96; i++) {
+                                if (array.count > 0) {
+                                    for (int j = 0; j < array.count; j++) {
+                                        NSDictionary *dic = array[j];
+                                        NSDate *date2 = [dic valueForKey:@"dateTime"];
+                                        NSTimeInterval time = [date2 timeIntervalSinceDate:date1];
+                                        if (i == (int)(time / 86400 * 96 + 0.5)) {
+                                            [yArray addObject:[dic valueForKey:@"value"]];
+                                            break;
+                                        }
+                                        if (j == array.count - 1) {
+                                            [yArray addObject:@"0"];
+                                        }
                                     }
                                 }
-                            }
-                            else {
-                                [yArray addObject:@"0"];
+                                else {
+                                    [yArray addObject:@"0"];
+                                }
+                                
+                                [xArray addObject:@""];
                             }
                             
-                            [xArray addObject:@""];
-                        }
+                            [_barChart setXLabels:xArray];
+                            [_barChart setYValues:yArray];
+                            
+                            [self.view addSubview:_barChart];
+                            [_barChart strokeChart];
+                        });
                         
-                        [_barChart setXLabels:xArray];
-                        [_barChart setYValues:yArray];
-                        
-                        [self.view addSubview:_barChart];
-                        [_barChart strokeChart];
-                    });
-
-                }
-                else {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        [self.view addSubview:_noteLabel];
-                    });
-                }
-            }];
-        }
-
-    }];
+                    }
+                    else {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            [self.view addSubview:_noteLabel];
+                        });
+                    }
+                }];
+            }
+            
+        }];
 
 }
 
@@ -575,8 +575,10 @@ PLHealthManagerDelegate
 - (void)initHKHealth{
     
     PLHealthManager *manager = [PLHealthManager shareInstance];
-
-    [manager getIphoneHealthData];
+    NSString *model = [[UIDevice currentDevice] model];
+    if ([model hasPrefix:@"iPh"]) {
+        [manager getIphoneHealthData];
+    }
 
     manager.days = 14;
     

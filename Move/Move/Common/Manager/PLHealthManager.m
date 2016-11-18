@@ -56,6 +56,7 @@
     store = [[HKHealthStore alloc] init];
     
     // 2.请求苹果健康的认证
+    
     [store requestAuthorizationToShareTypes:nil readTypes:getData completion:^(BOOL success, NSError * _Nullable error) {
         if (!success) {
             //NSLog(@"--------请求苹果健康认证失败");
