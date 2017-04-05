@@ -261,7 +261,8 @@
 
 - (void)setupNavigationView {
     // 设置导航栏view
-    __block PLNavigationView *plNavigationView = [[PLNavigationView alloc] init];
+    PLNavigationView *plNavigationView = [[PLNavigationView alloc] init];
+    __weak typeof(PLNavigationView) *weakPLN = plNavigationView;
     plNavigationView.frame = CGRectMake(0, 0, PLWIDTH, 64);
     plNavigationView.titleString = @"运动详情";
     [self.view addSubview:plNavigationView];
@@ -280,7 +281,7 @@
         if (self.isPlaying)
         {
  
-            [plNavigationView.deleteButton setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+            [weakPLN.deleteButton setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
             if (self.myLocation == nil)
             {
                 self.myLocation = [[MAPointAnnotation alloc] init];
@@ -296,7 +297,7 @@
         else
         {
 
-            [plNavigationView.deleteButton setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+            [weakPLN.deleteButton setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
             MAAnnotationView *view = [self.mapView viewForAnnotation:self.myLocation];
             
             if (view != nil)

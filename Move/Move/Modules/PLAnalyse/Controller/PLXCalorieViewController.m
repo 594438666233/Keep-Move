@@ -38,7 +38,7 @@ PNChartDelegate
     [manager authorizeHealthKit:^(BOOL success, NSError *error) {
         if (success) {
             [manager getStepCount:^(double value, NSArray *array, NSError *error) {
-                if (error == nil && array.count > 0) {
+                if (error == nil || array.count > 0) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         _sumLabel.text = [NSString stringWithFormat:@"%.0lf", value / 50];
                         _avgLabel.text = [NSString stringWithFormat:@"%.0lf", value / 7 / 50];

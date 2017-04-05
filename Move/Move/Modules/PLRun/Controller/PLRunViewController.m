@@ -134,7 +134,7 @@ PLHealthManagerDelegate
             if (error == nil) {
                 //NSLog(@"success");
                 [manager getStepCount:^(double value, NSArray *array, NSError *error) {
-                    if (error == nil && array.count > 0) {
+                    if (error == nil || array.count > 0) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             NSCalendar *calendar = [NSCalendar currentCalendar];
                             NSDateComponents *components = [calendar components:NSCalendarUnitYear|NSCalendarUnitMonth|NSCalendarUnitDay fromDate:date];
