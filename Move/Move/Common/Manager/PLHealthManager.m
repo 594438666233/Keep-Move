@@ -2,8 +2,8 @@
 //  PLHealthManager.m
 //  Move
 //
-//  Created by PhelanGeek on 2016/10/21.
-//  Copyright © 2016年 PhelanGeek. All rights reserved.
+//  Created by 舒鑫 on 2016/10/21.
+//  Copyright © 2016年 舒鑫. All rights reserved.
 //
 
 #import "PLHealthManager.h"

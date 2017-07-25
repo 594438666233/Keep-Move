@@ -2,8 +2,8 @@
 //  PLSignCellObject.h
 //  Move
 //
-//  Created by PhelanGeek on 2016/10/31.
-//  Copyright © 2016年 PhelanGeek. All rights reserved.
+//  Created by 舒鑫 on 2016/10/31.
+//  Copyright © 2016年 舒鑫. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

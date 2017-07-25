@@ -2,7 +2,7 @@
 //  MAAdditivePolylineRenderer.m
 //  Move
 //
-//  Created by PhelanGeek on 2016/11/2.
+//  Created by 舒鑫 on 2016/11/2.
 //  Copyright (c) 2015年 FENGSHENG. All rights reserved.
 //
 

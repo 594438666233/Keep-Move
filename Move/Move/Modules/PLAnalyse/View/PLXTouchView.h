@@ -3,7 +3,7 @@
 //  Move
 //
 //  Created by dllo on 2016/11/1.
-//  Copyright © 2016年 PhelanGeek. All rights reserved.
+//  Copyright © 2016年 舒鑫. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

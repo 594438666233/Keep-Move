@@ -2,8 +2,8 @@
 //  PLAnalyseViewController.m
 //  Move
 //
-//  Created by PhelanGeek on 2016/10/19.
-//  Copyright © 2016年 PhelanGeek. All rights reserved.
+//  Created by 舒鑫 on 2016/10/19.
+//  Copyright © 2016年 舒鑫. All rights reserved.
 //
 
 #import "PLAnalyseViewController.h"
@@ -64,8 +64,6 @@ UIScrollViewDelegate
     self.stepVC = [[PLXStepViewController alloc] init];
     [self addChildViewController:_stepVC];
     [_scrollView addSubview:_stepVC.view];
-    
-
     
     self.weightVC = [[PLXWeightViewController alloc] init];
     [self addChildViewController:_weightVC];
